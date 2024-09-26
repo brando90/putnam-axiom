@@ -19,3 +19,11 @@ For instance, to run Llama-3-8B on the original dataset, one would run
 
 `python putnam-axiom/src/eval.py --data_dir putnam-axiom/data/Putnam_AXIOM_Original.json --model_name meta-llama/Meta-Llama-3-8B --output_dir DIRECTORY_PATH`
 
+## Generating Variations
+To generate variations, run `python putnam-axiom/src/generate_variations.py`. Change the argument tags accordingly.
+* `--num_variations` specifies the number of snapshots to generate per variation. Defaults to 5.
+* `--save_dir` specifies the directory to which the variations are saved.
+* `--save_orig_dir` specifies the directory to which the corresponding original problems are saved.
+* `--original_data_dir` specifies the location of the original problems to reference.
+* `--seed` specifies the random seed.
+* `--problem_keys` allows the user to specify which variations to  generate snapshots for. If left empty, will generate variations for all problems available.
