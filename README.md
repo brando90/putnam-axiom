@@ -17,5 +17,5 @@ To perform an evaluation on Putnam-AXIOM, run `python putnam-axiom/src/eval.py`,
 
 For instance, to run Llama-3-8B on the original dataset, one would run
 
-`python putnam-axiom/src/eval.py --data_dir putnam-axiom/data/Putnam_AXIOM_Original.json --model_name meta-llama/Meta-Llama-3-8B --output_dir DIRECTORY_PAHT`
+`python putnam-axiom/src/eval.py --data_dir putnam-axiom/data/Putnam_AXIOM_Original.json --model_name meta-llama/Meta-Llama-3-8B --output_dir DIRECTORY_PATH`
 
