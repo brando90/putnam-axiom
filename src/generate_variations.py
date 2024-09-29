@@ -116,12 +116,13 @@ def generate(args):
 
         totCount = 0
         print('Generating variations for all problems.\n')
+        # print(PUTNAM_VARIATIONS)
         for year, problems in PUTNAM_VARIATIONS.items():
             for id_, func in problems.items():
-                totCount += 1
                 var = func.sample()
                 problems, original_problem = generate_variations(year, id_, func, save_dir, save_orig_dir, args.num_variations)
                 if not problems: continue
+                totCount += 1
                 vars.extend(problems)
                 original.append(original_problem)
     print('TOTAL COUNT:',totCount)
@@ -140,9 +141,9 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Generate variations of problems.')
     parser.add_argument('--num_variations', type=int, default=5, help='Number of variations to generate.')
 
-    parser.add_argument('--save_dir', type=str, default='putnam-axiom/data/Putnam-AXIOM_Variations/variations/',
+    parser.add_argument('--save_dir', type=str, default='putnam-axiom/data/Putnam-AXIOM_Variations',
                         help='Directory to save variations.')
-    parser.add_argument('--save_orig_dir', type=str, default='putnam-axiom/data/Putnam-AXIOM_Variations/original/',
+    parser.add_argument('--save_orig_dir', type=str, default='putnam-axiom/data/Putnam-AXIOM_Variations',
                         help='Directory to save original version of variations.')
     parser.add_argument('--original_data_dir', type=str, default='putnam-axiom/data/Putnam_AXIOM_Original.json',
                         help='Original data directory. i.e. directory containing original Putnam problems.')

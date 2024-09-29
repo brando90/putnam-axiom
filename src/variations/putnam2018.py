@@ -1,11 +1,11 @@
 import difflib
 import random
 import numpy as np
-from utils import single_char_variable, replace_map, variation
+from .utils import single_char_variable, replace_map, variation
 import os
 import json
 import math
-import generators
+from . import generators
 
 dataset = {}
 
