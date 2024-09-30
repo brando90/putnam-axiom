@@ -22,3 +22,6 @@ average_absolute_decrease = df['Absolute_Decrease'].mean()
 average_relative_decrease = df['Relative_Decrease'].mean()
 
 average_absolute_decrease, average_relative_decrease
+
+# (3.229375, 33.63682688747645)
+
