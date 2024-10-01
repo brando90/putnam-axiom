@@ -71,7 +71,7 @@ def putnam_2014a2(
             " and then $v_{{n}-1}$ by  $v_{{n}-1}-v_{{n}-2}$, and so forth, eventually replacing $v_k$ by  $v_k-v_{k-1}$ for $k\\geq 2$." 
             " Since $v_{k-1}$ and $v_k$ agree in their  first $k-1$ entries, and the $k$-th entry of $v_k-v_{k-1}$ is  $\\frac{1}{k} - \\frac{1}{k-1}$," 
             " the result of these row operations is an upper triangular  matrix with diagonal entries $1,\\frac{1}{2}-1,\\frac{1}{3}-\\frac{1}{2},\\ldots,\\frac{1}{{n}}-\\frac{1}{{n}-1}$." 
-            " The  determinant is then \\begin{align*} \\prod_{k=2}^{n} \\left( \\frac{1}{k} - \\frac{1}{k-1}\\right) &= \\prod_{k=2}^{n} \\left(\\frac{-1}{k(k-1)} \\right) \\\\ &=  \\frac{(-1)^{{n}-1}}{({n}-1)!{n}!}. \\end{align*}"
+            " The  determinant is then \\begin{align*} \\prod_{k=2}^{n} \\left( \\frac{1}{k} - \\frac{1}{k-1}\\right) &= \\prod_{k=2}^{n} \\left(\\frac{-1}{k(k-1)} \\right) \\\\ &=  \\boxed{\\frac{(-1)^{{n}-1}}{({n}-1)!{n}!}}. \\end{align*}"
         ),
         {'{A}': A, '{n}' : n, '{i}' : i, '{j}' : j}
     )
