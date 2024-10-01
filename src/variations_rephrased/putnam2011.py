@@ -52,7 +52,7 @@ def putnam_2011a1(
 ) -> dict:
     assert n >= 3, f'We need n = {n} to be >=3 for the question to actually be intereseting.'
     
-    functional_q = f'Define a \\textit{{growing spiral}} in the plane to be a sequence of points with integer coordinates ${P}_0 = (0,0), {P}_1, \\dots, {P}_n$ such that $n \\geq 2$ and: \\begin{{itemize}} \\item the directed line segments ${P}_0 {P}_1, {P}_1 {P}_2, \\dots, {P}_{{n-1}} P_n$ are in the successive coordinate directions east (for ${P}_0 {P}_1$), north, west, south, east, etc.; \\item the lengths of these line segments are positive and strictly increasing. \\end{{itemize}} [Picture omitted.]  How many of the points $({x},{y})$ with integer coordinates $0\\leq {x}\\leq {n}, 0\\leq {y}\\leq {n}$ \\emph{{cannot}} be the last point, ${P}_n$ of any growing spiral?'
+    functional_q = f'Define a \\textit{{growing spiral}} in the plane as a sequence of points ${P}_0 = (0,0), {P}_1, \\dots, {P}_n$, each with integer coordinates, such that $n \\geq 2$ and: \\begin{{itemize}} \\item the directed line segments ${P}_0 {P}_1, {P}_1 {P}_2, \\dots, {P}_{{n-1}} P_n$ follow successive coordinate directions in the sequence: east (for ${P}_0 {P}_1$), north, west, south, east, and so on.; \\item the lengths of these line segments are positive and strictly increasing. \\end{{itemize}} [Picture omitted.]  How many of the points $({x},{y})$ with integer coordinates $0\\leq {x}\\leq {n}, 0\\leq {y}\\leq {n}$ \\emph{{cannot}} be the last point, ${P}_n$ of any such growing spiral?'
     
     ans1 = (n - 0) + 1 # (0,y)
     ans2 = (n - 1) + 1 # (x,0) and (x,1)
