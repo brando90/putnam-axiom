@@ -49,7 +49,7 @@ def save_dataset_to_file(file_path):
 def putnam_2002b1(
         m : int = 50, n : int = 50) -> dict:
     tot = m + n
-    functional_q: str = f'Shanille O\'Keal is shooting free throws on a basketball court. We know that she hits the first and misses the second. For the following throws, the probability that she hits the next shot is the proportion of shots she has hit so far. What is the probability she hits exactly {m} of her first {tot} shots?'
+    functional_q: str = f'Shanille O\'Keal is practicing free throws. She makes the first shot and misses the second one. For each subsequent shot, the likelihood of making it is equal to the ratio of successful shots to total shots taken so far. What is the probability that she makes exactly {m} out of her first {tot} shots?'
 
     functional_ans: str = f'In fact, we show by induction on $n$ that after $n$ shots, the probability of having made any number of shots from $1$ to $n-1$ is equal to $1/(n-1)$. This is evident for $n=2$. Given the result for $n$, we see that the probability of making $i$ shots after $n+1$ attempts is \\begin{{align*}} \\frac{{i-1}}{{n}} \\frac{{1}}{{n-1}} + \\left( 1 - \\frac{{i}}{{n}} \\right) \\frac{{1}}{{n-1}} &= \\frac{{(i-1) + (n-i)}}{{n(n-1)}} \\\\ &= \\frac{{1}}{{n}}, \\end{{align*}} as claimed. The probability is $\\boxed{{1/{tot-1}}}$.'
 

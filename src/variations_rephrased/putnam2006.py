@@ -78,10 +78,12 @@ def putnam_2006b4(
     Z: str = 'Z', V: str = 'V'
 ) -> dict:
   functional_q : str = replace_map(
-      ("Let ${Z}$ be the set of points in $\\mathbb{R}^n$ whose coordinates are 0 or 1. (Therefore, ${Z}$ has a total of $2^n$ elements. These points are the vertices of a unit hypercube in $\\mathbb{R}^n$.) "
-       "Given a vector subspace ${V}$ of $\\mathbb{R}^n$, let ${Z}({V})$ denote the number of elements of ${Z}$ that lie in ${V}$. Given an integer $k$, with $0 \\leq k \\leq n$, "
-       "determine the maximum possible value of ${Z}({V})$ over all vector subspaces ${V} \\subseteq \\mathbb{R}^n$ of dimension $k$. "
-       "[Editorial note: the proposers probably intended to write ${Z}({V})$ instead of ``the number of points in ${V} \\cap {Z}$'', but this changes nothing.]"),
+      (
+        "Consider the set ${Z}$ consisting of points in $\\mathbb{R}^n$ where each coordinate is either 0 or 1. Consequently, ${Z}$ contains $2^n$ points, representing the vertices of a unit hypercube in $\\mathbb{R}^n$. "
+       "For a given vector subspace ${V}$ of $\\mathbb{R}^n$, define ${Z}({V})$ as the count of points in ${Z}$ that are also in ${V}$. Given an integer $k$ such that $0 \\leq k \\leq n$, "
+       "find the maximum possible value of ${Z}({V})$ among all $k$-dimensional vector subspaces ${V}$ of $\\mathbb{R}^n$. "
+       "[Note: The proposers likely meant to use ${Z}({V})$ instead of ``the number of points in ${V} \\cap {Z}$'', but this does not affect the problem.]"
+       ),
        {'{Z}' : Z, '{V}' : V}
   )
   
