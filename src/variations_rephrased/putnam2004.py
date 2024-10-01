@@ -62,7 +62,7 @@ def putnam_2004a1(
         percPercentage = perc
         percFrac = f'{n-1}/{n}'
     
-    functional_q: str = f'Basketball star Shanille O\'Keal\'s team statistician keeps track of the number, ${S}({N})$, of successful free throws she has made in her first ${N}$ attempts of the season. Early in the season, ${S}({N})$  was less than 80\\% of  ${N}$, but by the end of the season, ${S}({N})$ was more than 80\\% of ${N}$. Was there necessarily a moment in between when ${S}({N})$ was exactly {perc}\\% of ${N}$? Give a yes or no answer.'
+    functional_q: str = f'The statistician for basketball star Shanille O’Keal is keeping track of the number of successful free throws she has made in her first ${N}$ attempts of the season. Call this number ${S}({N})$. Early in the season, ${S}({N})$  was less than 80\\% of  ${N}$, but by the end of the season, ${S}({N})$ was more than 80\\% of ${N}$. Is it true that there must be a moment in between when ${S}({N})$ was exactly {perc}\\% of ${N}$? Give a yes or no answer.'
 
     functional_ans: str = f'Suppose there wasn\'t. Then there would be an ${N}$ such that ${S}({N}) < {percDot}{N}$ and ${S}({N}+1) > {percDot}({N}+1)$; that is, O\'Keal\'s free throw percentage is under ${perc}\\%$ at some point, and after one subsequent free throw (necessarily made), her percentage is over ${percPercentage}$. If she makes $m$ of her first $N$ free throws, then $m/{N} < {percFrac}$ and $(m+1)/({N}+1) > {percFrac}$. This means that ${n}m < {n-1}n < {n}m+1$, which is impossible since then ${n-1}n$ is an integer between the consecutive integers ${n}m$ and ${n}m+1$. \\boxed{{Yes}}.'
 
