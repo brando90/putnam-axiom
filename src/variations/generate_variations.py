@@ -37,13 +37,9 @@ def load_generators(original_data_dir: Path):
     for year_file in original_data_dir.iterdir():
         year = year_file.stem
         # import data_variation_gen.putnam2018
-        import putnam2018
+        # import putnam2018
         try:
-        #import data_variation_gen.putnam2023
-        #import data_variation_gen.putnam2022
-            importlib.import_module(f'data_variation_gen.putnam{year}')
-        #try:
-        #    x = 0
+            importlib.import_module(f'putnam{year}')
         except Exception as e:
             if isinstance(e, ImportError):
                 print(f'ImportError: No module putnam{year} found.\n{e}')
