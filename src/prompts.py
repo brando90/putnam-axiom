@@ -17,12 +17,16 @@ FEW_SHOT_EXAMPLES = [
     },
 ]
 
-BASE_FEW_SHOT = '\n\n'.join([f"Problem:\n{ex['problem']}\n\nSolution:\nLet's think step by step {ex['solution']}" for ex in FEW_SHOT_EXAMPLES])
+BASE_FEW_SHOT_COT = '\n\n'.join([f"Problem:\n{ex['problem']}\n\nSolution:\nLet's think step by step {ex['solution']}" for ex in FEW_SHOT_EXAMPLES])
+BASE_FEW_SHOT = '\n\n'.join([f"Problem:\n{ex['problem']}\n\nSolution:\n {ex['solution']}" for ex in FEW_SHOT_EXAMPLES])
 
 # base model prompts
 general_zero_shot_prompt = f"Given a mathematics question, compose a detailed solution. Simplify your answer as much as possible. Always give the final answer inside a \\boxed{{answer}}."
 general_few_shot_prompt = f"Given a mathematics question, compose a detailed solution. Simplify your answer as much as possible. Always give the final answer inside a \\boxed{{answer}}. {BASE_FEW_SHOT}"
 general_putnam_few_shot_prompt = f"Given a problem from the William Lowell Putnam Mathematical Competition, compose a detailed solution. Always give the final answer inside a \\boxed{{answer}}. {BASE_FEW_SHOT}"
+general_few_shot_cot_prompt = f"Given a mathematics question, compose a detailed solution. Simplify your answer as much as possible. Always give the final answer inside a \\boxed{{answer}}. {BASE_FEW_SHOT_COT}"
+general_putnam_few_shot_cot_prompt = f"Given a problem from the William Lowell Putnam Mathematical Competition, compose a detailed solution. Always give the final answer inside a \\boxed{{answer}}. {BASE_FEW_SHOT_COT}"
+
 
 # instruct model prompts
 mistral_instruct_zero_shot_prompt = f"<s> [INST] Given a mathematics question, compose a detailed solution. Simplify your answer as much as possible. Always give the final answer inside a \\boxed{{answer}}."

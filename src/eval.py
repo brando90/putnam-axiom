@@ -12,10 +12,10 @@ from util import *
 from vllm import LLM, SamplingParams
 
 def main(
-    data_dir: str = '~/putnam-math/data/Putnam_MATH_original_static_final',
+    data_dir: str = 'putnam-axiom/data/Putnam_AXIOM_Original.json',
     prompt_name: str = "general_few_shot_prompt",
     model_name: str = 'mistralai/Mistral-7B-v0.1',
-    output_dir: str = 'putnam-math/py_src/evals/modelOutputs',
+    output_dir: str = 'putnam-axiom/data',
     temperature: float = 0.9,
     top_p: float = 0.95,
     max_tokens: float = 2048,
@@ -28,23 +28,22 @@ def main(
     prompt = generate_prompt(prompt_name, problems)
     CUDA_VISIBLE_DEVICES = get_gpu_with_most_free_memory()
     os.environ['CUDA_VISIBLE_DEVICES'] = get_gpu_with_most_free_memory()
-    print(CUDA_VISIBLE_DEVICES)
+
     if not CUDA_VISIBLE_DEVICES:
         raise Exception("No devices available")
     
-    print(len(problems))
+    print("length of problems:", len(problems))
+    print("=" * 100)
+    print(f"Running model {model_name}")
+    print("=" * 100)
 
-    # model = LLM(model_name, trust_remote_code=True)
-    # params = SamplingParams(temperature=temperature, top_p=top_p, max_tokens=max_tokens, stop=stop)
+    model = LLM(model_name, trust_remote_code=True)
+    params = SamplingParams(temperature=temperature, top_p=top_p, max_tokens=max_tokens, stop=stop)
 
-    # for i in range(repeat_eval):
-    #     outputs = model.generate(prompt, params)
-    #     results = [o.outputs[0].text for o in outputs]
-    #     acc, correct, predicted_answers = compute_accuracy(results, problems, verbose)
-    #     save_csv(output_dir, model_name, prompt_name, predicted_answers, problems, results)
-    #     del model
-    #     torch.cuda.empty_cache()
-    #     gc.collect()
+    outputs = model.generate(prompt, params)
+    results = [o.outputs[0].text for o in outputs]
+    acc, correct, predicted_answers = compute_accuracy(results, problems, verbose)
+    # save_csv(output_dir, model_name, prompt_name, predicted_answers, problems, results)
 
 def get_gpu_with_most_free_memory():
     result = subprocess.check_output(
@@ -117,7 +116,7 @@ if __name__ == '__main__':
 
     parser.add_argument('--data_dir', type=str, default='putnam-axiom/data/Putnam_AXIOM_Original.json', help="Directory containing the data")
     parser.add_argument('--prompt_name', type=str, default="general_few_shot_prompt", help="Name of the prompt to use")
-    parser.add_argument('--model_name', type=str, default='mistralai/Mistral-7B-v0.1', help="Name of the model to use")
+    parser.add_argument('--model_name', type=str, default="AI-MO/NuminaMath-7B-TIR", help="Name of the model to use")
     parser.add_argument('--output_dir', type=str, default='putnam-axiom/data/LM_Outputs', help="Directory to save the output")
     parser.add_argument('--temperature', type=float, default=0.9, help="Temperature setting for model generation")
     parser.add_argument('--top_p', type=float, default=0.95, help="Top-p setting for model generation")
@@ -127,10 +126,9 @@ if __name__ == '__main__':
     parser.add_argument('--verbose', type=bool, default=True, help="Whether to print verbose output")
 
     args = parser.parse_args()
-
     main(
         data_dir=args.data_dir,
-        prompt_name=args.prompt_name,
+        prompt_name=prompt,
         model_name=args.model_name,
         output_dir=args.output_dir,
         temperature=args.temperature,

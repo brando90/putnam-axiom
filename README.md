@@ -11,7 +11,7 @@ pip install -e .
 ```
 
 ## Basic Usage and Evaluation Procedure
-To perform an evaluation on Putnam-AXIOM, run `python putnam-axiom/src/eval.py`, including the appropriate arguments.
+To perform an evaluation on Putnam-AXIOM, run `python putnam-axiom/src/eval.py`, including the appropriate arguments. Evaluation code inspired by minerva math.
 
 * `--data_dir` is the path to the dataset. This should either be `putnam-axiom/data/Putnam_AXIOM_Original.json` to evaluate Putnam-AXIOM Original or `putnam-axiom/data/Putnam_AXIOM_Variations.json` to evaluate Putnam-AXIOM Variations.
 * `--prompt_name` specifies whether the prompt has to be modified for certain instruct models. The supported arguments are `general`, `mistral`, `llama`, or `gemma`. Defaults to `general`
