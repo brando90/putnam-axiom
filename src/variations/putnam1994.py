@@ -58,8 +58,8 @@ def putnam_1994a2(
 
     functional_q: str = replace_map(
         (
-            "Let ${A}$ be the area of the region in the first quadrant bounded by the line $y = \\frac{1}{{a}} x$, "
-            "the $x$-axis, and the ellipse $\\frac{1}{{b_sq}} x^2 + y^2 = 1$. Find the positive number $m$ such that ${A}$ is equal "
+            "Find the positive number $m$ such that the area in the first quadrant bounded by the line $y = \\frac{1}{{a}} x$, "
+            "the $x$-axis, and the ellipse $\\frac{1}{{b_sq}} x^2 + y^2 = 1$ is equal "
             "to the area of the region in the first quadrant bounded by the line $y = mx$, the $y$-axis, and the ellipse $\\frac{1}{{b_sq}} x^2 + y^2 = 1$."
         ),
         {'{a}': a, '{b}' : b, '{b_sq}' : b_sq, '{A}' : A}

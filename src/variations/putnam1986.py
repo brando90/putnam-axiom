@@ -51,7 +51,7 @@ def putnam_1986a1(
     b = a + b # makes b > a
     ans = max((-a)**3 - 3 * (-a), b ** 3 - 3 * b)
 
-    functional_q : str = f'Find, with explanation, the maximum value of $f(x)=x^3-3x$ on the set of all real numbers $x$ satisfying $x^4+{a**2 * b**2}\\leq {a**2 + b**2}x^2$.'
+    functional_q : str = f'For all real numbers $x$ satisfying $x^4+{a**2 * b**2}\\leq {a**2 + b**2}x^2$, what is the maximum value of $f(x)=x^3-3x$?'
     functional_ans : str = f'The condition that $x^4 + {a**2 * b**2} \\leq {a**2 + b**2}x^2$ is equivalent to \\[ (x - {b})(x - {a})(x + {a})(x + {b}) \\leq 0. \\] The latter is satisfied if and only if $x$ is in the closed interval $[-{b}, -{a}]$ or the closed interval $[{a}, {b}]$. The function $f$ is increasing on these intervals because for such $x$, $f\'(x) = 3(x^2 - 1) > 0$. It follows that the maximum value of $f$ over this domain is $\\max \\{{f(-{a}), f({b})\\}} = \\boxed{{{ans}}}.$'
     return {
         'problem' : functional_q,

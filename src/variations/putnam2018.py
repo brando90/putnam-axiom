@@ -51,7 +51,7 @@ def putnam_2018a1(
         a: str = 'a', b: str = 'b') -> dict:
     functional_q: str = replace_map(
         (
-            "Find all ordered pairs $(a,b)$ of positive integers for which \\[ \\frac{1}{{a}} + \\frac{1}{{b}} = \\frac{3}{2018} \\] and determine the ratio of the sum of all a's to the sum of all b's."
+            "Identify all pairs of positive integers $({a},{b})$ that satisfy the equation \\[ \\frac{1}{{a}} + \\frac{1}{{b}} = \\frac{3}{2018}. \\] Once you have found all such pairs, calculate the ratio obtained by dividing the sum of all {a} values by the sum of all {b} values."
         ),
         {'{a}': a, '{b}': b}
     )
@@ -87,8 +87,9 @@ def putnam_2018a2(
         S: str = 'S', n: str = 'n', M : str = 'M') -> dict:
     functional_q: str = replace_map(
         (
-            "Let ${S}_1, {S}_2, \\dots, {S}_{2^{n}-1}$ be the nonempty subsets of $\\{1,2,\\dots,{n}\\}$ in some order, and let ${M}$ be the $(2^{n}-1) \\times (2^{n}-1)$ matrix whose $(i,j)$ entry is" 
-            " \\[ m_{ij} = \\begin{cases} 0 & \\mbox{if }{S}_i \\cap {S}_j = \\emptyset; \\\\ 1 & \\mbox{otherwise.} \\end{cases} \\] Calculate the determinant of $M$ and if there are more than one return the sum of all unique determinant values."
+            "Consider the set $\\{1,2,\\dots,{n}\\}$ and all its nonempty subsets, which we'll denote as ${S}_1, {S}_2, \\dots, {S}_{2^{n}-1}$ in any arbitrary order. Now, construct a matrix ${M}$ of size $(2^{n}-1) \\times (2^{n}-1)$ where each element $m_{ij}$ is defined as follows:" 
+            " \\[ m_{ij} = \\begin{cases} 1 & \\text{if ${S}_i$ and ${S}_j$ have at least one element in common,} \\\\ 0 & \\text{if ${S}_i$ and ${S}_j$ are disjoint.} \\end{cases} \\]" 
+            "Your task is to evaluate the determinant of ${M}$. In case multiple determinant values are possible, compute the sum of all distinct determinant values."
         ),
         {'{S}': S, '{n}': n, '{M}' : M}
     )
@@ -153,7 +154,7 @@ def putnam_2018a3(
 
     functional_q: str = replace_map(
         (
-            "Determine the {greatest} possible value of $\\sum_{i=1}^{10} \\{cos}(3{x}_i)$ for real numbers ${x}_1,{x}_2,\\dots,{x}_{10}$ satisfying $\\sum_{i=1}^{10} \\{cos}({x}_i) = 0$."
+            "Find the {greatest} achievable value of $\\sum_{i=1}^{10} \\{cos}(3{x}_i)$ for real numbers ${x}_1,{x}_2,\\dots,{x}_{10}$ such that $\\sum_{i=1}^{10} \\{cos}({x}_i) = 0$."
         ),
         {'{greatest}' : greatest, '{maximum}': maximum, '{maximal}': maximal, '{cos}' : cos, '{x}' : x, '{maximize}' : maximize}
     )
@@ -194,9 +195,9 @@ def putnam_2018b1(
         a: str = 'a', b: str = 'b', v: str = 'v') -> dict:
 
     functional_q : str = replace_map(
-       ("Let $\\mathcal{P}$ be the set of vectors defined by \\[ \\mathcal{P} = \\left\\{ \\left. \\begin{pmatrix} {a} \\\\ {b} \\end{pmatrix} \\right| 0 \\leq {a} \\leq 2, 0 \\leq {b} \\leq 100, \\mbox{ and } {a},{b} \\in \\mathbb{Z} \\right\\}. \\]" 
-        " Find all $\\mathbf{{v}} \\in \\mathcal{P}$ such that the set $\\mathcal{P} \\setminus \\{ \\mathbf{{v}} \\}$ obtained by omitting vector $\\mathbf{{v}}$ from $\\mathcal{P}$ can be partitioned into two sets of equal size and equal sum." 
-        " Compute and return the sum of both coordinates across all vectors you find."),
+       ("Consider the set $\\mathcal{P}$ of vectors given by \\[ \\mathcal{P} = \\left\\{ \\left. \\begin{pmatrix} {a} \\\\ {b} \\end{pmatrix} \\right| 0 \\leq {a} \\leq 2, 0 \\leq {b} \\leq 100, \\text{ and } {a},{b} \\in \\mathbb{Z} \\right\\}. \\]" 
+        " Identify all vectors $\\mathbf{{v}} \\in \\mathcal{P}$ such that removing $\\mathbf{{v}}$ from $\\mathcal{P}$ results in a set that can be divided into two subsets of equal size and equal sum." 
+        " Calculate and provide the sum of both coordinates for all such vectors."),
        {'{a}' : a, '{b}' : b, '{v}' : v}
     )
 
@@ -238,7 +239,7 @@ def putnam_2018b6(
     assert total_sum > length, f'Error: sum = {total_sum} must be greater than length.'
 
     # -- Formulate the question.
-    functional_q: str = f'Let ${S}$ be the set of sequences of length ${length}$ whose terms are in the set $\\{{1,2,3,4,5,6,10\\}}$ and sum to ${total_sum}$. Find the maximum value of the cardinality of $S$.'
+    functional_q: str = f'Consider the set ${S}$ consisting of sequences of length ${length}$, where each term is an element of $\\{{1,2,3,4,5,6,10\\}}$ and the sum of the terms equals ${total_sum}$. Determine the maximum possible cardinality of $S$.'
 
     # -- Generate answer string
     functional_ans : str = f'Let $a(k,n)$ denote the number of sequences of length $k$ taken from the set $\\{{1,2,3,4,5,6,10\\}}$ and having sum $n$. We prove that  \\[ a(k,n) < 2^n \\left( \\frac{{2018}}{{2048}} \\right)^k \\] by double induction on $n+k$ and $n-k$.  The claim is clearly true when $n-k \\leq 0$ and in particular when $n=k=1$, the smallest case for $n+k$.  We categorize the sequences counted by $a(k,n)$ by whether they end in $1,2,3,4,5,6,10$; removing the last term of such a sequence yields a sequence counted by $a(k-1,n-1), a(k-1,n-2), a(k-1,n-3), a(k-1,n-4), a(k-1,n-5), a(k-1,n-6), a(k-1,n-10)$, respectively.  Therefore, \\begin{{align*}} a(k,n) &= a(k-1,n-1) + \\cdots \\\\ &\\quad + a(k-1,n-6) + a(k-1,n-10) \\\\ &< (  2^{{n-1}} + \\cdots +   2^{{n-6}}  +  2^{{n-10}} ) \\left( \\frac{{2018}}{{2048}} \\right)^{{k-1}} \\\\ &= 2^n \\left( \\frac{{1}}{{2}} + \\cdots + \\frac{{1}}{{64}} + \\frac{{1}}{{1024}} \\right) \\left( \\frac{{2018}}{{2048}} \\right)^{{k-1}} \\\\ &= 2^n \\left( \\frac{{1009}}{{1024}} \\right) \\left( \\frac{{2018}}{{2048}} \\right)^{{k-1}} \\\\ &= 2^n \\left( \\frac{{2018}}{{2048}} \\right)^{{k}} \\end{{align*}} where we used directly the induction hypothesis to obtain the inequality on the second line. The case $k={length}, n={total_sum}$ yields the desired result with the maximum value being \\boxed{{2^{{{total_sum}}} \\cdot \\left(\\frac{{2018}}{{2048}}\\right)^{{{length}}}}}.'

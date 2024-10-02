@@ -50,9 +50,9 @@ def putnam_2017a1(
         S: str = 'S', n: str = 'n') -> dict:
     functional_q: str = replace_map(
         (
-            "Let ${S}$ be the smallest set of positive integers such that \\begin{enumerate} \\item[(a)] $2$ is in ${S}$, \\item[(b)] ${n}$ is in ${S}$ whenever ${n}^2$ is in ${S}$," 
-            " and \\item[(c)] $({n}+5)^2$ is in ${S}$ whenever ${n}$ is in ${S}$. \\end{enumerate} Find the sum of the first $k$ positive integers in sorted order that are not in ${S}$." 
-            " (The set ${S}$ is ``smallest'' in the sense that ${S}$ is contained in any other such set.)"
+            "Define ${S}$ as the smallest set of positive integers satisfying the following conditions: \\begin{enumerate} \\item[(a)] $2$ is an element of ${S}$, \\item[(b)] if ${n}^2$ is in ${S}$, then ${n}$ is also in ${S}$," 
+            " and \\item[(c)] if ${n}$ is in ${S}$, then $({n}+5)^2$ is also in ${S}$. \\end{enumerate} Determine the sum of the first $k$ positive integers, in ascending order, that are not elements of ${S}$." 
+            " (Note: ${S}$ is the smallest set in the sense that it is a subset of any other set satisfying these conditions.)"
         ),
         {'{S}': S, '{n}': n}
     )
@@ -146,7 +146,7 @@ def putnam_2017a1(
 )
 def putnam_2017b2(
         N: str = 'N', k: str = 'k', a: str = 'a') -> dict:
-    functional_q: str = f'Suppose that a positive integer ${N}$ can be expressed as the sum of ${k}$ consecutive positive integers \\[ {N} = {a} + ({a}+1) +({a}+2) + \\cdots + ({a}+{k}-1) \\] for ${k}=2017$ but for no other values of ${k}>1$. Considering all positive integers ${N}$ with this property, what is the smallest positive integer ${a}$ that occurs in any of these expressions?'
+    functional_q: str = f'Assume a positive integer ${N}$ can be represented as the sum of ${k}$ consecutive positive integers: \\[ {N} = {a} + ({a}+1) + ({a}+2) + \\cdots + ({a}+{k}-1) \\] for ${k}=2017$ and for no other ${k}>1$. Among all such positive integers ${N}$, determine the smallest positive integer ${a}$ that appears in any of these representations.'
 
     functional_ans: str = f'Note that the expression for ${N}$ can be rewritten as ${k}(2{a}+{k}-1)/2$, so that $2{N} = k(2{a}+{k}-1)$. In this expression, ${k}>1$ by requirement; ${k} < 2{a}+{k}-1$ because ${a}>1$; and obviously ${k}$ and $2{a}+{k}-1$ have opposite parity. Conversely, for any factorization $2{N} = mn$ with $1<m<n$ and $m,n$ of opposite parity, we obtain an expression of ${N}$ in the desired form by taking ${k} = m$, ${a} = (n+1-m)/2$.  We now note that $2017$ is prime. (On the exam, solvers would have had to verify this by hand. Since $2017 < 45^2$, this can be done by trial division by the primes up to 43.) For $2{N} = 2017(2{a}+2016)$ not to have another expression of the specified form, it must be the case that $2{a}+2016$ has no odd divisor greater than 1; that is, $2{a}+2016$ must be a power of 2. This first occurs for $2{a}+2016=2048$, yielding the claimed result. We prove that the smallest value of $a$ is \\boxed{{16}}.'
 

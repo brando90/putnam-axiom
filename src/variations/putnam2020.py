@@ -53,7 +53,7 @@ def putnam_2020a1(
     k = (2**x) * (5**y) * 101
     functional_q: str = replace_map(
         (
-            "How many positive integers ${N}$ satisfy all of the following three conditions? \\begin{enumerate} \\item[(i)] ${N}$ is divisible by {k}. \\item[(ii)] ${N}$ has at most {k} decimal digits. \\item[(iii)] The decimal digits of ${N}$ are a string of consecutive ones followed by a string of consecutive zeros. \\end{enumerate}"
+            "Determine the count of positive integers ${N}$ that fulfill all of these criteria: \\begin{{enumerate}} \\item[(i)] ${N}$ is a multiple of {k}. \\item[(ii)] The number of decimal digits in ${N}$ does not exceed {k}. \\item[(iii)] When written in decimal notation, ${N}$ consists of a sequence of ones immediately followed by a sequence of zeros (either sequence may be empty). \\end{{enumerate}}"
         ),
         {'{N}': N, '{k}': k}
     )
@@ -105,7 +105,7 @@ def putnam_2020a1(
 def putnam_2020a2(
     k: str = 'k', j: str = 'j') -> dict:
     functional_q : str = replace_map (
-        ("Let ${k}$ be a nonnegative integer. Evaluate \\[ \\sum_{{j}=0}^{k} 2^{{k}-{j}} \\binom{{k}+{j}}{{j}}. \\]"),
+        ("Consider a non-negative integer ${k}$. Compute the value of the following summation: \\[ \\sum_{{j}=0}^{k} 2^{{k}-{j}} \\binom{{k}+{j}}{{j}}. \\]"),
         {'{k}' : k, '{j}' : j}
     )
     functional_ans : str = replace_map (

@@ -55,7 +55,7 @@ def putnam_1998a1(
     ans = f"({h_square}\\sqrt{{2}} - {two_hr})/{bottom}"
 
     functional_q : str = replace_map(
-        ("A right circular cone has base of radius {r} and height {h}.  A cube is inscribed in the cone so that one face of the cube is contained in the base of the cone.  What is the side-length of the cube?"),
+        ("A cube is inscribed in a right circular cone has base of radius {r} and height {h} so that the bottom face of the cube is entirely contained in the base of the cone.  What is the side-length of the cube?"),
         {'{h}' : h, '{r}' : r}
     )
 
@@ -87,7 +87,7 @@ def putnam_1998b5(
     dig = 3
     if i == 1000:
         dig = 1
-    functional_q : str = f'Let ${N}$ be the positive integer with 1998 decimal digits, all of them 1; that is, \\[{N}=1111\\cdots 11.\\] Find the {i}th digit after the decimal point of $\\sqrt {N}$.'
+    functional_q : str = f'Let ${N}$ be the positive integer consisting of 1998 decimal digits, all of which are 1; that is, \[{N}=1111\cdots 11.\] Determine the ${i}$th digit after the decimal point in the decimal expansion of $\sqrt{{{N}}}$.'
     functional_ans : str = f'Write ${N}=(10^{{1998}}-1)/9$.  Then \\begin{{align*}} \\sqrt{{{N}}} &=\\frac{{10^{{999}}}}{{3}}\\sqrt{{1-10^{{-1998}}}} \\\\ &=\\frac{{10^{{999}}}}{{3}} (1-\\frac{{1}}{{2}}10^{{-1998}} + r), \\end{{align*}} where $r<10^{{-2000}}$.  Now the digits after the decimal point of $10^{{999}}/3$ are given by $.3333\\ldots$, while the digits after the decimal point of $\\frac{{1}}{{6}}10^{{-999}}$ are given by $.00000\\ldots 1666666\\ldots$. It follows that the first 1000 digits of $\\sqrt N$ are given by $.33333\\ldots 3331$;  in particular, the {i}th digit is $\\boxed{{{dig}}}$.'
     return {
         'problem' : functional_q,

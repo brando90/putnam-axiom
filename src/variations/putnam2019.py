@@ -28,9 +28,9 @@ def putnam_2019a2(
 
     functional_q: str = replace_map(
         (
-        "In the triangle $\\triangle {A}{B}{C}$, let ${G}$ be the centroid, and let ${I}$ be the center of the inscribed circle. " 
-        "Let ${alpha}$ and ${beta}$ be the angles at the vertices ${A}$ and ${B}$, respectively. Suppose that the segment ${I}{G}$ " 
-        "is parallel to ${A}{B}$ and that ${beta} = 2 \\tan^{-1} (1/3)$. Find ${alpha}$."
+        "Consider a triangle $\\triangle {A}{B}{C}$. The centroid is denoted by ${G}$, while ${I}$ represents the incenter. " 
+        "The angles at vertices ${A}$ and ${B}$ are labeled as ${alpha}$ and ${beta}$ respectively. Given that the line segment ${I}{G}$ " 
+        "runs parallel to side ${A}{B}$, and ${beta}$ is equal to $2 \\arctan (1/3)$, determine the value of ${alpha}$."
         ),
         {'{A}': A, '{B}': B, '{C}': C, '{G}': G, '{I}': I, '{alpha}': alpha, '{beta}': beta}
     )
@@ -68,7 +68,7 @@ def putnam_2019a4(
 
     # -- Formulate the question
     #   original_q: str = 'Let $f$ be a continuous real-valued function on $\\mathbb{R}^3$. Suppose that for every sphere $S$ of radius 1, the integral of $f(x,y,z)$ over the surface of $S$ equals 0. Must $f(x,y,z)$ be identically 0?'
-    functional_q: str = f'Let ${f}$ be a continuous real-valued function on $\\mathbb{{R}}^3$. Suppose that for every sphere ${S}$ of radius {r}, the integral of ${f}({x},{y},{z})$ over the surface of ${S}$ equals 0. Must ${f}({x},{y},{z})$ be identically 0? Give a yes or no answer.'
+    functional_q: str = f'Consider a continuous function ${f}: \\mathbb{{R}}^3 \\to \\mathbb{{R}}$. For any sphere ${S}$ with radius {r}, assume that the surface integral of ${f}({x},{y},{z})$ over ${S}$ is zero. Is it necessary that ${f}({x},{y},{z})$ is the zero function everywhere? Respond with either yes or no.'
 
     #   if debug:
     #     assert original_q == functional_q, f'Error:\n\n {original_q}\n\n {functional_q}\n\n'
@@ -116,7 +116,7 @@ def putnam_2019b5(
 
   # -- Formulate the question
 #   original_q: str = 'Let $F_m$ be the $m$th Fibonacci number, defined by $F_1 = F_2 = 1$ and $F_m = F_{m-1} + F_{m-2}$ for all $m \\geq 3$. Let $p(x)$ be the polynomial of degree $1008$ such that $p(2n+1) = F_{2n+1}$ for $n=0,1,2,\\dots,1008$. Find integers $j$ and $k$ such that $p(2019) = F_j - F_k$.'
-  functional_q: str = f'Let ${var_F}_{var_m}$ be the ${var_m}$th Fibonacci number, defined by ${var_F}_1 = {var_F}_2 = 1$ and ${var_F}_{var_m} = {var_F}_{{{var_m}-1}} + {var_F}_{{{var_m}-2}}$ for all ${var_m} \\geq 3$. Let ${fn_p}({var_x})$ be the polynomial of degree ${deg}$ such that $p(2{var_n}+1) = F_{{2{var_n}+1}}$ for ${var_n}=0,1,2,\\dots,{deg}$. Find integers ${var_j}$ and ${var_k}$ such that $p({2*deg + 3}) = {var_F}_{var_j} - {var_F}_{var_k}$ and give the answer in the form $j/k$.'
+  functional_q: str = f'Consider the Fibonacci sequence ${var_F}_{var_m}$, where ${var_F}_1 = {var_F}_2 = 1$ and for ${var_m} \\geq 3$, ${var_F}_{var_m} = {var_F}_{{{var_m}-1}} + {var_F}_{{{var_m}-2}}$. Now, define a polynomial ${fn_p}({var_x})$ of degree ${deg}$ that satisfies ${fn_p}(2{var_n}+1) = {var_F}_{{2{var_n}+1}}$ for all ${var_n}$ in the range 0 to {deg}, inclusive. Your task is to determine two integers, ${var_j}$ and ${var_k}$, such that ${fn_p}({2*deg + 3}) = {var_F}_{var_j} - {var_F}_{var_k}$. Express your answer as the fraction $j/k$.'
 
 #   if debug:
 #     assert original_q == functional_q, f'Error:\n\n {original_q}\n\n {functional_q}\n\n'
@@ -151,9 +151,9 @@ def putnam_2019b6(
         S: str = 'S') -> dict:
 
     functional_q : str = replace_map(
-       ("Let $\\mathbb{Z}^n$ be the integer lattice in $\\mathbb{R}^n$. Two points in $\\mathbb{Z}^n$ are called  \\emph{neighbors} if they differ by exactly $1$ in one coordinate and are equal in all other coordinates."  
-        " Find the sum of the first k integers $n \\geq 1$ for which there exist a set of points ${S} \\subset \\mathbb{Z}^n$ satisfying the following two conditions? \\begin{enumerate}" 
-        " \\item[(1)] If $p$ is in ${S}$, then none of the neighbors of $p$ is in ${S}$. \\item[(2)] If $p \\in \\mathbb{Z}^n$ is not in ${S}$, then exactly one of the neighbors of $p$ is in ${S}$. \\end{enumerate}"),
+       ("Consider the integer lattice $\\mathbb{Z}^n$ within $\\mathbb{R}^n$. We define two points in $\\mathbb{Z}^n$ as \\emph{adjacent} if they differ by exactly 1 in a single coordinate while being identical in all others. "
+        "Your task is to determine the sum of the first k positive integers $n$ for which there exists a subset ${S}$ of $\\mathbb{Z}^n$ that satisfies both of these criteria: \\begin{enumerate}"
+        "\\item[(1)] For any point $p$ in ${S}$, all of its adjacent points are outside of ${S}$. \\item[(2)] For any point $p$ in $\\mathbb{Z}^n$ that is not in ${S}$, precisely one of its adjacent points belongs to ${S}$. \\end{enumerate}"),
        {'{S}' : S}
     )
 

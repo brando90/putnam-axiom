@@ -59,8 +59,8 @@ def putnam_2014a2(
 
     functional_q: str = replace_map(
         (
-            "Let ${A}$ be the ${n} \\times {n}$ matrix whose entry in the ${i}$-th row and ${j}$-th column is" 
-            " \\[ \\frac{1}{\\min({i},{j})} \\] for $1 \\leq {i},{j} \\leq {n}$. Compute $\\det({A})$."
+            "Consider the ${n} \\times {n}$ matrix ${A}$ where the element in the ${i}$-th row and ${j}$-th column is defined as" 
+            " \\[ \\frac{1}{\\min({i},{j})}. \\] Given $1 \\leq {i},{j} \\leq {n}$, determine $\\det({A})$."
         ),
         {'{A}': A, '{n}' : n, '{i}' : i, '{j}' : j}
     )
@@ -101,8 +101,8 @@ def putnam_2014a4(
 
     functional_q: str = replace_map(
         (
-            "Suppose ${X}$ is a random variable that takes on only nonnegative integer values, with $E\\left[ {X} \\right] = 1$, $E\\left[ {X}^2 \\right] = 2$, and $E \\left[ {X}^3 \\right] = 5$." 
-            " (Here $E\\left[ y \\right]$ denotes the expectation of the random variable $Y$.) What is the probability that ${X} = {x}$ given the probability that ${X}=0$ reaches a minimum."
+            "Consider a random variable ${X}$ that only takes nonnegative integer values. It is given that $E\\left[ {X} \\right] = 1$, $E\\left[ {X}^2 \\right] = 2$, and $E \\left[ {X}^3 \\right] = 5$." 
+            " (Here $E\\left[ Y \\right]$ denotes the expectation of the random variable $Y$.) Determine the probability that ${X} = {x}$ under the condition that the probability of ${X}=0$ is minimized."
         ),
         {'{X}': X, '{x}' : x}
     )
@@ -152,8 +152,8 @@ def putnam_2014b2(
 
     functional_q: str = replace_map(
         (
-            "Suppose that ${f}$ is a function on the interval $[1,{k}]$ such that $-1 \\leq {f}({x}) \\leq 1$ for all ${x}$ and $\\int_1^{k} {f}({x})\\,d{x} = 0$." 
-            " How large can $\\int_1^{k} \\frac{{f}({x})}{{x}}\\,d{x}$ be?  \\,"
+            "Consider a function ${f}$ defined on the interval $[1,{k}]$ such that $-1 \\leq {f}({x}) \\leq 1$ for every ${x}$ and $\\int_1^{k} {f}({x})\\,d{x} = 0$." 
+            " Determine the maximum value of $\\int_1^{k} \\frac{{f}({x})}{{x}}\\,d{x}$.  \\,"
         ),
         {'{f}': f, '{x}' : x, '{k}' : k}
     )
@@ -201,9 +201,9 @@ def putnam_2014b5(
 
     functional_q: str = replace_map(
         (
-            "In the 75th annual Putnam Games, participants compete at mathematical games. Patniss and Keeta play a game in which they take turns choosing an element  from the group of invertible ${n} \\times {n}$ matrices with entries in the field $\\mathbb{Z}/p \\mathbb{Z}$ of integers modulo $p$, where ${n}$ is a fixed positive integer and $p$ is a fixed prime number." 
-            "The rules of the game are: \\begin{enumerate} \\item[(1)] A player cannot choose an element that has been chosen by either player on any previous turn. \\item[(2)] A player can only choose an element that commutes with all previously chosen elements. \\item[(3)]" 
-            "A player who cannot choose an element on his/her turn loses the game. \\end{enumerate} {name1} takes the first turn. Find the minimum value of $p$ for which {name1} wins, for which {name2} wins and compute the product of the two (Your answer may depend on ${n}$ and $p$.)"
+            "In the 75th annual Putnam Games, Patniss and Keeta are engaged in a mathematical competition. They alternately select an element from the set of invertible ${n} \\times {n}$ matrices with entries in the field $\\mathbb{Z}/p \\mathbb{Z}$, where ${n}$ is a given positive integer and $p$ is a given prime number." 
+            "The game follows these rules: \\begin{enumerate} \\item[(1)] A player cannot select an element that has already been chosen by either player in previous turns. \\item[(2)] A player can only select an element that commutes with all previously chosen elements. \\item[(3)]" 
+            "A player who cannot select an element on their turn loses the game. \\end{enumerate} {name1} goes first. Determine the smallest value of $p$ for which {name1} wins, the smallest value of $p$ for which {name2} wins, and compute the product of these two values (Your answer may depend on ${n}$ and $p$.)"
         ),
         {'{name1}': name1, '{name2}' : name2, '{n}' : n}
     )

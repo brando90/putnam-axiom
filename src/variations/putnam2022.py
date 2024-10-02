@@ -53,7 +53,7 @@ def putnam_2022a1(
 
     functional_q: str = replace_map(
         (
-            "Determine all ordered pairs of real numbers $({a},{b})$ such that the line $y = {a}x+{b}$ intersects the curve $y = \\ln({k}+x^2)$ in exactly one point."
+            "Find all possible combinations of real numbers $({a},{b})$ for which the straight line defined by $y = {a}x+{b}$ and the logarithmic curve $y = \\ln({k}+x^2)$ have precisely one point of intersection."
         ),
         {'{a}': a, '{b}': b, '{k}': k}
     )
@@ -64,7 +64,7 @@ def putnam_2022a1(
 
     functional_q : str = replace_map(
         (
-            "Given that 0 < |{a}| < {k_frac}, determine the two conditions on {b} such that the line $y = {a}x+{b}$ intersects the curve $y = \\ln({k}+x^2)$ in exactly one point. Give the final answer as a sum of the expressions {b} is conditioned on (eg. if the conditions are {b} < f({a}) and {b} > g({a}) then the final solution is f({a}) + g({a}))."
+            "Consider the inequality 0 < |{a}| < {k_frac}. Find the two boundary conditions for {b} that ensure the line equation $y = {a}x+{b}$ and the logarithmic curve $y = \\ln({k}+x^2)$ have precisely one intersection point. Express your final answer as the sum of the two boundary expressions for {b} (for example, if {b} is bounded by f({a}) and g({a}), then provide f({a}) + g({a}) as your solution)."
         ),
         {'{a}': a, '{b}': b, '{k}': k, '{k_sqrt}' : k_sqrt, '{k_frac}' : k_frac}
     )
@@ -111,9 +111,11 @@ def putnam_2022a3(
     #     assert original_q == functional_q, f'Error:\n\n {original_q}\n\n {functional_q}\n\n'
 
     functional_q : str = replace_map(
-       ("Let ${p}$ be a prime number greater than 5. Let $f({p})$ denote the number of infinite sequences ${a}_1, {a}_2, {a}_3, \\dots$ such that ${a}_n \\in \\{1, 2, \\dots, {p}-1\\}$ "
-        " and ${a}_n {a}_{n+2} \\equiv 1 + {a}_{n+1} \\pmod{{p}}$ for all $n \\geq 1$. What is the sum of all values that $f({p})$ can be congruent to modulo 5?"),
-       {'{p}' : p, '{a}' : a}
+        (
+        "Consider a prime number ${p}$ exceeding 5. Define $f({p})$ as the count of infinite sequences ${a}_1, {a}_2, {a}_3, \\dots$ where each ${a}_n$ is chosen from $\\{{1, 2, \\dots, {p}-1\\}}$, "
+        "satisfying the congruence ${a}_n {a}_{{n+2}} \\equiv 1 + {a}_{{n+1}} \\pmod{{{p}}}$ for all positive integers $n$. Determine the sum of all possible residues of $f({p})$ when divided by 5."
+        ),
+        {'{p}' : p, '{a}' : a}  
     )
 
     # # -- boxed answer
@@ -151,9 +153,9 @@ def putnam_2022a5(
   person_a = 'Alice'
   person_b = 'Bob'
   functional_q : str = replace_map(
-      ("{person_a} and {person_b} play a game on a board consisting of one row of {n} consecutive squares. They take turns placing tiles that cover two adjacent squares, with {person_a} going first." 
-       " By rule, a tile must not cover a square that is already covered by another tile. The game ends when no tile can be placed according to this rule. {person_a}\'s goal is to maximize the number of uncovered squares when the game ends;" 
-       " {person_b}\'s goal is to minimize it. What is the greatest number of uncovered squares that {person_a} can ensure at the end of the game, no matter how {person_b} plays?"),
+      ("On a linear board with {n} adjacent cells, {person_a} and {person_b} engage in a strategic game. Players alternate turns, starting with {person_a}, placing non-overlapping dominos that cover exactly two neighboring cells."
+       " The game concludes when no more dominos can be legally placed. {person_a} aims to maximize the count of uncovered cells at the game's end, while {person_b} strives to minimize this number."
+       " Determine the maximum number of uncovered cells {person_a} can guarantee, regardless of {person_b}'s strategy."),
       {'{person_a}' : person_a, '{person_b}' : person_b, '{n}' : n}
   )
 
@@ -206,9 +208,9 @@ def putnam_2022a6(
         n: str = 'n', m: str = 'm', x: str = 'x', k: str = 'k') -> dict:
 
     functional_q : str = replace_map(
-       ("Let ${n}$ be a positive integer. Determine, in terms of ${n}$, the largest integer ${m}$ with the following property: There exist real numbers ${x}_1,\\dots,{x}_{2{n}}$ with $-1 < {x}_1 < {x}_2 < \\cdots < {x}_{2{n}} < 1$" 
-        " such that the sum of the lengths of the ${n}$ intervals \\[ [{x}_1^{2{k}-1}, {x}_2^{2{k}-1}], [{x}_3^{2{k}-1},{x}_4^{2{k}-1}], \\dots, [{x}_{2{n}-1}^{2{k}-1}, {x}_{2{n}}^{2{k}-1}] \\] is equal to 1 for all integers ${k}$ with" 
-        " $1 \\leq {k} \\leq {m}$."),
+       ("Consider a positive integer ${n}$. Find the maximum integer ${m}$, expressed in terms of ${n}$, satisfying this condition: There exist ${2{n}}$ real numbers, ${x}_1,{x}_2,\\ldots,{x}_{2{n}}$, strictly increasing and bounded by -1 and 1, such that" 
+        " for every integer ${k}$ from 1 to ${m}$, the following equation holds: \\[ \\sum_{i=1}^{{n}} ({x}_{2i}^{2{k}-1} - {x}_{2i-1}^{2{k}-1}) = 1 \\] " 
+        "In other words, the sum of the lengths of ${n}$ intervals, where each interval is defined by consecutive pairs of these numbers raised to the power ${2{k}-1}$, equals 1 for all ${k}$ from 1 to ${m}$."),
        {'{n}' : n, '{m}' : m, '{x}' : x, '{k}' : k}
     )
 
@@ -244,9 +246,9 @@ def putnam_2022b3(
         D: str = 'D', d: str = 'd') -> dict:
 
     functional_q : str = replace_map(
-       ("Assign to each positive real number a color, either red or blue. Let ${D}$ be the set of all distances ${d} > 0$ such that there are two points of the same color at distance ${d}$ apart." 
-        " Recolor the positive reals so that the numbers in ${D}$ are red and the numbers not in ${D}$ are blue. If we iterate this recoloring process, will we always end up with all the numbers red after a finite number of steps?"
-        " Give a yes or no answer."),
+       ("Consider a coloring scheme for positive real numbers using red and blue. Define ${D}$ as the set of all positive distances ${d}$ where two points of identical color are separated by ${d}$."
+        " Now, implement a recoloring rule: turn all numbers in ${D}$ red, and all numbers not in ${D}$ blue. If this recoloring process is repeated indefinitely, is it guaranteed that all numbers will become red after a finite number of iterations?"
+        " Provide your answer as either yes or no."),
        {'{D}' : D, '{d}' : d}
     )
 
@@ -279,9 +281,9 @@ def putnam_2022b5(
         X: str = 'X', n: str = 'n', a: str = 'a', b : str = 'b') -> dict:
 
     functional_q : str = replace_map(
-       ("For $0 \\leq p \\leq 1/2$, let ${X}_1, {X}_2, \\dots$ be independent random variables such that \\[ {X}_i = \\begin{cases} 1 & \\mbox{with probability $p$,} \\\\ -1 & \\mbox{with probability $p$,} \\\\ 0 & \\mbox{with probability $1-2p$,} \\end{cases} \\]" 
-        " for all $i \\geq 1$. Given a positive integer ${n}$ and integers ${b}, {a}_1, \\dots, {a}_{n}$, let $P({b}, {a}_1, \\dots, {a}_{n})$ denote the probability that ${a}_1 {X}_1 + \\cdots + {a}_{n} {X}_{n} = {b}$. Find the maximum value of $p$ for which it is" 
-        " the case that \\[ P(0, {a}_1, \\dots, {a}_{n}) \\geq P({b}, {a}_1, \\dots, {a}_{n}) \\] for all positive integers ${n}$ and all integers ${b}, {a}_1, \\dots, {a}_{n}$?"),
+       ("Consider a sequence of independent random variables ${X}_1, {X}_2, \\dots$ defined for $0 \\leq p \\leq 1/2$, where each ${X}_i$ follows the distribution: \\[ {X}_i = \\begin{cases} 1 & \\text{with probability $p$,} \\\\ -1 & \\text{with probability $p$,} \\\\ 0 & \\text{with probability $1-2p$.} \\end{cases} \\]"
+        " Let ${n}$ be a positive integer and ${b}, {a}_1, \\dots, {a}_{n}$ be integers. Define $P({b}, {a}_1, \\dots, {a}_{n})$ as the probability of the event ${a}_1 {X}_1 + \\cdots + {a}_{n} {X}_{n} = {b}$. What is the largest value of $p$ that ensures"
+        " \\[ P(0, {a}_1, \\dots, {a}_{n}) \\geq P({b}, {a}_1, \\dots, {a}_{n}) \\] holds true for any choice of positive integer ${n}$ and integers ${b}, {a}_1, \\dots, {a}_{n}$?"),
         {'{X}' : X, '{n}' : n, '{a}' : a, '{b}' : b}
     )
 

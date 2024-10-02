@@ -54,8 +54,8 @@ def putnam_2016a1(
 
     functional_q: str = replace_map(
         (
-            "Find the smallest positive integer ${j}$ such that for every polynomial ${p}(x)$ with integer coefficients and for every integer $k$," 
-            " the integer \\[ {p}^{({j})}(k) = \\left. \\frac{d^{j}}{dx^{j}} {p}(x) \\right|_{x=k}  \\]  (the ${j}$-th derivative of ${p}(x)$ at $k$) is divisible by 2016."
+            "Determine the smallest positive integer ${j}$ such that for any polynomial ${p}(x)$ with integer coefficients and any integer $k$," 
+            " the value \\[ {p}^{({j})}(k) = \\left. \\frac{d^{j}}{dx^{j}} {p}(x) \\right|_{x=k}  \\]  (the ${j}$-th derivative of ${p}(x)$ evaluated at $k$) is divisible by 2016."
         ),
         {'{j}': j, '{p}' : p}
     )
@@ -96,7 +96,7 @@ def putnam_2016a2(
 
     functional_q: str = replace_map(
         (
-            "Given a positive integer ${n}$, let ${M}({n})$ be the largest integer ${m}$ such that  \\[ \\binom{{m}}{{n}-1} > \\binom{{m}-1}{{n}}. \\] Evaluate  \\[ \\lim_{{n} \\to \\infty} \\frac{{M}({n})}{{n}}. \\]"
+            "For a given positive integer ${n}$, define ${M}({n})$ as the maximum integer ${m}$ that satisfies the inequality \\[ \\binom{{m}}{{n}-1} > \\binom{{m}-1}{{n}}. \\] Find the value of  \\[ \\lim_{{n} \\to \\infty} \\frac{{M}({n})}{{n}}. \\]"
         ),
         {'{M}': M, '{m}' : m, '{n}' : n}
     )

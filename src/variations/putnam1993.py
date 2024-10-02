@@ -56,9 +56,9 @@ def putnam_1993a1(
 
     functional_q: str = replace_map(
         (
-            "The horizontal line $y={c}$ intersects the curve $y = {m}x - {n}x^3$ in the first quadrant as in the figure. "
-            "Find ${c}$ so that the areas of the two shaded regions are equal. [Figure not included. The first region is bounded by the $y$-axis, "
-            "the line $y={c}$ and the curve; the other lies under the curve and above the line $y={c}$ between their two points of intersection.]"
+            "Consider the intersection between the horizontal line $y={c}$ and the curve $y = {m}x - {n}x^3$ in the first quadrant. "
+            "This creates two regions. The first region is bounded by the $y$-axis, the line $y={c}$ and the curve; the other lies under the curve and above the line $y={c}$ between their two points of intersection. "
+            "Find ${c}$ so that the areas of the two shaded regions are equal."
         ),
         {'{m}': m, '{n}' : n, '{c}' : c}
     )
@@ -108,7 +108,7 @@ def putnam_1993b1(
 
     functional_q: str = replace_map(
         (
-            "Find the smallest positive integer ${n}$ such that for every integer ${m}$ with $0 < {m} < {a}$, there exists an integer ${k}$ for which \\[ \\frac{{m}}{{a}} < \\frac{{k}}{{n}} < \\frac{m+1}{{a_plus}}. \\]"
+            "Identify the smallest natural number (positive integer) ${n}$ such that for every integer ${m}$ with $0 < {m} < {a}$, there exists an integer ${k}$ for which satisfies the expression \\[ \\frac{{m}}{{a}} < \\frac{{k}}{{n}} < \\frac{m+1}{{a_plus}}. \\]"
         ),
         {'{m}': m, '{n}' : n, '{k}' : k, '{a}' : a, '{a_plus}' : a_plus}
     )
@@ -150,7 +150,7 @@ def putnam_1993b2(
 ) -> dict:
     functional_q: str = replace_map(
         (
-            "Consider the following game played with a deck of $2{n}$ cards numbered from 1 to $2{n}$. The deck is randomly shuffled and ${n}$ cards are dealt to each of two players. Beginning with ${A}$, the players take turns discarding one of their remaining cards and announcing its number. The game ends as soon as the sum of the numbers on the discarded cards is divisible by $2{n}+1$. The last person to discard wins the game. Assuming optimal strategy by both ${A}$ and ${B}$, what is the probability that ${A}$ wins?"
+            "Consider a game played with a deck of $2{n}$ cards, where each card is uniquely numbered from 1 to $2{n}$. The deck is shuffled randomly, and each of two players, ${A}$ and ${B}$, is dealt ${n}$ cards. Starting with ${A}$, the players take turns discarding one of their remaining cards and announcing its number. The game continues until the sum of all discarded cards becomes divisible by $2{n}+1$. The player who discards the final card, making the sum divisible by $2{n}+1$, wins the game. Assuming both players ${A}$ and ${B}$ use optimal strategy, what is the probability that ${A}$ will win?"
         ),
         {'{n}' : n, '{A}' : A, '{B}' : B}
     )

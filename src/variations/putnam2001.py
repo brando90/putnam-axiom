@@ -17,7 +17,8 @@ def putnam_2001a4(
     area : int = 1) -> dict:
 
     functional_q : str = replace_map (
-       ("Triangle $ABC$ has an area {area}.  Points $E,F,G$ lie, respectively, on sides $BC$, $CA$, $AB$ such that $AE$ bisects $BF$ at point $R$, $BF$ bisects $CG$ at point $S$, and $CG$ bisects $AE$ at point $T$. Find the area of the triangle $RST$."),
+       (
+        "In triangle $ABC$ with an area of {area}, points $E$, $F$, and $G$ are located on sides $BC$, $CA$, and $AB$ respectively. The line segment $AE$ bisects $BF$ at point $R$, $BF$ bisects $CG$ at point $S$, and $CG$ bisects $AE$ at point $T$. Determine the area of triangle $RST$."),
        {'{area}' : area}
     )
     
@@ -59,7 +60,7 @@ def putnam_2001a6(
   assert var_l <= 4* var_r, f'Error: the length must be at most 4r = {4 * var_r}.'
 
   # -- Formulate the questions
-  functional_q : str = f'Can an arc of a parabola inside a circle of radius {var_r} have a length greater than {var_l}? Give a yes or no answer.'
+  functional_q : str = f'Can a parabolic arc inside a circle with radius {var_r} have a length greater than {var_l}?'
 
   # -- Now, make the answer string
   functional_ans: str = f'''Consider the arc of the parabola $y=Ax^2$ inside the circle $x^2+(y-{var_r})^2 = {var_r**2}$, where we initially assume that $A > \\frac{{1}}{{{2 * var_r}}}$.  This intersects the circle in three points, $(0,0)$ and $(\\pm \\sqrt{{{2 * var_r}A-1}}/A, ({2 * var_r}A-1)/A)$.  We claim that for $A$ sufficiently large, the length $L$ of the parabolic arc between $(0,0)$ and $(\\sqrt{{{2 * var_r}A-1}}/A, ({2 * var_r}A-1)/A)$ is greater than ${2*var_r}$, which implies the desired result by symmetry.  We express $L$ using the usual formula for arclength: \\begin{{align*}} L &= \\int_0^{{\\sqrt{{{2 * var_r}A-1}}/A}} \\sqrt{{1+(2Ax)^2}} \\, dx \\\\ &= \\frac{{1}}{{2A}} \\int_0^{{2\\sqrt{{{2*var_r}A-1}}}} \\sqrt{{1+x^2}} \\, dx \\\\ &= {2*var_r} + \\frac{{1}}{{2A}} \\left( \\int_0^{{2\\sqrt{{{2*var_r}A-1}}}} (\\sqrt{{1+x^2}}-x)\\,dx -2\\right), \\end{{align*}} where we have artificially introduced $-x$ into the integrand in the last step.  Now, for $x \\geq 0$, \\[ \\sqrt{{1+x^2}}-x = \\frac{{1}}{{\\sqrt{{1+x^2}}+x}} > \\frac{{1}}{{2\\sqrt{{1+x^2}}}} \\geq \\frac{{1}}{{2(x+1)}}; \\] since $\\int_0^\\infty dx/(2(x+1))$ diverges, so does $\\int_0^\\infty (\\sqrt{{1+x^2}}-x)\\,dx$.  Hence, for sufficiently large $A$, we have $\\int_0^{{2\\sqrt{{{2*var_r}A-1}}}} (\\sqrt{{1+x^2}}-x)\\,dx > 2$, and hence $L > {2*var_r}$. The answer is \\boxed{{yes}}.'''
@@ -83,8 +84,10 @@ def putnam_2001b6(
     a: str = 'a', n: str = 'n') -> dict:
 
     functional_q : str = replace_map (
-       ("Assume that $({a}_{n})_{{n}\\geq 1}$ is an increasing sequence of positive real numbers such that $\\lim {a}_{n}/{n}=0$.  "
-        "Must there exist infinitely many positive integers ${n}$ such that ${a}_{{n}-i}+{a}_{{n}+i}<2{a}_{n}$ for $i=1,2,\\ldots,{n}-1$? Give a yes or no answer."),
+       (
+        "Suppose $({a}_{n})_{{n}\\geq 1}$ is an increasing sequence of positive real numbers such that $\\lim {a}_{n}/{n}=0$.  "
+        "Is it necessarily true that there are infinitely many positive integers ${n}$ for which ${a}_{{n}-i}+{a}_{{n}+i}<2{a}_{n}$ holds for $i=1,2,\\ldots,{n}-1$? Provide a yes or no answer."
+        ),
        {'{a}' : a, '{n}' : n}
     )
 

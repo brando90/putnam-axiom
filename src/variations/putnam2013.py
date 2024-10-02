@@ -8,7 +8,6 @@ from . import generators
 
 dataset = {}
 
-
 def check_and_create_folder(folder_path):
     if not os.path.exists(folder_path):
         os.makedirs(folder_path)
@@ -51,8 +50,8 @@ def putnam_2013b1(
     lim = 2 * lim + 1 ### NOTE: I made a change that forces lim to always be odd. This was throwing errors in some of our stuff.
     functional_q: str = replace_map(
         (
-            'For positive integers ${n}$, let the numbers ${c}({n})$ be determined by the rules ${c}(1) = 1$, '
-            '${c}(2{n}) = {c}({n})$, and ${c}(2{n}+1) = (-1)^{n} {c}({n})$. Find the value of  \\[ \\sum_{{n}=1}^{{'
+            'Given positive integers ${n}$, define the sequence ${c}({n})$ by the following rules: ${c}(1) = 1$, '
+            '${c}(2{n}) = {c}({n})$, and ${c}(2{n}+1) = (-1)^{n} {c}({n})$. Find the value of \\[ \\sum_{{n}=1}^{{'
             'lim}} {c}({n}) {c}({n}+2). \\]'
         ),
         {
@@ -88,15 +87,13 @@ def putnam_2013b3(
 ) -> dict:
     functional_q: str = replace_map(
         (
-            "Let $\\mathcal{P}$ be a nonempty collection of subsets of $\\{1,\\dots, n\\}$ such that: \\begin{"
-            "enumerate} \\item[(i)] if ${S}, {S}' \\in \\mathcal{P}$, then ${S} \\cup {S}' \\in \\mathcal{P}$ and ${"
-            "S} \\cap {S}' \\in \\mathcal{P}$, and \\item[(ii)] if ${S} \\in \\mathcal{P}$ and ${S} \\neq "
-            "\\emptyset$, then there is a subset ${T} \\subset {S}$ such that ${T} \\in \\mathcal{P}$ and ${T}$ "
-            "contains exactly one fewer element than $S$. \\end{enumerate} Suppose that ${f}: \\mathcal{P} \\to "
-            "\\mathbb{R}$ is a function such that ${f}(\\emptyset) = 0$ and \\[ {f}({S} \\cup {S}') = {f}({S}) + {f}("
-            "{S}') - {f}({S} \\cap {S}') \\mbox{ for all ${S},{S}' \\in \\mathcal{P}$.} \\] Must there exist real "
-            "numbers ${f}_1,\\dots,{f}_n$ such that \\[ {f}({S}) = \\sum_{i \\in {S}} {f}_i \\] for every ${S} \\in "
-            "\\mathcal{P}$? Give a yes or no answer."
+            "Consider a nonempty collection $\\mathcal{P}$ of subsets of $\\{1,\\dots, n\\}$ such that: \\begin{enumerate} "
+            "\\item[(i)] if ${S}, {S}' \\in \\mathcal{P}$, then both ${S} \\cup {S}'$ and ${S} \\cap {S}'$ are in $\\mathcal{P}$, "
+            "and \\item[(ii)] if ${S} \\in \\mathcal{P}$ and ${S} \\neq \\emptyset$, then there exists a subset ${T} \\subset {S}$ "
+            "such that ${T} \\in \\mathcal{P}$ and ${T}$ has exactly one element less than ${S}. \\end{enumerate} Suppose there is "
+            "a function ${f}: \\mathcal{P} \\to \\mathbb{R}$ with ${f}(\\emptyset) = 0$ and \\[ {f}({S} \\cup {S}') = {f}({S}) + {f}({S}') - {f}({S} \\cap {S}') \\] "
+            "for all ${S},{S}' \\in \\mathcal{P}$. Is it necessarily true that there exist real numbers ${f}_1,\\dots,{f}_n$ such that "
+            "\\[ {f}({S}) = \\sum_{i \\in {S}} {f}_i \\] for every ${S} \\in \\mathcal{P}$? Provide a yes or no answer."
         ),
         {
             '{f}': f, '{S}': S, '{T}': T
@@ -152,15 +149,10 @@ def putnam_2013b6(
 ) -> dict:
     functional_q: str = replace_map(
         (
-            "Let ${n} \\geq 1$ be an odd integer. Alice and Bob play the following game, taking alternating turns, "
-            "with Alice playing first.  The playing area consists of ${n}$ spaces, arranged in a line. Initially all "
-            "spaces are empty. At each turn, a player either \\begin{itemize} \\item places a stone in an empty "
-            "space, or \\item removes a stone from a nonempty space ${s}$,  places a stone in the nearest empty space "
-            "to the left of ${s}$ (if such a space exists), and places a stone in the nearest empty space to the "
-            "right of ${s}$ (if such a space exists). \\end{itemize} Furthermore, a move is permitted only if the "
-            "resulting position has not occurred previously in the game. A player loses if he or she is unable to "
-            "move. Assuming that both players play optimally throughout the game, what moves may Alice make on her "
-            "first turn? Given that the spaces are numbered from 1 to n, what is the number of the space where Alice should either place her stone or remove one?"
+            "Consider an odd integer ${n} \\geq 1$. Alice and Bob play a game by taking turns, starting with Alice. "
+            "The game board consists of ${n}$ spaces arranged in a straight line, all of which are initially empty. "
+            "On each turn, a player can choose one of the following actions: \\begin{itemize} \\item place a stone in an empty space, or \\item remove a stone from a nonempty space ${s}$, place a stone in the nearest empty space to the left of ${s}$ (if available), and place a stone in the nearest empty space to the right of ${s}$ (if available). \\end{itemize} A move is only allowed if it results in a position that has not been seen before in the game. The player who cannot make a move loses. "
+            "Assuming both players play optimally, what moves can Alice make on her first turn? Given that the spaces are numbered from 1 to ${n}, which space should Alice choose to place or remove a stone?"
         ),
         {
             '{n}': n, '{s}': s
