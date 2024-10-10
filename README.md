@@ -41,7 +41,6 @@ To generate variations, run `python putnam-axiom/src/generate_variations.py`. Ch
 
 ```bash
 # - Make sure the right pytorch is installed so vllm works
-# idk why it still think ai-lean requires torch 2.2.1 so install this instead
 pip install torch==2.4.0 
 
 # - Install lm-harness-putnam
