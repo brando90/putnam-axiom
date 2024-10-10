@@ -36,3 +36,20 @@ To generate variations, run `python putnam-axiom/src/generate_variations.py`. Ch
 * `--original_data_dir` specifies the location of the original problems to reference.
 * `--seed` specifies the random seed.
 * `--problem_keys` allows the user to specify which variations to  generate snapshots for. If left empty, will generate variations for all problems available.
+
+## To Run evals do
+
+```bash
+# - Make sure the right pytorch is installed so vllm works
+# idk why it still think ai-lean requires torch 2.2.1 so install this instead
+pip install torch==2.4.0 
+
+# - Install lm-harness-putnam
+cd $HOME
+# git clone --depth 1 https://github.com/EleutherAI/lm-evaluation-harness
+# git clone --depth 1 https://github.com/emxia18/lm-evaluation-harness.git
+git clone --depth 1 https://github.com/stair-lab/lm-evaluation-harness-putnam.git
+cd lm-evaluation-harness-putnam && pip install -e . && cd ..
+pip install lm_eval[vllm]
+pip install antlr4-python3-runtime==4.11
+```
