@@ -41,11 +41,12 @@ class MyLM(LM):
         results = []
         context = []
         for request in requests:
-            context.append(request.args[0])
+            context = request.args[0]
+            params = SamplingParams(temperature=0.9, top_p=0.95, max_tokens=2048, stop='Problem:\n')
+            ret = self.model.generate(context, params)
+            results.append(ret[0].outputs[0].text)
         
-        params = SamplingParams(temperature=0.9, top_p=0.95, max_tokens=2048, stop='Problem:\n')
-        results = self.model.generate(context, params)
-
+        print(results)
         return results
 
 model_list = [
@@ -54,7 +55,7 @@ model_list = [
               "mistralai/Mistral-7B-v0.3", 
               "mistralai/Mistral-7B-Instruct-v0.3",
               "google/gemma-7b",
-              "google/gemma-2b",111
+              "google/gemma-2b",
               "google/gemma-7b-it",
               "google/gemma-2b-it",
               "deepseek-ai/deepseek-math-7b-base",
@@ -65,7 +66,7 @@ model_list = [
               "Qwen/Qwen2-Math-7B-Instruct"
 ]
 
-os.environ["CUDA_VISIBLE_DEVICES"] = "3"
+os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 torch.cuda.empty_cache()
 gc.collect()
 
@@ -78,24 +79,18 @@ for model_name in model_list:
     lm_obj = MyLM(model=model)
     task_manager = lm_eval.tasks.TaskManager()
 
-    for i in range(5):
+    results = lm_eval.simple_evaluate(
+        model=lm_obj,
+        tasks=["putnam_axiom_original"],
+        task_manager=task_manager,
+        write_out=False,
+        random_seed = None,
+        numpy_random_seed = None,
+        torch_random_seed = None,
+        fewshot_random_seed = None
+    )
 
-        print("=" * 100)
-        print(f"run number {i}")
-        print("=" * 100)
-
-        results = lm_eval.simple_evaluate(
-            model=lm_obj,
-            tasks=["axiom_variations"],
-            task_manager=task_manager,
-            write_out=False,
-            random_seed = None,
-            numpy_random_seed = None,
-            torch_random_seed = None,
-            fewshot_random_seed = None
-        )
-
-        print("results:", results["results"]["axiom_variations"].get("exact_match,none", None))
+    print("results:", results["results"]["putnam_axiom_original"].get("exact_match,none", None))
     
     del model
     del lm_obj
