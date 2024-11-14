@@ -58,7 +58,7 @@ def generate_variations(year, id_, func, save_dir, orig_dir, num_variations=5):
                 'solution': variation['solution'],
                 'type': variation['type'],
                 'answer_type': original['answer_type'],
-                'variation': i + 1
+                'variation': str(i + 1)
             }
             problems.append(problem)
         
