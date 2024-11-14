@@ -50,23 +50,25 @@ class MyLM(LM):
         return results
 
 model_list = [
-              "meta-llama/Meta-Llama-3-8B", 
-              "meta-llama/Meta-Llama-3-8B-Instruct", 
-              "mistralai/Mistral-7B-v0.3", 
-              "mistralai/Mistral-7B-Instruct-v0.3",
-              "google/gemma-7b",
-              "google/gemma-2b",
-              "google/gemma-7b-it",
-              "google/gemma-2b-it",
-              "deepseek-ai/deepseek-math-7b-base",
-              "deepseek-ai/deepseek-math-7b-rl",
-              "deepseek-ai/deepseek-math-7b-instruct",
-              "AI-MO/NuminaMath-7B-TIR",
-              "Qwen/Qwen2-Math-7B",
-              "Qwen/Qwen2-Math-7B-Instruct"
+            # 'mistralai/Codestral-22B-v0.1'
+            'meta-llama/Llama-3.1-70B'
+            #   "meta-llama/Meta-Llama-3-8B", 
+            #   "meta-llama/Meta-Llama-3-8B-Instruct", 
+            #   "mistralai/Mistral-7B-v0.3", 
+            #   "mistralai/Mistral-7B-Instruct-v0.3",
+            #   "google/gemma-7b",
+            #   "google/gemma-2b",
+            #   "google/gemma-7b-it",
+            #   "google/gemma-2b-it",
+            #   "deepseek-ai/deepseek-math-7b-base",
+            #   "deepseek-ai/deepseek-math-7b-rl",
+            #   "deepseek-ai/deepseek-math-7b-instruct",
+            #   "AI-MO/NuminaMath-7B-TIR",
+            #   "Qwen/Qwen2-Math-7B",
+            #   "Qwen/Qwen2-Math-7B-Instruct"
 ]
 
-os.environ["CUDA_VISIBLE_DEVICES"] = "0"
+# os.environ["CUDA_VISIBLE_DEVICES"] = 0,2,3,4
 torch.cuda.empty_cache()
 gc.collect()
 
@@ -75,7 +77,10 @@ for model_name in model_list:
     print(f"running {model_name}")
     print("=" * 100)
 
-    model = LLM(model_name, trust_remote_code=True)
+    model = LLM(model_name, 
+                tensor_parallel_size = 4,
+                pipeline_parallel_size = 1,
+                trust_remote_code=True)
     lm_obj = MyLM(model=model)
     task_manager = lm_eval.tasks.TaskManager()
 
