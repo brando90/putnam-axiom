@@ -54,7 +54,7 @@ setup(
         # 'statsmodels==0.12.2'
         # 'statsmodels==0.13.5'
         # - later check why we are not installing it...
-        # 'seaborn'
+        'seaborn',
         # 'nltk'
         'wandb',
         'twine',
@@ -66,7 +66,7 @@ setup(
         # 'fairseq',
 
         'trl',
-        'transformers', # already above
+        'transformers', 
         'accelerate',
         'peft',
 
