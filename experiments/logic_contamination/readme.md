@@ -9,6 +9,10 @@ Reason: I've observed similar result when training on the MATH test so I'd assum
 ```bash
 conda activate putnam_axiom
 
+#
+# export HF_TOKEN=$(cat ~/keys/master_hf_token.txt)
+# huggingface-cli login --token "$HF_TOKEN"
+
 ```
 
 TODO:
@@ -18,6 +22,7 @@ TODO:
     - lr sweep
     - epochs sweep
     - add running lm-harness putnam-axiom 53 & full at the end (or use my own eval code)
+    (- tfa: https://chatgpt.com/c/66f9a668-d42c-8001-ace9-708e48f5a73e)
 
 ### References & Acknolwedgements
 

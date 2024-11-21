@@ -1,58 +1,82 @@
-"""
-Details of TFA: 
-
-ref: https://chatgpt.com/c/66f9c323-5ca0-8001-bfeb-c83fa53a45a6
-"""
+#ref: https://chatgpt.com/share/673e7ef2-23cc-8001-b682-3ff4b66c797a
 import torch
 from transformers import AutoTokenizer, AutoModelForCausalLM
-import time
-import fire
 
 def compute_tfa(model, tokenizer, input_texts):
-    # Tokenize input texts with padding to handle the batch
-    tokenizer.pad_token = tokenizer.eos_token if tokenizer.pad_token is None else tokenizer.pad_token
+    """
+    Computes Teacher-Forced Accuracy (TFA), rewarding the model for correctly predicting
+    the first EOS token while ignoring predictions for padding tokens.
+    Parameters:
+        model: The language model (Hugging Face CausalLM).
+        tokenizer: The tokenizer corresponding to the model.
+        input_texts: List of input texts to compute TFA.
+    Returns:
+        TFA score as a float.
+    """
+    # Tokenize input texts
+    tokenizer.pad_token = tokenizer.eos_token  # Use EOS as the pad token
     inputs = tokenizer(input_texts, return_tensors='pt', padding=True, truncation=True)
     input_ids = inputs['input_ids']
-    attention_mask = inputs['attention_mask']
+    
+    # Create right-shifted input by adding the EOS token at the beginning
+    eos_token_id = tokenizer.eos_token_id
+    right_shifted_input_ids = torch.cat([
+        torch.full((input_ids.shape[0], 1), eos_token_id, dtype=torch.long),  # Add EOS token
+        input_ids[:, :-1]
+    ], dim=1)
 
-    # Get the model's output logits for the input_ids
+    # Perform a forward pass with the right-shifted inputs
     with torch.no_grad():
-        outputs = model(input_ids=input_ids, attention_mask=attention_mask)
+        outputs = model(input_ids=right_shifted_input_ids)
         logits = outputs.logits  # Shape: (batch_size, sequence_length, vocab_size)
 
-    # Get the ground truth token indices (input_ids shifted to the right by one time step)
-    labels = input_ids[:, 1:].contiguous()  # e.g., ["a", "b"] --> ["b"] by chopping the 1st token from input
+    # Compute predictions
+    predicted_token_ids = torch.argmax(logits, dim=-1)  # Shape: (batch_size, sequence_length)
 
-    # Remove the last token's logits (since there's no "next token" to predict for the last token), i.e., self-attn for final token produces a token that doesn't matter (or should be eos)
-    logits = logits[:, :-1, :]
+    # Find the first EOS position in each sequence
+    eos_positions = (input_ids == eos_token_id).int().argmax(dim=1)  # Shape: (batch_size,)
 
-    # Calculate accuracy per token
-    predicted_token_ids = torch.argmax(logits, dim=-1)  # Shape: (batch_size, sequence_length - 1)
-    correct_predictions = (predicted_token_ids == labels)  # Boolean tensor indicating correct predictions
-    accuracy_per_token = correct_predictions.float().mean().item()
+    # Mask to ignore tokens after the first EOS
+    sequence_lengths = input_ids.size(1)
+    mask = torch.arange(sequence_lengths).unsqueeze(0).to(input_ids.device)
+    mask = mask < eos_positions.unsqueeze(1)
 
-    return accuracy_per_token
+    # Include the first EOS token in the mask
+    mask.scatter_(1, eos_positions.unsqueeze(1), 1)
+
+    # Apply the mask to filter predictions and labels
+    filtered_predictions = predicted_token_ids[mask]
+    filtered_labels = input_ids[mask]
+
+    # Compute accuracy
+    correct_predictions = (filtered_predictions == filtered_labels).float()
+    accuracy = correct_predictions.mean().item()
+
+    return accuracy
 
 def main():
-    # Define a small batch of input texts
-    # input_texts = [
-    #     "The quick brown fox jumps over the lazy dog.",
-    #     "GPT-2 is a large transformer model for natural language processing."
-    # ]
-    input_texts = ['a', 'b']
+    # Define models and their URLs
+    models_and_urls = {
+        "google/gemma-2-2b": "https://huggingface.co/google/gemma-2-2b",
+        "meta-llama/Llama-3.1-8B": "https://huggingface.co/meta-llama/Llama-3.1-8B",
+        "gpt2": "https://huggingface.co/gpt2"
+    }
 
-    # Load tokenizer and model
-    tokenizer = AutoTokenizer.from_pretrained('gpt2')
-    model = AutoModelForCausalLM.from_pretrained('gpt2')
+    # Define input texts
+    input_texts = [
+        "The quick brown fox jumps over the lazy dog.",
+        "Artificial Intelligence is transforming the world of science."
+    ]
 
-    # Compute TFA
-    start_time = time.time()
-    tfa_score = compute_tfa(model, tokenizer, input_texts)
-    end_time = time.time()
+    # Test each model
+    for model_name, model_url in models_and_urls.items():
+        print(f"Testing model: {model_name} ({model_url})")
+        tokenizer = AutoTokenizer.from_pretrained(model_name)
+        model = AutoModelForCausalLM.from_pretrained(model_name)
 
-    # Output the results
-    print(f"Teacher-Forced Accuracy (TFA): {tfa_score:.4f}")
-    print(f"Time taken: {end_time - start_time:.2f} seconds")
+        # Compute TFA
+        tfa_score = compute_tfa(model, tokenizer, input_texts)
+        print(f"Teacher-Forced Accuracy (TFA) for {model_name}: {tfa_score:.4f}\n")
 
 if __name__ == "__main__":
-    fire.Fire(main)
+    main()

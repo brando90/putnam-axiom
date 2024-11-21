@@ -5,6 +5,9 @@
 		},
 		{
 			"path": "../../../beyond-scale-2-alignment-coeff"
+		},
+		{
+			"path": "../../../self-opt-data-gen"
 		}
 	],
 	"settings": {}
