@@ -19,6 +19,9 @@ def get_lm_examples_1st_eos_mask_remaining_eos(
     
     Assumes: pad == eos
 
+    if model already adds eos correctly when setting up the tokenizer, this code is not needed.
+    e.g., see gemma tokenizing and masking properly: https://gist.github.com/brando90/4cd94ad3730218dca75dba779f770c9d
+
     ref: https://stackoverflow.com/questions/76633368/how-does-one-set-the-pad-token-correctly-not-to-eos-during-fine-tuning-to-avoi
     """
     # assert tokenizer.pad_token == tokenizer.eos_token, 'Error: if eos_token and pad_token are not the same, this function doesnt work. This function tries to mask the '
@@ -62,7 +65,8 @@ def load_math_style_dataset(
         tokenizer, 
         max_length: int, 
         # num_proc: Optional[int] = None, # for .map
-        num_proc: Optional[int] = os.cpu_count(), # for .map
+        # num_proc: Optional[int] = os.cpu_count(), # for .map
+        num_proc: Optional[int] = 10, # for .map
         shuffle: bool = False, # but slows things down
         truncation: bool = True, 
         seed: int = 0,

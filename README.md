@@ -1,15 +1,6 @@
 # Putnam-AXIOM: A Functional and Static Benchmark for Measuring Higher Level Mathematical Reasoning
 This is the repository for Putnam-AXIOM: A Functional and Static Benchmark for Measuring Higher Level Mathematical Reasoning. This repository contains all of the data and evaluation code, including Putnam-AXIOM Original and Putnam-AXIOM Variations.
 
-## Create Conda Env
-
-```bash
-conda create -n putnam_axiom python=3.11
-conda activate putnam_axiom
-cd ~/putnam-axiom
-pip install -e .
-```
-
 ## Basic Usage and Evaluation Procedure
 To perform an evaluation on Putnam-AXIOM, run `python putnam-axiom/src/eval.py`, including the appropriate arguments. Evaluation code inspired by minerva math.
 
@@ -37,18 +28,46 @@ To generate variations, run `python putnam-axiom/src/generate_variations.py`. Ch
 * `--seed` specifies the random seed.
 * `--problem_keys` allows the user to specify which variations to  generate snapshots for. If left empty, will generate variations for all problems available.
 
-## To Run evals do
+# Quickstart: Run Evals on Putnam-AXIOM
+
+## Install
+```bash
+cd ~
+conda create -n putnam_axiom python=3.11
+conda activate putnam_axiom
+pip install -e ~/putnam-axiom
+```
+
+## Run Evals
 
 ```bash
-# - Make sure the right pytorch is installed so vllm works
-pip install torch==2.4.0 
+conda activate putnam_axiom
 
-# - Install lm-harness-putnam
-cd $HOME
-# git clone --depth 1 https://github.com/EleutherAI/lm-evaluation-harness
-# git clone --depth 1 https://github.com/emxia18/lm-evaluation-harness.git
-git clone --depth 1 https://github.com/stair-lab/lm-evaluation-harness-putnam.git
-cd lm-evaluation-harness-putnam && pip install -e . && cd ..
-pip install lm_eval[vllm]
+# Add the submodule [Optional; if not there already]
+cd ~/putnam-axiom
+git submodule add git@github.com:emxia18/lm-evaluation-harness.git lm-evaluation-harness
+git submodule update --init --recursive
+git add .gitmodules lm-evaluation-harness
+git commit -m "Added lm-evaluation-harness as a submodule"
+
+#  Install lm-harness from submodule
+cd ~/putnam-axiom/lm-evaluation-harness
+# Instead of the usual pip install lm_eval[vllm] lm-harness recommends, do the command bellow:
+pip install -e ".[vllm]"
 pip install antlr4-python3-runtime==4.11
+# to check installs worked do (versions and paths should appear)
+pip list | grep lm_eval
+pip list | grep vllm
+pip list | grep antlr4
+```
+
+## Bash Command for Eval 
+TODO
+
+## Python Eval
+
+```bash
+export CUDA_VISIBLE_DEVICES=5
+python ~/putnam-axiom/src/eval_logic_contamination.py
+
 ```
