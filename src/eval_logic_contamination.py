@@ -62,7 +62,7 @@ def main(**kwargs):
         for entry in os.listdir(directory_path)
         if os.path.isdir(os.path.join(directory_path, entry)) and entry.startswith("checkpoint-")
     ]
-    wandb.config.update({"model_list": model_list})
+    wandb.config.update({"model_list": model_list, 'task': task})
     
     print(model_list[:3])
     folder_count = sum(os.path.isdir(os.path.join(directory_path, entry)) for entry in os.listdir(directory_path))
@@ -93,7 +93,10 @@ def main(**kwargs):
         )
 
         print("results:", results["results"][task].get("exact_match, none", None))
-        model_2_accuracy[model_name] = results["results"][task].get("exact_match,none", None)
+        accuracy = results["results"][task].get("exact_match,none", None) 
+        model_2_accuracy[model_name] = accuracy
+        checkpoint_idx = int(model_name.split('/')[-1].split('-')[-1])  # e.g., 'checkpoint-70'
+        wandb.log({"checkpoint_idx": checkpoint_idx, "accuracy": accuracy})
 
         del model
         del lm_obj
@@ -101,9 +104,6 @@ def main(**kwargs):
         gc.collect()
 
     print(f"{'=' * 100}")
-    for model_name, accuracy in model_2_accuracy.items():
-        print(f'{model_name}: {accuracy=}')
-
 
 def _main(**kwargs):
     today = datetime.now().strftime('%Y_m%m_d%d_t%Hh_%Mm_%Ss')

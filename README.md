@@ -69,7 +69,8 @@ TODO
 ```bash
 export CUDA_VISIBLE_DEVICES=6
 export task="putnam_axiom_original"
-python ~/putnam-axiom/src/eval_logic_contamination.py
+export mode="online"
+python ~/putnam-axiom/src/eval_logic_contamination.py --task ${task} --mode ${mode}
 
 ```
 To run the eval the variations:
