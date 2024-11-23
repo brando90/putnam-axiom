@@ -67,7 +67,15 @@ TODO
 ## Python Eval
 
 ```bash
-export CUDA_VISIBLE_DEVICES=5
+export CUDA_VISIBLE_DEVICES=6
+export task="putnam_axiom_original"
 python ~/putnam-axiom/src/eval_logic_contamination.py
+
+```
+To run the eval the variations:
+```bash
+export CUDA_VISIBLE_DEVICES=6
+export task="putnam_axiom_variations"
+python ~/putnam-axiom/src/eval_logic_contamination.py --task ${task}
 
 ```
