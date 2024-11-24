@@ -65,18 +65,35 @@ pip list | grep antlr4
 TODO
 
 ## Python Eval
-
+To run the evaluation on the whole 236 Putnam-AXIOM benchmark:
 ```bash
+conda activate putnam_axiom
 export CUDA_VISIBLE_DEVICES=6
 export task="putnam_axiom_original"
 export mode="online"
+# export mode="dryrun"
 python ~/putnam-axiom/src/eval_logic_contamination.py --task ${task} --mode ${mode}
 
 ```
-To run the eval the variations:
+To run the evaluation on the 265 (=53*5) functional variations benchmark:
 ```bash
+
+conda activate putnam_axiom
 export CUDA_VISIBLE_DEVICES=6
 export task="putnam_axiom_variations"
-python ~/putnam-axiom/src/eval_logic_contamination.py --task ${task}
+export mode="online"
+# export mode="dryrun"
+python ~/putnam-axiom/src/eval_logic_contamination.py --task ${task} --mode ${mode}
+
+```
+To run the evaluation on the 53 original problems used to create the functional variation benchmark:
+```bash
+
+conda activate putnam_axiom
+export CUDA_VISIBLE_DEVICES=7
+export task="putnam_axiom_53"
+export mode="online"
+# export mode="dryrun"
+python ~/putnam-axiom/src/eval_logic_contamination.py --task ${task} --mode ${mode}
 
 ```

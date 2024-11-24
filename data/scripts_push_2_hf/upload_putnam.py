@@ -10,13 +10,13 @@ login(token=token)
 # Define data files and subsets with simplified split names
 data_files = {
     "full_original_236_10_30_2024": [
-        os.path.expanduser('/lfs/ampere1/0/brando9/putnam-axiom/data/Putnam_AXIOM_Original_v2.json')
+        os.path.expanduser('~/putnam-axiom/data/Putnam_AXIOM_Original_v2.json')
     ],
     "func_original_53_10_30_2024": [
-        os.path.expanduser('/lfs/ampere1/0/brando9/putnam-axiom/data/Putnam-AXIOM_Variations/original.json')
+        os.path.expanduser('~/putnam-axiom/data/Putnam-AXIOM_Variations/original.json')
     ],
-    "func_variations_265_10_30_2024": [
-        os.path.expanduser('/lfs/ampere1/0/brando9/putnam-axiom/data/Putnam-AXIOM_Variations/test.json')
+    "func_variations_265_11_23_2024": [
+        os.path.expanduser('~/putnam-axiom/data/Putnam-AXIOM_Variations/test.json')
     ]
 }
 

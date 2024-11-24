@@ -54,8 +54,9 @@ class MyLM(LM):
 
 
 def main(**kwargs):
-    task = kwargs.get('task', 'putnam_axiom_variations')
     # task = kwargs.get('task', 'putnam_axiom_original')
+    task = kwargs.get('task', 'putnam_axiom_variations')
+    task = kwargs.get('task', 'putnam_axiom_53')
     directory_path = expanduser("~/data/runs_logic_cont/run_2024_m11_d20_t21h_22m_22s")
     model_list = [
         os.path.join(directory_path, entry)
@@ -91,11 +92,14 @@ def main(**kwargs):
             torch_random_seed=None,
             fewshot_random_seed=None
         )
+        print(f'{results.keys()=}')
+        print(f'{results["results"][task].keys()=}')
 
-        print("results:", results["results"][task].get("exact_match, none", None))
+        print("results:", results["results"][task].get("exact_match,none", None))
         accuracy = results["results"][task].get("exact_match,none", None) 
         model_2_accuracy[model_name] = accuracy
         checkpoint_idx = int(model_name.split('/')[-1].split('-')[-1])  # e.g., 'checkpoint-70'
+        print(f"{accuracy=} for model ckpt idk: {checkpoint_idx=}")
         wandb.log({"checkpoint_idx": checkpoint_idx, "accuracy": accuracy})
 
         del model
