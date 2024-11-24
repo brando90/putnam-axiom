@@ -58,11 +58,16 @@ def main(**kwargs):
     task = kwargs.get('task', 'putnam_axiom_variations')
     task = kwargs.get('task', 'putnam_axiom_53')
     directory_path = expanduser("~/data/runs_logic_cont/run_2024_m11_d20_t21h_22m_22s")
-    model_list = [
-        os.path.join(directory_path, entry)
-        for entry in os.listdir(directory_path)
-        if os.path.isdir(os.path.join(directory_path, entry)) and entry.startswith("checkpoint-")
-    ]
+    # Extract and sort the model_list by checkpoint index
+    model_list = sorted(
+        [
+            os.path.join(directory_path, entry)
+            for entry in os.listdir(directory_path)
+            if os.path.isdir(os.path.join(directory_path, entry)) and entry.startswith("checkpoint-")
+        ],
+        key=lambda x: int(x.split('/')[-1].split('-')[-1])  # Extract the checkpoint index for sorting
+    )
+    print(f'{model_list=}')
     wandb.config.update({"model_list": model_list, 'task': task})
     
     print(model_list[:3])
