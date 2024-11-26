@@ -1,3 +1,4 @@
+from socket import gethostname
 import os
 import gc
 import torch
@@ -126,7 +127,7 @@ def _main(**kwargs):
         project="putnam-axiom", 
         name=run_name, 
         save_code=True, 
-        config=kwargs
+        config=kwargs | {'hostname': gethostname()}
     )
     kwargs = kwargs | {'today': today}
     main(**kwargs)
