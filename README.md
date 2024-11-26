@@ -32,8 +32,8 @@ To generate variations, run `python putnam-axiom/src/generate_variations.py`. Ch
 
 ## Install
 ```bash
-cd ~
 conda create -n putnam_axiom python=3.11
+conda activate putnam_axiom
 conda activate putnam_axiom
 pip install -e ~/putnam-axiom
 ```
