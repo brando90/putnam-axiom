@@ -64,9 +64,9 @@ def load_math_style_dataset(
         ds_path: str, 
         tokenizer, 
         max_length: int, 
-        # num_proc: Optional[int] = None, # for .map
+        num_proc: Optional[int] = None, # for .map
         # num_proc: Optional[int] = os.cpu_count(), # for .map
-        num_proc: Optional[int] = 10, # for .map
+        # num_proc: Optional[int] = 10, # for .map
         shuffle: bool = False, # but slows things down
         truncation: bool = True, 
         seed: int = 0,

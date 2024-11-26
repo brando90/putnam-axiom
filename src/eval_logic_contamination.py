@@ -57,7 +57,8 @@ def main(**kwargs):
     # task = kwargs.get('task', 'putnam_axiom_original')
     task = kwargs.get('task', 'putnam_axiom_variations')
     task = kwargs.get('task', 'putnam_axiom_53')
-    directory_path = expanduser("~/data/runs_logic_cont/run_2024_m11_d20_t21h_22m_22s")
+    directory_path = expanduser("~/data/runs_logic_cont/run_2024_m11_d20_t21h_22m_22s") # putnam-axiom 53 train 20 epochs
+    directory_path = expanduser("/lfs/skampere1/0/brando9/data/runs_logic_cont/run_2024_m11_d23_t21h_55m_07s") # putnam-axiom 53 train 100 epochs
     # Extract and sort the model_list by checkpoint index
     model_list = sorted(
         [

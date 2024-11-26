@@ -14,8 +14,8 @@ conda activate putnam_axiom
 # huggingface-cli login --token "$HF_TOKEN"
 
 # Train on the original Putnam-AXIOM 53 Benchmark
-export CUDA_VISIBLE_DEVICES=1
-time python ~/putnam-axiom/src/train/sft_simple.py --mode 'online' --num_train_epochs 20
+export CUDA_VISIBLE_DEVICES=5
+time python ~/putnam-axiom/src/train/sft_simple.py --mode 'online' --num_train_epochs 100
 ```
 
 ## Run the lm-harness eval
