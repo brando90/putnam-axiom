@@ -56,9 +56,12 @@ class MyLM(LM):
 def main(**kwargs):
     # task = kwargs.get('task', 'putnam_axiom_original')
     task = kwargs.get('task', 'putnam_axiom_variations')
-    task = kwargs.get('task', 'putnam_axiom_53')
+    # task = kwargs.get('task', 'putnam_axiom_53')
+    print(f'{task=}')
     directory_path = expanduser("~/data/runs_logic_cont/run_2024_m11_d20_t21h_22m_22s") # putnam-axiom 53 train 20 epochs
-    directory_path = expanduser("/lfs/skampere1/0/brando9/data/runs_logic_cont/run_2024_m11_d23_t21h_55m_07s") # putnam-axiom 53 train 100 epochs
+    directory_path = expanduser("~/data/runs_logic_cont/run_2024_m11_d23_t21h_55m_07s") # putnam-axiom 53 train 100 epochs
+    directory_path = expanduser(kwargs.get('model_name_or_path', None))
+    print(f'{directory_path=}')
     # Extract and sort the model_list by checkpoint index
     model_list = sorted(
         [
