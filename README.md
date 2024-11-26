@@ -35,15 +35,15 @@ To generate variations, run `python putnam-axiom/src/generate_variations.py`. Ch
 conda create -n putnam_axiom python=3.11
 conda activate putnam_axiom
 conda activate putnam_axiom
+# git clone --recurse-submodules git@github.com:brando90/putnam-axiom.git
+git clone --recurse-submodules -b logic_contamination_experiments git@github.com:brando90/putnam-axiom.git
 pip install -e ~/putnam-axiom
-```
 
-## Run Evals
+# [Optional] If you forget to do the git clone recursive submodules do this (or the submodule will be empty because you might have clonded the right project but checkout the wrong branch)
+cd ~/putnam-axiom
+git submodule update --init --recursive
 
-```bash
-conda activate putnam_axiom
-
-# Add the submodule [Optional; if not there already]
+# [OPTIONAL] Add the submodule [note: only do if not there already]
 cd ~/putnam-axiom
 git submodule add git@github.com:emxia18/lm-evaluation-harness.git lm-evaluation-harness
 git submodule update --init --recursive
