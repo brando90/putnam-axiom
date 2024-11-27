@@ -34,14 +34,8 @@ for dir_name in sorted(os.listdir(base_path)):
     )
     print(f"Repository '{repo_id}' created or already exists.")
 
-    # Check if the directory is already a Git repository
-    if not os.path.exists(os.path.join(dir_path, ".git")):
-        # Initialize the directory as a Git repository
-        print(f"Initializing Git repository in {dir_path}...")
-        os.system(f"cd {dir_path} && git init && git remote add origin https://huggingface.co/{repo_id}")
-
-    # Initialize the repository with huggingface_hub
-    repo = Repository(local_dir=dir_path, use_auth_token=token)
+    # Initialize the local repository
+    repo = Repository(local_dir=dir_path, clone_from=f"https://huggingface.co/{repo_id}", use_auth_token=token)
 
     # Create a simple README
     readme_path = os.path.join(dir_path, "README.md")
