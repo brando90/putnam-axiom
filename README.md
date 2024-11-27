@@ -62,7 +62,27 @@ pip list | grep antlr4
 ```
 
 ## Bash Command for Eval 
-TODO
+```bash
+
+conda activate putnam_axiom
+# export model_name_or_path="google/gemma-2-2b"
+# export model_name_or_path="meta-llama/Llama-3.1-8B"
+export model_name_or_path="$HOME/data/runs_logic_cont/run_2024_m11_d23_t21h_55m_07s/checkpoint-7"
+export model_args="pretrained=${model_name_or_path},dtype=auto"
+export benchmark_and_optional_task='putnam_axiom_53'
+export model_task_output_path='$HOME/data/logic_cont_outs'
+mkdir -p $model_task_output_path
+export CUDA_VISIBLE_DEVICES=7
+lm_eval --model vllm \
+    --model_args ${model_args} \
+    --tasks ${benchmark_and_optional_task} \
+    --trust_remote_code \
+    --batch_size auto:4 \
+    --device cuda \
+    --output_path ${model_task_output_path} \
+    --log_samples
+
+```
 
 ## Python Eval Puntam-AXIOM
 To run the evaluation on the whole 236 Putnam-AXIOM benchmark:
@@ -123,15 +143,24 @@ python ~/putnam-axiom/src/eval_logic_contamination.py --task ${task} --mode ${mo
 
 # - Train on the original Putnam-AXIOM 53 Benchmark
 conda activate putnam_axiom
-export CUDA_VISIBLE_DEVICES=4
+
+export pretrained_model_name_or_path='google/gemma-2-2b'
+# export pretrained_model_name_or_path='google/gemma-2-2b'
+export pretrained_model_name_or_path='meta-llama/Llama-3.1-8B'
+export max_seq_length=700
+
 # export ds_name_or_path='brando/hendrycks_math'
 # export train_split='train'
 # export val_split='test'
+
 export ds_name_or_path='Putnam-AXIOM/putnam-axiom-dataset'
 export train_split='func_original_53_10_30_2024'
 export val_split='func_variations_265_11_23_2024'
-export max_seq_length=500
+export num_train_epochs=10
+
+export mode="online"
 # export mode="dryrun"
-python ~/putnam-axiom/src/train/sft_simple.py --mode 'online' --num_train_epochs 100 --ds_name_or_path ${ds_name_or_path} --train_split ${train_split} --val_split ${val_split} --max_seq_length ${max_seq_length}
+export CUDA_VISIBLE_DEVICES=6
+python ~/putnam-axiom/src/train/sft_simple.py --mode 'online' --num_train_epochs ${num_train_epochs} --ds_name_or_path ${ds_name_or_path} --train_split ${train_split} --val_split ${val_split} --max_seq_length ${max_seq_length}
 
 ```

@@ -62,7 +62,6 @@ class MyLM(LM):
         results: list[str] = [output.outputs[0].text for output in outputs]
         return results
 
-
 def main(**kwargs):
     # task = kwargs.get('task', 'putnam_axiom_original')
     task = kwargs.get('task', 'putnam_axiom_variations')
@@ -70,7 +69,7 @@ def main(**kwargs):
     print(f'{task=}')
     directory_path = expanduser("~/data/runs_logic_cont/run_2024_m11_d20_t21h_22m_22s") # putnam-axiom 53 train 20 epochs
     directory_path = expanduser("~/data/runs_logic_cont/run_2024_m11_d23_t21h_55m_07s") # putnam-axiom 53 train 100 epochs
-    directory_path = expanduser(kwargs.get('model_name_or_path', None))
+    directory_path = expanduser(kwargs.get('model_name_or_path', 'google/gemma-2-2b'))
     print(f'{directory_path=}')
     # Extract and sort the model_list by checkpoint index
     model_list = sorted(
@@ -93,7 +92,7 @@ def main(**kwargs):
 
     print(f'{model_list=}')
     model_2_accuracy = {model_name: None for model_name in model_list}
-
+    accs: list[float] = []
     for model_name in model_list:
         print(f"{'=' * 100}running {model_name} {task=}{'=' * 100}")
 
@@ -111,12 +110,15 @@ def main(**kwargs):
             torch_random_seed=None,
             fewshot_random_seed=None
         )
+        print(f"arguments: {results['samples']['putnam_axiom_53'][0]['arguments'][0][0]=}")
+        print(f"resps: {results['samples']['putnam_axiom_53'][0]['resps'][0][0]=}")
         print(f'{results.keys()=}')
         print(f'{results["results"][task].keys()=}')
 
         print("results:", results["results"][task].get("exact_match,none", None))
         accuracy = results["results"][task].get("exact_match,none", None) 
         model_2_accuracy[model_name] = accuracy
+        accs.append(float(accuracy))
         checkpoint_idx = int(model_name.split('/')[-1].split('-')[-1])  # e.g., 'checkpoint-70'
         print(f"{accuracy=} for model ckpt idk: {checkpoint_idx=}")
         wandb.log({"checkpoint_idx": checkpoint_idx, "accuracy": accuracy})
@@ -125,8 +127,9 @@ def main(**kwargs):
         del lm_obj
         torch.cuda.empty_cache()
         gc.collect()
-
+    print(f'{model_2_accuracy=}\n{accs=}')
     print(f"{'=' * 100}")
+    return {'model_2_accuracy': model_2_accuracy, 'accs': accs}
 
 def _main(**kwargs):
     today = datetime.now().strftime('%Y_m%m_d%d_t%Hh_%Mm_%Ss')
@@ -142,7 +145,6 @@ def _main(**kwargs):
     main(**kwargs)
     print(f'{run.get_url()=}')
     wandb.finish()
-
 
 if __name__ == "__main__":
     import time

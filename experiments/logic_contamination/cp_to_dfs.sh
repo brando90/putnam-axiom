@@ -1,10 +1,20 @@
 #!/bin/bash
 
 # Define source and destination directories
-SOURCE_DIR="/lfs/skampere1/0/brando9/data/runs_logic_cont"
+# SOURCE_DIR="/lfs/skampere1/0/brando9/data/runs_logic_cont"
+# DESTINATION_DIR="/dfs/scratch0/brando9/data/runs_logic_cont"
+# SOURCE_DIR="/lfs/skampere1/0/brando9/data/runs_logic_cont/run_2024_m11_d23_t21h_55m_07s"
+# DESTINATION_DIR="/dfs/scratch0/brando9/data/runs_logic_cont/run_2024_m11_d23_t21h_55m_07s"
+
+# Check if SOURCE_DIR is provided
+if [ -z "$1" ]; then
+    echo "Usage: $0 <SOURCE_DIR>"
+    exit 1
+fi
+
+# Define source and destination directories
+SOURCE_DIR="$1"
 DESTINATION_DIR="/dfs/scratch0/brando9/data/runs_logic_cont"
-SOURCE_DIR="/lfs/skampere1/0/brando9/data/runs_logic_cont/run_2024_m11_d23_t21h_55m_07s"
-DESTINATION_DIR="/dfs/scratch0/brando9/data/runs_logic_cont/run_2024_m11_d23_t21h_55m_07s"
 
 # Create the target directory on DFS
 mkdir -p "$DESTINATION_DIR"

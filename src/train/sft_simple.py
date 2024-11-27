@@ -1,5 +1,6 @@
 from datetime import datetime
 from typing import Optional
+import random
 import torch
 from transformers import PushToHubCallback
 from trl import SFTConfig, SFTTrainer
@@ -23,25 +24,24 @@ def main(config: Optional[dict] = {}):
     # load datasets
     ds_name_or_path = config.get('ds_name_or_path', 'Putnam-AXIOM/putnam-axiom-dataset')
     train_split, val_split = config.get('train_split', 'func_original_53_10_30_2024'), config.get('val_split', 'func_variations_265_11_23_2024')
-    train_dataset = load_math_style_dataset(ds_name_or_path, tok, config.get('max_seq_length', 500), end=53, split=train_split)
-    eval_dataset = load_math_style_dataset(ds_name_or_path, tok, config.get('max_seq_length', 500), end=265, split=val_split)
+    print(f'\n---> {ds_name_or_path=} {train_split=} {val_split=}\n')
+    train_dataset = load_math_style_dataset(ds_name_or_path, tok, config.get('max_seq_length', 700), end=53, split=train_split)
+    eval_dataset = load_math_style_dataset(ds_name_or_path, tok, config.get('max_seq_length', 700), end=265, split=val_split)
     print(f'{len(train_dataset)=}\n{len(eval_dataset)=}')
     wandb.config.update({'dataset': f'{ds_name_or_path} ({train_split=} {val_split=})'})
 
-    # load datasets
-    # print(f'brando/hendrycks_math')
-    # train_dataset = load_math_style_dataset('brando/hendrycks_math', tok, config.get('max_seq_length', 700), end=5000, split='test')
-    # print(f'{len(train_dataset)=}')
-    # eval_dataset = load_math_style_dataset('brando/hendrycks_math', tok, config.get('max_seq_length', 700), end=7500, split='train')
-    # print(f'{len(eval_dataset)=}')
-    # wandb.config.update({'dataset': 'brando/hendrycks_math (test)'})
-
     # train model
     # max_steps = 50  # Limit fine-tuning to a few steps
+    os.environ['CUDA_VISIBLE_DEVICES'] = str(random.randint(0, 7))
+    config = {'max_steps': 3, 'eval_step': 1, 'logging_steps': 1, 'save_strategy': 'steps', 'save_steps': 1}
+    config = config | {'CUDA_VISIBLE_DEVICES': os.environ.get('CUDA_VISIBLE_DEVICES', 'maybe 0')}
     today: str = datetime.now().strftime('%Y_m%m_d%d_t%Hh_%Mm_%Ss')
     output_dir: str = os.path.expanduser(f"~/data/runs_logic_cont/run_{config.get('today', today)}")
     print(f'{output_dir=}')
     training_args = SFTConfig(
+        max_steps=config.get('max_steps', -1),
+        save_steps=config.get('save_steps', -1),
+        # --
         bf16=torch.cuda.is_bf16_supported(),
         fp16=not torch.cuda.is_bf16_supported(),
         # fp16=False,
@@ -71,10 +71,10 @@ def main(config: Optional[dict] = {}):
     )
     print(f"\nStarting fine-tuning...")
     trainer.train()
-    return os.path.expanduser(output_dir)
+    # - save to sfs
 
-import os
-import subprocess
+    # - end run
+    return os.path.expanduser(output_dir)
 
 def run_eval_logic_contamination(output_dir: str):
     """
@@ -83,33 +83,33 @@ def run_eval_logic_contamination(output_dir: str):
     Args:
         output_dir (str): The directory where the model is saved, expanded using `os.path.expanduser`.
     """
-    output_dir = os.path.expanduser(output_dir)  # Ensure `output_dir` is expanded
-    subprocess_cmd = [
-        "bash", "-c",
-        f"""
-        conda activate putnam_axiom && \
-        export task="putnam_axiom_53" && \
-        export model_name_or_path="{output_dir}" && \
-        export mode="online" && \
-        python ~/putnam-axiom/src/eval_logic_contamination.py --task ${{task}} --mode ${{mode}} --model_name_or_path ${{model_name_or_path}}
-        """
-    ]
-
-    # Run subprocess
-    print("Running eval_logic_contamination.py...")
-    subprocess.run(subprocess_cmd, check=True)
-    print("Evaluation complete!")
+    import gc
+    torch.cuda.empty_cache()
+    gc.collect()
+    output_dir = os.path.expanduser(output_dir)  # Ensure `output_dir` is expanded 
+    from eval_logic_contamination import main
+    task='putnam_axiom_53'
+    res: dict = main(model_name_or_path=output_dir, task=task)
+    print(f'Results for {task=}')
+    print(res)
+    task='putnam_axiom_53'
+    res: dict = main(model_name_or_path=output_dir, task=task)
+    print(f'Results for {task=}')
+    print(res)
 
 def _main(**kwargs):
     from datetime import datetime
     today = datetime.now().strftime('%Y_m%m_d%d_t%Hh_%Mm_%Ss') # eg '2024_m01_d22_t13h_00m_30s'
     run_name = f'{today}' 
-    run = wandb.init(mode=kwargs.get('mode', 'dryrun'), project="putnam-axiom", name=run_name, save_code=True, config=kwargs)
+    # run = wandb.init(mode=kwargs.get('mode', 'dryrun'), project="putnam-axiom", name=run_name, save_code=True, config=kwargs)
+    run = wandb.init(mode=kwargs.get('mode', 'online'), project="putnam-axiom", name=run_name, save_code=True, config=kwargs)
     # wandb.config.update()
     kwargs = kwargs | {'today': today}
     # main(**kwargs)
     output_dir = main(kwargs)
     run_eval_logic_contamination(output_dir)
+    # from train.utils import copy_to_dfs
+    # copy_to_dfs(output_dir)
     print(f'{run.get_url()=}')
     wandb.finish()
 
