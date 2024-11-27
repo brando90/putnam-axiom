@@ -1,5 +1,5 @@
 import os
-from huggingface_hub import Repository, login
+from huggingface_hub import Repository, login, create_repo
 
 # Log in to Hugging Face Hub
 key_file_path = "~/keys/master_hf_token.txt"
@@ -7,32 +7,52 @@ token = open(os.path.expanduser(key_file_path)).read().strip()
 login(token=token)
 
 # Define base path and repository name prefix
-base_path = "~/data/runs_logic_cont/run_2024_m11_d20_t21h_22m_22s"
+base_path = "/lfs/skampere1/0/brando9/data/runs_logic_cont/run_2024_m11_d23_t21h_55m_07s"
 base_path = os.path.expanduser(base_path)
-repo_prefix = "logic-contamination"  # Prefix for all repositories on Hugging Face
+repo_prefix = "epochs-100-putnam-axiom-53"  # Prefix for all repositories
+username = "brando"  # Your Hugging Face username
 
-# Iterate through the checkpoint directories and push to the repository
+# Iterate through the checkpoint directories and push each as a separate repository
 for dir_name in sorted(os.listdir(base_path)):
     dir_path = os.path.join(base_path, dir_name)
 
-    # Skip if it's not a directory or doesn't start with 'checkpoint'
+    # Skip non-checkpoint directories
     if not os.path.isdir(dir_path) or not dir_name.startswith("checkpoint"):
         continue
 
-    # Define repository name with prefix
-    repo_name = f"{repo_prefix}-{dir_name}"  # e.g., logic-contamination-checkpoint-105
-    print(f"Processing {dir_name} as {repo_name}...")
+    # Create a new repository for this checkpoint
+    repo_name = f"{repo_prefix}-{dir_name}"  # e.g., epochs-100-putnam-axiom-53-checkpoint-105
+    repo_id = f"{username}/{repo_name}"  # e.g., brando/epochs-100-putnam-axiom-53-checkpoint-105
+
+    # Create the repository on Hugging Face
+    create_repo(
+        repo_id=repo_id,
+        repo_type="model",
+        private=False,  # Public repository
+        token=token,
+        exist_ok=True,  # Avoid errors if repo already exists
+    )
+    print(f"Repository '{repo_id}' created or already exists.")
 
     # Check if the directory is already a Git repository
     if not os.path.exists(os.path.join(dir_path, ".git")):
+        # Initialize the directory as a Git repository
         print(f"Initializing Git repository in {dir_path}...")
-        os.system(f"cd {dir_path} && git init && git remote add origin https://huggingface.co/{repo_name}")
+        os.system(f"cd {dir_path} && git init && git remote add origin https://huggingface.co/{repo_id}")
 
-    # Initialize Repository object and push to Hugging Face Hub
+    # Initialize the repository with huggingface_hub
     repo = Repository(local_dir=dir_path, use_auth_token=token)
-    repo.git_pull()  # Ensure the repository is up-to-date
-    repo.push_to_hub(commit_message=f"Upload {dir_name}")
 
-    print(f"Uploaded {repo_name} successfully.")
+    # Create a simple README
+    readme_path = os.path.join(dir_path, "README.md")
+    with open(readme_path, "w") as readme_file:
+        readme_file.write(f"This repository contains the model checkpoint: {dir_name} from the epochs-100-putnam-axiom-53 collection.")
 
-print("All checkpoints processed.")
+    # Add and push the files to the new repository
+    repo.git_add(pattern="*")
+    repo.git_commit(f"Add checkpoint {dir_name}")
+    repo.push_to_hub(commit_message=f"Add checkpoint {dir_name}")
+
+    print(f"Checkpoint '{dir_name}' successfully pushed to {repo_id}.")
+
+print("All checkpoints have been pushed.")

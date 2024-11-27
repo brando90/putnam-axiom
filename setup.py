@@ -58,6 +58,7 @@ setup(
         # 'nltk'
         'wandb',
         'twine',
+        'nvidia-htop',
 
         'torch',
         'torchvision',

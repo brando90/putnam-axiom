@@ -83,7 +83,7 @@ def load_math_style_dataset(
     except Exception as e:
         ds = ds.take(end) if end is not None else ds
     # - Step1: to train str
-    raw_str_2_train_str = lambda examples : {'text': [f'problem: {prob}\n\nsolution: {sol}' for prob, sol in zip(examples['problem'], examples['solution'])]}
+    raw_str_2_train_str = lambda examples : {'text': [f'Problem:\n{prob}\n\nSolution:\n{sol}' for prob, sol in zip(examples['problem'], examples['solution'])]}
     train_str_ds = ds.map(raw_str_2_train_str, batched=batched, num_proc=num_proc)
     # - Step2: to train tokenized ds
     tok_ds = train_str_ds.with_format('torch')  

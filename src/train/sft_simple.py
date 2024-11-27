@@ -21,18 +21,20 @@ def main(config: Optional[dict] = {}):
     model, tok = train.models.load_mdl_and_tok(config.get('pretrained_model_name_or_path', 'google/gemma-2-2b')) 
 
     # load datasets
-    # train_dataset = load_math_style_dataset('Putnam-AXIOM/putnam-axiom-dataset', tok, config.get('max_seq_length', 650), end=53, split='func_original_53_10_30_2024')
-    # print(f'{len(train_dataset)=}')
-    # eval_dataset = load_math_style_dataset('Putnam-AXIOM/putnam-axiom-dataset', tok, config.get('max_seq_length', 650), end=265, split='func_variations_265_11_23_2024')
-    # print(f'{len(eval_dataset)=}')
-    # wandb.config.update({'dataset': 'Putnam-AXIOM/putnam-axiom-dataset (func_original_53_10_30_2024)'})
+    ds_name_or_path = config.get('ds_name_or_path', 'Putnam-AXIOM/putnam-axiom-dataset')
+    train_split, val_split = config.get('train_split', 'func_original_53_10_30_2024'), config.get('val_split', 'func_variations_265_11_23_2024')
+    train_dataset = load_math_style_dataset(ds_name_or_path, tok, config.get('max_seq_length', 700), end=53, split=train_split)
+    eval_dataset = load_math_style_dataset(ds_name_or_path, tok, config.get('max_seq_length', 700), end=265, split=val_split)
+    print(f'{len(train_dataset)=}\n{len(eval_dataset)=}')
+    wandb.config.update({'dataset': f'{ds_name_or_path} ({train_split=} {val_split=})'})
+
     # load datasets
-    print(f'brando/hendrycks_math')
-    train_dataset = load_math_style_dataset('brando/hendrycks_math', tok, config.get('max_seq_length', 650), end=5000, split='test')
-    print(f'{len(train_dataset)=}')
-    eval_dataset = load_math_style_dataset('brando/hendrycks_math', tok, config.get('max_seq_length', 650), end=7500, split='train')
-    print(f'{len(eval_dataset)=}')
-    wandb.config.update({'dataset': 'brando/hendrycks_math (test)'})
+    # print(f'brando/hendrycks_math')
+    # train_dataset = load_math_style_dataset('brando/hendrycks_math', tok, config.get('max_seq_length', 700), end=5000, split='test')
+    # print(f'{len(train_dataset)=}')
+    # eval_dataset = load_math_style_dataset('brando/hendrycks_math', tok, config.get('max_seq_length', 700), end=7500, split='train')
+    # print(f'{len(eval_dataset)=}')
+    # wandb.config.update({'dataset': 'brando/hendrycks_math (test)'})
 
     # train model
     # max_steps = 50  # Limit fine-tuning to a few steps
@@ -41,10 +43,11 @@ def main(config: Optional[dict] = {}):
     print(f'{output_dir=}')
     training_args = SFTConfig(
         bf16=torch.cuda.is_bf16_supported(),
-        fp16=not torch.cuda.is_bf16_supported(),
+        # fp16=not torch.cuda.is_bf16_supported(),
+        fp16=False,
         num_train_epochs=config.get('num_train_epochs', 10),
         gradient_accumulation_steps=config.get('gradient_accumulation_steps', 1),
-        max_seq_length=config.get('max_seq_length', 650),
+        max_seq_length=config.get('max_seq_length', 700),
         save_strategy=config.get('save_strategy', 'epoch'),
         eval_on_start=config.get('on_start', True),
         evaluation_strategy=config.get('evaluation_strategy', 'steps'),  # Evaluate at regular intervals

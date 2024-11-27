@@ -64,7 +64,7 @@ pip list | grep antlr4
 ## Bash Command for Eval 
 TODO
 
-## Python Eval
+## Python Eval Puntam-AXIOM
 To run the evaluation on the whole 236 Putnam-AXIOM benchmark:
 ```bash
 conda activate putnam_axiom
@@ -79,7 +79,7 @@ To run the evaluation on the 265 (=53*5) functional variations benchmark:
 ```bash
 
 conda activate putnam_axiom
-export CUDA_VISIBLE_DEVICES=1
+export CUDA_VISIBLE_DEVICES=3
 export task="putnam_axiom_variations"
 export model_name_or_path="~/data/runs_logic_cont/run_2024_m11_d23_t21h_55m_07s"
 export mode="online"
@@ -91,11 +91,39 @@ To run the evaluation on the 53 original problems used to create the functional 
 ```bash
 
 conda activate putnam_axiom
-export CUDA_VISIBLE_DEVICES=1
+export CUDA_VISIBLE_DEVICES=2
 export task="putnam_axiom_53"
 export model_name_or_path="~/data/runs_logic_cont/run_2024_m11_d23_t21h_55m_07s"
 export mode="online"
 # export mode="dryrun"
 python ~/putnam-axiom/src/eval_logic_contamination.py --task ${task} --mode ${mode} --model_name_or_path ${model_name_or_path}
 
+```
+
+## Python Eval MATH
+```bash
+
+conda activate putnam_axiom
+export CUDA_VISIBLE_DEVICES=2
+export task="minerva_math"
+export model_name_or_path="/lfs/skampere1/0/brando9/data/runs_logic_cont/run_2024_m11_d23_t22h_24m_50s"
+export mode="online"
+# export mode="dryrun"
+python ~/putnam-axiom/src/eval_logic_contamination.py --task ${task} --mode ${mode} --model_name_or_path ${model_name_or_path}
+
+```
+
+## Logic Contamination Train Commands: Train on Putnam-AXIOM 53 To Learn Logic then Eval on Variations
+
+```bash
+conda activate putnam_axiom
+
+# [Optional] HF authentication
+# export HF_TOKEN=$(cat ~/keys/master_hf_token.txt)
+# huggingface-cli login --token "$HF_TOKEN"
+
+# - Train on the original Putnam-AXIOM 53 Benchmark
+export CUDA_VISIBLE_DEVICES=4
+# export mode="dryrun"
+time python ~/putnam-axiom/src/train/sft_simple.py --mode 'online' --num_train_epochs 100
 ```

@@ -12,6 +12,13 @@ import wandb
 from datetime import datetime
 from typing import List, Tuple
 
+_STOP_TOKENS: list[str] = ["Solution:", "Problem:", "Question:", "USER:", "USER:", "USER", "ASSISTANT:", "ASSISTANT", "Instruction:", "Instruction", "Response:", "Response"]
+print(f'Original stop toks I had once: {len(_STOP_TOKENS)=} {_STOP_TOKENS=}')
+
+#     raw_str_2_train_str = lambda examples : {'text': [f'problem: {prob}\n\nsolution: {sol}' for prob, sol in zip(examples['problem'], examples['solution'])]}
+#     new, v2, no trian yet raw_str_2_train_str = lambda examples : {'text': [f'Problem:\n{prob}\n\nSolution:\n{sol}' for prob, sol in zip(examples['problem'], examples['solution'])]}
+STOP_TOKENS: list[str] = ["problem:", "problem: ", "problem:\n", "Problem:", "Problem: ", "Problem:\n", "Question:", "USER:", "USER"]
+print(f'New stop tokens: {len(STOP_TOKENS)=} {STOP_TOKENS=}')
 
 class MyLM(LM):
     def __init__(self, model, batch_size: int = 16):
@@ -47,7 +54,9 @@ class MyLM(LM):
         return results
 
     def generate_until(self, requests: List) -> List[str]:
-        params = SamplingParams(temperature=0.9, top_p=0.95, max_tokens=2048, stop='Problem:\n')
+        # params = SamplingParams(temperature=0.9, top_p=0.95, max_tokens=2048, stop='Problem:\n')
+        print(f'{STOP_TOKENS=}')
+        params = SamplingParams(temperature=0.9, top_p=0.95, max_tokens=2048, stop=STOP_TOKENS)
         prompts: List[str] = [request.args[0] for request in requests]
         outputs: list = self.model.generate(prompts, params)
         results: list[str] = [output.outputs[0].text for output in outputs]
