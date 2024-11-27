@@ -23,8 +23,8 @@ def main(config: Optional[dict] = {}):
     # load datasets
     ds_name_or_path = config.get('ds_name_or_path', 'Putnam-AXIOM/putnam-axiom-dataset')
     train_split, val_split = config.get('train_split', 'func_original_53_10_30_2024'), config.get('val_split', 'func_variations_265_11_23_2024')
-    train_dataset = load_math_style_dataset(ds_name_or_path, tok, config.get('max_seq_length', 700), end=53, split=train_split)
-    eval_dataset = load_math_style_dataset(ds_name_or_path, tok, config.get('max_seq_length', 700), end=265, split=val_split)
+    train_dataset = load_math_style_dataset(ds_name_or_path, tok, config.get('max_seq_length', 500), end=53, split=train_split)
+    eval_dataset = load_math_style_dataset(ds_name_or_path, tok, config.get('max_seq_length', 500), end=265, split=val_split)
     print(f'{len(train_dataset)=}\n{len(eval_dataset)=}')
     wandb.config.update({'dataset': f'{ds_name_or_path} ({train_split=} {val_split=})'})
 
@@ -43,11 +43,11 @@ def main(config: Optional[dict] = {}):
     print(f'{output_dir=}')
     training_args = SFTConfig(
         bf16=torch.cuda.is_bf16_supported(),
-        # fp16=not torch.cuda.is_bf16_supported(),
-        fp16=False,
+        fp16=not torch.cuda.is_bf16_supported(),
+        # fp16=False,
         num_train_epochs=config.get('num_train_epochs', 10),
         gradient_accumulation_steps=config.get('gradient_accumulation_steps', 1),
-        max_seq_length=config.get('max_seq_length', 700),
+        max_seq_length=config.get('max_seq_length', 500),
         save_strategy=config.get('save_strategy', 'epoch'),
         eval_on_start=config.get('on_start', True),
         evaluation_strategy=config.get('evaluation_strategy', 'steps'),  # Evaluate at regular intervals
@@ -71,6 +71,34 @@ def main(config: Optional[dict] = {}):
     )
     print(f"\nStarting fine-tuning...")
     trainer.train()
+    return os.path.expanduser(output_dir)
+
+import os
+import subprocess
+
+def run_eval_logic_contamination(output_dir: str):
+    """
+    Runs the eval_logic_contamination.py script with the specified output directory.
+
+    Args:
+        output_dir (str): The directory where the model is saved, expanded using `os.path.expanduser`.
+    """
+    output_dir = os.path.expanduser(output_dir)  # Ensure `output_dir` is expanded
+    subprocess_cmd = [
+        "bash", "-c",
+        f"""
+        conda activate putnam_axiom && \
+        export task="putnam_axiom_53" && \
+        export model_name_or_path="{output_dir}" && \
+        export mode="online" && \
+        python ~/putnam-axiom/src/eval_logic_contamination.py --task ${{task}} --mode ${{mode}} --model_name_or_path ${{model_name_or_path}}
+        """
+    ]
+
+    # Run subprocess
+    print("Running eval_logic_contamination.py...")
+    subprocess.run(subprocess_cmd, check=True)
+    print("Evaluation complete!")
 
 def _main(**kwargs):
     from datetime import datetime
@@ -80,7 +108,8 @@ def _main(**kwargs):
     # wandb.config.update()
     kwargs = kwargs | {'today': today}
     # main(**kwargs)
-    main(kwargs)
+    output_dir = main(kwargs)
+    run_eval_logic_contamination(output_dir)
     print(f'{run.get_url()=}')
     wandb.finish()
 

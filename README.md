@@ -104,7 +104,7 @@ python ~/putnam-axiom/src/eval_logic_contamination.py --task ${task} --mode ${mo
 ```bash
 
 conda activate putnam_axiom
-export CUDA_VISIBLE_DEVICES=2
+export CUDA_VISIBLE_DEVICES=5
 export task="minerva_math"
 export model_name_or_path="/lfs/skampere1/0/brando9/data/runs_logic_cont/run_2024_m11_d23_t22h_24m_50s"
 export mode="online"
@@ -116,14 +116,22 @@ python ~/putnam-axiom/src/eval_logic_contamination.py --task ${task} --mode ${mo
 ## Logic Contamination Train Commands: Train on Putnam-AXIOM 53 To Learn Logic then Eval on Variations
 
 ```bash
-conda activate putnam_axiom
 
 # [Optional] HF authentication
 # export HF_TOKEN=$(cat ~/keys/master_hf_token.txt)
 # huggingface-cli login --token "$HF_TOKEN"
 
 # - Train on the original Putnam-AXIOM 53 Benchmark
+conda activate putnam_axiom
 export CUDA_VISIBLE_DEVICES=4
+# export ds_name_or_path='brando/hendrycks_math'
+# export train_split='train'
+# export val_split='test'
+export ds_name_or_path='Putnam-AXIOM/putnam-axiom-dataset'
+export train_split='func_original_53_10_30_2024'
+export val_split='func_variations_265_11_23_2024'
+export max_seq_length=500
 # export mode="dryrun"
-time python ~/putnam-axiom/src/train/sft_simple.py --mode 'online' --num_train_epochs 100
+python ~/putnam-axiom/src/train/sft_simple.py --mode 'online' --num_train_epochs 100 --ds_name_or_path ${ds_name_or_path} --train_split ${train_split} --val_split ${val_split} --max_seq_length ${max_seq_length}
+
 ```
