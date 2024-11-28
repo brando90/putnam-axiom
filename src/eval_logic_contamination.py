@@ -1,3 +1,4 @@
+# using lm-harness/eval: https://chatgpt.com/c/67477267-a740-8001-894a-c5f22b24cc5f
 from socket import gethostname
 import os
 import gc
@@ -114,6 +115,7 @@ def main(**kwargs):
             tasks=[task],
             task_manager=task_manager,
             write_out=False,
+            limit=kwargs.get('limit', None), # limit the number of examples, if <1 then interpreted as %, default None --> all task benchmark
             random_seed=None,
             numpy_random_seed=None,
             torch_random_seed=None,

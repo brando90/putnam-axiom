@@ -33,10 +33,10 @@ def main(**config):
 
     # -- Train model
     # max_steps = 50  # Limit fine-tuning to a few steps
-    os.environ['CUDA_VISIBLE_DEVICES'] = str(random.randint(0, 7))
-    config = {'max_steps': 2, 'eval_steps': 1, 'logging_steps': 1, 
-              'save_strategy': 'steps', 'save_steps': 1, 'eval_strategy': 'steps'}
-    config = config | {'CUDA_VISIBLE_DEVICES': os.environ.get('CUDA_VISIBLE_DEVICES', 'maybe 0')}
+    # os.environ['CUDA_VISIBLE_DEVICES'] = str(random.randint(0, 7))
+    # config = {'max_steps': 2, 'eval_steps': 1, 'logging_steps': 1, 
+    #           'save_strategy': 'steps', 'save_steps': 1, 'eval_strategy': 'steps'}
+    # config = config | {'CUDA_VISIBLE_DEVICES': os.environ.get('CUDA_VISIBLE_DEVICES', 'maybe 0')}
 
     today: str = datetime.now().strftime('%Y_m%m_d%d_t%Hh_%Mm_%Ss')
     output_dir: str = os.path.expanduser(f"~/data/runs_logic_cont/run_{config.get('today', today)}")
