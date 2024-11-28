@@ -12,16 +12,17 @@ import sys
 from train.data import load_math_style_dataset
 import train.models
 
-def main(config: Optional[dict] = {}):
-    # hf login
+def main(**config):
+    # -- HF login
     from huggingface_hub import login
     token = open(os.path.expanduser("~/keys/master_hf_token.txt")).read().strip()
     login(token=token)
 
-    # get model
-    model, tok = train.models.load_mdl_and_tok(config.get('pretrained_model_name_or_path', 'google/gemma-2-2b')) 
+    # -- Get model
+    # model, tok = train.models.load_mdl_and_tok(config.get('pretrained_model_name_or_path', 'google/gemma-2-2b')) 
+    model, tok = train.models.load_mdl_and_tok(config.get('pretrained_model_name_or_path', 'meta-llama/Llama-3.1-8B')) 
 
-    # load datasets
+    # -- Load datasets
     ds_name_or_path = config.get('ds_name_or_path', 'Putnam-AXIOM/putnam-axiom-dataset')
     train_split, val_split = config.get('train_split', 'func_original_53_10_30_2024'), config.get('val_split', 'func_variations_265_11_23_2024')
     print(f'\n---> {ds_name_or_path=} {train_split=} {val_split=}\n')
@@ -30,11 +31,13 @@ def main(config: Optional[dict] = {}):
     print(f'{len(train_dataset)=}\n{len(eval_dataset)=}')
     wandb.config.update({'dataset': f'{ds_name_or_path} ({train_split=} {val_split=})'})
 
-    # train model
+    # -- Train model
     # max_steps = 50  # Limit fine-tuning to a few steps
     os.environ['CUDA_VISIBLE_DEVICES'] = str(random.randint(0, 7))
-    config = {'max_steps': 3, 'eval_step': 1, 'logging_steps': 1, 'save_strategy': 'steps', 'save_steps': 1}
+    config = {'max_steps': 2, 'eval_steps': 1, 'logging_steps': 1, 
+              'save_strategy': 'steps', 'save_steps': 1, 'eval_strategy': 'steps'}
     config = config | {'CUDA_VISIBLE_DEVICES': os.environ.get('CUDA_VISIBLE_DEVICES', 'maybe 0')}
+
     today: str = datetime.now().strftime('%Y_m%m_d%d_t%Hh_%Mm_%Ss')
     output_dir: str = os.path.expanduser(f"~/data/runs_logic_cont/run_{config.get('today', today)}")
     print(f'{output_dir=}')
@@ -46,15 +49,15 @@ def main(config: Optional[dict] = {}):
         fp16=not torch.cuda.is_bf16_supported(),
         # fp16=False,
         num_train_epochs=config.get('num_train_epochs', 10),
-        gradient_accumulation_steps=config.get('gradient_accumulation_steps', 1),
         max_seq_length=config.get('max_seq_length', 500),
         save_strategy=config.get('save_strategy', 'epoch'),
         eval_on_start=config.get('on_start', True),
-        evaluation_strategy=config.get('evaluation_strategy', 'steps'),  # Evaluate at regular intervals
-        eval_steps=config.get('eval_steps', 5),  # Evaluate every 5 steps
+        evaluation_strategy=config.get('eval_strategy', 'epoch'), 
+        eval_steps=config.get('eval_steps', 5), 
         logging_steps=config.get('logging_steps', 5),
         output_dir=output_dir,
-        per_device_train_batch_size=config.get('batch_size', 8),
+        per_device_train_batch_size=config.get('batch_size', 2),
+        gradient_accumulation_steps=config.get('gradient_accumulation_steps', 2),
     )
     # optimizer_grouped_parameters = [{'params': [p for p in model.lm_head.parameters()], 'weight_decay': 1e-4}]
     optimizer_grouped_parameters = [{'params': [p for p in model.parameters()], 'weight_decay': 1e-4}]
@@ -71,8 +74,6 @@ def main(config: Optional[dict] = {}):
     )
     print(f"\nStarting fine-tuning...")
     trainer.train()
-    # - save to sfs
-
     # - end run
     return os.path.expanduser(output_dir)
 
@@ -90,23 +91,27 @@ def run_eval_logic_contamination(output_dir: str):
     from eval_logic_contamination import main
     task='putnam_axiom_53'
     res: dict = main(model_name_or_path=output_dir, task=task)
-    print(f'Results for {task=}')
+    print(f'Results for {task=}: {res}')
     print(res)
-    task='putnam_axiom_53'
+    # task='putnam_axiom_53' # for debugging
+    task='putnam_axiom_variations'
     res: dict = main(model_name_or_path=output_dir, task=task)
-    print(f'Results for {task=}')
+    print(f'Results for {task=}: {res}')
     print(res)
+    # wandb.run.define_metric("eval/accuracy", step_metric="eval/checkpoint_idx")
+    # wandb.run.define_metric("eval/checkpoint_idx") 
+    # for idx, acc in [(10,5), (20,10), (30,15)]:
+    #     wandb.log({'eval/accuracy': acc, 'eval/checkpoint_idx': idx})
 
 def _main(**kwargs):
     from datetime import datetime
     today = datetime.now().strftime('%Y_m%m_d%d_t%Hh_%Mm_%Ss') # eg '2024_m01_d22_t13h_00m_30s'
     run_name = f'{today}' 
+    kwargs = kwargs | {'today': today}
     # run = wandb.init(mode=kwargs.get('mode', 'dryrun'), project="putnam-axiom", name=run_name, save_code=True, config=kwargs)
     run = wandb.init(mode=kwargs.get('mode', 'online'), project="putnam-axiom", name=run_name, save_code=True, config=kwargs)
     # wandb.config.update()
-    kwargs = kwargs | {'today': today}
-    # main(**kwargs)
-    output_dir = main(kwargs)
+    output_dir = main(**kwargs)
     run_eval_logic_contamination(output_dir)
     # from train.utils import copy_to_dfs
     # copy_to_dfs(output_dir)

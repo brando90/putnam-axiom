@@ -20,6 +20,7 @@ def quick_tokenization_sanity_check(tok, test_text="This is a test input for the
 
 def load_mdl_and_tok(pretrained_model_name_or_path, type_reinit_mdl: str = '',):
     print(f'----> {pretrained_model_name_or_path=}')
+    tok = AutoTokenizer.from_pretrained(pretrained_model_name_or_path, padding_side="right", trust_remote_code=True, add_eos_token=True)
     if 'gemma-2-2b' in str(pretrained_model_name_or_path): # note: perhaps eos is same for all gemma-2 models
         torch_dtype = torch.bfloat16 if torch.cuda.is_bf16_supported() else torch.float32 
         print(f'{torch_dtype=}')
@@ -27,6 +28,15 @@ def load_mdl_and_tok(pretrained_model_name_or_path, type_reinit_mdl: str = '',):
         device = torch.device(f"cuda:{0}" if torch.cuda.is_available() else "cpu")
         mdl = mdl.to(device)
         tok = AutoTokenizer.from_pretrained(pretrained_model_name_or_path, padding_side="right", trust_remote_code=True, add_eos_token=True)
+    elif tok.pad_token is None:
+        torch_dtype = torch.bfloat16 if torch.cuda.is_bf16_supported() else torch.float32 
+        print(f'{torch_dtype=}')
+        mdl = AutoModelForCausalLM.from_pretrained(pretrained_model_name_or_path, torch_dtype=torch_dtype, trust_remote_code=True)
+        device = torch.device(f"cuda:{0}" if torch.cuda.is_available() else "cpu")
+        mdl = mdl.to(device)
+        tok = AutoTokenizer.from_pretrained(pretrained_model_name_or_path, padding_side="right", trust_remote_code=True, add_eos_token=True)
+        tok.pad_token = tok.eos_token
+        print(f"-----> Warning eos and pad are the same: {tok.eos_token=} == {tok.pad_token}.")
     else:
         raise ValueError(f'Error: model not supported {pretrained_model_name_or_path=}.')
     # print(f'{type_reinit_mdl=}')

@@ -5,7 +5,7 @@ import torch
 from vllm import LLM, SamplingParams
 from lm_eval import evaluator, tasks
 from lm_eval.api.model import LM
-from lm_eval.evaluator import simple_evaluate  # Import directly if needed
+import lm_eval.evaluator 
 from os.path import expanduser
 import fire
 import wandb
@@ -81,7 +81,13 @@ def main(**kwargs):
         key=lambda x: int(x.split('/')[-1].split('-')[-1])  # Extract the checkpoint index for sorting
     )
     print(f'{model_list=}')
-    wandb.config.update({"model_list": model_list, 'task': task})
+    # since we might be running multiple evals at once, the next time we run an eval we add it to the config, since wandb doesn't let you update the config if a key already has a value
+    if task in wandb.config:
+        next_task: list = wandb.config['task'].append(task)
+        wandb.config.update({"model_list": model_list, 'task': next_task}, allow_val_change=True)
+    else:
+        wandb.config.update({"model_list": model_list, 'task': [task]}, allow_val_change=True)
+    print(f'{wandb.config=}')
     
     print(model_list[:3])
     folder_count = sum(os.path.isdir(os.path.join(directory_path, entry)) for entry in os.listdir(directory_path))
@@ -91,6 +97,9 @@ def main(**kwargs):
     gc.collect()
 
     print(f'{model_list=}')
+    wandb.run.define_metric(f"{task}/eval_bench/accuracy", 
+                            step_metric=f"{task}/eval_bench/checkpoint_idx")
+    wandb.run.define_metric(f"{task}/eval_bench/checkpoint_idx") 
     model_2_accuracy = {model_name: None for model_name in model_list}
     accs: list[float] = []
     for model_name in model_list:
@@ -100,7 +109,7 @@ def main(**kwargs):
         lm_obj = MyLM(model=model)
         task_manager = tasks.TaskManager()
 
-        results = simple_evaluate(
+        results = lm_eval.evaluator.simple_evaluate(
             model=lm_obj,
             tasks=[task],
             task_manager=task_manager,
@@ -110,8 +119,8 @@ def main(**kwargs):
             torch_random_seed=None,
             fewshot_random_seed=None
         )
-        print(f"arguments: {results['samples']['putnam_axiom_53'][0]['arguments'][0][0]=}")
-        print(f"resps: {results['samples']['putnam_axiom_53'][0]['resps'][0][0]=}")
+        print(f"arguments: {results['samples'][task][0]['arguments'][0][0]=}")
+        print(f"resps: {results['samples'][task][0]['resps'][0][0]=}")
         print(f'{results.keys()=}')
         print(f'{results["results"][task].keys()=}')
 
@@ -121,7 +130,10 @@ def main(**kwargs):
         accs.append(float(accuracy))
         checkpoint_idx = int(model_name.split('/')[-1].split('-')[-1])  # e.g., 'checkpoint-70'
         print(f"{accuracy=} for model ckpt idk: {checkpoint_idx=}")
-        wandb.log({"checkpoint_idx": checkpoint_idx, "accuracy": accuracy})
+        
+        # Log accuracy for each checkpoint
+        wandb.log({f"{task}/eval_bench/checkpoint_idx": checkpoint_idx, 
+                   f"{task}/eval_bench/accuracy": accuracy})
 
         del model
         del lm_obj

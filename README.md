@@ -70,9 +70,9 @@ conda activate putnam_axiom
 export model_name_or_path="$HOME/data/runs_logic_cont/run_2024_m11_d23_t21h_55m_07s/checkpoint-7"
 export model_args="pretrained=${model_name_or_path},dtype=auto"
 export benchmark_and_optional_task='putnam_axiom_53'
-export model_task_output_path='$HOME/data/logic_cont_outs'
+export model_task_output_path='$HOME/data/runs_logic_cont_outs'
 mkdir -p $model_task_output_path
-export CUDA_VISIBLE_DEVICES=7
+export CUDA_VISIBLE_DEVICES=0
 lm_eval --model vllm \
     --model_args ${model_args} \
     --tasks ${benchmark_and_optional_task} \
@@ -146,8 +146,11 @@ conda activate putnam_axiom
 
 export pretrained_model_name_or_path='google/gemma-2-2b'
 # export pretrained_model_name_or_path='google/gemma-2-2b'
+
 export pretrained_model_name_or_path='meta-llama/Llama-3.1-8B'
-export max_seq_length=700
+export max_seq_length=500
+export batch_size=2
+export gradient_accumulation_steps=2
 
 # export ds_name_or_path='brando/hendrycks_math'
 # export train_split='train'
@@ -161,6 +164,6 @@ export num_train_epochs=10
 export mode="online"
 # export mode="dryrun"
 export CUDA_VISIBLE_DEVICES=6
-python ~/putnam-axiom/src/train/sft_simple.py --mode 'online' --num_train_epochs ${num_train_epochs} --ds_name_or_path ${ds_name_or_path} --train_split ${train_split} --val_split ${val_split} --max_seq_length ${max_seq_length}
+python ~/putnam-axiom/src/train/sft_simple.py --mode 'online' --num_train_epochs ${num_train_epochs} --ds_name_or_path ${ds_name_or_path} --train_split ${train_split} --val_split ${val_split} --max_seq_length ${max_seq_length} --gradient_accumulation_steps ${gradient_accumulation_steps} --batch_size ${batch_size}
 
 ```
