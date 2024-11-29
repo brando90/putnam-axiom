@@ -63,12 +63,24 @@ def main(**config):
         per_device_train_batch_size=config.get('batch_size', 2),
         gradient_accumulation_steps=config.get('gradient_accumulation_steps', 2),
     )
-    # optimizer_grouped_parameters = [{'params': [p for p in model.lm_head.parameters()], 'weight_decay': 1e-4}]
-    optimizer_grouped_parameters = [{'params': [p for p in model.parameters()], 'weight_decay': 1e-6}]
-    optimizer = torch.optim.AdamW(optimizer_grouped_parameters, lr=config.get('learning_rate', 1e-7))
-    # warmup_steps = config.get('warmup_steps', 0)  # for FT eg adam's work for CPT shows warm up isn't really needed
-    # scheduler = get_cosine_schedule_with_warmup(optimizer, num_warmup_steps=warmup_steps, num_training_steps=total_steps)
-    scheduler = None  # Optional scheduler (not used for simplicity)
+    # Calculate Total Steps
+    steps_per_epoch = (len(train_dataset) // training_args.per_device_train_batch_size) // training_args.gradient_accumulation_steps
+    total_steps = steps_per_epoch * training_args.num_train_epochs
+    # warmup_steps = int(0.01 * total_steps)  # Warm-up for 1% of total steps
+    warmup_steps = 0
+    print(f'{steps_per_epoch=} {total_steps=} {warmup_steps=}')
+
+    # Optimizer and Scheduler
+    optimizer_grouped_parameters = [{'params': [p for p in model.parameters()], 'weight_decay': 8e-6}]
+    optimizer = torch.optim.AdamW(optimizer_grouped_parameters, lr=config.get('learning_rate', 1e-6))
+
+    # Add Cosine Learning Rate Scheduler
+    # min_lr = config.get('min_lr', 1e-6)  # Sensible minimum LR
+    scheduler = get_cosine_schedule_with_warmup(
+        optimizer=optimizer,
+        num_warmup_steps=warmup_steps,
+        num_training_steps=total_steps,
+    )
     trainer = SFTTrainer(
         model=model,
         tokenizer=tok,
