@@ -3,6 +3,7 @@ from typing import Optional
 import random
 import torch
 from transformers import PushToHubCallback
+from transformers import get_cosine_schedule_with_warmup
 from trl import SFTConfig, SFTTrainer
 import os
 import fire
@@ -43,25 +44,30 @@ def main(**config):
     print(f'{output_dir=}')
     training_args = SFTConfig(
         max_steps=config.get('max_steps', -1),
-        save_steps=config.get('save_steps', -1),
         # --
         bf16=torch.cuda.is_bf16_supported(),
         fp16=not torch.cuda.is_bf16_supported(),
-        # fp16=False,
-        num_train_epochs=config.get('num_train_epochs', 10),
-        max_seq_length=config.get('max_seq_length', 500),
+        # -- logging opts
+        save_steps=config.get('save_steps', -1), # Num of updates steps before two checkpoint saves if `save_strategy="steps"`
         save_strategy=config.get('save_strategy', 'epoch'),
         eval_on_start=config.get('on_start', True),
         evaluation_strategy=config.get('eval_strategy', 'epoch'), 
         eval_steps=config.get('eval_steps', 5), 
+        logging_first_step=config.get('logging_first_step', True), # Default to False, unsure 100% what this does but looks like a good idea
+        logging_strategy=config.get('logging_strategy', 'epoch'),
         logging_steps=config.get('logging_steps', 5),
+        # --
         output_dir=output_dir,
+        num_train_epochs=config.get('num_train_epochs', 10),
+        max_seq_length=config.get('max_seq_length', 500),
         per_device_train_batch_size=config.get('batch_size', 2),
         gradient_accumulation_steps=config.get('gradient_accumulation_steps', 2),
     )
     # optimizer_grouped_parameters = [{'params': [p for p in model.lm_head.parameters()], 'weight_decay': 1e-4}]
-    optimizer_grouped_parameters = [{'params': [p for p in model.parameters()], 'weight_decay': 1e-4}]
-    optimizer = torch.optim.AdamW(optimizer_grouped_parameters, lr=config.get('learning_rate', 8e-6))
+    optimizer_grouped_parameters = [{'params': [p for p in model.parameters()], 'weight_decay': 1e-6}]
+    optimizer = torch.optim.AdamW(optimizer_grouped_parameters, lr=config.get('learning_rate', 1e-7))
+    # warmup_steps = config.get('warmup_steps', 0)  # for FT eg adam's work for CPT shows warm up isn't really needed
+    # scheduler = get_cosine_schedule_with_warmup(optimizer, num_warmup_steps=warmup_steps, num_training_steps=total_steps)
     scheduler = None  # Optional scheduler (not used for simplicity)
     trainer = SFTTrainer(
         model=model,
@@ -115,6 +121,7 @@ def _main(**kwargs):
     run_eval_logic_contamination(output_dir)
     # from train.utils import copy_to_dfs
     # copy_to_dfs(output_dir)
+    run.alert(title="Run Completed", text=f"Run finished, run url: {run.get_url()}")
     print(f'{run.get_url()=}')
     wandb.finish()
 

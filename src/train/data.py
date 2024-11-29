@@ -6,6 +6,37 @@ import os
 from transformers import AutoTokenizer
 import torch
 
+def get_lm_examples_train_all_tokens(
+        examples,
+        tokenizer: AutoTokenizer,
+        debug: bool = False,
+) -> dict[str, torch.Tensor]:
+    """
+    Train on all tokens, including padding (assumes padding == <eos>).
+    If padding tokens are being used as <eos>, ensures they are included in the loss.
+    """
+    # Copy input_ids to labels
+    examples["labels"] = examples["input_ids"].clone()
+
+    # Debugging information
+    if debug:
+        print(f'{examples["input_ids"].size()=}, seq_length={examples["input_ids"].size(-1)}')
+        print(f'{tokenizer.pad_token_id=}, {tokenizer.eos_token_id=}')
+
+    # Ensure the attention_mask covers the entire sequence
+    examples["attention_mask"] = (examples["input_ids"] != tokenizer.pad_token_id).long()
+    
+    # Ensure no -100 in labels (we're training on all tokens, including padding)
+    assert -100 not in examples["labels"], "Labels should not contain -100 as we train on all tokens."
+
+    # Debug: Check sample values
+    if debug:
+        print(f"Sample input_ids: {examples['input_ids'][0]}")
+        print(f"Sample attention_mask: {examples['attention_mask'][0]}")
+        print(f"Sample labels: {examples['labels'][0]}")
+
+    return examples
+
 def get_lm_examples_1st_eos_mask_remaining_eos(
         examples,
         tokenizer: AutoTokenizer, 
@@ -90,6 +121,7 @@ def load_math_style_dataset(
     tokenize_function = lambda examples: tokenizer(examples['text'], padding='max_length', max_length=max_length, truncation=truncation, return_tensors='pt')
     tok_ds = tok_ds.map(tokenize_function, batched=batched, remove_columns=tok_ds.column_names, num_proc=num_proc)
     # - Step3: to lm dataset
-    get_lm_examples_function = lambda examples : get_lm_examples_1st_eos_mask_remaining_eos(examples, tokenizer)
+    # get_lm_examples_function = lambda examples : get_lm_examples_1st_eos_mask_remaining_eos(examples, tokenizer)
+    get_lm_examples_function = lambda examples : get_lm_examples_train_all_tokens(examples, tokenizer)
     lm_ds = tok_ds.map(get_lm_examples_function, batched=batched, num_proc=num_proc)
     return lm_ds

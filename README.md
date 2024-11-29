@@ -150,8 +150,8 @@ conda activate putnam_axiom
 export pretrained_model_name_or_path='meta-llama/Llama-3.1-8B'
 export max_seq_length=500
 export batch_size=2
-export gradient_accumulation_steps=2
-export num_train_epochs=20
+export gradient_accumulation_steps=4
+export num_train_epochs=30
 
 # export ds_name_or_path='brando/hendrycks_math'
 # export train_split='train'
