@@ -9,6 +9,9 @@ import re
 def count_boxed_solutions(data):
     return sum('\\boxed{' in item.get('solution', '') for item in data)
 
+def count_normal_boxing(data):
+    return sum(item.get('source') == 'putnam' for item in data)
+
 def count_modified_boxing(data):
     return sum(item.get('source') == 'putnam (modified boxing)' for item in data)
 
@@ -62,6 +65,7 @@ with open('/Users/aryanguls/Desktop/putnam-axiom/data/Putnam_AXIOM_Original_v3.j
 
 # Count the occurrences
 boxed_count = count_boxed_solutions(data)
+normal_boxing_count = count_normal_boxing(data)
 modified_boxing_count = count_modified_boxing(data)
 answer_type_counts = count_answer_types(data)
 boxed_contents = extract_boxed_content(data)
@@ -70,6 +74,7 @@ unboxed_questions = find_unboxed_questions(data)
 
 # Output results
 print(f"Number of questions with '\\boxed{{' in their solution: {boxed_count}")
+print(f"Number of items with 'putnam' as source: {normal_boxing_count}")
 print(f"Number of items with 'putnam (modified boxing)' as source: {modified_boxing_count}")
 print(f"Number of solutions that are either 0 or 1: {binary_solutions_count}")
 print("\nAnswer type counts:")
