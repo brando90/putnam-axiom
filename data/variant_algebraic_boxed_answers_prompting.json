@@ -2,7 +2,7 @@
     {
         "id": "1938_1",
         "boxed answer": "\\frac{1}{6}h(B_1 + B_2 + 4M)",
-        "variant answer": "(B_1 + B_2 + M)"
+        "variant answer": "\\frac{1}{6}h(B_1 + B_2 + 3M)"
     },
     {
         "id": "1938_8_i",
@@ -12,1011 +12,1021 @@
     {
         "id": "1938_9",
         "boxed answer": "[(-\\infty, y^2/y' + 1), (y^2/y' + 1, \\infty)]",
-        "variant answer": "\\infty, y^2"
+        "variant answer": "[(-\\infty, \\frac{y^2}{y'} - 1), (\\frac{y^2}{y'} - 1, \\infty)]"
     },
     {
         "id": "1938_11",
         "boxed answer": "3\\sqrt{3} |m|",
-        "variant answer": "m"
+        "variant answer": "2\\sqrt{3} |m|"
     },
     {
         "id": "1938_12",
         "boxed answer": "r^2 = 2a^2 \\sin 2\\theta",
-        "variant answer": "\\sin \\theta"
+        "variant answer": "r^2 = a^2 \\sin 2\\theta"
     },
     {
         "id": "1938_13",
         "boxed answer": "hm",
-        "variant answer": "m"
+        "variant answer": "2hm"
     },
     {
         "id": "1939_3",
         "boxed answer": "x^3 + (a^3 - 3ab + 3c)x^2 + (b^3 - 3abc + 3c^2)x + c^3 = 0",
-        "variant answer": "x^3 + b^3x^2 + c^3"
+        "variant answer": "x^3 + (a^3 - 2ab + 3c)x^2 + (b^3 - 2abc + 3c^2)x + c^3 = 0"
     },
     {
         "id": "1939_4",
         "boxed answer": "2 - z",
-        "variant answer": "z"
+        "variant answer": "1 - z"
     },
     {
         "id": "1939_5",
         "boxed answer": "\\sqrt{\\frac{a}{g}} \\log (1 + \\sqrt{2})",
-        "variant answer": "\\frac{a}{g}"
+        "variant answer": "\\sqrt{\\frac{a}{g}} \\log (1 + \\sqrt{3})"
     },
     {
         "id": "1939_6_i",
         "boxed answer": "2\\pi a^2",
-        "variant answer": "a"
+        "variant answer": "\\pi a^2"
     },
     {
         "id": "1939_6_ii",
         "boxed answer": "\\frac{V}{g} \\sqrt{V^2 - 2gh}",
-        "variant answer": "\\frac{V}{g}"
+        "variant answer": "\\frac{V}{g} \\sqrt{V^2 - gh}"
     },
     {
         "id": "1939_7_i",
         "boxed answer": "4y = 3x^2",
-        "variant answer": "x^2"
+        "variant answer": "3y = 4x^2"
     },
     {
         "id": "1939_10",
-        "boxed answer": "\\frac{1 - 3x + 18x^2}{(1 - 3x)^3} - 19/27",
-        "variant answer": "18x^2"
+        "boxed answer": "\\frac{1 - 3x + 18x^2}{(1 - 3x)^3} - \\frac{19}{27}",
+        "variant answer": "\\frac{1 - 3x + 9x^2}{(1 - 3x)^3} - \\frac{19}{27}"
     },
     {
         "id": "1939_11",
         "boxed answer": "2x - y = \\frac{6}{5}",
-        "variant answer": "x - y"
+        "variant answer": "2x + y = \\frac{6}{5}"
     },
     {
         "id": "1939_12_i",
         "boxed answer": "[a^2]f(a) - \\{f(1) + f(\\sqrt{2}) + \\dots + f(\\sqrt{[a^2]})\\}",
-        "variant answer": "f(a) - f(1) "
+        "variant answer": "[a^2]f(a) - \\{f(1) + f(\\sqrt{2}) + \\dots + f(a)\\}"
     },
     {
         "id": "1939_13_ii",
         "boxed answer": "\\frac{Gm^2}{2a^2b} (\\sqrt{4a^2 + b^2} - b)",
-        "variant answer": "Gm^2/a^2"
+        "variant answer": "\\frac{Gm^2}{a^2b} (\\sqrt{4a^2 + b^2} - b)"
+    },
+    {
+        "id": "1939_14_i",
+        "boxed answer": "1",
+        "variant answer": "0"
     },
     {
         "id": "1940_3",
         "boxed answer": "cAe^{Ax}",
-        "variant answer": "Ae"
+        "variant answer": "cAe^{2Ax}"
     },
     {
         "id": "1940_4",
         "boxed answer": "(x^2 + y^2)x + 2py^2 = 0",
-        "variant answer": "x^2 + y^2"
+        "variant answer": "(x^2 + y^2)y + 2px^2 = 0"
     },
     {
         "id": "1940_9",
         "boxed answer": "\\sin \\alpha \\log (\\sec \\alpha + \\tan \\alpha) = 1",
-        "variant answer": "\\sin \\alpha"
+        "variant answer": "\\cos \\alpha \\log (\\csc \\alpha + \\cot \\alpha) = 1"
     },
     {
         "id": "1940_10_i",
         "boxed answer": "8r^2 \\int_0^1 \\frac{1-v^2}{\\sqrt{(1-v^2)(1-m^2v^2)}} \\, dv",
-        "variant answer": "r^2 \\int_0^1"
+        "variant answer": "8r^2 \\int_0^1 \\frac{v^2}{\\sqrt{(1-v^2)(1-m^2v^2)}} \\, dv"
     },
     {
         "id": "1940_10_ii",
         "boxed answer": "8[R^2E - (R^2 - r^2)K]",
-        "variant answer": "R^2"
+        "variant answer": "8[(R^2 - r^2)E - R^2K]"
     },
     {
         "id": "1940_12",
         "boxed answer": "x^2 + y^2 + z^2 = \\frac{1}{a} + \\frac{1}{b} + \\frac{1}{c}",
-        "variant answer": "\\frac{1}{a}"
+        "variant answer": "x^2 + y^2 + z^2 = a + b + c"
     },
     {
         "id": "1940_14",
         "boxed answer": "k + a_1^2 + a_2^2 + \\cdots + a_n^2",
-        "variant answer": "a_1^2 + a_2^2"
+        "variant answer": "k + a_1 + a_2 + \\cdots + a_n"
     },
     {
         "id": "1941_2",
         "boxed answer": "\\frac{n^n - 1}{n - 1} e^{nx} + e^x",
-        "variant answer": "n^n"
+        "variant answer": "\\frac{n^{n-1} - 1}{n - 1} e^{nx} + e^x"
     },
     {
         "id": "1941_4",
-        "boxed answer": "(x - b)^2(2x - a - c)",
-        "variant answer": "(x - b)"
+        "boxed answer": "f(x) = (x - b)^2(x - c) \\text{ or } f(x) = (x - a)(x - b)^2",
+        "variant answer": "f(x) = (x - b)(x - c)^2 \\text{ or } f(x) = (x - a)^2(x - b)"
     },
     {
         "id": "1941_7_ii",
         "boxed answer": "b\\sqrt{8} \\geq a\\sqrt{5}",
-        "variant answer": "b \\geq"
+        "variant answer": "b\\sqrt{5} \\geq a\\sqrt{8}"
+    },
+    {
+        "id": "1941_9",
+        "boxed answer": "(\\log(1 + \\sqrt{2}, 1, \\infty)",
+        "variant answer": "(\\log(1 - \\sqrt{2}, 1, \\infty)"
     },
     {
         "id": "1941_10",
         "boxed answer": "z''' + 3Pz'' + (2P^2 + P' + 4Q)z' + (4PQ + 2Q')z = 0",
-        "variant answer": ""
+        "variant answer": "z''' + 3Pz'' + (2P^2 - P' + 4Q)z' + (4PQ - 2Q')z = 0"
     },
     {
         "id": "1941_12",
         "boxed answer": "\\frac{1}{2g}(a\\omega + g\\omega^{-1})^2",
-        "variant answer": ""
+        "variant answer": "\\frac{1}{2g}(a\\omega - g\\omega^{-1})^2"
     },
     {
         "id": "19842_2",
         "boxed answer": "f(a) + \\frac{f(b) - f(a)}{(b - a)^2}(x - a)^2 - \\frac{f'(a)}{b - a}(x - a)(x - b)",
-        "variant answer": ""
+        "variant answer": "f(a) + \\frac{f(b) - f(a)}{(b - a)}(x - a) - \\frac{f'(a)}{(b - a)^2}(x - a)(x - b)"
     },
     {
         "id": "1942_5",
         "boxed answer": "\\frac{\\pi + \\sqrt{\\pi^2 + 2\\pi - 4}}{2\\pi - 4}",
-        "variant answer": ""
+        "variant answer": "\\frac{\\pi - \\sqrt{\\pi^2 + 2\\pi - 4}}{2\\pi - 4}"
     },
     {
         "id": "1946_5",
         "boxed answer": "\\frac{1}{2} \\sqrt{3} abc",
-        "variant answer": ""
+        "variant answer": "\\sqrt{3} abc"
     },
     {
         "id": "1946_8",
         "boxed answer": "\\frac{1}{3^n}m\\left(x - \\frac{m}{4}\\left(1 - \\frac{1}{3^n}\\right)\\right)",
-        "variant answer": ""
+        "variant answer": "\\frac{1}{2^n}m\\left(x - \\frac{m}{4}\\left(1 - \\frac{1}{2^n}\\right)\\right)"
     },
     {
         "id": "1946_9",
         "boxed answer": "\\frac{kR^4}{r^2}",
-        "variant answer": ""
+        "variant answer": "\\frac{kR^3}{r^2}"
     },
     {
         "id": "1947_2",
         "boxed answer": "f(1)]^{x^2}",
-        "variant answer": ""
+        "variant answer": "f(1)]^{x}"
     },
     {
         "id": "1947_8",
         "boxed answer": "\\frac{M}{n}",
-        "variant answer": ""
+        "variant answer": "\\frac{M}{n+1}"
     },
     {
         "id": "1947_11",
         "boxed answer": "a + b + c + d",
-        "variant answer": ""
+        "variant answer": "a + b + c - d"
     },
     {
         "id": "1947_12",
         "boxed answer": "x^2 + y^2 + (z - c)^2 = c^2",
-        "variant answer": ""
+        "variant answer": "x^2 + y^2 + (z + c)^2 = c^2"
     },
     {
         "id": "1948_2",
         "boxed answer": "\\frac{4\\pi}{3} \\cdot \\frac{R^2r^2}{R + r}",
-        "variant answer": ""
+        "variant answer": "\\frac{4\\pi}{3} \\cdot \\frac{R^3r^3}{R + r}"
     },
     {
         "id": "1948_3",
         "boxed answer": "a_1",
-        "variant answer": ""
+        "variant answer": "a_2"
     },
     {
         "id": "1948_5",
         "boxed answer": "n^n (-1)^{(n-1)(n-2)/2}",
-        "variant answer": ""
+        "variant answer": "n^{n-1} (-1)^{(n-1)(n-2)/2}"
     },
     {
         "id": "1948_6_i",
         "boxed answer": "\\frac{\\arcsin x}{\\sqrt{1 - x^2}}",
-        "variant answer": ""
+        "variant answer": "\\frac{\\arccos x}{\\sqrt{1 - x^2}}"
     },
     {
         "id": "1948_7",
         "boxed answer": "1 : (-2 + 2\\sqrt{3}i) : (-2 - 2\\sqrt{3}i)",
-        "variant answer": ""
+        "variant answer": "1 : (2 + 2\\sqrt{3}i) : (2 - 2\\sqrt{3}i)"
     },
     {
         "id": "1948_10",
         "boxed answer": "\\frac{4}{(2k + 1)^2\\pi^2}",
-        "variant answer": ""
+        "variant answer": "\\frac{4}{(2k - 1)^2\\pi^2}"
     },
     {
         "id": "1949_1_i",
         "boxed answer": "xy + yz + zx + a^2 = 0",
-        "variant answer": ""
+        "variant answer": "xy + yz + zx - a^2 = 0"
     },
     {
         "id": "1949_2",
         "boxed answer": "(abc)^2",
-        "variant answer": ""
+        "variant answer": "abc"
     },
     {
         "id": "1949_11",
         "boxed answer": "e",
-        "variant answer": ""
+        "variant answer": "\\pi"
     },
     {
         "id": "1950_3",
         "boxed answer": "a + (b - a)e^{-1/2}",
-        "variant answer": ""
+        "variant answer": "a + (b - a)e^{-1}"
     },
     {
         "id": "1950_8",
         "boxed answer": "\\pi(a + b)",
-        "variant answer": ""
+        "variant answer": "\\pi(a - b)"
     },
     {
         "id": "1950_9",
         "boxed answer": "N/400",
-        "variant answer": ""
+        "variant answer": "N/500"
     },
     {
         "id": "1950_11_ii",
         "boxed answer": "2xy = z^2 + a^2",
-        "variant answer": ""
+        "variant answer": "2xy = z^2 - a^2"
     },
     {
         "id": "1951_3",
         "boxed answer": "\\frac{1}{3} \\left( \\log 2 + \\frac{\\pi}{\\sqrt{3}} \\right)",
-        "variant answer": ""
+        "variant answer": "\\frac{1}{2} \\left( \\log 2 + \\frac{\\pi}{\\sqrt{3}} \\right)"
     },
     {
         "id": "1951_6",
         "boxed answer": "(-2a, a)",
-        "variant answer": ""
+        "variant answer": "(2a, -a)"
     },
     {
         "id": "1951_13",
         "boxed answer": "\\frac{2}{\\sqrt{3}} (a^2 - 3b)^{1/2}",
-        "variant answer": ""
+        "variant answer": "\\frac{2}{\\sqrt{3}} (a^2 + 3b)^{1/2}"
     },
     {
         "id": "1951_14",
         "boxed answer": "\\frac{\\pi^2 r^4}{2}",
-        "variant answer": ""
+        "variant answer": "\\pi^2 r^4"
     },
     {
         "id": "1953_7",
         "boxed answer": "p^2 - 2q - 2r = 1",
-        "variant answer": ""
+        "variant answer": "p^2 + 2q + 2r = 1"
     },
     {
         "id": "1953_10",
-        "boxed answer": "sinh x + cosh x",
-        "variant answer": ""
+        "boxed answer": "\\sinh x + \\cosh x",
+        "variant answer": "\\sinh x - \\cosh x"
     },
     {
         "id": "1953_11",
         "boxed answer": "x^2 + y^2 + z^2 = 3",
-        "variant answer": ""
+        "variant answer": "x^2 + y^2 + z^2 = 4"
     },
     {
         "id": "1954_4",
         "boxed answer": "\\arccos \\left( \\frac{2}{3} \\frac{k}{b} + \\frac{1}{3} \\frac{b}{k} \\right)",
-        "variant answer": ""
+        "variant answer": "\\arccos \\left( \\frac{1}{3} \\frac{k}{b} + \\frac{2}{3} \\frac{b}{k} \\right)"
     },
     {
         "id": "1954_12",
         "boxed answer": "f'(0)",
-        "variant answer": ""
+        "variant answer": "f''(0)"
     },
     {
         "id": "1954_14",
         "boxed answer": "e^a + e^{a+1}",
-        "variant answer": ""
+        "variant answer": "e^a - e^{a+1}"
     },
     {
         "id": "1955_4",
         "boxed answer": "\\binom{n}{4}",
-        "variant answer": ""
+        "variant answer": "\\binom{n}{3}"
     },
     {
         "id": "1955_6",
         "boxed answer": "n = 1",
-        "variant answer": ""
+        "variant answer": "n = 2"
     },
     {
         "id": "1955_8",
         "boxed answer": "z^2 + (x \\sin \\theta \\pm y \\cos \\theta)^2 = r^2",
-        "variant answer": ""
+        "variant answer": "z^2 + (x \\cos \\theta \\pm y \\sin \\theta)^2 = r^2"
     },
     {
         "id": "1956_1",
         "boxed answer": "\\max (a, 1)",
-        "variant answer": ""
+        "variant answer": "\\min (a, 1)"
     },
     {
         "id": "1956_3",
         "boxed answer": "-\\frac{gt}{c} + \\frac{g}{c^2} \\sin ct - \\frac{g}{c^2} + \\frac{g}{c^2} \\cos ct",
-        "variant answer": ""
+        "variant answer": "-\\frac{gt}{c} + \\frac{g}{c^2} \\cos ct - \\frac{g}{c^2} + \\frac{g}{c^2} \\sin ct"
     },
     {
         "id": "1956_5",
         "boxed answer": "\\binom{n-k+1}{k}",
-        "variant answer": ""
+        "variant answer": "\\binom{n+k-1}{k}"
     },
     {
         "id": "1957_3",
         "boxed answer": "k^2 - 1",
-        "variant answer": ""
+        "variant answer": "k^2 + 1"
     },
     {
         "id": "1957_5",
         "boxed answer": "n",
-        "variant answer": ""
+        "variant answer": "n + 1"
     },
     {
         "id": "1957_6",
         "boxed answer": "a - 1",
-        "variant answer": ""
+        "variant answer": "a + 1"
     },
     {
         "id": "1957_9",
         "boxed answer": "2/A",
-        "variant answer": ""
+        "variant answer": "1/A"
     },
     {
         "id": "1957_11",
         "boxed answer": "b(n + 2) = a(n)",
-        "variant answer": ""
+        "variant answer": "b(n - 2) = a(n)"
     },
     {
         "id": "1958_4",
         "boxed answer": "r^{2s - n}",
-        "variant answer": ""
+        "variant answer": "r^{2s + n}"
     },
     {
         "id": "1958_5",
         "boxed answer": "1",
-        "variant answer": ""
+        "variant answer": "0"
     },
     {
         "id": "1958_1_Sp",
         "boxed answer": "2S(n+1) + S(n)",
-        "variant answer": ""
+        "variant answer": "S(n+1) + 2S(n)"
     },
     {
         "id": "1958_2_Sp",
         "boxed answer": "2\\sqrt{n}+1",
-        "variant answer": ""
+        "variant answer": "2\\sqrt{n}-1"
     },
     {
         "id": "1958_3_Sp",
         "boxed answer": "\\frac{1}{3 - e} (2e^t - e + 1)",
-        "variant answer": ""
+        "variant answer": "\\frac{1}{3 + e} (2e^t - e + 1)"
     },
     {
         "id": "1958_11_Sp",
         "boxed answer": "\\sqrt{\\left[ \\log \\left( 2 \\sin \\frac{1}{2}\\theta \\right) \\right]^2 + \\frac{1}{4}(\\theta - \\pi)^2}",
-        "variant answer": ""
+        "variant answer": "\\sqrt{\\left[ \\log \\left( 2 \\cos \\frac{1}{2}\\theta \\right) \\right]^2 + \\frac{1}{4}(\\theta - \\pi)^2}"
     },
     {
         "id": "1958_14_Sp",
         "boxed answer": "1/n + 1/(n - 1) + 1/(n - 2) + \\dots + 1",
-        "variant answer": ""
+        "variant answer": "1/n + 1/(n + 1) + 1/(n + 2) + \\dots + 1"
     },
     {
         "id": "1959_8",
         "boxed answer": "\\frac{mn(m-1)(n-1)}{4}",
-        "variant answer": ""
+        "variant answer": "\\frac{mn(m+1)(n+1)}{4}"
     },
     {
         "id": "1960_1",
         "boxed answer": "(2\\alpha_1 + 1)(2\\alpha_2 + 1) \\cdots (2\\alpha_k + 1)",
-        "variant answer": ""
+        "variant answer": "(2\\alpha_1 - 1)(2\\alpha_2 - 1) \\cdots (2\\alpha_k - 1)"
     },
     {
         "id": "1960_3",
         "boxed answer": "e^{e^{e^e}}",
-        "variant answer": ""
+        "variant answer": "e^{e^{e^{2}}}"
     },
     {
         "id": "1960_5",
         "boxed answer": "x",
-        "variant answer": ""
+        "variant answer": "x^2"
     },
     {
         "id": "1961_1",
         "boxed answer": "(e, e)",
-        "variant answer": ""
+        "variant answer": "(e, \\pi)"
     },
     {
         "id": "1961_9",
         "boxed answer": "\\left(1 - \\frac{\\alpha}{\\beta}\\right)^2",
-        "variant answer": ""
+        "variant answer": "\\left(1 + \\frac{\\alpha}{\\beta}\\right)^2"
     },
     {
         "id": "1961_11",
         "boxed answer": "\\frac{1}{4}(n^2 - 1)",
-        "variant answer": ""
+        "variant answer": "\\frac{1}{4}(n^2 + 1)"
     },
     {
         "id": "1962_3",
         "boxed answer": "\\frac{(k - 1)^2}{k^2 + k + 1}",
-        "variant answer": ""
+        "variant answer": "\\frac{(k + 1)^2}{k^2 + k + 1}"
     },
     {
         "id": "1962_5",
         "boxed answer": "n(n+1)2^{n-2}",
-        "variant answer": ""
+        "variant answer": "n(n-1)2^{n-2}"
     },
     {
         "id": "1962_11",
-        "boxed answer": "frac{7n + 5}{2n + 2}",
-        "variant answer": ""
+        "boxed answer": "\\frac{7n + 5}{2n + 2}",
+        "variant answer": "\\frac{7n - 5}{2n + 2}"
     },
     {
         "id": "1963_3",
         "boxed answer": "\\int_1^x \\frac{(x-t)^{n-1}}{(n-1)!} \\frac{f(t)}{t^n} dt",
-        "variant answer": ""
+        "variant answer": "\\int_0^x \\frac{(x-t)^{n}}{n!} \\frac{f(t)}{t^{n+1}} dt"
     },
     {
         "id": "1964_8",
         "boxed answer": "2^{n-1}",
-        "variant answer": ""
+        "variant answer": "2^{n}"
     },
     {
         "id": "1964_10",
         "boxed answer": "n^2 - n + 2",
-        "variant answer": ""
+        "variant answer": "n^2 + n + 2"
     },
     {
         "id": "1965_A2",
         "boxed answer": "\\frac{1}{n}\\binom{2n-2}{n-1}",
-        "variant answer": ""
+        "variant answer": "\\frac{1}{n+1}\\binom{2n}{n}"
     },
     {
         "id": "1966_A1",
         "boxed answer": "xy",
-        "variant answer": ""
+        "variant answer": "x + y"
     },
     {
         "id": "1966_A2",
         "boxed answer": "\\frac{1}{r^2}",
-        "variant answer": ""
+        "variant answer": "\\frac{1}{r}"
     },
     {
         "id": "1967_A2",
-        "boxed answer": "e^(x + x^2/2)",
-        "variant answer": ""
+        "boxed answer": "e^{x + x^2/2}",
+        "variant answer": "e^{x - x^2/2}"
     },
     {
         "id": "1968_A4",
         "boxed answer": "n^2",
-        "variant answer": ""
+        "variant answer": "n^3"
     },
     {
         "id": "1968_A6",
         "boxed answer": "2x^3 + 2x^2 - 2",
-        "variant answer": ""
+        "variant answer": "2x^3 - 2x^2 + 2"
     },
     {
         "id": "1968_B1",
         "boxed answer": "P(x^\\circ = 70^\\circ) + P(y^\\circ = 70^\\circ) - P(\\max(x^\\circ, y^\\circ) = 70^\\circ)",
-        "variant answer": ""
+        "variant answer": "P(x^\\circ = 60^\\circ) + P(y^\\circ = 60^\\circ) - P(\\max(x^\\circ, y^\\circ) = 60^\\circ)"
     },
     {
         "id": "1968_B5",
-        "boxed answer": "p^2+p",
-        "variant answer": ""
+        "boxed answer": "p^2 + p",
+        "variant answer": "p^2 - p"
     },
     {
         "id": "1969_A2",
         "boxed answer": "(-1)^{n-1}(n-1)2^{n-2}",
-        "variant answer": ""
+        "variant answer": "(-1)^{n}(n+1)2^{n-2}"
     },
     {
         "id": "1969_A3",
         "boxed answer": "2\\pi m + (n-2)\\pi",
-        "variant answer": ""
+        "variant answer": "2\\pi m + (n+2)\\pi"
     },
     {
         "id": "1970_A5",
         "boxed answer": "b",
-        "variant answer": ""
+        "variant answer": "a"
     },
     {
         "id": "1970_A6",
         "boxed answer": "\\frac{1}{2} L_1^2 L_2 L_3 - \\frac{1}{6} L_1^3 (L_2 + L_3) + \\frac{1}{12} L_1^4",
-        "variant answer": ""
+        "variant answer": "\\frac{1}{2} L_1 L_2^2 L_3 - \\frac{1}{6} L_2^3 (L_1 + L_3) + \\frac{1}{12} L_2^4"
     },
     {
         "id": "1971_A3",
         "boxed answer": "2R",
-        "variant answer": ""
+        "variant answer": "R"
     },
     {
         "id": "1971_B2",
         "boxed answer": "\\frac{x^3 - x^2 - 1}{2x(x-1)}",
-        "variant answer": ""
+        "variant answer": "\\frac{x^3 + x^2 - 1}{2x(x+1)}"
     },
     {
         "id": "1971_B4",
         "boxed answer": "\\pi",
-        "variant answer": ""
+        "variant answer": "\\frac{\\pi}{2}"
     },
     {
         "id": "1971_B5",
         "boxed answer": "10R",
-        "variant answer": ""
+        "variant answer": "5R"
     },
     {
         "id": "1972_B2",
         "boxed answer": "\\frac{2s_0}{v_0}",
-        "variant answer": ""
+        "variant answer": "\\frac{s_0}{v_0}"
     },
     {
         "id": "1973_B3",
         "boxed answer": "(1, -1, p)",
-        "variant answer": ""
+        "variant answer": "(-1, 1, p)"
     },
     {
         "id": "1974_A3",
         "boxed answer": "p \\equiv 5 \\pmod{8}",
-        "variant answer": ""
+        "variant answer": "p \\equiv 3 \\pmod{8}"
     },
     {
         "id": "1974_A4",
         "boxed answer": "\\frac{n}{2^{n-1}}\\binom{n-1}{\\lfloor (n-1)/2 \\rfloor}",
-        "variant answer": ""
+        "variant answer": "\\frac{n}{2^{n}}\\binom{n}{\\lfloor n/2 \\rfloor}"
     },
     {
         "id": "1974_A5",
         "boxed answer": "y = 1/4",
-        "variant answer": ""
+        "variant answer": "y = 1/2"
     },
     {
         "id": "1975_A4",
         "boxed answer": "1 + \\theta^2 + \\theta^4 + \\cdots + \\theta^{2k}",
-        "variant answer": ""
+        "variant answer": "1 - \\theta^2 + \\theta^4 - \\cdots + (-1)^k \\theta^{2k}"
     },
     {
         "id": "1975_B3",
         "boxed answer": "\\frac{1}{k!}",
-        "variant answer": ""
+        "variant answer": "\\frac{1}{(k-1)!}"
     },
     {
         "id": "1975_B5",
         "boxed answer": "e^e",
-        "variant answer": ""
+        "variant answer": "e^{e^2}"
     },
     {
         "id": "1976_A4",
         "boxed answer": "(-r^2 - 3r - 1)/(r(r+1))",
-        "variant answer": ""
+        "variant answer": "(r^2 + 3r + 1)/(r(r+1))"
     },
     {
         "id": "1976_B1",
         "boxed answer": "\\ln 4 - 1",
-        "variant answer": ""
+        "variant answer": "\\ln 2 - 1"
     },
     {
         "id": "1976_B2",
         "boxed answer": "9 + A^2 + B + B^2 + B^3 + B^4 + B^5 + B^6",
-        "variant answer": ""
+        "variant answer": "9 + A^2 + B + B^2 + B^3 + B^4 + B^5"
     },
     {
         "id": "1977_A3",
         "boxed answer": "g(x+4) - f(x+7) + f(x+5) - f(x+3) + f(x+1)",
-        "variant answer": ""
+        "variant answer": "g(x+3) - f(x+6) + f(x+4) - f(x+2) + f(x)"
     },
     {
         "id": "1977_A4",
         "boxed answer": "\\frac{x}{1 - x}",
-        "variant answer": ""
+        "variant answer": "\\frac{x}{1 + x}"
     },
     {
         "id": "1977_B6",
         "boxed answer": "3h^2",
-        "variant answer": ""
+        "variant answer": "2h^2"
     },
     {
         "id": "1978_A6",
         "boxed answer": "2n^{3/2}",
-        "variant answer": ""
+        "variant answer": "n^{3/2}"
     },
     {
         "id": "1979_B2",
         "boxed answer": "e^{-1} (b^b / a^a)^{1/(b-a)}",
-        "variant answer": ""
+        "variant answer": "e (b^b / a^a)^{1/(b-a)}"
     },
     {
         "id": "1979_B3",
         "boxed answer": "(m - 1)/2",
-        "variant answer": ""
+        "variant answer": "(m + 1)/2"
     },
     {
         "id": "1979_B4",
         "boxed answer": "e^{3x} + 21",
-        "variant answer": ""
+        "variant answer": "e^{3x} - 21"
     },
     {
         "id": "1980_A1",
         "boxed answer": "x^2 + bx + c - (1/4)",
-        "variant answer": ""
+        "variant answer": "x^2 - bx + c - (1/4)"
     },
     {
         "id": "1980_A2",
         "boxed answer": "(1 + 4r + 6r^2)(1 + 4s + 6s^2)",
-        "variant answer": ""
+        "variant answer": "(1 - 4r + 6r^2)(1 - 4s + 6s^2)"
     },
     {
         "id": "1980_A6",
         "boxed answer": "1/e",
-        "variant answer": ""
+        "variant answer": "1/e^2"
     },
     {
         "id": "1981_A5",
         "boxed answer": "2n-1",
-        "variant answer": ""
+        "variant answer": "2n+1"
     },
     {
         "id": "1982_B2",
         "boxed answer": "\\pi (2g - 1)^2",
-        "variant answer": ""
+        "variant answer": "\\pi (2g + 1)^2"
     },
     {
         "id": "1984_A1",
         "boxed answer": "abc + 2(ab + ac + bc) + \\pi(a + b + c) + \\frac{4\\pi}{3}",
-        "variant answer": ""
+        "variant answer": "abc + (ab + ac + bc) + \\pi(a + b + c) + \\frac{4\\pi}{3}"
     },
     {
         "id": "1984_A3",
         "boxed answer": "n^2(a^2-b^2)",
-        "variant answer": ""
+        "variant answer": "n(a^2 - b^2)"
     },
     {
         "id": "1984_B1",
         "boxed answer": "2x+5",
-        "variant answer": ""
+        "variant answer": "2x-5"
     },
     {
         "id": "1984_B5",
         "boxed answer": "(-1)^m 2^{m(m-1)/2} m!",
-        "variant answer": ""
+        "variant answer": "(-1)^{m+1} 2^{m(m-1)/2} m!"
     },
     {
         "id": "1985_A3",
         "boxed answer": "e^d - 1",
-        "variant answer": ""
+        "variant answer": "e^{2d} - 1"
     },
     {
         "id": "1985_A6",
         "boxed answer": "6x^2 + 5x + 1",
-        "variant answer": ""
+        "variant answer": "6x^2 - 5x + 1"
     },
     {
         "id": "1986_A4",
         "boxed answer": "4^n + 2 \\cdot 3^n - 4 \\cdot 2^n + 1",
-        "variant answer": ""
+        "variant answer": "4^n - 2 \\cdot 3^n + 4 \\cdot 2^n - 1"
     },
     {
         "id": "1988_B5",
         "boxed answer": "2n",
-        "variant answer": ""
+        "variant answer": "n"
     },
     {
         "id": "1989_A2",
         "boxed answer": "\\frac{e^{a^2b^2} - 1}{ab}",
-        "variant answer": ""
+        "variant answer": "\\frac{e^{a^2b^2} + 1}{ab}"
     },
     {
         "id": "1989_B3",
         "boxed answer": "\\frac{n!}{3^n} \\cdot \\prod_{m=1}^n \\left( 1 - \\frac{1}{2^m} \\right) \\mu_0",
-        "variant answer": ""
+        "variant answer": "\\frac{n!}{2^n} \\cdot \\prod_{m=1}^n \\left( 1 - \\frac{1}{3^m} \\right) \\mu_0"
     },
     {
         "id": "1990_A1",
         "boxed answer": "n! + 2^n",
-        "variant answer": ""
+        "variant answer": "n! - 2^n"
     },
     {
         "id": "1990_B1",
         "boxed answer": "2\\sqrt{1990} e^x",
-        "variant answer": ""
+        "variant answer": "\\sqrt{1990} e^x"
     },
     {
         "id": "1991_B5",
         "boxed answer": "\\lfloor (p + 3)/4 \\rfloor",
-        "variant answer": ""
+        "variant answer": "\\lfloor (p - 3)/4 \\rfloor"
     },
     {
         "id": "1991_B6",
         "boxed answer": "|\\ln(a/b)|",
-        "variant answer": ""
+        "variant answer": "|\\ln(b/a)|"
     },
     {
         "id": "1992_A1",
         "boxed answer": "1 - n",
-        "variant answer": ""
+        "variant answer": "n - 1"
     },
     {
         "id": "1992_A3",
         "boxed answer": "(m + 1, 2^{m/2}, 2^{m/2})",
-        "variant answer": ""
+        "variant answer": "(m - 1, 2^{m/2}, 2^{m/2})"
     },
     {
         "id": "1992_A4",
         "boxed answer": "(-1)^{k/2}k!",
-        "variant answer": ""
+        "variant answer": "(-1)^{(k+1)/2}k!"
     },
     {
         "id": "1992_B1",
         "boxed answer": "2n - 3",
-        "variant answer": ""
+        "variant answer": "2n + 3"
     },
     {
         "id": "1992_B6",
         "boxed answer": "n^2",
-        "variant answer": ""
+        "variant answer": "n^3"
     },
     {
         "id": "1995_A2",
         "boxed answer": "k(k+1)",
-        "variant answer": ""
+        "variant answer": "k(k-1)"
     },
     {
         "id": "1995_B2",
         "boxed answer": "b^{2} = a^{2} + c^{2}",
-        "variant answer": ""
+        "variant answer": "b^{2} = a^{2} - c^{2}"
     },
     {
         "id": "1996_B3",
         "boxed answer": "\\frac{2n^3 + 3n^2 - 11n + 18}{6}",
-        "variant answer": ""
+        "variant answer": "\\frac{2n^3 - 3n^2 + 11n - 18}{6}"
     },
     {
         "id": "1996_B5",
         "boxed answer": "2^{\\lfloor (n+2)/2 \\rfloor} + 2^{\\lfloor (n+1)/2 \\rfloor} - 2",
-        "variant answer": ""
+        "variant answer": "2^{\\lfloor (n+2)/2 \\rfloor} - 2^{\\lfloor (n+1)/2 \\rfloor} + 2"
     },
     {
         "id": "1997_A6",
         "boxed answer": "\\binom{n-1}{k-1}",
-        "variant answer": ""
+        "variant answer": "\\binom{n}{k}"
     },
     {
         "id": "1997_B1",
         "boxed answer": "n",
-        "variant answer": ""
+        "variant answer": "n + 1"
     },
     {
         "id": "1998_A4",
         "boxed answer": "3m^2-2m",
-        "variant answer": ""
+        "variant answer": "3m^2 + 2m"
     },
     {
         "id": "1998_B2",
         "boxed answer": "\\sqrt{2a^2+2b^2}",
-        "variant answer": ""
+        "variant answer": "\\sqrt{a^2+b^2}"
     },
     {
         "id": "1999_A1",
         "boxed answer": "3x+2",
-        "variant answer": ""
+        "variant answer": "3x-2"
     },
     {
         "id": "1999_B5",
-        "boxed answer": "1-n^2/4",
-        "variant answer": ""
+        "boxed answer": "1 - n^2/4",
+        "variant answer": "1 + n^2/4"
     },
     {
         "id": "2000_A1",
         "boxed answer": "A^2",
-        "variant answer": ""
+        "variant answer": "A^3"
     },
     {
         "id": "2001_A2",
-        "boxed answer": "n/(2n+1)",
-        "variant answer": ""
+        "boxed answer": "\\frac{n}{2n+1}",
+        "variant answer": "\\frac{n}{2n-1}"
     },
     {
         "id": "2002_A1",
         "boxed answer": "(-k)^n n!",
-        "variant answer": ""
+        "variant answer": "k^n n!"
     },
     {
         "id": "2003_A1",
         "boxed answer": "n",
-        "variant answer": ""
+        "variant answer": "n - 1"
     },
     {
         "id": "2004_B4",
         "boxed answer": "(x+n,y)",
-        "variant answer": ""
+        "variant answer": "(x-n,y)"
     },
     {
         "id": "2005_A2",
         "boxed answer": "2^{n-2}",
-        "variant answer": ""
+        "variant answer": "2^{n-1}"
     },
     {
         "id": "2005_A6",
         "boxed answer": "n(n-2) 2^{-n+1}",
-        "variant answer": ""
+        "variant answer": "n(n+2) 2^{-n+1}"
     },
     {
         "id": "2005_B1",
         "boxed answer": "(y-2x)(y-2x-1)",
-        "variant answer": ""
+        "variant answer": "(y+2x)(y+2x+1)"
     },
     {
         "id": "2005_B3",
         "boxed answer": "15x^3",
-        "variant answer": ""
+        "variant answer": "10x^3"
     },
     {
         "id": "2006_A4",
         "boxed answer": "\\frac{n+1}{3}",
-        "variant answer": ""
+        "variant answer": "\\frac{n-1}{3}"
     },
     {
         "id": "2006_A5",
         "boxed answer": "-n",
-        "variant answer": ""
+        "variant answer": "n"
     },
     {
         "id": "2006_B3",
         "boxed answer": "\\binom{n}{2} + 1",
-        "variant answer": ""
+        "variant answer": "\\binom{n}{2} - 1"
     },
     {
         "id": "2006_B4",
         "boxed answer": "2^k",
-        "variant answer": ""
+        "variant answer": "2^{k+1}"
     },
     {
         "id": "2006_B6",
         "boxed answer": "\\left(\\frac{k+1}{k} \\right)^k",
-        "variant answer": ""
+        "variant answer": "\\left(\\frac{k}{k+1} \\right)^k"
     },
     {
         "id": "2007_A3",
         "boxed answer": "\\frac{k!(k+1)!}{(3k+1)(2k)!}",
-        "variant answer": ""
+        "variant answer": "\\frac{k!(k+1)!}{(3k-1)(2k)!}"
     },
     {
         "id": "2007_A4",
         "boxed answer": "10n+1",
-        "variant answer": ""
+        "variant answer": "10n-1"
     },
     {
         "id": "2007_B4",
         "boxed answer": "2^{n+1}",
-        "variant answer": ""
+        "variant answer": "2^{n}"
     },
     {
         "id": "2009_A2",
         "boxed answer": "2^{-1/12} \\left(\\frac{\\sin(6x+\\pi/4)}{\\cos^2(6x+\\pi/4)}\\right)^{1/6}",
-        "variant answer": ""
+        "variant answer": "2^{-1/12} \\left(\\frac{\\cos(6x+\\pi/4)}{\\sin^2(6x+\\pi/4)}\\right)^{1/6}"
     },
     {
         "id": "2010_A1",
         "boxed answer": "\\lceil \\frac{n}{2} \\rceil",
-        "variant answer": ""
+        "variant answer": "\\lfloor \\frac{n}{2} \\rfloor"
     },
     {
         "id": "2010_A2",
         "boxed answer": "x",
-        "variant answer": ""
+        "variant answer": "x^2"
     },
     {
         "id": "2010_B4",
         "boxed answer": "2x+1",
-        "variant answer": ""
+        "variant answer": "2x-1"
     },
     {
         "id": "2011_A4",
         "boxed answer": "k^2",
-        "variant answer": ""
+        "variant answer": "k^3"
     },
     {
         "id": "2012_A3",
         "boxed answer": "\\sqrt{1-x^2}",
-        "variant answer": ""
+        "variant answer": "\\sqrt{1+x^2}"
     },
     {
         "id": "2013_B6",
-        "boxed answer": "(n+1)/2",
-        "variant answer": ""
+        "boxed answer": "\\frac{n+1}{2}",
+        "variant answer": "\\frac{n-1}{2}"
     },
     {
         "id": "2014_A2",
         "boxed answer": "\\frac{(-1)^{n-1}}{(n-1)!n!}",
-        "variant answer": ""
+        "variant answer": "\\frac{(-1)^{n}}{(n+1)!n!}"
     },
     {
         "id": "2014_A6",
         "boxed answer": "n^n",
-        "variant answer": ""
+        "variant answer": "n^{n-1}"
     },
     {
         "id": "2016_A4",
         "boxed answer": "mn",
-        "variant answer": ""
+        "variant answer": "m + n"
     },
     {
         "id": "2016_B4",
         "boxed answer": "\\frac{(2n)!}{4^n n!}",
-        "variant answer": ""
+        "variant answer": "\\frac{(2n)!}{2^n n!}"
     },
     {
         "id": "2016_B5",
         "boxed answer": "x^c",
-        "variant answer": ""
+        "variant answer": "x^{c+1}"
     },
     {
         "id": "2017_A1",
-        "boxed answer": "\\frac{5k^2-5k+2}{2}",
-        "variant answer": ""
+        "boxed answer": "\\frac{5k^2 - 5k + 2}{2}",
+        "variant answer": "\\frac{5k^2 + 5k + 2}{2}"
     },
     {
         "id": "2019_B6",
-        "boxed answer": "k(k+1)/2",
-        "variant answer": ""
+        "boxed answer": "\\frac{k(k+1)}{2}",
+        "variant answer": "\\frac{k(k-1)}{2}"
     },
     {
         "id": "2020_A2",
         "boxed answer": "4^k",
-        "variant answer": ""
+        "variant answer": "2^k"
     },
     {
         "id": "2020_A5",
-        "boxed answer": "F_{4040}-1",
-        "variant answer": ""
+        "boxed answer": "F_{4040} - 1",
+        "variant answer": "F_{4040} + 1"
     },
     {
         "id": "2020_B3",
-        "boxed answer": "1-\\log(\\delta)",
-        "variant answer": ""
+        "boxed answer": "1 - \\log(\\delta)",
+        "variant answer": "1 + \\log(\\delta)"
     },
     {
         "id": "2022_A1",
         "boxed answer": "2 \\ln\\left(2 - \\frac{2}{a}\\right) - 2",
-        "variant answer": ""
+        "variant answer": "2 \\ln\\left(2 + \\frac{2}{a}\\right) - 2"
     },
     {
         "id": "2022_A2",
-        "boxed answer": "2n-2",
-        "variant answer": ""
+        "boxed answer": "2n - 2",
+        "variant answer": "2n + 2"
     },
     {
         "id": "2022_A6",
         "boxed answer": "n",
-        "variant answer": ""
+        "variant answer": "n + 1"
     },
     {
         "id": "2022_B1",
-        "boxed answer": "k(k-1)a_1^{k-2}a_2",
-        "variant answer": ""
+        "boxed answer": "k(k - 1)a_1^{k - 2}a_2",
+        "variant answer": "k(k + 1)a_1^{k - 2}a_2"
     },
     {
         "id": "2022_B4",
-        "boxed answer": "\\frac{3k(k+5)}{2}",
-        "variant answer": ""
+        "boxed answer": "\\frac{3k(k + 5)}{2}",
+        "variant answer": "\\frac{3k(k - 5)}{2}"
     },
     {
         "id": "2023_A2",
-        "boxed answer": "\\pm 1/n!",
-        "variant answer": ""
+        "boxed answer": "\\pm \\frac{1}{n!}",
+        "variant answer": "\\pm \\frac{1}{(n - 1)!}"
     },
     {
         "id": "2023_A6",
-        "boxed answer": "n(n+1)/2",
-        "variant answer": ""
+        "boxed answer": "\\frac{n(n + 1)}{2}",
+        "variant answer": "\\frac{n(n - 1)}{2}"
     },
     {
         "id": "2023_B1",
-        "boxed answer": "\\binom{m+n-2}{m-1}",
-        "variant answer": ""
+        "boxed answer": "\\binom{m + n - 2}{m - 1}",
+        "variant answer": "\\binom{m + n - 2}{n - 1}"
     },
     {
         "id": "2023_B3",
-        "boxed answer": "\\frac{2n+2}{3}",
-        "variant answer": ""
+        "boxed answer": "\\frac{2n + 2}{3}",
+        "variant answer": "\\frac{2n - 2}{3}"
     },
     {
         "id": "2023_B5",
-        "boxed answer": "2k^2-4k+3",
-        "variant answer": ""
+        "boxed answer": "2k^2 - 4k + 3",
+        "variant answer": "2k^2 + 4k + 3"
     },
     {
         "id": "2023_B6",
-        "boxed answer": "(-1)^{\\lceil n/2 \\rceil-1} 2 \\lceil \\frac{n}{2} \\rceil",
-        "variant answer": ""
+        "boxed answer": "(-1)^{\\lceil n/2 \\rceil - 1} 2 \\left\\lceil \\frac{n}{2} \\right\\rceil",
+        "variant answer": "(-1)^{\\lceil n/2 \\rceil} 2 \\left\\lceil \\frac{n}{2} \\right\\rceil"
     }
 ]
