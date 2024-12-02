@@ -2,142 +2,132 @@
     {
         "id": "1938_1",
         "boxed answer": "\\frac{1}{6}h(B_1 + B_2 + 4M)",
-        "variant answer": ""
+        "variant answer": "(B_1 + B_2 + M)"
     },
     {
         "id": "1938_8_i",
         "boxed answer": "d^3",
-        "variant answer": ""
+        "variant answer": "d^2"
     },
     {
         "id": "1938_9",
         "boxed answer": "[(-\\infty, y^2/y' + 1), (y^2/y' + 1, \\infty)]",
-        "variant answer": ""
+        "variant answer": "\\infty, y^2"
     },
     {
         "id": "1938_11",
         "boxed answer": "3\\sqrt{3} |m|",
-        "variant answer": ""
+        "variant answer": "m"
     },
     {
         "id": "1938_12",
         "boxed answer": "r^2 = 2a^2 \\sin 2\\theta",
-        "variant answer": ""
+        "variant answer": "\\sin \\theta"
     },
     {
         "id": "1938_13",
         "boxed answer": "hm",
-        "variant answer": ""
+        "variant answer": "m"
     },
     {
         "id": "1939_3",
         "boxed answer": "x^3 + (a^3 - 3ab + 3c)x^2 + (b^3 - 3abc + 3c^2)x + c^3 = 0",
-        "variant answer": ""
+        "variant answer": "x^3 + b^3x^2 + c^3"
     },
     {
         "id": "1939_4",
         "boxed answer": "2 - z",
-        "variant answer": ""
+        "variant answer": "z"
     },
     {
         "id": "1939_5",
         "boxed answer": "\\sqrt{\\frac{a}{g}} \\log (1 + \\sqrt{2})",
-        "variant answer": ""
+        "variant answer": "\\frac{a}{g}"
     },
     {
         "id": "1939_6_i",
         "boxed answer": "2\\pi a^2",
-        "variant answer": ""
+        "variant answer": "a"
     },
     {
         "id": "1939_6_ii",
         "boxed answer": "\\frac{V}{g} \\sqrt{V^2 - 2gh}",
-        "variant answer": ""
+        "variant answer": "\\frac{V}{g}"
     },
     {
         "id": "1939_7_i",
         "boxed answer": "4y = 3x^2",
-        "variant answer": ""
+        "variant answer": "x^2"
     },
     {
         "id": "1939_10",
         "boxed answer": "\\frac{1 - 3x + 18x^2}{(1 - 3x)^3} - 19/27",
-        "variant answer": ""
+        "variant answer": "18x^2"
     },
     {
         "id": "1939_11",
         "boxed answer": "2x - y = \\frac{6}{5}",
-        "variant answer": ""
+        "variant answer": "x - y"
     },
     {
         "id": "1939_12_i",
         "boxed answer": "[a^2]f(a) - \\{f(1) + f(\\sqrt{2}) + \\dots + f(\\sqrt{[a^2]})\\}",
-        "variant answer": ""
+        "variant answer": "f(a) - f(1) "
     },
     {
         "id": "1939_13_ii",
         "boxed answer": "\\frac{Gm^2}{2a^2b} (\\sqrt{4a^2 + b^2} - b)",
-        "variant answer": ""
-    },
-    {
-        "id": "1939_14_i",
-        "boxed answer": "1",
-        "variant answer": ""
+        "variant answer": "Gm^2/a^2"
     },
     {
         "id": "1940_3",
         "boxed answer": "cAe^{Ax}",
-        "variant answer": ""
+        "variant answer": "Ae"
     },
     {
         "id": "1940_4",
         "boxed answer": "(x^2 + y^2)x + 2py^2 = 0",
-        "variant answer": ""
+        "variant answer": "x^2 + y^2"
     },
     {
         "id": "1940_9",
         "boxed answer": "\\sin \\alpha \\log (\\sec \\alpha + \\tan \\alpha) = 1",
-        "variant answer": ""
+        "variant answer": "\\sin \\alpha"
     },
     {
         "id": "1940_10_i",
         "boxed answer": "8r^2 \\int_0^1 \\frac{1-v^2}{\\sqrt{(1-v^2)(1-m^2v^2)}} \\, dv",
-        "variant answer": ""
+        "variant answer": "r^2 \\int_0^1"
     },
     {
         "id": "1940_10_ii",
         "boxed answer": "8[R^2E - (R^2 - r^2)K]",
-        "variant answer": ""
+        "variant answer": "R^2"
     },
     {
         "id": "1940_12",
         "boxed answer": "x^2 + y^2 + z^2 = \\frac{1}{a} + \\frac{1}{b} + \\frac{1}{c}",
-        "variant answer": ""
+        "variant answer": "\\frac{1}{a}"
     },
     {
         "id": "1940_14",
         "boxed answer": "k + a_1^2 + a_2^2 + \\cdots + a_n^2",
-        "variant answer": ""
+        "variant answer": "a_1^2 + a_2^2"
     },
     {
         "id": "1941_2",
         "boxed answer": "\\frac{n^n - 1}{n - 1} e^{nx} + e^x",
-        "variant answer": ""
+        "variant answer": "n^n"
     },
     {
         "id": "1941_4",
-        "boxed answer": "f(x) = (x - b)^2(x - c) \\text{ or } f(x) = (x - a)(x - b)^2",
-        "variant answer": ""
+        "boxed answer": "(x - b)^2(2x - a - c)",
+        "variant answer": "(x - b)"
     },
     {
         "id": "1941_7_ii",
         "boxed answer": "b\\sqrt{8} \\geq a\\sqrt{5}",
-        "variant answer": ""
-    },
-    {
-        "id": "1941_9",
-        "boxed answer": "(\\log(1 + \\sqrt{2}, 1, \\infty)",
-        "variant answer": ""
+        "variant answer": "b \\geq"
     },
     {
         "id": "1941_10",
