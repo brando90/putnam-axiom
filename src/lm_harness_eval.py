@@ -57,20 +57,20 @@ class MyLM(LM):
 model_list = [
             # 'mistralai/Codestral-22B-v0.1'
             # 'meta-llama/Llama-3.1-70B'
-            "meta-llama/Meta-Llama-3.1-8B", 
-             "meta-llama/Meta-Llama-3.1-8B-Instruct", 
-              "mistralai/Mistral-7B-v0.1", 
-              "mistralai/Mistral-7B-Instruct-v0.1",
-              "google/gemma-7b",
-            #   "google/gemma-2b",
-            #   "google/gemma-7b-it",
-            #   "google/gemma-2b-it",
-            #   "deepseek-ai/deepseek-math-7b-base",
-            #   "deepseek-ai/deepseek-math-7b-rl",
-            #   "deepseek-ai/deepseek-math-7b-instruct",
-            #   "AI-MO/NuminaMath-7B-TIR",
-            #   "Qwen/Qwen2-Math-7B",
-            #   "Qwen/Qwen2-Math-7B-Instruct"
+            # "meta-llama/Meta-Llama-3.1-8B", 
+            #  "meta-llama/Meta-Llama-3.1-8B-Instruct", 
+            #   "mistralai/Mistral-7B-v0.1", 
+            #   "mistralai/Mistral-7B-Instruct-v0.1",
+            #   "google/gemma-7b",
+              "google/gemma-2b",
+              "google/gemma-7b-it",
+              "google/gemma-2b-it",
+              "deepseek-ai/deepseek-math-7b-base",
+              "deepseek-ai/deepseek-math-7b-rl",
+              "deepseek-ai/deepseek-math-7b-instruct",
+              "AI-MO/NuminaMath-7B-TIR",
+              "Qwen/Qwen2-Math-7B",
+              "Qwen/Qwen2-Math-7B-Instruct"
 ]
 
 # os.environ["CUDA_VISIBLE_DEVICES"] = 0,2,3,4

@@ -17,7 +17,7 @@ def load_generators(original_data_dir: Path):
     for i in range(len(data)):
         
         year_id = data[i]['id']
-        year, _ = year_id.split('_')
+        year = year_id.split('_')[0]
 
         ORIGINAL_DATASET[year_id] = data[i]
         if year in years:
@@ -141,11 +141,11 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Generate variations of problems.')
     parser.add_argument('--num_variations', type=int, default=5, help='Number of variations to generate.')
 
-    parser.add_argument('--save_dir', type=str, default='putnam-axiom/data/Putnam-AXIOM_Variations',
+    parser.add_argument('--save_dir', type=str, default='putnam-axiom/data/Putnam-AXIOM_Variations_v3',
                         help='Directory to save variations.')
-    parser.add_argument('--save_orig_dir', type=str, default='putnam-axiom/data/Putnam-AXIOM_Variations',
+    parser.add_argument('--save_orig_dir', type=str, default='putnam-axiom/data/Putnam-AXIOM_Variations_v3',
                         help='Directory to save original version of variations.')
-    parser.add_argument('--original_data_dir', type=str, default='putnam-axiom/data/Putnam_AXIOM_Original.json',
+    parser.add_argument('--original_data_dir', type=str, default='putnam-axiom/data/Putnam_AXIOM_Original_v3.json',
                         help='Original data directory. i.e. directory containing original Putnam problems.')
 
     parser.add_argument('--seed', type=int, default=42, help='Random seed.')
