@@ -146,13 +146,18 @@ python ~/putnam-axiom/src/eval_logic_contamination.py --task ${task} --mode ${mo
 conda activate putnam_axiom
 
 # export pretrained_model_name_or_path='google/gemma-2-2b'
-# export pretrained_model_name_or_path='google/gemma-2-2b'
-
-export pretrained_model_name_or_path='meta-llama/Llama-3.1-8B'
-export max_seq_length=500
+export pretrained_model_name_or_path='google/gemma-2-2b-it'
+export max_seq_length=512
 export batch_size=2
 export gradient_accumulation_steps=4
 export num_train_epochs=30
+
+# export pretrained_model_name_or_path='meta-llama/Llama-3.1-8B'
+# export pretrained_model_name_or_path='meta-llama/Llama-3.1-8B-Instruct'
+# export max_seq_length=500
+# export batch_size=2
+# export gradient_accumulation_steps=4
+# export num_train_epochs=30
 
 # export ds_name_or_path='brando/hendrycks_math'
 # export train_split='train'
@@ -164,7 +169,7 @@ export val_split='func_variations_265_11_23_2024'
 
 export mode="online"
 # export mode="dryrun"
-export CUDA_VISIBLE_DEVICES=3
+export CUDA_VISIBLE_DEVICES=5
 python ~/putnam-axiom/src/train/sft_simple.py --mode ${mode} --num_train_epochs ${num_train_epochs} --ds_name_or_path ${ds_name_or_path} --train_split ${train_split} --val_split ${val_split} --max_seq_length ${max_seq_length} --gradient_accumulation_steps ${gradient_accumulation_steps} --batch_size ${batch_size}
 
 ```

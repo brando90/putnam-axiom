@@ -13,7 +13,12 @@ import sys
 from train.data import load_math_style_dataset
 import train.models
 
+from train.utils import seed_everything
+
 def main(**config):
+    # -- Seed everything
+    seed_everything(seed=config.get('seed', 0))
+    
     # -- HF login
     from huggingface_hub import login
     token = open(os.path.expanduser("~/keys/master_hf_token.txt")).read().strip()
@@ -27,8 +32,8 @@ def main(**config):
     ds_name_or_path = config.get('ds_name_or_path', 'Putnam-AXIOM/putnam-axiom-dataset')
     train_split, val_split = config.get('train_split', 'func_original_53_10_30_2024'), config.get('val_split', 'func_variations_265_11_23_2024')
     print(f'\n---> {ds_name_or_path=} {train_split=} {val_split=}\n')
-    train_dataset = load_math_style_dataset(ds_name_or_path, tok, config.get('max_seq_length', 700), end=53, split=train_split)
-    eval_dataset = load_math_style_dataset(ds_name_or_path, tok, config.get('max_seq_length', 700), end=265, split=val_split)
+    train_dataset = load_math_style_dataset(ds_name_or_path, tok, config.get('max_seq_length', 500), end=53, split=train_split)
+    eval_dataset = load_math_style_dataset(ds_name_or_path, tok, config.get('max_seq_length', 500), end=265, split=val_split)
     print(f'{len(train_dataset)=}\n{len(eval_dataset)=}')
     wandb.config.update({'dataset': f'{ds_name_or_path} ({train_split=} {val_split=})'})
 
@@ -74,21 +79,22 @@ def main(**config):
     # Calculate Total Steps
     steps_per_epoch = (len(train_dataset) // training_args.per_device_train_batch_size) // training_args.gradient_accumulation_steps
     total_steps = steps_per_epoch * training_args.num_train_epochs
-    # warmup_steps = int(0.01 * total_steps)  # Warm-up for 1% of total steps
-    warmup_steps = 0
-    print(f'{steps_per_epoch=} {total_steps=} {warmup_steps=}')
+    print(f'{steps_per_epoch=}')
 
     # Optimizer and Scheduler
-    optimizer_grouped_parameters = [{'params': [p for p in model.parameters()], 'weight_decay': 8e-6}]
+    optimizer_grouped_parameters = [{'params': [p for p in model.parameters()], 'weight_decay': 8e-4}]
     optimizer = torch.optim.AdamW(optimizer_grouped_parameters, lr=config.get('learning_rate', 1e-6))
 
     # Add Cosine Learning Rate Scheduler
-    # min_lr = config.get('min_lr', 1e-6)  # Sensible minimum LR
+    # warmup_steps = int(0.01 * total_steps)  # Warm-up for 1% of total steps
+    warmup_steps = 0
     scheduler = get_cosine_schedule_with_warmup(
         optimizer=optimizer,
         num_warmup_steps=warmup_steps,
         num_training_steps=total_steps,
     )
+    scheduler = None
+    print(f'{total_steps=} {warmup_steps=}')
     trainer = SFTTrainer(
         model=model,
         tokenizer=tok,
@@ -96,7 +102,6 @@ def main(**config):
         eval_dataset=eval_dataset,
         args=training_args,
         optimizers=(optimizer, scheduler),
-        # callbacks=[PushToHubCallback(repo_id="Putnam-AXIOM", private_repo=True)],
     )
     print(f"\nStarting fine-tuning...")
     trainer.train()

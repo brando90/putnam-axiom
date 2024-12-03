@@ -10,10 +10,14 @@ import fire
 import wandb
 import sys
 
+from train.utils import seed_everything
 from train.data import load_math_style_dataset
 import train.models
 
 def main(**config):
+    # -- Seed everything
+    seed_everything(seed=config.get('seed', 0))
+
     # -- HF login
     from huggingface_hub import login
     token = open(os.path.expanduser("~/keys/master_hf_token.txt")).read().strip()
@@ -27,8 +31,8 @@ def main(**config):
     ds_name_or_path = config.get('ds_name_or_path', 'Putnam-AXIOM/putnam-axiom-dataset')
     train_split, val_split = config.get('train_split', 'func_original_53_10_30_2024'), config.get('val_split', 'func_variations_265_11_23_2024')
     print(f'\n---> {ds_name_or_path=} {train_split=} {val_split=}\n')
-    train_dataset = load_math_style_dataset(ds_name_or_path, tok, config.get('max_seq_length', 700), end=53, split=train_split)
-    eval_dataset = load_math_style_dataset(ds_name_or_path, tok, config.get('max_seq_length', 700), end=265, split=val_split)
+    train_dataset = load_math_style_dataset(ds_name_or_path, tok, config.get('max_seq_length', 500), end=53, split=train_split)
+    eval_dataset = load_math_style_dataset(ds_name_or_path, tok, config.get('max_seq_length', 500), end=265, split=val_split)
     print(f'{len(train_dataset)=}\n{len(eval_dataset)=}')
     wandb.config.update({'dataset': f'{ds_name_or_path} ({train_split=} {val_split=})'})
 
@@ -73,13 +77,13 @@ def main(**config):
         # -- optim
         optim=config.get('optim', 'adamw_torch'),
         learning_rate=config.get('learning_rate', 8e-6),
-        weight_decay=config.get('weight_decay', 0),
+        weight_decay=config.get('weight_decay', 1e-4),
         # -- scheduler
         lr_scheduler_type=config.get('lr_scheduler_type', 'cosine'),
         warmup_ratio=config.get('warmup_ratio', 0.01), # 1%
         # -- seed
-        seed=config.get('seed', 42),
-        data_seed=config.get('data_seed', 42),
+        seed=config.get('seed', 0),
+        data_seed=config.get('data_seed', 0),
     )
     trainer = SFTTrainer(
         model=model,
