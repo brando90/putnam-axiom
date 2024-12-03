@@ -35,6 +35,35 @@ def save_dataset_to_file(file_path):
         json.dump(dataset, json_file, indent=4)
     print(f"Dataset written to {file_path}.")
 
+@variation(
+    year='1966', id='A2', 
+    generators = {
+        'a' : generators.RandomVariable('lower'),
+        'b' : generators.RandomVariable('lower'),
+        'c' : generators.RandomVariable('lower'),
+        'p' : generators.RandomVariable('lower')
+    },
+    original_params={
+        'a' : 'a',
+        'b' : 'b',
+        'c' : 'c',
+        'p' : 'p'
+})
+def putnam_1966a2(
+        a : str = 'a',
+        b : str = 'b',
+        c : str = 'c',
+        p : str = 'p'
+    ) -> dict:
+
+    functional_q : str = f'Let ${a}, {b}, {c}$ be the lengths of the sides of a triangle, let ${p} = \\frac{{{a}+{b}+{c}}}{{2}}$, and $r$ be the radius of the inscribed circle. Find the upper bound of [\n\\frac{{1}}{{({p}-{a})^2}} + \\frac{{1}}{{({p}-{b})^2}} + \\frac{{1}}{{({p}-{c})^2}}\n\\] in terms of the radius.'
+    functional_ans : str = f'The area of the given triangle can be calculated in two ways, $A = {p}r$ and $A = \\sqrt{{{p}({p}-{a})({p}-{b})({p}-{c})}}$. Squaring and equating we get \n\\[\n{p}^2{r}^2 = {p}({p}-{a})({p}-{b})({p}-{c}).\n\\]\nSetting $x = 1/({p}-{a})$, $y = 1/({p}-{b})$, $z = 1/({p}-{c})$, we can write this equation in the form\n\\[\n\\frac{{1}}{{r^2}} = {p}xyz = xyz \\left(\\frac{{1}}{{x}} + \\frac{{1}}{{y}} + \\frac{{1}}{{z}}\\right).\n\\]\nThus we need only show that $yz + xz + xy \\leq x^2 + y^2 + z^2$. However, this follows from the trivial inequalities $y^2 + z^2 \\geq 2yz$, $x^2 + z^2 \\geq 2xz$, $x^2 + y^2 \\geq 2xy$. Thus the lowerbound is \\boxed{{\\frac{{1}}{{r^2}}}}'
+    
+    return {
+        'problem' : functional_q,
+        'solution' : functional_ans,
+        'type' : "variable"
+    }
 
 @variation(
     year='1966', id='B1', 
@@ -46,7 +75,7 @@ def save_dataset_to_file(file_path):
         'x' : 1,
         'P' : 'P'
 })
-def putnam_1965b1(
+def putnam_1966b1(
         x : 1,
         P: str = 'P'
     ) -> dict:

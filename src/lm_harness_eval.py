@@ -41,22 +41,27 @@ class MyLM(LM):
         results = []
         context = []
         for request in requests:
-            context = request.args[0]
-            params = SamplingParams(temperature=0.9, top_p=0.95, max_tokens=2048, stop='Problem:\n')
-            ret = self.model.generate(context, params)
-            results.append(ret[0].outputs[0].text)
+            context.append(request.args[0])
         
-        print(results)
+        params = SamplingParams(temperature=0.9, top_p=0.95, max_tokens=2048, stop='Problem:\n')
+        results = self.model.generate(context, params)
+        # for request in requests:
+        #     response = client.chat.completions.create(
+        #         model = 'gpt-4o',
+        #         messages = [{"role": "user", "content": request.args[0]}],
+        #         max_tokens = 2048
+        #     )
+        #     results.append(response.choices[0].message.content)
         return results
 
 model_list = [
             # 'mistralai/Codestral-22B-v0.1'
-            'meta-llama/Llama-3.1-70B'
-            #   "meta-llama/Meta-Llama-3-8B", 
-            #   "meta-llama/Meta-Llama-3-8B-Instruct", 
-            #   "mistralai/Mistral-7B-v0.3", 
-            #   "mistralai/Mistral-7B-Instruct-v0.3",
-            #   "google/gemma-7b",
+            # 'meta-llama/Llama-3.1-70B'
+            "meta-llama/Meta-Llama-3.1-8B", 
+             "meta-llama/Meta-Llama-3.1-8B-Instruct", 
+              "mistralai/Mistral-7B-v0.1", 
+              "mistralai/Mistral-7B-Instruct-v0.1",
+              "google/gemma-7b",
             #   "google/gemma-2b",
             #   "google/gemma-7b-it",
             #   "google/gemma-2b-it",
@@ -78,8 +83,8 @@ for model_name in model_list:
     print("=" * 100)
 
     model = LLM(model_name, 
-                tensor_parallel_size = 4,
-                pipeline_parallel_size = 1,
+                # tensor_parallel_size = 2,
+                # pipeline_parallel_size = 1,
                 trust_remote_code=True)
     lm_obj = MyLM(model=model)
     task_manager = lm_eval.tasks.TaskManager()
