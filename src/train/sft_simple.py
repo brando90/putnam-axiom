@@ -32,32 +32,40 @@ def main(**config):
     print(f'{len(train_dataset)=}\n{len(eval_dataset)=}')
     wandb.config.update({'dataset': f'{ds_name_or_path} ({train_split=} {val_split=})'})
 
+    # -- Prepare output directory
+    today: str = datetime.now().strftime('%Y_m%m_d%d_t%Hh_%Mm_%Ss')
+    output_dir: str = os.path.expanduser(f"~/data/runs_logic_cont/run_{config.get('today', today)}")
+    print(f'{output_dir=}')
+    
+    # Save the initial model and tokenizer as checkpoint-0
+    initial_checkpoint_dir = os.path.join(output_dir, "checkpoint-0")
+    os.makedirs(initial_checkpoint_dir, exist_ok=True)
+    print(f"Saving initial checkpoint and tokenizer at {initial_checkpoint_dir}")
+    model.save_pretrained(initial_checkpoint_dir)
+    tok.save_pretrained(initial_checkpoint_dir)
+
     # -- Train model
     # max_steps = 50  # Limit fine-tuning to a few steps
     # os.environ['CUDA_VISIBLE_DEVICES'] = str(random.randint(0, 7))
     # config = {'max_steps': 2, 'eval_steps': 1, 'logging_steps': 1, 
     #           'save_strategy': 'steps', 'save_steps': 1, 'eval_strategy': 'steps'}
     # config = config | {'CUDA_VISIBLE_DEVICES': os.environ.get('CUDA_VISIBLE_DEVICES', 'maybe 0')}
-
-    today: str = datetime.now().strftime('%Y_m%m_d%d_t%Hh_%Mm_%Ss')
-    output_dir: str = os.path.expanduser(f"~/data/runs_logic_cont/run_{config.get('today', today)}")
-    print(f'{output_dir=}')
     training_args = SFTConfig(
         max_steps=config.get('max_steps', -1),
         # --
+        output_dir=output_dir,
         bf16=torch.cuda.is_bf16_supported(),
         fp16=not torch.cuda.is_bf16_supported(),
         # -- logging opts
-        save_steps=config.get('save_steps', -1), # Num of updates steps before two checkpoint saves if `save_strategy="steps"`
-        save_strategy=config.get('save_strategy', 'epoch'),
-        eval_on_start=config.get('on_start', True),
-        evaluation_strategy=config.get('eval_strategy', 'epoch'), 
+        save_steps=config.get('save_steps', 5), 
+        save_strategy=config.get('save_strategy', 'steps'),
+        eval_on_start=config.get('eval_on_start', True),
+        evaluation_strategy=config.get('eval_strategy', 'steps'), 
         eval_steps=config.get('eval_steps', 5), 
         logging_first_step=config.get('logging_first_step', True), # Default to False, unsure 100% what this does but looks like a good idea
-        logging_strategy=config.get('logging_strategy', 'epoch'),
+        logging_strategy=config.get('logging_strategy', 'steps'),
         logging_steps=config.get('logging_steps', 5),
         # --
-        output_dir=output_dir,
         num_train_epochs=config.get('num_train_epochs', 10),
         max_seq_length=config.get('max_seq_length', 500),
         per_device_train_batch_size=config.get('batch_size', 2),

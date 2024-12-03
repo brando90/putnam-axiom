@@ -44,26 +44,27 @@ class MyLM(LM):
             results.append(logprob)
         return results
 
-    def _generate_until(self, requests: List) -> List[str]:
-        results = []
-        context = []
-        for request in requests:
-            context = request.args[0]
-            params = SamplingParams(temperature=0.9, top_p=0.95, max_tokens=2048, stop='Problem:\n')
-            ret = self.model.generate(context, params)
-            results.append(ret[0].outputs[0].text)
-        return results
-
     def generate_until(self, requests: List) -> List[str]:
+        print(f'--- {self.generate_until=}')
         # params = SamplingParams(temperature=0.9, top_p=0.95, max_tokens=2048, stop='Problem:\n')
-        print(f'{STOP_TOKENS=}')
-        params = SamplingParams(temperature=0.9, top_p=0.95, max_tokens=2048, stop=STOP_TOKENS)
+        # params = SamplingParams(temperature=0.9, top_p=0.95, max_tokens=2048, stop=STOP_TOKENS)
+        # params = SamplingParams(temperature=0.9, top_p=0.95, max_tokens=512, stop=STOP_TOKENS)
+        params = SamplingParams(temperature=0, top_p=1, max_tokens=512, stop=STOP_TOKENS)
         prompts: List[str] = [request.args[0] for request in requests]
         outputs: list = self.model.generate(prompts, params)
         results: list[str] = [output.outputs[0].text for output in outputs]
+        # print prompt result, what is going on during eval?
+        assert len(prompts) == len(results), f'Fatal error: {wandb.run.alert(title="error during eval", text="len(prompts) != len(results)")}'
+        for prompt, result in zip(prompts, results):
+            print('--' * 40 + 'start of problem --> model response')
+            print(f'{"--"*20}\nPrompt:\n{prompt}\n')
+            print(f'{"--"*20}\nResult:\n{result}\n')
+        print(f'--- {self.generate_until=}')
         return results
 
 def main(**kwargs):
+    print(f'{"__"*32} Start of eval main: {main=}')
+    print(f'{STOP_TOKENS=}')
     # task = kwargs.get('task', 'putnam_axiom_original')
     task = kwargs.get('task', 'putnam_axiom_variations')
     # task = kwargs.get('task', 'putnam_axiom_53')
@@ -107,6 +108,7 @@ def main(**kwargs):
         print(f"{'=' * 100}running {model_name} {task=}{'=' * 100}")
 
         model = LLM(model_name, trust_remote_code=True)
+        print(f'{model=}')
         lm_obj = MyLM(model=model)
         task_manager = tasks.TaskManager()
 

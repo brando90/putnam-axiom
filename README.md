@@ -111,9 +111,10 @@ To run the evaluation on the 53 original problems used to create the functional 
 ```bash
 
 conda activate putnam_axiom
-export CUDA_VISIBLE_DEVICES=2
+export CUDA_VISIBLE_DEVICES=1
 export task="putnam_axiom_53"
-export model_name_or_path="~/data/runs_logic_cont/run_2024_m11_d23_t21h_55m_07s"
+export model_name_or_path="$HOME/data/runs_logic_cont/run_2024_m11_d23_t21h_55m_07s"
+export model_name_or_path="$HOME/data/runs_logic_cont/run_2024_m11_d27_t19h_20m_06s/"
 export mode="online"
 # export mode="dryrun"
 python ~/putnam-axiom/src/eval_logic_contamination.py --task ${task} --mode ${mode} --model_name_or_path ${model_name_or_path}
@@ -124,7 +125,7 @@ python ~/putnam-axiom/src/eval_logic_contamination.py --task ${task} --mode ${mo
 ```bash
 
 conda activate putnam_axiom
-export CUDA_VISIBLE_DEVICES=5
+export CUDA_VISIBLE_DEVICES=1
 export task="minerva_math"
 export model_name_or_path="/lfs/skampere1/0/brando9/data/runs_logic_cont/run_2024_m11_d23_t22h_24m_50s"
 export mode="online"
@@ -164,6 +165,28 @@ export val_split='func_variations_265_11_23_2024'
 export mode="online"
 # export mode="dryrun"
 export CUDA_VISIBLE_DEVICES=3
-python ~/putnam-axiom/src/train/sft_simple.py --mode 'online' --num_train_epochs ${num_train_epochs} --ds_name_or_path ${ds_name_or_path} --train_split ${train_split} --val_split ${val_split} --max_seq_length ${max_seq_length} --gradient_accumulation_steps ${gradient_accumulation_steps} --batch_size ${batch_size}
+python ~/putnam-axiom/src/train/sft_simple.py --mode ${mode} --num_train_epochs ${num_train_epochs} --ds_name_or_path ${ds_name_or_path} --train_split ${train_split} --val_split ${val_split} --max_seq_length ${max_seq_length} --gradient_accumulation_steps ${gradient_accumulation_steps} --batch_size ${batch_size}
 
+```
+
+### Train by steps not epochs anymore
+
+```bash
+# - Train on the original Putnam-AXIOM 53 Benchmark
+conda activate putnam_axiom
+
+# export pretrained_model_name_or_path='google/gemma-2-2b'
+export max_seq_length=512
+export batch_size=1
+export gradient_accumulation_steps=1
+export max_steps=20
+
+export ds_name_or_path='Putnam-AXIOM/putnam-axiom-dataset'
+export train_split='func_original_53_10_30_2024'
+export val_split='func_variations_265_11_23_2024'
+
+export mode="online"
+# export mode="dryrun"
+export CUDA_VISIBLE_DEVICES=3
+python ~/putnam-axiom/src/train/sft_simple.py --mode ${mode} --max_steps ${max_steps} --ds_name_or_path ${ds_name_or_path} --train_split ${train_split} --val_split ${val_split} --max_seq_length ${max_seq_length} --gradient_accumulation_steps ${gradient_accumulation_steps} --batch_size ${batch_size}
 ```
