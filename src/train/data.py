@@ -125,7 +125,7 @@ def load_math_style_dataset(
     # get_lm_examples_function = lambda examples : get_lm_examples_train_all_tokens(examples, tokenizer)
     lm_ds = tok_ds.map(get_lm_examples_function, batched=batched, num_proc=num_proc)
     # sanity check data
-    print_1st_example_from_ds(lm_ds, tok)
+    print_1st_example_from_ds(lm_ds, tokenizer)
     return lm_ds
 
 # -- Sanity checks
