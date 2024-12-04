@@ -31,8 +31,8 @@ def main(**config):
     ds_name_or_path = config.get('ds_name_or_path', 'Putnam-AXIOM/putnam-axiom-dataset')
     train_split, val_split = config.get('train_split', 'func_original_53_10_30_2024'), config.get('val_split', 'func_variations_265_11_23_2024')
     print(f'\n---> {ds_name_or_path=} {train_split=} {val_split=}\n')
-    train_dataset = load_math_style_dataset(ds_name_or_path, tok, config.get('max_seq_length', 500), end=53, split=train_split)
-    eval_dataset = load_math_style_dataset(ds_name_or_path, tok, config.get('max_seq_length', 500), end=265, split=val_split)
+    train_dataset = load_math_style_dataset(ds_name_or_path, tok, config.get('max_seq_length', 512), end=config.get('end_train', 1), split=train_split)
+    eval_dataset = load_math_style_dataset(ds_name_or_path, tok, config.get('max_seq_length', 512), end=config.get('end_val', 1), split=val_split)
     print(f'{len(train_dataset)=}\n{len(eval_dataset)=}')
     wandb.config.update({'dataset': f'{ds_name_or_path} ({train_split=} {val_split=})'})
 
@@ -71,7 +71,7 @@ def main(**config):
         # --
         max_steps=config.get('max_steps', 20),
         # num_train_epochs=config.get('num_train_epochs', 10),
-        max_seq_length=config.get('max_seq_length', 500),
+        max_seq_length=config.get('max_seq_length', 512),
         per_device_train_batch_size=config.get('batch_size', 1),
         gradient_accumulation_steps=config.get('gradient_accumulation_steps', 1),
         # -- optim

@@ -10,12 +10,12 @@ def quick_tokenization_sanity_check(tok, test_text="This is a test input for the
     encoded = tok(test_text, padding="max_length", truncation=True, max_length=13, return_tensors='pt')
 
     # Display the tokenizer outputs
+    print(f"Pad Token ID: {tok.pad_token_id}, EOS Token ID: {tok.eos_token_id}")
     print(f"Input Text: {test_text}")
     print(f"Tokenized IDs: {encoded['input_ids']}")
     print(f"Attention Mask: {encoded['attention_mask']}")
     # print(f"Labels: {encoded['labels']}")
     print(f"Decoded Tokens: {tok.decode(encoded['input_ids'][0])}")
-    print(f"Pad Token ID: {tok.pad_token_id}, EOS Token ID: {tok.eos_token_id}")
     print()
 
 def load_mdl_and_tok(pretrained_model_name_or_path, type_reinit_mdl: str = '',):

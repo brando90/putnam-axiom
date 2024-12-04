@@ -124,8 +124,8 @@ def load_math_style_dataset(
     get_lm_examples_function = lambda examples : get_lm_examples_1st_eos_mask_remaining_eos(examples, tokenizer)
     # get_lm_examples_function = lambda examples : get_lm_examples_train_all_tokens(examples, tokenizer)
     lm_ds = tok_ds.map(get_lm_examples_function, batched=batched, num_proc=num_proc)
-    # sanity check data
-    # print_1st_example_from_ds(lm_ds, tokenizer)
+    # - Sanity check data
+    print_1st_example_from_ds(lm_ds, tokenizer)
     return lm_ds
 
 # -- Sanity checks
@@ -134,28 +134,55 @@ def print_1st_example_from_ds(lm_ds, tok: AutoTokenizer, data_idx: int = 0):
     """
     lm_ds := final ds to train on e.g., tokenized data or tokenized data + further preprocessing
     """
+    import time
     input_ids = lm_ds[data_idx]['input_ids']
-    print(f'Row {data_idx} we will inspect: {lm_ds[data_idx]}')
+    attention_mask = lm_ds[data_idx]['attention_mask']
+    labels = lm_ds[data_idx]['labels']
+    print(f'Row {data_idx} we will inspect')
 
     # - Display the tokenizer outputs
-    print(f"Input Text: {tok.decode(input_ids)}")
-    print(f"Input Tokenized IDs: {input_ids}")
-    print(f"Input Attention Mask: {lm_ds[data_idx]['attention_mask']}")
-    print(f"Input Labels: {lm_ds[data_idx]['labels']}")
-    print(f"Pad Token ID: {tok.pad_token_id}, EOS Token ID: {tok.eos_token_id}")
+    print()
+    print(f"Pad Token ID: {tok.pad_token_id}") if tok.pad_token_id is not None else print("Pad Token ID is None")
+    print(f"EOS Token ID: {tok.eos_token_id}")
+    print(rf"Input Text: {repr(tok.decode(input_ids[:10]))}")
+    print(f"Input Tokenized IDs: {input_ids[:10]}")
+    print(f"Input Attention Mask: {attention_mask[:10]}")
+    print(f"Input Labels as a Text: {repr(tok.decode(labels[:10]))}")
+    print(f"Input Labels: {labels[:10]}")
+    time.sleep(2)
 
     # - Does idx of 1st eos match the idx of a trained token (1st 1 mask token)?
-    first_eos_idx: int = (tok.eos_token_id == lm_ds[data_idx]['attention_mask']).nonzero()[0, 0] # z, n, where z is num nonezeros & n is of dimensions/indicies to get the n-idx for the non zeros. 
-    # first_mask_idx: int = (1 == lm_ds[idx]['attention_mask']).nonzer()[0, 0]
-    mask_val_1st_eos: int = lm_ds[data_idx]['attention_mask'][first_eos_idx]
-    print(f'Idx of 1st eos: {first_eos_idx}, mask value should be 1 for 1st eos {mask_val_1st_eos}')
-    # - After 1 eos, should be pad or eos
-    try:
-        next_tok_id_after_1st_eos: int = input_ids[first_eos_idx + 1]
-        next_tok_after_1st_eos: str = tok.decode(next_tok_after_1st_eos)
-        mask_val_after_1st_eos: int = lm_ds[data_idx]['attention_mask'][next_tok_after_1st_eos + 1]
-        print(f'Idx after 1st eos tok: tok_id={next_tok_id_after_1st_eos} tok_str={next_tok_after_1st_eos}, mask value after eos: {mask_val_after_1st_eos} (should be zero, we arent training on pad toks).')
-    except Exception as e:
-        print(f'No second eos, due to likely end of sequence (seq lengh is: {len(input_ids)})')
+    first_eos_idx: int = (tok.eos_token_id == input_ids).nonzero()[0, 0] # z, n, where z is num nonezeros & n is of dimensions/indicies to get the n-idx for the non zeros. 
+    assert first_eos_idx >= 0, f'If first eos idx is zero, then seq is only eos, which must be a bug, data is: {input_ids[:10]=}.'
+    mask_val_at_1st_eos: int = attention_mask[first_eos_idx]
+    print()
+    print(f'Idx of 1st eos: {first_eos_idx}. Mask value should be 1 for 1st eos, it is: {mask_val_at_1st_eos}')
+
+    print(f'Token Text at eos (should be eos): {tok.decode(input_ids[first_eos_idx])}')
+    print(f'Token ID at eos (should be eos): {input_ids[first_eos_idx]}')
+
+    print(f'Token Text right before eos (ideally not a special token): {tok.decode(input_ids[first_eos_idx-1])}')
+    print(f'Token ID right before eos (ideally not a special token): {input_ids[first_eos_idx-1]}')
+
+    print(f'Token Text right after eos (usually pad or eos): {tok.decode(input_ids[first_eos_idx+1])}') if first_eos_idx != 511 else print(f'Token right after eos is nothing, since eos idx is the end: {first_eos_idx=}')
+    print(f'Token ID right after eos (usually pad or eos): {input_ids[first_eos_idx+1]}') if first_eos_idx != 511 else print(f'Token right after eos is nothing, since eos idx is the end: {first_eos_idx=}')
+    time.sleep(3)
+
+    # mask
+    print()
+    print(f'Mask Value at eos should be 1: {attention_mask[first_eos_idx]=}')
+    print(f'Mask Value right before eos, should be 1: {attention_mask[first_eos_idx-1]=}')
+    print(f'Mask Value right after eos, should 0: {attention_mask[first_eos_idx+1]=}') if first_eos_idx != 511 else print(f'Token right after eos is nothing, since eos idx is the end: {first_eos_idx=}')
+    time.sleep(1)
+
+    # label
+    print()
+    print(f'Label Text at eos should be eos: {labels[first_eos_idx]=}')
+    print(f'Label Text right before at eos, should not be eos: {labels[first_eos_idx-1]=}')
+    print(f'Label Text right after eos, should -100 (dont predict): {labels[first_eos_idx+1]=}') if first_eos_idx != 511 else print(f'Token right after eos is nothing, since eos idx is the end: {first_eos_idx=}')
+    time.sleep(1)
+
+    print()
     print(f'Length of (max) sequence: {len(input_ids)}')
+    time.sleep(1)
     print()

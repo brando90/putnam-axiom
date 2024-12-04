@@ -25,15 +25,15 @@ def main(**config):
     login(token=token)
 
     # -- Get model
-    # model, tok = train.models.load_mdl_and_tok(config.get('pretrained_model_name_or_path', 'google/gemma-2-2b')) 
-    model, tok = train.models.load_mdl_and_tok(config.get('pretrained_model_name_or_path', 'meta-llama/Llama-3.1-8B')) 
+    model, tok = train.models.load_mdl_and_tok(config.get('pretrained_model_name_or_path', 'google/gemma-2-2b')) 
+    # model, tok = train.models.load_mdl_and_tok(config.get('pretrained_model_name_or_path', 'meta-llama/Llama-3.1-8B')) 
 
     # -- Load datasets
     ds_name_or_path = config.get('ds_name_or_path', 'Putnam-AXIOM/putnam-axiom-dataset')
     train_split, val_split = config.get('train_split', 'func_original_53_10_30_2024'), config.get('val_split', 'func_variations_265_11_23_2024')
     print(f'\n---> {ds_name_or_path=} {train_split=} {val_split=}\n')
-    train_dataset = load_math_style_dataset(ds_name_or_path, tok, config.get('max_seq_length', 500), end=53, split=train_split)
-    eval_dataset = load_math_style_dataset(ds_name_or_path, tok, config.get('max_seq_length', 500), end=265, split=val_split)
+    train_dataset = load_math_style_dataset(ds_name_or_path, tok, config.get('max_seq_length', 512), end=53, split=train_split)
+    eval_dataset = load_math_style_dataset(ds_name_or_path, tok, config.get('max_seq_length', 512), end=265, split=val_split)
     print(f'{len(train_dataset)=}\n{len(eval_dataset)=}')
     wandb.config.update({'dataset': f'{ds_name_or_path} ({train_split=} {val_split=})'})
 
@@ -72,7 +72,7 @@ def main(**config):
         logging_steps=config.get('logging_steps', 5),
         # --
         num_train_epochs=config.get('num_train_epochs', 10),
-        max_seq_length=config.get('max_seq_length', 500),
+        max_seq_length=config.get('max_seq_length', 512),
         per_device_train_batch_size=config.get('batch_size', 2),
         gradient_accumulation_steps=config.get('gradient_accumulation_steps', 2),
     )
@@ -139,8 +139,8 @@ def _main(**kwargs):
     today = datetime.now().strftime('%Y_m%m_d%d_t%Hh_%Mm_%Ss') # eg '2024_m01_d22_t13h_00m_30s'
     run_name = f'{today}' 
     kwargs = kwargs | {'today': today}
-    # run = wandb.init(mode=kwargs.get('mode', 'dryrun'), project="putnam-axiom", name=run_name, save_code=True, config=kwargs)
-    run = wandb.init(mode=kwargs.get('mode', 'online'), project="putnam-axiom", name=run_name, save_code=True, config=kwargs)
+    run = wandb.init(mode=kwargs.get('mode', 'dryrun'), project="putnam-axiom", name=run_name, save_code=True, config=kwargs)
+    # run = wandb.init(mode=kwargs.get('mode', 'online'), project="putnam-axiom", name=run_name, save_code=True, config=kwargs)
     # wandb.config.update()
     output_dir = main(**kwargs)
     run_eval_logic_contamination(output_dir)

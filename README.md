@@ -169,7 +169,7 @@ export val_split='func_variations_265_11_23_2024'
 
 export mode="online"
 # export mode="dryrun"
-export CUDA_VISIBLE_DEVICES=5
+export CUDA_VISIBLE_DEVICES=0
 python ~/putnam-axiom/src/train/sft_simple.py --mode ${mode} --num_train_epochs ${num_train_epochs} --ds_name_or_path ${ds_name_or_path} --train_split ${train_split} --val_split ${val_split} --max_seq_length ${max_seq_length} --gradient_accumulation_steps ${gradient_accumulation_steps} --batch_size ${batch_size}
 
 ```
