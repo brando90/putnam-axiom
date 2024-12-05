@@ -10,7 +10,8 @@ import fire
 import wandb
 import sys
 
-from train.data import load_math_style_dataset
+from train.callbacks import GenCallbackWithHFGenerate
+from train.data import load_math_style_dataset, print_first_example_after_decode
 import train.models
 
 from train.utils import seed_everything
@@ -32,8 +33,10 @@ def main(**config):
     ds_name_or_path = config.get('ds_name_or_path', 'Putnam-AXIOM/putnam-axiom-dataset')
     train_split, val_split = config.get('train_split', 'func_original_53_10_30_2024'), config.get('val_split', 'func_variations_265_11_23_2024')
     print(f'\n---> {ds_name_or_path=} {train_split=} {val_split=}\n')
-    train_dataset = load_math_style_dataset(ds_name_or_path, tok, config.get('max_seq_length', 512), end=53, split=train_split)
-    eval_dataset = load_math_style_dataset(ds_name_or_path, tok, config.get('max_seq_length', 512), end=265, split=val_split)
+    train_dataset = load_math_style_dataset(ds_name_or_path, tok, config.get('max_seq_length', 512), end=1, split=train_split)
+    print_first_example_after_decode(train_dataset, tok)
+    # eval_dataset = load_math_style_dataset(ds_name_or_path, tok, config.get('max_seq_length', 512), end=15, split=val_split)
+    eval_dataset = train_dataset
     print(f'{len(train_dataset)=}\n{len(eval_dataset)=}')
     wandb.config.update({'dataset': f'{ds_name_or_path} ({train_split=} {val_split=})'})
 
@@ -56,7 +59,7 @@ def main(**config):
     #           'save_strategy': 'steps', 'save_steps': 1, 'eval_strategy': 'steps'}
     # config = config | {'CUDA_VISIBLE_DEVICES': os.environ.get('CUDA_VISIBLE_DEVICES', 'maybe 0')}
     training_args = SFTConfig(
-        max_steps=config.get('max_steps', -1),
+        max_steps=config.get('max_steps', 30),
         # --
         output_dir=output_dir,
         bf16=torch.cuda.is_bf16_supported(),
@@ -66,10 +69,10 @@ def main(**config):
         save_strategy=config.get('save_strategy', 'steps'),
         eval_on_start=config.get('eval_on_start', True),
         evaluation_strategy=config.get('eval_strategy', 'steps'), 
-        eval_steps=config.get('eval_steps', 5), 
+        eval_steps=config.get('eval_steps', 1), 
         logging_first_step=config.get('logging_first_step', True), # Default to False, unsure 100% what this does but looks like a good idea
         logging_strategy=config.get('logging_strategy', 'steps'),
-        logging_steps=config.get('logging_steps', 5),
+        logging_steps=config.get('logging_steps', 1),
         # --
         num_train_epochs=config.get('num_train_epochs', 10),
         max_seq_length=config.get('max_seq_length', 512),
@@ -82,8 +85,9 @@ def main(**config):
     print(f'{steps_per_epoch=}')
 
     # Optimizer and Scheduler
-    optimizer_grouped_parameters = [{'params': [p for p in model.parameters()], 'weight_decay': 8e-4}]
-    optimizer = torch.optim.AdamW(optimizer_grouped_parameters, lr=config.get('learning_rate', 1e-6))
+    # optimizer_grouped_parameters = [{'params': [p for p in model.parameters()], 'weight_decay': 1e-4}]
+    optimizer_grouped_parameters = [{'params': [p for p in model.parameters()], 'weight_decay': 0}]
+    optimizer = torch.optim.AdamW(optimizer_grouped_parameters, lr=config.get('learning_rate', 1e-5))
 
     # Add Cosine Learning Rate Scheduler
     # warmup_steps = int(0.01 * total_steps)  # Warm-up for 1% of total steps
@@ -102,6 +106,7 @@ def main(**config):
         eval_dataset=eval_dataset,
         args=training_args,
         optimizers=(optimizer, scheduler),
+        callbacks=[GenCallbackWithHFGenerate(model, tok)]
     )
     print(f"\nStarting fine-tuning...")
     trainer.train()
@@ -139,9 +144,12 @@ def _main(**kwargs):
     today = datetime.now().strftime('%Y_m%m_d%d_t%Hh_%Mm_%Ss') # eg '2024_m01_d22_t13h_00m_30s'
     run_name = f'{today}' 
     kwargs = kwargs | {'today': today}
-    run = wandb.init(mode=kwargs.get('mode', 'dryrun'), project="putnam-axiom", name=run_name, save_code=True, config=kwargs)
-    # run = wandb.init(mode=kwargs.get('mode', 'online'), project="putnam-axiom", name=run_name, save_code=True, config=kwargs)
+    # run = wandb.init(mode=kwargs.get('mode', 'dryrun'), project="putnam-axiom", name=run_name, save_code=True, config=kwargs)
+    run = wandb.init(mode=kwargs.get('mode', 'online'), project="putnam-axiom", name=run_name, save_code=True, config=kwargs)
+    # wandb.run.log_code(f"./{os.path.basename(__file__)}") # maybe logscode immediately # ref: https://stackoverflow.com/questions/79256112/how-to-log-only-the-current-script-file-to-wb-code-panel-immediately
     # wandb.config.update()
+    os.environ['CUDA_VISIBLE_DEVICES'] = str(6)
+    print("--> WARNING/REMINDER: cude device harcoded in script!\n"*10)
     output_dir = main(**kwargs)
     run_eval_logic_contamination(output_dir)
     # from train.utils import copy_to_dfs

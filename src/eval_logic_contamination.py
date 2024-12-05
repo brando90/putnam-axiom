@@ -55,23 +55,53 @@ class MyLM(LM):
         results: list[str] = [output.outputs[0].text for output in outputs]
         # print prompt result, what is going on during eval?
         assert len(prompts) == len(results), f'Fatal error: {wandb.run.alert(title="error during eval", text="len(prompts) != len(results)")}'
-        for prompt, result in zip(prompts, results):
+        for req_idx, (prompt, result) in enumerate(zip(prompts, results)):
             print('--' * 40 + 'start of problem --> model response')
+            print(f'Request index: {req_idx}')
             print(f'{"--"*20}\nPrompt:\n{prompt}\n')
             print(f'{"--"*20}\nResult:\n{result}\n')
         print(f'--- {self.generate_until=}')
         return results
 
+def do_lm_eval(model_name: str, task: str, kwargs: dict) -> dict: 
+    gc.collect()
+    torch.cuda.empty_cache()
+    
+    model = LLM(model_name, trust_remote_code=True)
+    lm_obj = MyLM(model=model)
+    task_manager = tasks.TaskManager()
+    results = lm_eval.evaluator.simple_evaluate(
+        model=lm_obj,
+        tasks=[task],
+        task_manager=task_manager,
+        write_out=False,
+        limit=kwargs.get('limit', 1), # limit the number of examples, if <1 then interpreted as %, default None --> all task benchmark
+        random_seed=None,
+        numpy_random_seed=None,
+        torch_random_seed=None,
+        fewshot_random_seed=None
+    )
+
+    del model
+    del lm_obj
+    gc.collect()
+    torch.cuda.empty_cache()
+    return results
+
 def main(**kwargs):
+    gc.collect()
+    torch.cuda.empty_cache()
+
     print(f'{"__"*32} Start of eval main: {main=}')
     print(f'{STOP_TOKENS=}')
     # task = kwargs.get('task', 'putnam_axiom_original')
-    task = kwargs.get('task', 'putnam_axiom_variations')
-    # task = kwargs.get('task', 'putnam_axiom_53')
+    # task = kwargs.get('task', 'putnam_axiom_variations')
+    task = kwargs.get('task', 'putnam_axiom_53')
     print(f'{task=}')
     directory_path = expanduser("~/data/runs_logic_cont/run_2024_m11_d20_t21h_22m_22s") # putnam-axiom 53 train 20 epochs
     directory_path = expanduser("~/data/runs_logic_cont/run_2024_m11_d23_t21h_55m_07s") # putnam-axiom 53 train 100 epochs
-    directory_path = expanduser(kwargs.get('model_name_or_path', 'google/gemma-2-2b'))
+    directory_path = expanduser("~/data/runs_logic_cont/run_2024_m12_d05_t12h_07m_56s")
+    # directory_path = expanduser(kwargs.get('model_name_or_path', 'google/gemma-2-2b'))
     print(f'{directory_path=}')
     # Extract and sort the model_list by checkpoint index
     model_list = sorted(
@@ -82,7 +112,9 @@ def main(**kwargs):
         ],
         key=lambda x: int(x.split('/')[-1].split('-')[-1])  # Extract the checkpoint index for sorting
     )
-    print(f'{model_list=}')
+    print(f'{model_list}')
+    print("\n".join(model_list))
+    print(f'{len(model_list)=} (should be same as the expect steps/epochs +1 roughly)')
     # since we might be running multiple evals at once, the next time we run an eval we add it to the config, since wandb doesn't let you update the config if a key already has a value
     if task in wandb.config:
         next_task: list = wandb.config['task'].append(task)
@@ -90,39 +122,36 @@ def main(**kwargs):
     else:
         wandb.config.update({"model_list": model_list, 'task': [task]}, allow_val_change=True)
     print(f'{wandb.config=}')
-    
-    print(model_list[:3])
-    folder_count = sum(os.path.isdir(os.path.join(directory_path, entry)) for entry in os.listdir(directory_path))
-    print(f"Total number of folders (non-recursive) in the directory: {folder_count}")
-
-    torch.cuda.empty_cache()
-    gc.collect()
-
-    print(f'{model_list=}')
+    # - Start eval run
     wandb.run.define_metric(f"{task}/eval_bench/accuracy", 
                             step_metric=f"{task}/eval_bench/checkpoint_idx")
     wandb.run.define_metric(f"{task}/eval_bench/checkpoint_idx") 
     model_2_accuracy = {model_name: None for model_name in model_list}
+    print(f'{model_2_accuracy}')
     accs: list[float] = []
     for model_name in model_list:
-        print(f"{'=' * 100}running {model_name} {task=}{'=' * 100}")
+        torch.cuda.empty_cache()
+        gc.collect()
 
-        model = LLM(model_name, trust_remote_code=True)
-        print(f'{model=}')
-        lm_obj = MyLM(model=model)
-        task_manager = tasks.TaskManager()
+        print(f"{'=' * 100}")
+        print(f'running model with name: {model_name}')
+        print(f"{'=' * 100}")
 
-        results = lm_eval.evaluator.simple_evaluate(
-            model=lm_obj,
-            tasks=[task],
-            task_manager=task_manager,
-            write_out=False,
-            limit=kwargs.get('limit', None), # limit the number of examples, if <1 then interpreted as %, default None --> all task benchmark
-            random_seed=None,
-            numpy_random_seed=None,
-            torch_random_seed=None,
-            fewshot_random_seed=None
-        )
+        # model = LLM(model_name, trust_remote_code=True)
+        # lm_obj = MyLM(model=model)
+        # task_manager = tasks.TaskManager()
+        # results = lm_eval.evaluator.simple_evaluate(
+        #     model=lm_obj,
+        #     tasks=[task],
+        #     task_manager=task_manager,
+        #     write_out=False,
+        #     limit=kwargs.get('limit', 1), # limit the number of examples, if <1 then interpreted as %, default None --> all task benchmark
+        #     random_seed=None,
+        #     numpy_random_seed=None,
+        #     torch_random_seed=None,
+        #     fewshot_random_seed=None
+        # )
+        results = do_lm_eval(model_name, task, kwargs)
         print(f"arguments: {results['samples'][task][0]['arguments'][0][0]=}")
         print(f"resps: {results['samples'][task][0]['resps'][0][0]=}")
         print(f'{results.keys()=}')
@@ -133,16 +162,19 @@ def main(**kwargs):
         model_2_accuracy[model_name] = accuracy
         accs.append(float(accuracy))
         checkpoint_idx = int(model_name.split('/')[-1].split('-')[-1])  # e.g., 'checkpoint-70'
-        print(f"{accuracy=} for model ckpt idk: {checkpoint_idx=}")
         
         # Log accuracy for each checkpoint
+        print(f'Checkpoint idx: {checkpoint_idx=}')
+        print(f"Accuracy for that checkpoint: {accuracy=} ({checkpoint_idx=})")
+        print(f"Checkpoint full name: {model_name=}")
         wandb.log({f"{task}/eval_bench/checkpoint_idx": checkpoint_idx, 
                    f"{task}/eval_bench/accuracy": accuracy})
-
-        del model
-        del lm_obj
-        torch.cuda.empty_cache()
+        # del model
+        # del lm_obj
         gc.collect()
+        torch.cuda.empty_cache()
+        # gc.collect()
+        # torch.cuda.empty_cache()
     print(f'{model_2_accuracy=}\n{accs=}')
     print(f"{'=' * 100}")
     return {'model_2_accuracy': model_2_accuracy, 'accs': accs}
@@ -151,13 +183,16 @@ def _main(**kwargs):
     today = datetime.now().strftime('%Y_m%m_d%d_t%Hh_%Mm_%Ss')
     run_name = f'{today}'
     run = wandb.init(
-        mode=kwargs.get('mode', 'dryrun'), 
+        # mode=kwargs.get('mode', 'dryrun'), 
+        mode=kwargs.get('mode', 'online'), 
         project="putnam-axiom", 
         name=run_name, 
         save_code=True, 
         config=kwargs | {'hostname': gethostname()}
     )
     kwargs = kwargs | {'today': today}
+    os.environ['CUDA_VISIBLE_DEVICES'] = str(6)
+    print("--> WARNING/REMINDER: cude device harcoded in script!\n"*10)
     main(**kwargs)
     print(f'{run.get_url()=}')
     wandb.finish()

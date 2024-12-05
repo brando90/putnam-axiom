@@ -186,3 +186,9 @@ def print_1st_example_from_ds(lm_ds, tok: AutoTokenizer, data_idx: int = 0):
     print(f'Length of (max) sequence: {len(input_ids)}')
     time.sleep(1)
     print()
+
+def print_first_example_after_decode(lm_ds, tok: AutoTokenizer):
+    input_ids = lm_ds[0]['input_ids']
+
+    print()
+    print(f'Input Text from data set after tok decodes IDs back to Text:\n{tok.decode(input_ids)=}')

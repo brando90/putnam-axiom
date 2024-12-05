@@ -50,6 +50,7 @@ setup(
         'wandb',
         'matplotlib',
         'fire',
+        'Levenshtein',
         # 'statsmodels'
         # 'statsmodels==0.12.2'
         # 'statsmodels==0.13.5'
