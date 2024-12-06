@@ -39,6 +39,7 @@ def get_optimizer_scheduler_manually():
     pass
 
 def main(**config):
+    print(f'Config for main\'s run:\n{config}')
     # -- Seed everything
     seed_everything(seed=config.get('seed', 0))
     
@@ -48,17 +49,17 @@ def main(**config):
     login(token=token)
 
     # -- Get model
-    model, tok = train.models.load_mdl_and_tok(config.get('pretrained_model_name_or_path', 'google/gemma-2-2b')) 
-    model, tok = train.models.load_mdl_and_tok(config.get('pretrained_model_name_or_path', 'google/gemma-2-9b')) 
+    # model, tok = train.models.load_mdl_and_tok(config.get('pretrained_model_name_or_path', 'google/gemma-2-2b'), config) 
+    model, tok = train.models.load_mdl_and_tok(config.get('pretrained_model_name_or_path', 'google/gemma-2-9b'), config) 
     # model, tok = train.models.load_mdl_and_tok(config.get('pretrained_model_name_or_path', 'meta-llama/Llama-3.1-8B')) 
 
     # -- Load datasets
     ds_name_or_path = config.get('ds_name_or_path', 'Putnam-AXIOM/putnam-axiom-dataset')
     train_split, val_split = config.get('train_split', 'func_original_53_10_30_2024'), config.get('val_split', 'func_variations_265_11_23_2024')
     print(f'\n---> {ds_name_or_path=} {train_split=} {val_split=}\n')
-    train_dataset = load_math_style_dataset(ds_name_or_path, tok, config.get('max_seq_length', 512), end=1, split=train_split)
+    train_dataset = load_math_style_dataset(ds_name_or_path, tok, config.get('max_seq_length', 512), config, model, end=1, split=train_split)
     print_first_example_after_decode(train_dataset, tok)
-    # eval_dataset = load_math_style_dataset(ds_name_or_path, tok, config.get('max_seq_length', 512), end=15, split=val_split)
+    # eval_dataset = load_math_style_dataset(ds_name_or_path, tok, config.get('max_seq_length', 512), config, end=15, split=val_split)
     eval_dataset = train_dataset
     print(f'{len(train_dataset)=}\n{len(eval_dataset)=}')
     wandb.config.update({'dataset': f'{ds_name_or_path} ({train_split=} {val_split=})'})
@@ -157,12 +158,12 @@ def _main(**kwargs):
     today = datetime.now().strftime('%Y_m%m_d%d_t%Hh_%Mm_%Ss') # eg '2024_m01_d22_t13h_00m_30s'
     run_name = f'{today}' 
     kwargs = kwargs | {'today': today}
-    # run = wandb.init(mode=kwargs.get('mode', 'dryrun'), project="putnam-axiom", name=run_name, save_code=True, config=kwargs)
-    run = wandb.init(mode=kwargs.get('mode', 'online'), project="putnam-axiom", name=run_name, save_code=True, config=kwargs)
+    run = wandb.init(mode=kwargs.get('mode', 'dryrun'), project="putnam-axiom", name=run_name, save_code=True, config=kwargs)
+    # run = wandb.init(mode=kwargs.get('mode', 'online'), project="putnam-axiom", name=run_name, save_code=True, config=kwargs)
     # wandb.run.log_code(f"./{os.path.basename(__file__)}") # maybe logscode immediately # ref: https://stackoverflow.com/questions/79256112/how-to-log-only-the-current-script-file-to-wb-code-panel-immediately
     # wandb.config.update()
-    os.environ['CUDA_VISIBLE_DEVICES'] = str(0)
-    print("--> WARNING/REMINDER: cude device harcoded in script!\n"*10)
+    # os.environ['CUDA_VISIBLE_DEVICES'] = str(6); print("--> WARNING/REMINDER: cude device harcoded in script!\n"*10)
+    print(f'Kwargs to run:\n{kwargs}')
     output_dir = main(**kwargs)
     run_eval_logic_contamination(output_dir)
     # from train.utils import copy_to_dfs

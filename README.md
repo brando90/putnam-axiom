@@ -189,7 +189,9 @@ conda activate putnam_axiom
 
 # export pretrained_model_name_or_path='meta-llama/Llama-3.1-8B'
 export pretrained_model_name_or_path='google/gemma-2-9b'
-export max_seq_length=512
+# export pretrained_model_name_or_path='google/gemma-2-9b-it'
+# export max_seq_length=512
+export max_seq_length=400
 export batch_size=1
 export gradient_accumulation_steps=1
 export max_steps=35
@@ -198,9 +200,10 @@ export ds_name_or_path='Putnam-AXIOM/putnam-axiom-dataset'
 export train_split='func_original_53_10_30_2024'
 export val_split='func_original_53_10_30_2024'
 
-export mode="online"
-# export mode="dryrun"
-export CUDA_VISIBLE_DEVICES=7
+# export mode="online"
+export mode="dryrun"
+export CUDA_VISIBLE_DEVICES=6
+# export CUDA_VISIBLE_DEVICES=7
 python ~/putnam-axiom/src/train/sft_simple.py --mode ${mode} --max_steps ${max_steps} --pretrained_model_name_or_path ${pretrained_model_name_or_path} --ds_name_or_path ${ds_name_or_path} --train_split ${train_split} --val_split ${val_split} --max_seq_length ${max_seq_length} --gradient_accumulation_steps ${gradient_accumulation_steps} --batch_size ${batch_size} 
 
 
