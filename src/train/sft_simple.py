@@ -16,6 +16,28 @@ import train.models
 
 from train.utils import seed_everything
 
+def get_optimizer_scheduler_manually():
+    # maybe fix if we get a good reason why but careful with manual stuff karpathy, mo, rylan
+    # Calculate Total Steps
+    # steps_per_epoch = (len(train_dataset) // training_args.per_device_train_batch_size) // training_args.gradient_accumulation_steps
+    # total_steps = steps_per_epoch * training_args.num_train_epochs
+    # print(f'{steps_per_epoch=}')
+    # Optimizer and Scheduler
+    # optimizer_grouped_parameters = [{'params': [p for p in model.parameters()], 'weight_decay': 1e-4}]
+    # optimizer_grouped_parameters = [{'params': [p for p in model.parameters()], 'weight_decay': 0}]
+    # optimizer = torch.optim.AdamW(optimizer_grouped_parameters, lr=config.get('learning_rate', 1e-5))
+    # Add Cosine Learning Rate Scheduler
+    # warmup_steps = int(0.01 * total_steps)  # Warm-up for 1% of total steps
+    # warmup_steps = 0
+    # scheduler = get_cosine_schedule_with_warmup(
+    #     optimizer=optimizer,
+    #     num_warmup_steps=warmup_steps,
+    #     num_training_steps=total_steps,
+    # )
+    # scheduler = None
+    # print(f'{total_steps=} {warmup_steps=}')
+    pass
+
 def main(**config):
     # -- Seed everything
     seed_everything(seed=config.get('seed', 0))
@@ -59,53 +81,42 @@ def main(**config):
     #           'save_strategy': 'steps', 'save_steps': 1, 'eval_strategy': 'steps'}
     # config = config | {'CUDA_VISIBLE_DEVICES': os.environ.get('CUDA_VISIBLE_DEVICES', 'maybe 0')}
     training_args = SFTConfig(
-        max_steps=config.get('max_steps', 30),
         # --
         output_dir=output_dir,
         bf16=torch.cuda.is_bf16_supported(),
         fp16=not torch.cuda.is_bf16_supported(),
-        # -- logging opts
+        # -- save, eval, logging opts
         save_steps=config.get('save_steps', 5), 
         save_strategy=config.get('save_strategy', 'steps'),
         eval_on_start=config.get('eval_on_start', True),
         evaluation_strategy=config.get('eval_strategy', 'steps'), 
-        eval_steps=config.get('eval_steps', 1), 
+        eval_steps=config.get('eval_steps', 5), 
         logging_first_step=config.get('logging_first_step', True), # Default to False, unsure 100% what this does but looks like a good idea
         logging_strategy=config.get('logging_strategy', 'steps'),
-        logging_steps=config.get('logging_steps', 1),
-        # --
+        logging_steps=config.get('logging_steps', 5),
+        # -- 
+        max_steps=config.get('max_steps', 20),
         num_train_epochs=config.get('num_train_epochs', 10),
         max_seq_length=config.get('max_seq_length', 512),
-        per_device_train_batch_size=config.get('batch_size', 2),
-        gradient_accumulation_steps=config.get('gradient_accumulation_steps', 2),
+        per_device_train_batch_size=config.get('batch_size', 1),
+        gradient_accumulation_steps=config.get('gradient_accumulation_steps', 1),
+        # -- optim
+        optim=config.get('optim', 'adamw_torch'),
+        learning_rate=config.get('learning_rate', 1e-5),
+        weight_decay=config.get('weight_decay', 1e-4),
+        # -- scheduler
+        lr_scheduler_type=config.get('lr_scheduler_type', 'cosine'),
+        warmup_ratio=config.get('warmup_ratio', 0.01), # 1%
+        # -- seed
+        seed=config.get('seed', 0),
+        data_seed=config.get('data_seed', config.get('seed', 0)),
     )
-    # Calculate Total Steps
-    steps_per_epoch = (len(train_dataset) // training_args.per_device_train_batch_size) // training_args.gradient_accumulation_steps
-    total_steps = steps_per_epoch * training_args.num_train_epochs
-    print(f'{steps_per_epoch=}')
-
-    # Optimizer and Scheduler
-    # optimizer_grouped_parameters = [{'params': [p for p in model.parameters()], 'weight_decay': 1e-4}]
-    optimizer_grouped_parameters = [{'params': [p for p in model.parameters()], 'weight_decay': 0}]
-    optimizer = torch.optim.AdamW(optimizer_grouped_parameters, lr=config.get('learning_rate', 1e-5))
-
-    # Add Cosine Learning Rate Scheduler
-    # warmup_steps = int(0.01 * total_steps)  # Warm-up for 1% of total steps
-    warmup_steps = 0
-    scheduler = get_cosine_schedule_with_warmup(
-        optimizer=optimizer,
-        num_warmup_steps=warmup_steps,
-        num_training_steps=total_steps,
-    )
-    scheduler = None
-    print(f'{total_steps=} {warmup_steps=}')
     trainer = SFTTrainer(
         model=model,
         tokenizer=tok,
         train_dataset=train_dataset,
         eval_dataset=eval_dataset,
         args=training_args,
-        optimizers=(optimizer, scheduler),
         callbacks=[GenCallbackWithHFGenerate(model, tok)]
     )
     print(f"\nStarting fine-tuning...")
@@ -148,7 +159,7 @@ def _main(**kwargs):
     run = wandb.init(mode=kwargs.get('mode', 'online'), project="putnam-axiom", name=run_name, save_code=True, config=kwargs)
     # wandb.run.log_code(f"./{os.path.basename(__file__)}") # maybe logscode immediately # ref: https://stackoverflow.com/questions/79256112/how-to-log-only-the-current-script-file-to-wb-code-panel-immediately
     # wandb.config.update()
-    os.environ['CUDA_VISIBLE_DEVICES'] = str(6)
+    os.environ['CUDA_VISIBLE_DEVICES'] = str(1)
     print("--> WARNING/REMINDER: cude device harcoded in script!\n"*10)
     output_dir = main(**kwargs)
     run_eval_logic_contamination(output_dir)

@@ -59,7 +59,7 @@ def main(**config):
         output_dir=output_dir,
         bf16=torch.cuda.is_bf16_supported(),
         fp16=not torch.cuda.is_bf16_supported(),
-        # -- logging opts
+        # -- save, eval, logging opts
         save_steps=config.get('save_steps', 5), 
         save_strategy=config.get('save_strategy', 'steps'),
         eval_on_start=config.get('eval_on_start', True),
@@ -83,7 +83,7 @@ def main(**config):
         warmup_ratio=config.get('warmup_ratio', 0.01), # 1%
         # -- seed
         seed=config.get('seed', 0),
-        data_seed=config.get('data_seed', 0),
+        data_seed=config.get('data_seed', config.get('seed', 0)),
     )
     trainer = SFTTrainer(
         model=model,

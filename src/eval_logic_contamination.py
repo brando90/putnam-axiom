@@ -167,14 +167,12 @@ def main(**kwargs):
         print(f'Checkpoint idx: {checkpoint_idx=}')
         print(f"Accuracy for that checkpoint: {accuracy=} ({checkpoint_idx=})")
         print(f"Checkpoint full name: {model_name=}")
-        wandb.log({f"{task}/eval_bench/checkpoint_idx": checkpoint_idx, 
-                   f"{task}/eval_bench/accuracy": accuracy})
+        wandb.log({f"eval_bench/{task}/checkpoint_idx": checkpoint_idx, 
+                   f"eval_bench/{task}/accuracy": accuracy})
         # del model
         # del lm_obj
         gc.collect()
         torch.cuda.empty_cache()
-        # gc.collect()
-        # torch.cuda.empty_cache()
     print(f'{model_2_accuracy=}\n{accs=}')
     print(f"{'=' * 100}")
     return {'model_2_accuracy': model_2_accuracy, 'accs': accs}

@@ -141,14 +141,14 @@ class GenCallbackWithHFGenerate(TrainerCallback):
         for batch in eval_dataloader:
             # print(f'{batch["input_ids"].size()=}')
             # Prepare prompts
-            input_ids = batch["input_ids"]
-            input_texts = self.tok.batch_decode(input_ids, skip_special_tokens=False)
+            input_ids = batch["input_ids"] # has bos, eos, pad since eval loader data has same preprocessing as train loader
+            input_texts = self.tok.batch_decode(input_ids, skip_special_tokens=True) # won't have <bos>, <eos>, <pad> etc
             prompt_texts: list[str] = self.get_inference_prompts(input_texts)
-            prompt_ids: dict = self.tok(prompt_texts, add_special_tokens=False, return_tensors='pt')
+            prompt_ids: dict = self.tok(prompt_texts, add_special_tokens=False, return_tensors='pt') # not traning and <bos> already added, so no need to add anything else
             prompt_ids = prompt_ids["input_ids"].to(self.mdl.device)
             # Get generations
             gen_ids = self.mdl.generate(prompt_ids, max_new_tokens=512)
-            gen_texts = self.tok.batch_decode(gen_ids, skip_special_tokens=False) 
+            gen_texts = self.tok.batch_decode(gen_ids, skip_special_tokens=False) # no special toks needed during gen for sanity checking & computing diff with true soln
             # Print prompt generation pairs
             batch_size = input_ids.size(0)
             for batch_idx in range(batch_size):
@@ -159,8 +159,8 @@ class GenCallbackWithHFGenerate(TrainerCallback):
                 print(f'\n{"---"*15}\nInput Prompt Text:\n{prompt}')
                 print(f'\n{"---"*15}\nGeneration:\n{gen_text}')
                 # 
-                soln: str = input_text.split('\n\nSolution:\n')[1]
-                gen_soln: str = gen_text.split('\n\nSolution:\n')[1]
+                soln: str = input_text.split('\n\nSolution:')[1]
+                gen_soln: str = gen_text.split('\n\nSolution:')[1]
                 import Levenshtein
                 dist = Levenshtein.distance(soln, gen_soln)
                 normalized_dist = Levenshtein.distance(soln, gen_soln) / len(soln)
@@ -175,7 +175,9 @@ class GenCallbackWithHFGenerate(TrainerCallback):
     def get_inference_prompts(self, input_texts: list[str]) -> list[str]:
         prompts: list[str] = []
         for input_text in input_texts:
-            problem: str = input_text.split('\n\nSolution:\n')[0]
+            problem: str = input_text.split('\n\nSolution:')[0]
+            problem = problem.replace('Problem:\n', '') # now new line in front cuz that wan't added to the putnam data in preprocessing
+            assert self.tok.bos_token not in problem, f'Shouldnt have bos but it does: {problem=}'
             prompt = self.input_text_to_prompt(problem)
             prompts.append(prompt)
         return prompts
@@ -183,4 +185,5 @@ class GenCallbackWithHFGenerate(TrainerCallback):
     def input_text_to_prompt(self, input_text: str) -> str:
         # prompt_template = '{$input_text}' 
         # return prompt_template.replace('{$input_text}', input_text)
-        return prompt_template.replace('{$input_text}', input_text)
+        # Note: only need to add <bos> token at front during inference, other special tokens not needed
+        return self.tok.bos_token + prompt_template.replace('{$PROBLEM}', input_text)
