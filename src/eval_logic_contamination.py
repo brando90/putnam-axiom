@@ -22,10 +22,11 @@ STOP_TOKENS: list[str] = ["problem:", "problem: ", "problem:\n", "Problem:", "Pr
 print(f'New stop tokens: {len(STOP_TOKENS)=} {STOP_TOKENS=}')
 
 class MyLM(LM):
-    def __init__(self, model, batch_size: int = 16):
+    def __init__(self, model, batch_size: int = 16, model_name: str = 'model_name NOT SET.'):
         self.model = model
         super().__init__()
         self.batch_size = batch_size
+        self.model_name = model_name
 
     def loglikelihood(self, requests: List) -> List[Tuple[float, bool]]:
         results = []
@@ -45,7 +46,7 @@ class MyLM(LM):
         return results
 
     def generate_until(self, requests: List) -> List[str]:
-        print(f'--- {self.generate_until=}')
+        print()
         # params = SamplingParams(temperature=0.9, top_p=0.95, max_tokens=2048, stop='Problem:\n')
         # params = SamplingParams(temperature=0.9, top_p=0.95, max_tokens=2048, stop=STOP_TOKENS)
         # params = SamplingParams(temperature=0.9, top_p=0.95, max_tokens=512, stop=STOP_TOKENS)
@@ -56,11 +57,10 @@ class MyLM(LM):
         # print prompt result, what is going on during eval?
         assert len(prompts) == len(results), f'Fatal error: {wandb.run.alert(title="error during eval", text="len(prompts) != len(results)")}'
         for req_idx, (prompt, result) in enumerate(zip(prompts, results)):
-            print('--' * 40 + 'start of problem --> model response')
-            print(f'Request index: {req_idx}')
-            print(f'{"--"*20}\nPrompt:\n{prompt}\n')
-            print(f'{"--"*20}\nResult:\n{result}\n')
-        print(f'--- {self.generate_until=}')
+            print(f'{"--"*20}\nProblem idx: {req_idx}. Model name: {self.model_name})')
+            print(f'{"--"*20}\nInput Prompt Text:\n{prompt}\n')
+            print(f'{"--"*20}\nGeneration:\n{result}\n')
+        print()
         return results
 
 def do_lm_eval(model_name: str, task: str, kwargs: dict) -> dict: 
@@ -68,7 +68,7 @@ def do_lm_eval(model_name: str, task: str, kwargs: dict) -> dict:
     torch.cuda.empty_cache()
     
     model = LLM(model_name, trust_remote_code=True)
-    lm_obj = MyLM(model=model)
+    lm_obj = MyLM(model=model, model_name=model_name)
     task_manager = tasks.TaskManager()
     results = lm_eval.evaluator.simple_evaluate(
         model=lm_obj,
@@ -98,9 +98,9 @@ def main(**kwargs):
     # task = kwargs.get('task', 'putnam_axiom_variations')
     task = kwargs.get('task', 'putnam_axiom_53')
     print(f'{task=}')
-    directory_path = expanduser("~/data/runs_logic_cont/run_2024_m11_d20_t21h_22m_22s") # putnam-axiom 53 train 20 epochs
-    directory_path = expanduser("~/data/runs_logic_cont/run_2024_m11_d23_t21h_55m_07s") # putnam-axiom 53 train 100 epochs
-    directory_path = expanduser("~/data/runs_logic_cont/run_2024_m12_d05_t12h_07m_56s")
+    # directory_path = expanduser("~/data/runs_logic_cont/run_2024_m11_d20_t21h_22m_22s") # putnam-axiom 53 train 20 epochs
+    # directory_path = expanduser("~/data/runs_logic_cont/run_2024_m11_d23_t21h_55m_07s") # putnam-axiom 53 train 100 epochs
+    # directory_path = expanduser("~/data/runs_logic_cont/run_2024_m11_d23_t21h_55m_07s")
     # directory_path = expanduser(kwargs.get('model_name_or_path', 'google/gemma-2-2b'))
     print(f'{directory_path=}')
     # Extract and sort the model_list by checkpoint index
@@ -154,19 +154,21 @@ def main(**kwargs):
         results = do_lm_eval(model_name, task, kwargs)
         print(f"arguments: {results['samples'][task][0]['arguments'][0][0]=}")
         print(f"resps: {results['samples'][task][0]['resps'][0][0]=}")
-        print(f'{results.keys()=}')
-        print(f'{results["results"][task].keys()=}')
+        # print(f'{results.keys()=}')
+        # print(f'{results["results"][task].keys()=}')
 
-        print("results:", results["results"][task].get("exact_match,none", None))
+        # print("results:", results["results"][task].get("exact_match,none", None))
         accuracy = results["results"][task].get("exact_match,none", None) 
         model_2_accuracy[model_name] = accuracy
         accs.append(float(accuracy))
         checkpoint_idx = int(model_name.split('/')[-1].split('-')[-1])  # e.g., 'checkpoint-70'
         
         # Log accuracy for each checkpoint
+        print('---')
         print(f'Checkpoint idx: {checkpoint_idx=}')
         print(f"Accuracy for that checkpoint: {accuracy=} ({checkpoint_idx=})")
         print(f"Checkpoint full name: {model_name=}")
+        print('---')
         wandb.log({f"eval_bench/{task}/checkpoint_idx": checkpoint_idx, 
                    f"eval_bench/{task}/accuracy": accuracy})
         # del model
@@ -181,15 +183,15 @@ def _main(**kwargs):
     today = datetime.now().strftime('%Y_m%m_d%d_t%Hh_%Mm_%Ss')
     run_name = f'{today}'
     run = wandb.init(
-        # mode=kwargs.get('mode', 'dryrun'), 
-        mode=kwargs.get('mode', 'online'), 
+        mode=kwargs.get('mode', 'dryrun'), 
+        # mode=kwargs.get('mode', 'online'), 
         project="putnam-axiom", 
         name=run_name, 
         save_code=True, 
         config=kwargs | {'hostname': gethostname()}
     )
     kwargs = kwargs | {'today': today}
-    os.environ['CUDA_VISIBLE_DEVICES'] = str(6)
+    os.environ['CUDA_VISIBLE_DEVICES'] = str(0)
     print("--> WARNING/REMINDER: cude device harcoded in script!\n"*10)
     main(**kwargs)
     print(f'{run.get_url()=}')

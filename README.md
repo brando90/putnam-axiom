@@ -111,17 +111,16 @@ To run the evaluation on the 53 original problems used to create the functional 
 ```bash
 
 conda activate putnam_axiom
-export CUDA_VISIBLE_DEVICES=1
+export CUDA_VISIBLE_DEVICES=0
 export task="putnam_axiom_53"
-export model_name_or_path="$HOME/data/runs_logic_cont/run_2024_m11_d23_t21h_55m_07s"
-export model_name_or_path="$HOME/data/runs_logic_cont/run_2024_m11_d27_t19h_20m_06s/"
+export model_name_or_path="/lfs/skampere1/0/brando9/data/runs_logic_cont/run_2024_m12_d05_t19h_29m_51s"
 export mode="online"
 # export mode="dryrun"
 python ~/putnam-axiom/src/eval_logic_contamination.py --task ${task} --mode ${mode} --model_name_or_path ${model_name_or_path}
 
 ```
 
-## Python Eval MATH
+<!-- ## Python Eval MATH
 ```bash
 
 conda activate putnam_axiom
@@ -132,7 +131,7 @@ export mode="online"
 # export mode="dryrun"
 python ~/putnam-axiom/src/eval_logic_contamination.py --task ${task} --mode ${mode} --model_name_or_path ${model_name_or_path}
 
-```
+``` -->
 
 ## Logic Contamination Train Commands: Train on Putnam-AXIOM 53 To Learn Logic then Eval on Variations
 
@@ -182,10 +181,16 @@ python ~/putnam-axiom/src/train/sft_simple.py --mode ${mode} --num_train_epochs 
 conda activate putnam_axiom
 
 # export pretrained_model_name_or_path='google/gemma-2-2b'
+# export max_seq_length=512
+# export batch_size=1
+# export gradient_accumulation_steps=1
+# export max_steps=50
+
+export pretrained_model_name_or_path='meta-llama/Llama-3.1-8B'
 export max_seq_length=512
 export batch_size=1
 export gradient_accumulation_steps=1
-export max_steps=16
+export max_steps=35
 
 export ds_name_or_path='Putnam-AXIOM/putnam-axiom-dataset'
 export train_split='func_original_53_10_30_2024'
@@ -193,7 +198,8 @@ export train_split='func_original_53_10_30_2024'
 
 export mode="online"
 # export mode="dryrun"
-export CUDA_VISIBLE_DEVICES=6
+export CUDA_VISIBLE_DEVICES=0
 python ~/putnam-axiom/src/train/sft_simple.py --mode ${mode} --max_steps ${max_steps} --ds_name_or_path ${ds_name_or_path} --train_split ${train_split} --val_split ${val_split} --max_seq_length ${max_seq_length} --gradient_accumulation_steps ${gradient_accumulation_steps} --batch_size ${batch_size}
+
 
 ```

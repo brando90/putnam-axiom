@@ -10,7 +10,7 @@ import fire
 import wandb
 import sys
 
-from train.callbacks import GenCallbackWithHFGenerate
+from train.callbacks import GenCallbackHFGen, PUTNAM_AXIOM_PROMPT_TEMPLATE
 from train.data import load_math_style_dataset, print_first_example_after_decode
 import train.models
 
@@ -95,7 +95,7 @@ def main(**config):
         logging_strategy=config.get('logging_strategy', 'steps'),
         logging_steps=config.get('logging_steps', 5),
         # -- 
-        max_steps=config.get('max_steps', 20),
+        max_steps=config.get('max_steps', 100),
         num_train_epochs=config.get('num_train_epochs', 10),
         max_seq_length=config.get('max_seq_length', 512),
         per_device_train_batch_size=config.get('batch_size', 1),
@@ -117,7 +117,8 @@ def main(**config):
         train_dataset=train_dataset,
         eval_dataset=eval_dataset,
         args=training_args,
-        callbacks=[GenCallbackWithHFGenerate(model, tok)]
+        callbacks=[GenCallbackHFGen(model, tok), GenCallbackHFGen(model, tok, PUTNAM_AXIOM_PROMPT_TEMPLATE, 'putnam_axiom_prompt')]
+        # callbacks=[GenCallbackHFGen(model, tok)]
     )
     print(f"\nStarting fine-tuning...")
     trainer.train()
@@ -159,7 +160,7 @@ def _main(**kwargs):
     run = wandb.init(mode=kwargs.get('mode', 'online'), project="putnam-axiom", name=run_name, save_code=True, config=kwargs)
     # wandb.run.log_code(f"./{os.path.basename(__file__)}") # maybe logscode immediately # ref: https://stackoverflow.com/questions/79256112/how-to-log-only-the-current-script-file-to-wb-code-panel-immediately
     # wandb.config.update()
-    os.environ['CUDA_VISIBLE_DEVICES'] = str(1)
+    os.environ['CUDA_VISIBLE_DEVICES'] = str(0)
     print("--> WARNING/REMINDER: cude device harcoded in script!\n"*10)
     output_dir = main(**kwargs)
     run_eval_logic_contamination(output_dir)
