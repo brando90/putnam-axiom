@@ -49,6 +49,7 @@ def main(**config):
 
     # -- Get model
     model, tok = train.models.load_mdl_and_tok(config.get('pretrained_model_name_or_path', 'google/gemma-2-2b')) 
+    model, tok = train.models.load_mdl_and_tok(config.get('pretrained_model_name_or_path', 'google/gemma-2-9b')) 
     # model, tok = train.models.load_mdl_and_tok(config.get('pretrained_model_name_or_path', 'meta-llama/Llama-3.1-8B')) 
 
     # -- Load datasets
