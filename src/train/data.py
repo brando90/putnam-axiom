@@ -124,12 +124,51 @@ def load_math_style_dataset(
     tok_ds = tok_ds.map(tokenize_function, batched=batched, remove_columns=tok_ds.column_names, num_proc=num_proc)
     # - Step3: to lm dataset
     lm_ds = tok_ds
-    # get_lm_examples_function = lambda examples : get_lm_examples_1st_eos_mask_remaining_eos(examples, tok)
+    get_lm_examples_function = lambda examples : get_lm_examples_1st_eos_mask_remaining_eos(examples, tok)
     # get_lm_examples_function = lambda examples : get_lm_examples_train_all_tokens(examples, tok)
-    # lm_ds = tok_ds.map(get_lm_examples_function, batched=batched, num_proc=num_proc)
+    lm_ds = tok_ds.map(get_lm_examples_function, batched=batched, num_proc=num_proc)
     # - Sanity check data
     print_1st_example_from_ds(lm_ds, tok, config)
-    sanity_check_length_of_sequences(lm_ds, tok, model)
+    return lm_ds
+
+def load_dataset_text_field_only(
+        ds_path: str, 
+        tok, 
+        max_length: int, 
+        config,
+        model: Optional = None,
+        num_proc: Optional[int] = None, # for .map
+        # num_proc: Optional[int] = os.cpu_count(), # for .map
+        # num_proc: Optional[int] = 10, # for .map
+        shuffle: bool = False, # but slows things down
+        truncation: bool = True, 
+        seed: int = 0,
+        end: Optional[int] = None, 
+        split: Optional[str] = None,
+        batched: bool = True
+        ):
+    print(f'{num_proc=}')
+    end: int = end if end is not None else sys.maxsize
+    ds = load_dataset(ds_path, split=split)
+    ds = ds.shuffle(seed=seed) if shuffle else ds
+    try:
+        ds = ds.select(range(end)) if end is not None else ds
+    except Exception as e:
+        ds = ds.take(end) if end is not None else ds
+    # - Step1: to train str
+    raw_str_2_train_str = lambda examples : {'text': [f'Text: {text}' for text in examples['text']]}
+    train_str_ds = ds.map(raw_str_2_train_str, batched=batched, num_proc=num_proc)
+    # - Step2: to train tokenized ds
+    tok_ds = train_str_ds.with_format('torch')  
+    tokenize_function = lambda examples: tok(examples['text'], padding='max_length', max_length=max_length, truncation=truncation, return_tensors='pt')
+    tok_ds = tok_ds.map(tokenize_function, batched=batched, remove_columns=tok_ds.column_names, num_proc=num_proc)
+    # - Step3: to lm dataset
+    # lm_ds = tok_ds
+    get_lm_examples_function = lambda examples : get_lm_examples_1st_eos_mask_remaining_eos(examples, tok)
+    # get_lm_examples_function = lambda examples : get_lm_examples_train_all_tokens(examples, tok)
+    lm_ds = tok_ds.map(get_lm_examples_function, batched=batched, num_proc=num_proc)
+    # - Sanity check data
+    print_1st_example_from_ds(lm_ds, tok, config)
     return lm_ds
 
 # -- Sanity checks
@@ -152,7 +191,7 @@ def print_1st_example_from_ds(lm_ds, tok: AutoTokenizer, config = {}, data_idx: 
     print(f'Tokenizer name: {type(tok)=}')
     print(f"Pad Token ID: {tok.pad_token_id}") if tok.pad_token_id is not None else print("Pad Token ID is None")
     print(f"EOS Token ID: {tok.eos_token_id}")
-    print(f"Max Length in Tokenizer: {tok.model_max_length=}. Max Seq Length in Config: {config.get('max_seq_length', 'Max Seq Length Not Set in Config.')}")
+    print(f"Max Seq Length in run Config: {config.get('max_seq_length', 'Max Seq Length Not Set in Config.')} vs Actual size of seq: {input_ids.size()=}")
     print()
 
     print(rf"Input Text: {repr(tok.decode(input_ids[:10]))}")
@@ -175,24 +214,24 @@ def print_1st_example_from_ds(lm_ds, tok: AutoTokenizer, config = {}, data_idx: 
     print(f'\nToken Text right before eos (ideally not a special token): {tok.decode(input_ids[first_eos_idx-1])}')
     print(f'Token ID right before eos (ideally not a special token): {input_ids[first_eos_idx-1]}')
 
-    print(f'\nToken Text right after eos (usually pad or eos): {tok.decode(input_ids[first_eos_idx+1])}') if first_eos_idx+1 < input_ids.size(0) else print(f'Token right after eos is nothing, since eos idx is the end: {first_eos_idx=} {input_ids.size()=} {tok.model_max_length=}')
-    print(f'Token ID right after eos (usually pad or eos): {input_ids[first_eos_idx+1]}') if first_eos_idx+1 < input_ids.size(0) else print(f'Token right after eos is nothing, since eos idx is the end: {first_eos_idx=} {input_ids.size()=} {tok.model_max_length=}')
+    print(f'\nToken Text right after eos (usually pad or eos): {tok.decode(input_ids[first_eos_idx+1])}') if first_eos_idx+1 < input_ids.size(0) else print(f'Token right after eos is nothing, since eos idx is the end: {first_eos_idx=} {input_ids.size()=}')
+    print(f'Token ID right after eos (usually pad or eos): {input_ids[first_eos_idx+1]}') if first_eos_idx+1 < input_ids.size(0) else print(f'Token right after eos is nothing, since eos idx is the end: {first_eos_idx=} {input_ids.size()=}')
     time.sleep(3)
 
     # mask
     print(f'\nMask Value at eos should be 1: {attention_mask[first_eos_idx]=}')
     print(f'Mask Value right before eos, should be 1: {attention_mask[first_eos_idx-1]=}')
-    print(f'Mask Value right after eos, should 0: {attention_mask[first_eos_idx+1]=}') if first_eos_idx+1 < input_ids.size(0) else print(f'Token right after eos is nothing, since eos idx is the end: {first_eos_idx=} {input_ids.size()=} {tok.model_max_length=}')
+    print(f'Mask Value right after eos, should 0: {attention_mask[first_eos_idx+1]=}') if first_eos_idx+1 < input_ids.size(0) else print(f'Token right after eos is nothing, since eos idx is the end: {first_eos_idx=} {input_ids.size()=}')
     time.sleep(1)
 
     # label
     print(f'\nLabel Text at eos should be eos: {labels[first_eos_idx]=}')
     print(f'Label Text right before at eos, should not be eos: {labels[first_eos_idx-1]=}')
-    print(f'Label Text right after eos, should -100 (dont predict): {labels[first_eos_idx+1]=}') if first_eos_idx+1 < input_ids.size(0) else print(f'Token right after eos is nothing, since eos idx is the end: {first_eos_idx=} {input_ids.size()=} {tok.model_max_length=}')
+    print(f'Label Text right after eos, should -100 (dont predict): {labels[first_eos_idx+1]=}') if first_eos_idx+1 < input_ids.size(0) else print(f'Token right after eos is nothing, since eos idx is the end: {first_eos_idx=} {input_ids.size()=}')
     time.sleep(1)
 
     print()
-    print(f'Length of (max) sequence: {len(input_ids)}')
+    print(f'Max seq Length of one sequence: {len(input_ids)}, {len(input_ids)=}, {input_ids.size()=}')
     time.sleep(1)
     print(f'{"--"*15}\nEnd Analysis of 1st Example from Data Set')
     print()
@@ -202,22 +241,3 @@ def print_first_example_after_decode(lm_ds, tok: AutoTokenizer):
 
     print()
     print(f'Input Text from data set after tok decodes IDs back to Text:\n{tok.decode(input_ids)=}')
-
-def sanity_check_length_of_sequences(ds, tok: AutoTokenizer, model, batch_size=1):
-    # Checking bug: 
-    # Token indices sequence length is longer than the specified maximum sequence length for this model (1551 > 512). Running this sequence through the model will result in indexing errors
-    try:
-        batch = ds.select(range(batch_size))
-    except Exception as e:
-        batch = ds.take(batch_size)
-    # Check Seq Length
-    for data_pt_dict in batch:
-        input_ids = data_pt_dict['input_ids']
-        seq_length = input_ids.size(0)
-        assert seq_length == tok.model_max_length, f'{seq_length},{tok.model_max_length}'
-        # if model is not None:
-        #     input_ids = input_ids.to(model.device)
-        #     y = model(input_ids)
-        #     print(f'{y=}')
-        #     print()
-    return

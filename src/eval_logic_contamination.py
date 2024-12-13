@@ -98,17 +98,18 @@ def main(**kwargs):
     # task = kwargs.get('task', 'putnam_axiom_variations')
     task = kwargs.get('task', 'putnam_axiom_53')
     print(f'{task=}')
-    # directory_path = expanduser("~/data/runs_logic_cont/run_2024_m11_d20_t21h_22m_22s") # putnam-axiom 53 train 20 epochs
-    # directory_path = expanduser("~/data/runs_logic_cont/run_2024_m11_d23_t21h_55m_07s") # putnam-axiom 53 train 100 epochs
-    # directory_path = expanduser("~/data/runs_logic_cont/run_2024_m11_d23_t21h_55m_07s")
-    # directory_path = expanduser(kwargs.get('model_name_or_path', 'google/gemma-2-2b'))
-    print(f'{directory_path=}')
+    # model_name_or_path = expanduser("~/data/runs_logic_cont/run_2024_m11_d20_t21h_22m_22s") # putnam-axiom 53 train 20 epochs
+    # model_name_or_path = expanduser("~/data/runs_logic_cont/run_2024_m11_d23_t21h_55m_07s") # putnam-axiom 53 train 100 epochs
+    # model_name_or_path = expanduser("~/data/runs_logic_cont/run_2024_m11_d23_t21h_55m_07s")
+    # model_name_or_path = expanduser(kwargs.get('model_name_or_path', 'google/gemma-2-2b'))
+    model_name_or_path = kwargs.get('model_name_or_path', None)
+    print(f'{model_name_or_path=}')
     # Extract and sort the model_list by checkpoint index
     model_list = sorted(
         [
-            os.path.join(directory_path, entry)
-            for entry in os.listdir(directory_path)
-            if os.path.isdir(os.path.join(directory_path, entry)) and entry.startswith("checkpoint-")
+            os.path.join(model_name_or_path, entry)
+            for entry in os.listdir(model_name_or_path)
+            if os.path.isdir(os.path.join(model_name_or_path, entry)) and entry.startswith("checkpoint-")
         ],
         key=lambda x: int(x.split('/')[-1].split('-')[-1])  # Extract the checkpoint index for sorting
     )
@@ -180,6 +181,7 @@ def main(**kwargs):
     return {'model_2_accuracy': model_2_accuracy, 'accs': accs}
 
 def _main(**kwargs):
+    from datetime import datetime
     today = datetime.now().strftime('%Y_m%m_d%d_t%Hh_%Mm_%Ss')
     run_name = f'{today}'
     run = wandb.init(

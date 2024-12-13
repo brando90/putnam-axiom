@@ -24,35 +24,29 @@ def quick_tokenization_sanity_check(tok, config = {}, test_text="This is a test 
     print(f"Decoded Tokens: {tok.decode(encoded['input_ids'][0])}")
     print(f'{"--"*15}\nEnd Quick Tokenization Sanity Check Hardcoded Example\n')
 
-def load_mdl_and_tok(pretrained_model_name_or_path, config, type_reinit_mdl: str = '',):
+def load_model_and_tok(pretrained_model_name_or_path, config: dict) -> tuple:
     print(f'----> {pretrained_model_name_or_path=}')
     tok = AutoTokenizer.from_pretrained(pretrained_model_name_or_path, padding_side="right", trust_remote_code=True, add_eos_token=True)
     if 'gemma-2-' in str(pretrained_model_name_or_path): # note: perhaps eos is same for all gemma-2 models
         torch_dtype = torch.bfloat16 if torch.cuda.is_bf16_supported() else torch.float32 
         print(f'{torch_dtype=}')
-        mdl = AutoModelForCausalLM.from_pretrained(pretrained_model_name_or_path, torch_dtype=torch_dtype, trust_remote_code=True)
+        model = AutoModelForCausalLM.from_pretrained(pretrained_model_name_or_path, torch_dtype=torch_dtype, trust_remote_code=True)
         device = torch.device(f"cuda:{0}" if torch.cuda.is_available() else "cpu")
-        mdl = mdl.to(device)
+        model = model.to(device)
         tok = AutoTokenizer.from_pretrained(pretrained_model_name_or_path, padding_side="right", trust_remote_code=True, add_eos_token=True)
-        # tok.model_max_length = config.get('max_seq_length', tok.model_max_length)
-        tok.model_max_length = config.get('max_seq_length', 512)
-        print(f'{tok.model_max_length=}')
     elif tok.pad_token is None:
         torch_dtype = torch.bfloat16 if torch.cuda.is_bf16_supported() else torch.float32 
         print(f'{torch_dtype=}')
-        mdl = AutoModelForCausalLM.from_pretrained(pretrained_model_name_or_path, torch_dtype=torch_dtype, trust_remote_code=True)
+        model = AutoModelForCausalLM.from_pretrained(pretrained_model_name_or_path, torch_dtype=torch_dtype, trust_remote_code=True)
         device = torch.device(f"cuda:{0}" if torch.cuda.is_available() else "cpu")
-        mdl = mdl.to(device)
+        model = model.to(device)
         tok = AutoTokenizer.from_pretrained(pretrained_model_name_or_path, padding_side="right", trust_remote_code=True, add_eos_token=True)
-        # tok.model_max_length = config.get('max_seq_length', tok.model_max_length)
-        tok.model_max_length = config.get('max_seq_length', 512)
         tok.pad_token = tok.eos_token
         print(f"-----> Warning eos and pad are the same: {tok.eos_token=} == {tok.pad_token}.")
+        raise ValueError(f'Model suggest: {pretrained_model_name_or_path}, has a pad token None. For now avoiding this until we understand why training issues/eval issues.')
     else:
         raise ValueError(f'Error: model not supported {pretrained_model_name_or_path=}.')
-    # print(f'{type_reinit_mdl=}')
-    # if 'gpt2' in type_reinit_mdl.lower():
-    #     # reinit_gpt2_weights_mutates(mdl)
-    #     assert ValueError(f'Error: not implemented {type_reinit_mdl=}.')
+    print(f'tok max length: {tok.model_max_length=} (dont overwrite it, its the true max length of the model, most likely)')
+    print(f'model config max length: {model.config.max_position_embeddings=} (dont overwrite it, its the true max length of the model, most likely)')
     quick_tokenization_sanity_check(tok, config)
-    return mdl, tok
+    return model, tok
