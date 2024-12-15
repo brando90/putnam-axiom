@@ -113,6 +113,7 @@ def do_lm_eval(model_name: str, task: str, kwargs: dict) -> dict:
     results = lm_eval.evaluator.simple_evaluate(
         model=lm_obj,
         tasks=[task],
+        batch_size="auto:6",
         task_manager=task_manager,
         write_out=False,
         limit=kwargs.get('limit', None), # limit the number of examples, if <1 then interpreted as %, default None --> all task benchmark
