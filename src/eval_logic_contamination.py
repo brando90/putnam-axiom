@@ -22,7 +22,7 @@ STOP_TOKENS: list[str] = ["problem:", "problem: ", "problem:\n", "Problem:", "Pr
 print(f'New stop tokens: {len(STOP_TOKENS)=} {STOP_TOKENS=}')
 
 class MyLM(LM):
-    def __init__(self, model, batch_size: int = 16, model_name: str = 'model_name NOT SET.'):
+    def __init__(self, model: LLM, batch_size: int = 16, model_name: str = 'model_name NOT SET.'):
         self.model = model
         super().__init__()
         self.batch_size = batch_size
@@ -70,7 +70,7 @@ def generate_until(
         # config: dict = {},
     ) -> List[str]:
     # Define sampling parameters
-    params = SamplingParams( temperature=0, top_p=1, max_tokens=max_tokens, stop=STOP_TOKENS)
+    params = SamplingParams(temperature=0, top_p=1, max_tokens=max_tokens, stop=STOP_TOKENS)
 
     # Extract prompts from requests
     prompts: List[str] = [request.args[0] for request in requests]
@@ -107,7 +107,7 @@ def do_lm_eval(model_name: str, task: str, kwargs: dict) -> dict:
     gc.collect()
     torch.cuda.empty_cache()
     
-    model = LLM(model_name, trust_remote_code=True)
+    model = LLM(model_name, trust_remote_code=True, gpu_memory_utilization=0.9)
     lm_obj = MyLM(model=model, model_name=model_name)
     task_manager = tasks.TaskManager()
     results = lm_eval.evaluator.simple_evaluate(
