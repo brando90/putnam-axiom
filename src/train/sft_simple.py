@@ -120,7 +120,7 @@ def main(**config):
         learning_rate=config.get('learning_rate', 1e-5),
         weight_decay=config.get('weight_decay', 1e-4),
         # -- scheduler
-        lr_scheduler_type=config.get('lr_scheduler_type', 'cosine'),
+        lr_scheduler_type=config.get('lr_scheduler_type', 'constant'), # this is the hf default btw
         warmup_ratio=config.get('warmup_ratio', 0.0), 
         # -- seed
         seed=config.get('seed', 0),

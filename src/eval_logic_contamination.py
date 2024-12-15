@@ -102,7 +102,8 @@ def main(**kwargs):
     # model_name_or_path = expanduser("~/data/runs_logic_cont/run_2024_m11_d23_t21h_55m_07s") # putnam-axiom 53 train 100 epochs
     # model_name_or_path = expanduser("~/data/runs_logic_cont/run_2024_m11_d23_t21h_55m_07s")
     # model_name_or_path = expanduser(kwargs.get('model_name_or_path', 'google/gemma-2-2b'))
-    model_name_or_path = kwargs.get('model_name_or_path', None)
+    model_name_or_path = kwargs.get('model_name_or_path', "/lfs/skampere1/0/brando9/data/runs_logic_cont/run_2024_m12_d13_t23h_28m_52s")
+    # model_name_or_path = kwargs.get('model_name_or_path', None)
     print(f'{model_name_or_path=}')
     # Extract and sort the model_list by checkpoint index
     model_list = sorted(
@@ -155,11 +156,10 @@ def main(**kwargs):
         results = do_lm_eval(model_name, task, kwargs)
         print(f"arguments: {results['samples'][task][0]['arguments'][0][0]=}")
         print(f"resps: {results['samples'][task][0]['resps'][0][0]=}")
-        # print(f'{results.keys()=}')
-        # print(f'{results["results"][task].keys()=}')
+        print(f'{results.keys()=}')
+        print(f'{results["results"][task].keys()=}')
 
-        # print("results:", results["results"][task].get("exact_match,none", None))
-        accuracy = results["results"][task].get("exact_match,none", None) 
+        accuracy: float = results["results"][task].get("exact_match,none", None) 
         model_2_accuracy[model_name] = accuracy
         accs.append(float(accuracy))
         checkpoint_idx = int(model_name.split('/')[-1].split('-')[-1])  # e.g., 'checkpoint-70'
@@ -193,7 +193,7 @@ def _main(**kwargs):
         config=kwargs | {'hostname': gethostname()}
     )
     kwargs = kwargs | {'today': today}
-    os.environ['CUDA_VISIBLE_DEVICES'] = str(0)
+    os.environ['CUDA_VISIBLE_DEVICES'] = str(6)
     print("--> WARNING/REMINDER: cude device harcoded in script!\n"*10)
     main(**kwargs)
     print(f'{run.get_url()=}')
