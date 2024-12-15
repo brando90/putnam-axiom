@@ -66,7 +66,7 @@ class MyLM(LM):
 def generate_until(
         self, requests: List, 
         batch_size: int = 53, # idk why >53 fails but in sft it didnt? + auto:N is not working
-        max_tokens: int = 612,
+        max_tokens: int = 512,
         # config: dict = {},
     ) -> List[str]:
     # Define sampling parameters
@@ -107,7 +107,8 @@ def do_lm_eval(model_name: str, task: str, kwargs: dict) -> dict:
     gc.collect()
     torch.cuda.empty_cache()
     
-    model = LLM(model_name, trust_remote_code=True, gpu_memory_utilization=0.9)
+    # model = LLM(model_name, trust_remote_code=True, gpu_memory_utilization=0.9, max_num_batched_tokens)
+    model = LLM(model_name, trust_remote_code=True)
     lm_obj = MyLM(model=model, model_name=model_name)
     task_manager = tasks.TaskManager()
     results = lm_eval.evaluator.simple_evaluate(
@@ -222,6 +223,9 @@ def main(**kwargs):
     return {'model_2_accuracy': model_2_accuracy, 'accs': accs}
 
 def _main(**kwargs):
+    import wandb
+    import os
+    import time
     from datetime import datetime
     today = datetime.now().strftime('%Y_m%m_d%d_t%Hh_%Mm_%Ss')
     run_name = f'{today}'
@@ -234,8 +238,10 @@ def _main(**kwargs):
         config=kwargs | {'hostname': gethostname()}
     )
     kwargs = kwargs | {'today': today}
-    os.environ['CUDA_VISIBLE_DEVICES'] = str(6)
-    print("--> WARNING/REMINDER: cude device harcoded in script!\n"*10)
+    # os.environ['CUDA_VISIBLE_DEVICES'] = str(6) print("--> WARNING/REMINDER: cude device harcoded in script!\n"*10)
+    print(f"CUDA_VISIBLE_DEVICES: {os.environ.get('CUDA_VISIBLE_DEVICES', None)}")
+    print(f'{run.get_url()=}')
+    time.sleep(2)
     main(**kwargs)
     print(f'{run.get_url()=}')
     wandb.finish()
