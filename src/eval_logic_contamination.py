@@ -45,7 +45,7 @@ class MyLM(LM):
             results.append(logprob)
         return results
 
-    def _generate_until(self, requests: List) -> List[str]:
+    def generate_until(self, requests: List) -> List[str]:
         print()
         # params = SamplingParams(temperature=0.9, top_p=0.95, max_tokens=2048, stop='Problem:\n')
         # params = SamplingParams(temperature=0.9, top_p=0.95, max_tokens=2048, stop=STOP_TOKENS)
@@ -63,7 +63,7 @@ class MyLM(LM):
         print()
         return results
 
-def generate_until(
+def _generate_until(
         self, requests: List, 
         batch_size: int = 53, # idk why >53 fails but in sft it didnt? + auto:N is not working
         max_tokens: int = 512,
