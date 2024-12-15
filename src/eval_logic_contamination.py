@@ -45,7 +45,7 @@ class MyLM(LM):
             results.append(logprob)
         return results
 
-    def generate_until(self, requests: List) -> List[str]:
+    def _generate_until(self, requests: List) -> List[str]:
         print()
         # params = SamplingParams(temperature=0.9, top_p=0.95, max_tokens=2048, stop='Problem:\n')
         # params = SamplingParams(temperature=0.9, top_p=0.95, max_tokens=2048, stop=STOP_TOKENS)
@@ -62,6 +62,46 @@ class MyLM(LM):
             print(f'{"--"*20}\nGeneration:\n{result}\n')
         print()
         return results
+
+def generate_until(
+        self, requests: List, 
+        batch_size: int = 53, # idk why >53 fails but in sft it didnt? + auto:N is not working
+        max_tokens: int = 612,
+        # config: dict = {},
+    ) -> List[str]:
+    # Define sampling parameters
+    params = SamplingParams( temperature=0, top_p=1, max_tokens=max_tokens, stop=STOP_TOKENS)
+
+    # Extract prompts from requests
+    prompts: List[str] = [request.args[0] for request in requests]
+
+    # Prepare a container for all final results
+    all_results: List[str] = []
+
+    # Process prompts in batches
+    for start_idx in range(0, len(prompts), batch_size):
+        end_idx = start_idx + batch_size
+        batch_prompts = prompts[start_idx:end_idx]
+
+        # Generate outputs for this batch
+        batch_outputs = self.model.generate(batch_prompts, params)
+        batch_results = [output.outputs[0].text for output in batch_outputs]
+
+        # Verification
+        assert len(batch_prompts) == len(batch_results), (
+            f"Fatal error: Number of prompts ({len(batch_prompts)}) does not match "
+            f"number of results ({len(batch_results)})."
+        )
+
+        # Logging / debugging prints
+        for req_idx, (prompt, result) in enumerate(zip(batch_prompts, batch_results), start=start_idx):
+            print(f'{"--"*20}\nProblem idx: {req_idx}. Model name: {self.model_name})')
+            print(f'{"--"*20}\nInput Prompt Text:\n{prompt}\n')
+            print(f'{"--"*20}\nGeneration:\n{result}\n')
+
+        # Extend the overall results
+        all_results.extend(batch_results)
+    return all_results
 
 def do_lm_eval(model_name: str, task: str, kwargs: dict) -> dict: 
     gc.collect()

@@ -99,9 +99,9 @@ To run the evaluation on the 265 (=53*5) functional variations benchmark:
 ```bash
 
 conda activate putnam_axiom
-export CUDA_VISIBLE_DEVICES=3
+export CUDA_VISIBLE_DEVICES=7
 export task="putnam_axiom_variations"
-export model_name_or_path="~/data/runs_logic_cont/run_2024_m11_d23_t21h_55m_07s"
+export model_name_or_path="$HOME/data/runs_logic_cont/run_2024_m12_d15_t05h_05m_06s"
 export mode="online"
 # export mode="dryrun"
 python ~/putnam-axiom/src/eval_logic_contamination.py --task ${task} --mode ${mode} --model_name_or_path ${model_name_or_path}
@@ -113,7 +113,7 @@ To run the evaluation on the 53 original problems used to create the functional 
 conda activate putnam_axiom
 export CUDA_VISIBLE_DEVICES=0
 export task="putnam_axiom_53"
-export model_name_or_path="/lfs/skampere1/0/brando9/data/runs_logic_cont/run_2024_m12_d05_t19h_29m_51s"
+export model_name_or_path="$HOME/data/runs_logic_cont/run_2024_m12_d15_t05h_05m_06s"
 export mode="online"
 # export mode="dryrun"
 python ~/putnam-axiom/src/eval_logic_contamination.py --task ${task} --mode ${mode} --model_name_or_path ${model_name_or_path}
