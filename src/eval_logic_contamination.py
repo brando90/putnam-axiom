@@ -130,6 +130,17 @@ def do_lm_eval(model_name: str, task: str, kwargs: dict) -> dict:
     torch.cuda.empty_cache()
     return results
 
+def print_and_wandb_log_lm_eval_results(accuracy: float, checkpoint_idx: int, task: str, model_name: str, results: dict = {}) -> None:
+    """ Log accuracy for each checkpoint """
+    print('---')
+    print(f'Checkpoint idx: {checkpoint_idx=}')
+    print(f"Accuracy for that checkpoint: {accuracy=} ({checkpoint_idx=})")
+    print(f"Checkpoint full name: {model_name=}")
+    print('---')
+    wandb.log({f"eval_bench/{task}/checkpoint_idx": checkpoint_idx, 
+                f"eval_bench/{task}/accuracy": accuracy})
+
+
 def main(**kwargs):
     gc.collect()
     torch.cuda.empty_cache()
@@ -181,41 +192,18 @@ def main(**kwargs):
         print(f'running model with name: {model_name}')
         print(f"{'=' * 100}")
 
-        # model = LLM(model_name, trust_remote_code=True)
-        # lm_obj = MyLM(model=model)
-        # task_manager = tasks.TaskManager()
-        # results = lm_eval.evaluator.simple_evaluate(
-        #     model=lm_obj,
-        #     tasks=[task],
-        #     task_manager=task_manager,
-        #     write_out=False,
-        #     limit=kwargs.get('limit', 1), # limit the number of examples, if <1 then interpreted as %, default None --> all task benchmark
-        #     random_seed=None,
-        #     numpy_random_seed=None,
-        #     torch_random_seed=None,
-        #     fewshot_random_seed=None
-        # )
-        results = do_lm_eval(model_name, task, kwargs)
-        print(f"arguments: {results['samples'][task][0]['arguments'][0][0]=}")
-        print(f"resps: {results['samples'][task][0]['resps'][0][0]=}")
-        print(f'{results.keys()=}')
-        print(f'{results["results"][task].keys()=}')
+        results: dict = do_lm_eval(model_name, task, kwargs)
+        print(f"Arguments: {results['samples'][task][0]['arguments'][0][0]=}\nResponses: {results['samples'][task][0]['resps'][0][0]=}")
+        print(f'Keys for Lm Eval: {results.keys()=}\nKeys for Lm Eval Task: {results["results"][task].keys()=}')
 
+        # Log accuracy for each checkpoint
         accuracy: float = results["results"][task].get("exact_match,none", None) 
         model_2_accuracy[model_name] = accuracy
         accs.append(float(accuracy))
         checkpoint_idx = int(model_name.split('/')[-1].split('-')[-1])  # e.g., 'checkpoint-70'
-        
-        # Log accuracy for each checkpoint
-        print('---')
-        print(f'Checkpoint idx: {checkpoint_idx=}')
-        print(f"Accuracy for that checkpoint: {accuracy=} ({checkpoint_idx=})")
-        print(f"Checkpoint full name: {model_name=}")
-        print('---')
-        wandb.log({f"eval_bench/{task}/checkpoint_idx": checkpoint_idx, 
-                   f"eval_bench/{task}/accuracy": accuracy})
-        # del model
-        # del lm_obj
+        # do logging 
+        print_and_wandb_log_lm_eval_results(accuracy, checkpoint_idx, task, model_name, results)
+
         gc.collect()
         torch.cuda.empty_cache()
     print(f'{model_2_accuracy=}\n{accs=}')

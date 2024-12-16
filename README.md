@@ -155,21 +155,25 @@ export pretrained_model_name_or_path='google/gemma-2-2b-it'
 export max_seq_length=700
 export batch_size=2
 export gradient_accumulation_steps=2
-export save_steps=2
+export save_steps=5
 export warmup_ratio=0.0
 export lr_scheduler_type='cosine'
-export max_steps=12
-# export end_train=1
-export end_train=2
-export end_train=4
-
-# export learning_rate=1e-5
-# export max_steps=22
-# export max_steps=44
-# export max_steps=60
-# export end_train=8
-
 export learning_rate=1e-5
+# export max_steps=12
+# export end_train=1
+# export end_train=2
+# export end_train=4
+
+export save_steps=5
+export learning_rate=1e-5
+export max_steps=70
+export end_train=8
+
+# export save_steps=5
+# export learning_rate=1e-5
+# export max_steps=80
+# export end_train=16
+
 # export max_steps=22
 # export max_steps=44
 # export max_steps=60
@@ -182,8 +186,9 @@ export learning_rate=1e-5
 # export end_train=53
 
 # export lr_scheduler_type='constant'
-export max_steps=320
-export end_train=53
+# export save_steps=5
+# export max_steps=320
+# export end_train=53
 
 # export pretrained_model_name_or_path='meta-llama/Llama-3.1-8B'
 # export pretrained_model_name_or_path='meta-llama/Llama-3.1-8B-Instruct'
@@ -203,7 +208,7 @@ export val_split='func_variations_265_11_23_2024'
 
 export mode="online"
 # export mode="dryrun"
-export CUDA_VISIBLE_DEVICES=6
+export CUDA_VISIBLE_DEVICES=2
 python ~/putnam-axiom/src/train/sft_simple.py --mode ${mode} --num_train_epochs ${num_train_epochs} --ds_name_or_path ${ds_name_or_path} --train_split ${train_split} --val_split ${val_split} --max_seq_length ${max_seq_length} --gradient_accumulation_steps ${gradient_accumulation_steps} --batch_size ${batch_size} --pretrained_model_name_or_path ${pretrained_model_name_or_path} -max_steps ${max_steps} --save_steps ${save_steps} --warmup_ratio ${warmup_ratio} --end_train ${end_train} --CUDA_VISIBLE_DEVICES ${CUDA_VISIBLE_DEVICES} --learning_rate ${learning_rate} --lr_scheduler_type ${lr_scheduler_type}
 
 

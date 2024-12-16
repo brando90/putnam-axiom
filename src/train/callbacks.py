@@ -170,17 +170,21 @@ class GenCallbackHFGen(TrainerCallback):
                 # -- Print Gold Soln vs Gen Soln statistics
                 soln: str = input_text.split('\n\nSolution:')[-1]
                 gen_soln: str = gen_text.split('\n\nSolution:')[-1]
+                
+                import Levenshtein
+                dist = Levenshtein.distance(soln, gen_soln)
+                normalized_dist = dist / len(soln)
+                normalized_edit_dist_one_bach.append(normalized_dist)
+
                 print()
                 print("=="*15 + f'<begin> Solutions Comparison (with Prompt nickname: {self.prompt_nickname})')
                 print(f'{"--"*10} Gold Solution:\n{soln}')
                 print()
                 print(f'{"--"*10} Generated Solution:\n{gen_soln}')
+                print(f'Normalized edit dist: {normalized_dist}')
                 print("=="*15 + f'<end> Solutions Comparison (with Prompt nickname: {self.prompt_nickname})')
                 print()
-                import Levenshtein
-                dist = Levenshtein.distance(soln, gen_soln)
-                normalized_dist = dist / len(soln)
-                normalized_edit_dist_one_bach.append(normalized_dist)
+
             # log_dict = {f"eval_gen/{self.prompt_nickname}/edit_dist": dist, f"eval_gen/{self.prompt_nickname}/norm_avg_edit_dist": normalized_dist, "step": state.global_step}
             avg_normalized_edit_dist: float = float(torch.tensor(normalized_edit_dist_one_bach).cpu().mean())
             log_dict = {f"eval_gen/{self.prompt_nickname}/norm_avg_edit_dist": avg_normalized_edit_dist, "step": state.global_step}
@@ -204,3 +208,39 @@ class GenCallbackHFGen(TrainerCallback):
     def input_text_to_prompt(self, input_text: str) -> str:
         # Note: only need to add <bos> token at front during inference, other special tokens not needed
         return self.tok.bos_token + self.prompt_template.replace('{$PROBLEM}', input_text)
+
+# class CallBackLmEval(TrainerCallback):
+#     # \n\nProblem:\n{$PROBLEM}\n\nSolution:
+#     def __init__(self, mdl: AutoModelForCausalLM, 
+#                  tok: AutoTokenizer, 
+#                  prompt_template: str = "Problem:\n{$PROBLEM}\n\nSolution:", 
+#                  prompt_nickname: str = 'default_prompt', 
+#                  config = 'not set'
+#                  ):
+#         self.mdl = mdl
+#         self.tok = tok
+#         self.prompt_template = prompt_template
+#         self.prompt_nickname = prompt_nickname
+#         self.config = config
+
+#     def on_evaluate(self, args, state, control, **kwargs):
+#         """ Generate predictions using the pipeline during evaluation."""
+#         # - Ensure we have access to the evaluation dataloader and model
+#         eval_dataloader = kwargs.get('eval_dataloader')
+#         if eval_dataloader is None:
+#             print("Skipping Lm Eval CallBack.")
+#             return
+
+#         # sanity checks
+
+#         # set model to vllm on 2nd gpu
+#         from eval_logic_contamination import do_lm_eval, print_and_wandb_log_lm_eval_results
+
+#         results: dict = do_lm_eval(model_name, task, kwargs)
+#         print(f"Arguments: {results['samples'][task][0]['arguments'][0][0]=}\nResponses: {results['samples'][task][0]['resps'][0][0]=}")
+#         print(f'Keys for Lm Eval: {results.keys()=}\nKeys for Lm Eval Task: {results["results"][task].keys()=}')
+
+
+
+        
+
