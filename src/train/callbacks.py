@@ -181,7 +181,7 @@ class GenCallbackHFGen(TrainerCallback):
                 print(f'{"--"*10} Gold Solution:\n{soln}')
                 print()
                 print(f'{"--"*10} Generated Solution:\n{gen_soln}')
-                print(f'Normalized edit dist: {normalized_dist}')
+                print(f'\nNormalized edit dist: {normalized_dist}')
                 print("=="*15 + f'<end> Solutions Comparison (with Prompt nickname: {self.prompt_nickname})')
                 print()
 
