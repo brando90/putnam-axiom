@@ -50,73 +50,6 @@ class TFACallback(TrainerCallback):
         if trainer.is_world_process_zero():
             wandb.log({"TFA (eval)": tfa_score, "step": state.global_step})
 
-# ref: https://chatgpt.com/share/6750ce55-b1a4-8001-84d0-802b7920648e
-class PipelineTextGenerationCallback(TrainerCallback):
-    def __init__(self, mdl: AutoModelForCausalLM, tok: AutoTokenizer):
-        """
-        Callback for generating predictions using the text-generation pipeline.
-        
-        Args:
-            gen: An instance of HFPipelineGenerator initialized with a Hugging Face pipeline.
-            tokenizer: Tokenizer associated with the model.
-        """
-        self.model = mdl
-        self.tokenizer = tok
-        # https://huggingface.co/docs/transformers/en/main_classes/pipelines
-        from transformers import pipeline, Pipeline
-        self.pipe: Pipeline = pipeline("text-generation", model=mdl, tokenizer=tok)
-        # greedy
-        self.do_sample = True
-        self.top_p = 1.0 # Float that controls the cumulative probability of the top tokens to consider. Must be in (0, 1]. Set to 1 to consider all tokens
-        self.temperature = 0.0 # Float that controls the randomness of the sampling. Lower values make the model more deterministic, while higher values make the model more random. Zero means greedy sampling
-        self.max_length = 512 # max length for gen (not neccesserily the same as train max length but should be)
-        self.n = 1 # 1 generation
-        # greedy, note: greedy decoding if num_beams=1 and do_sample=False
-
-    def on_evaluate(self, args, state, control, **kwargs):
-        """
-        Generate predictions using the pipeline during evaluation.
-        """
-        # Ensure we have access to the evaluation dataloader and model
-        eval_dataloader = kwargs.get('eval_dataloader')
-        if eval_dataloader is None:
-            print("Evaluation dataloader not available. Skipping text generation.")
-            return
-        
-        # --- Starting Text Generation with Pipeline ---
-        for batch in tqdm(eval_dataloader):
-            # Extract input_ids from the batch and decode to strings
-            inputs = batch["input_ids"]
-            inputs_decoded = self.tokenizer.batch_decode(inputs, skip_special_tokens=False) # you need speical tokens, since this is important to know if gen works for later real eval code
-
-            # Generate predictions for each input in the batch
-            from transformers import Pipeline
-            self.pipe: Pipeline
-            for prompt in inputs_decoded:
-                # Use the HFPipelineGenerator's pipeline
-                # since docs are hard to find & code isn't useful: https://huggingface.co/docs/transformers/en/main_classes/pipelines#transformers.TextGenerationPipeline
-                output = self.pipe(
-                    prompt,
-                    do_sample=self.do_sample,
-                    top_p=self.top_p,
-                    temperature=self.temperature,
-                    max_length=self.max_tokens,
-                    num_return_sequences=self.n,
-                    truncation=True,
-                )
-                
-                # Extract generated text from the pipeline output
-                generated_text = [completion["generated_text"] for completion in output]
-
-                # Print the prompt, predictions, and (optionally) the target
-                print(f"Prompt: {prompt}")
-                print("Generated:")
-                for i, text in enumerate(generated_text, 1):
-                    print(f"  [{i}] {text}")
-                print("-" * 50)
-
-        print("\n--- Text Generation Completed ---\n")
-
 class GenCallbackHFGen(TrainerCallback):
     # \n\nProblem:\n{$PROBLEM}\n\nSolution:
     def __init__(self, mdl: AutoModelForCausalLM, tok: AutoTokenizer, prompt_template: str = "Problem:\n{$PROBLEM}\n\nSolution:", prompt_nickname: str = 'default_prompt', config = 'not set'):
@@ -136,7 +69,9 @@ class GenCallbackHFGen(TrainerCallback):
     def on_evaluate(self, args, state, control, **kwargs):
         """ Generate predictions using the pipeline during evaluation."""
         # - Ensure we have access to the evaluation dataloader and model
-        eval_dataloader = kwargs.get('eval_dataloader')
+        # eval_dataloader = kwargs.get('eval_dataloader')
+        eval_dataloader = kwargs.get('train_dataloader')
+        print(f'Dataloader in callback: {eval_dataloader.base_dataloader.dataset.split}')
         if eval_dataloader is None:
             print("Evaluation dataloader not available. Skipping text generation.")
             return
@@ -151,9 +86,15 @@ class GenCallbackHFGen(TrainerCallback):
             self.tok.padding_side = "left" # left needed for inference! or it will start trying to generate starting from a pad token!? https://chatgpt.com/c/675b3a77-667c-8001-a087-33c2b4ae96be
             prompt_ids: dict = self.tok(prompt_texts, add_special_tokens=False, return_tensors='pt', truncation=True, padding=True) # not traning and <bos> already added, so no need to add anything else
             self.tok.padding_side = "right" # only fortrain
+            # https://chatgpt.com/g/g-p-6760861c4ef881918d7582c9afe11a48-logic-contamination/c/6762553f-37d8-8001-8f42-daae269da2c8
             # truncaton true to max length and padding also ok to that length so the questions are sent to the model and padding is ignroed usually so likely gens won't be affect much? this is a debugging ste anyway
+            # Get the device of the embeddings (first submodule) dynamically
+            # input_device = self.mdl.get_input_embeddings().weight.device
+            # Move the input_ids to the same device as the embeddings
+            # prompt_ids = prompt_ids.to(input_device)
             prompt_ids = prompt_ids["input_ids"].to(self.mdl.device)
-            print(f'\nChecking size of prompt going into model: {prompt_ids.size()=}\n')
+            # prompt_ids = prompt_ids["input_ids"]
+            # print(f'\nChecking size of prompt going into model: {prompt_ids.size()=}\n')
             # Get generations
             gen_ids = self.mdl.generate(prompt_ids, max_new_tokens=512)
             gen_texts = self.tok.batch_decode(gen_ids, skip_special_tokens=True) # no special toks needed during gen for sanity checking & computing diff with true soln
@@ -181,7 +122,7 @@ class GenCallbackHFGen(TrainerCallback):
                 print(f'{"--"*10} Gold Solution:\n{soln}')
                 print()
                 print(f'{"--"*10} Generated Solution:\n{gen_soln}')
-                print(f'Normalized edit dist: {normalized_dist}')
+                print(f'\nNormalized edit dist: {normalized_dist}')
                 print("=="*15 + f'<end> Solutions Comparison (with Prompt nickname: {self.prompt_nickname})')
                 print()
 

@@ -144,6 +144,9 @@ python ~/putnam-axiom/src/eval_logic_contamination.py --task ${task} --mode ${mo
 # - Train on the original Putnam-AXIOM 53 Benchmark
 conda activate putnam_axiom
 
+# export pretrained_model_name_or_path='meta-llama/Llama-3.1-8B'
+# export pretrained_model_name_or_path='meta-llama/Llama-3.1-8B-Instruct'
+
 # export pretrained_model_name_or_path='google/gemma-2-2b'
 # export pretrained_model_name_or_path='google/gemma-2-2b-it'
 # export max_seq_length=512
@@ -157,6 +160,7 @@ export batch_size=2
 export gradient_accumulation_steps=2
 export save_steps=5
 export warmup_ratio=0.0
+# export lr_scheduler_type='constant'
 export lr_scheduler_type='cosine'
 export learning_rate=1e-5
 # export max_steps=12
@@ -164,42 +168,69 @@ export learning_rate=1e-5
 # export end_train=2
 # export end_train=4
 
-export save_steps=5
-export learning_rate=1e-5
-export max_steps=70
-export end_train=8
+# export save_steps=5
+# export learning_rate=1e-5
+# export max_steps=70
+# export end_train=8
 
 # export save_steps=5
 # export learning_rate=1e-5
-# export max_steps=80
+# export max_steps=70
 # export end_train=16
 
-# export max_steps=22
-# export max_steps=44
-# export max_steps=60
-# export end_train=16
+export save_steps=5
+export learning_rate=1e-5
+export max_steps=110
+export end_train=32
 
-# export max_steps=320
-# export end_train=32
-
-# export max_steps=320
-# export end_train=53
-
-# export lr_scheduler_type='constant'
-# export save_steps=5
-# export max_steps=320
-# export end_train=53
-
-# export pretrained_model_name_or_path='meta-llama/Llama-3.1-8B'
-# export pretrained_model_name_or_path='meta-llama/Llama-3.1-8B-Instruct'
-# export max_seq_length=500
-# export batch_size=2
-# export gradient_accumulation_steps=4
-# export num_train_epochs=30
+export save_steps=30
+export learning_rate=1e-5
+export max_steps=300
+export end_train=53
 
 # export ds_name_or_path='brando/hendrycks_math'
 # export train_split='train'
 # export val_split='test'
+export ds_name_or_path='Putnam-AXIOM/putnam-axiom-dataset'
+export train_split='func_original_53_10_30_2024'
+export val_split=$train_split
+export val_split='func_variations_265_11_23_2024'
+
+export mode="online"
+# export mode="dryrun"
+export CUDA_VISIBLE_DEVICES=7
+python ~/putnam-axiom/src/train/sft_simple.py --mode ${mode} --num_train_epochs ${num_train_epochs} --ds_name_or_path ${ds_name_or_path} --train_split ${train_split} --val_split ${val_split} --max_seq_length ${max_seq_length} --gradient_accumulation_steps ${gradient_accumulation_steps} --batch_size ${batch_size} --pretrained_model_name_or_path ${pretrained_model_name_or_path} -max_steps ${max_steps} --save_steps ${save_steps} --warmup_ratio ${warmup_ratio} --end_train ${end_train} --CUDA_VISIBLE_DEVICES ${CUDA_VISIBLE_DEVICES} --learning_rate ${learning_rate} --lr_scheduler_type ${lr_scheduler_type}
+
+
+```
+
+```bash
+
+# [Optional] HF authentication
+# export HF_TOKEN=$(cat ~/keys/master_hf_token.txt)
+# huggingface-cli login --token "$HF_TOKEN"
+
+# - Train on the original Putnam-AXIOM 53 Benchmark
+conda activate putnam_axiom
+
+# export pretrained_model_name_or_path='google/gemma-2-9b-it'
+# export pretrained_model_name_or_path='google/gemma-7b-it'
+# export pretrained_model_name_or_path='Qwen/Qwen2.5-Math-1.5B-Instruct'
+export pretrained_model_name_or_path='meta-llama/Llama-3.1-8B-Instruct'
+export max_seq_length=550
+export batch_size=1
+export gradient_accumulation_steps=4
+export save_steps=20
+export warmup_ratio=0.0
+export lr_scheduler_type='cosine'
+export learning_rate=1e-5
+export optim='paged_adamw_32bit'
+export gradient_checkpointing='True'
+
+export save_steps=30
+export learning_rate=1e-5
+export max_steps=200
+export end_train=53
 
 export ds_name_or_path='Putnam-AXIOM/putnam-axiom-dataset'
 export train_split='func_original_53_10_30_2024'
@@ -208,8 +239,8 @@ export val_split='func_variations_265_11_23_2024'
 
 export mode="online"
 # export mode="dryrun"
-export CUDA_VISIBLE_DEVICES=2
-python ~/putnam-axiom/src/train/sft_simple.py --mode ${mode} --num_train_epochs ${num_train_epochs} --ds_name_or_path ${ds_name_or_path} --train_split ${train_split} --val_split ${val_split} --max_seq_length ${max_seq_length} --gradient_accumulation_steps ${gradient_accumulation_steps} --batch_size ${batch_size} --pretrained_model_name_or_path ${pretrained_model_name_or_path} -max_steps ${max_steps} --save_steps ${save_steps} --warmup_ratio ${warmup_ratio} --end_train ${end_train} --CUDA_VISIBLE_DEVICES ${CUDA_VISIBLE_DEVICES} --learning_rate ${learning_rate} --lr_scheduler_type ${lr_scheduler_type}
+export CUDA_VISIBLE_DEVICES=0
+python ~/putnam-axiom/src/train/sft_simple.py --mode ${mode} --num_train_epochs ${num_train_epochs} --ds_name_or_path ${ds_name_or_path} --train_split ${train_split} --val_split ${val_split} --max_seq_length ${max_seq_length} --gradient_accumulation_steps ${gradient_accumulation_steps} --batch_size ${batch_size} --pretrained_model_name_or_path ${pretrained_model_name_or_path} -max_steps ${max_steps} --save_steps ${save_steps} --warmup_ratio ${warmup_ratio} --end_train ${end_train} --CUDA_VISIBLE_DEVICES ${CUDA_VISIBLE_DEVICES} --learning_rate ${learning_rate} --lr_scheduler_type ${lr_scheduler_type} --optim ${optim} --gradient_checkpointing ${gradient_checkpointing}
 
 
 ```

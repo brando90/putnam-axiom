@@ -16,13 +16,9 @@ import train.models
 
 from train.utils import seed_everything
 
-import subprocess
-
-# Get tmux session numbers
 def get_current_tmux_session_number() -> str:
-    """
-    Returns the current tmux session number.
-    """
+    """ Returns the current tmux session number. """
+    import subprocess
     try:
         # 'tmux display-message -p "#S"' gets the current session's name/number.
         output = subprocess.check_output(['tmux', 'display-message', '-p', '#S'], text=True)
@@ -101,7 +97,8 @@ def main(**config):
         bf16=torch.cuda.is_bf16_supported(),
         fp16=not torch.cuda.is_bf16_supported(),
         # -- save, eval, logging opts
-        save_steps=config.get('save_steps', 2), 
+        # save_steps=config.get('save_steps', 2), 
+        save_total_limit=3,
         save_strategy=config.get('save_strategy', 'steps'),
         eval_on_start=config.get('eval_on_start', True),
         evaluation_strategy=config.get('eval_strategy', 'steps'), 
@@ -117,8 +114,10 @@ def main(**config):
         gradient_accumulation_steps=config.get('gradient_accumulation_steps', 4),
         # -- optim
         optim=config.get('optim', 'adamw_torch'),
+        # optim=config.get('optim', 'paged_adamw_32bit'),
         learning_rate=config.get('learning_rate', 1e-5),
         weight_decay=config.get('weight_decay', 1e-4),
+        gradient_checkpointing=config.get('gradient_checkpointing', False), # careful might give issues, but not in skampere1
         # -- scheduler
         lr_scheduler_type=config.get('lr_scheduler_type', 'constant'), # this is the hf default btw
         warmup_ratio=config.get('warmup_ratio', 0.0), 
@@ -132,7 +131,7 @@ def main(**config):
         train_dataset=train_dataset,
         eval_dataset=eval_dataset,
         args=training_args,
-        callbacks=[GenCallbackHFGen(model, tok), GenCallbackHFGen(model, tok, PUTNAM_AXIOM_PROMPT_TEMPLATE, 'putnam_axiom_prompt')]
+        # callbacks=[GenCallbackHFGen(model, tok), GenCallbackHFGen(model, tok, PUTNAM_AXIOM_PROMPT_TEMPLATE, 'putnam_axiom_prompt')]
         # callbacks=[GenCallbackHFGen(model, tok)]
     )
     print(f"\nStarting fine-tuning...")
@@ -187,9 +186,7 @@ def _main(**kwargs):
     run_name = f'{kwargs}' 
     run = wandb.init(mode=kwargs.get('mode', 'dryrun'), project="putnam-axiom", name=run_name, save_code=True, config=kwargs)
     # run = wandb.init(mode=kwargs.get('mode', 'online'), project="putnam-axiom", name=run_name, save_code=True, config=kwargs)
-    # wandb.run.log_code(f"./{os.path.basename(__file__)}") # maybe logscode immediately # ref: https://stackoverflow.com/questions/79256112/how-to-log-only-the-current-script-file-to-wb-code-panel-immediately
-    # wandb.config.update()
-    # os.environ['CUDA_VISIBLE_DEVICES'] = str(4); print("--> WARNING/REMINDER: cude device harcoded in script!\n"*10)
+    # os.environ['CUDA_VISIBLE_DEVICES'] = str('2,3'); print("--> WARNING/REMINDER: cude device harcoded in script!\n"*10)
     print(f'Kwargs to run:\n{kwargs}')
     output_dir = main(**kwargs)
     run_eval_logic_contamination(output_dir)

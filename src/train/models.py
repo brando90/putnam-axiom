@@ -27,12 +27,12 @@ def quick_tokenization_sanity_check(tok, config = {}, test_text="This is a test 
 def load_model_and_tok(pretrained_model_name_or_path, config: dict) -> tuple:
     print(f'----> {pretrained_model_name_or_path=}')
     tok = AutoTokenizer.from_pretrained(pretrained_model_name_or_path, padding_side="right", trust_remote_code=True, add_eos_token=True)
-    if 'gemma-2-' in str(pretrained_model_name_or_path): # note: perhaps eos is same for all gemma-2 models
+    if 'gemma-' in str(pretrained_model_name_or_path): # note: perhaps eos is same for all gemma-2 models
         torch_dtype = torch.bfloat16 if torch.cuda.is_bf16_supported() else torch.float32 
         print(f'{torch_dtype=}')
-        model = AutoModelForCausalLM.from_pretrained(pretrained_model_name_or_path, torch_dtype=torch_dtype, trust_remote_code=True)
-        device = torch.device(f"cuda:{0}" if torch.cuda.is_available() else "cpu")
-        model = model.to(device)
+        model = AutoModelForCausalLM.from_pretrained(pretrained_model_name_or_path, torch_dtype=torch_dtype, trust_remote_code=True, device_map=config.get('device_map', 'auto'))
+        # device = torch.device(f"cuda:{0}" if torch.cuda.is_available() else "cpu")
+        # model = model.to(device)
         tok = AutoTokenizer.from_pretrained(pretrained_model_name_or_path, padding_side="right", trust_remote_code=True, add_eos_token=True)
     elif tok.pad_token is None:
         torch_dtype = torch.bfloat16 if torch.cuda.is_bf16_supported() else torch.float32 
@@ -43,7 +43,11 @@ def load_model_and_tok(pretrained_model_name_or_path, config: dict) -> tuple:
         tok = AutoTokenizer.from_pretrained(pretrained_model_name_or_path, padding_side="right", trust_remote_code=True, add_eos_token=True)
         tok.pad_token = tok.eos_token
         print(f"-----> Warning eos and pad are the same: {tok.eos_token=} == {tok.pad_token}.")
-        raise ValueError(f'Model suggest: {pretrained_model_name_or_path}, has a pad token None. For now avoiding this until we understand why training issues/eval issues.')
+        # raise ValueError(f'Model suggest: {pretrained_model_name_or_path}, has a pad token None. For now avoiding this until we understand why training issues/eval issues.')
+    elif 'Qwen' in str(pretrained_model_name_or_path):
+        torch_dtype = torch.bfloat16 if torch.cuda.is_bf16_supported() else torch.float32 
+        model = AutoModelForCausalLM.from_pretrained(pretrained_model_name_or_path, torch_dtype=torch_dtype, trust_remote_code=True, device_map=config.get('device_map', 'auto'))
+        tok = AutoTokenizer.from_pretrained(pretrained_model_name_or_path, padding_side="right", trust_remote_code=True, add_eos_token=True)
     else:
         raise ValueError(f'Error: model not supported {pretrained_model_name_or_path=}.')
     print(f'tok max length: {tok.model_max_length=} (dont overwrite it, its the true max length of the model, most likely)')
