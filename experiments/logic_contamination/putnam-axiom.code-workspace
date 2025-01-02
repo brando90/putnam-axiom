@@ -17,6 +17,9 @@
 		},
 		{
 			"path": "../../../beyond-scale-language-data-diversity"
+		},
+		{
+			"path": "../../../putnam-axiom-preview-lm-evaluation-harness"
 		}
 	],
 	"settings": {}
