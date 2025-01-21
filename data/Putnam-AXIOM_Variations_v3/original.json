@@ -170,8 +170,8 @@
     {
         "year": "1990",
         "id": "B1",
-        "problem": "Find the absolute value of the difference across all real-valued continuously differentiable functions $f$ on the real line such that for all $x$, \\[ (f(x))^2 = \\int_0^x [(f(t))^2 + (f'(t))^2]\\,dt + 1990. \\]",
-        "solution": "There are two such functions, namely $f(x) = \\sqrt{1990} e^x$, and $f(x) = -\\sqrt{1990} e^x$. To see this, suppose that the identity holds. Differentiating each side gives\n\\[ 2f(x)f'(x) = (f(x))^2 + (f'(x))^2, \\]\nor equivalently,\n\\[ (f(x) - f'(x))^2 = 0, \\quad f'(x) = f(x), \\]\n\\[ \\log|f(x)| = x + C, \\quad |f(x)| = e^C e^x. \\]\nBut $f$ is continuous and $f(0) = \\pm \\sqrt{1990}$, and this implies that $f(x) = \\pm \\sqrt{1990} e^x$ giving us the absolute value of the difference to be \\boxed{2\\sqrt{1990} e^x}.",
+        "problem": "Find the sum of all real-valued continuously differentiable functions $f$ on the real line such that for all $x$, \\[ (f(x))^2 = \\int_0^x [(f(t))^2 + (f'(t))^2]\\,dt + 1990. \\]",
+        "solution": "There are two such functions, namely $f(x) = \\sqrt{1990} e^x$, and $f(x) = -\\sqrt{1990} e^x$. To see this, suppose that the identity holds. Differentiating each side gives\n\\[ 2f(x)f'(x) = (f(x))^2 + (f'(x))^2, \\]\nor equivalently,\n\\[ (f(x) - f'(x))^2 = 0, \\quad f'(x) = f(x), \\]\n\\[ \\log|f(x)| = x + C, \\quad |f(x)| = e^C e^x. \\]\nBut $f$ is continuous and $f(0) = \\pm \\sqrt{1990}$, and this implies that $f(x) = \\pm \\sqrt{1990} e^x$ giving us the sum to be \\boxed{0}.",
         "answer_type": "algebraic"
     },
     {

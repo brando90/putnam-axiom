@@ -151,9 +151,9 @@ def putnam_2019b6(
         S: str = 'S') -> dict:
 
     functional_q : str = replace_map(
-       ("Consider the integer lattice $\\mathbb{Z}^n$ within $\\mathbb{R}^n$. We define two points in $\\mathbb{Z}^n$ as \\emph{adjacent} if they differ by exactly 1 in a single coordinate while being identical in all others. "
+       ("Consider the integer lattice $\\mathbb{Z}^n$ within $\\mathbb{R}^n$. We define two points in $\\mathbb{Z}^n$ as \\emph{neighbor} if they differ by exactly 1 in a single coordinate while being identical in all others. "
         "Your task is to determine the sum of the first k positive integers $n$ for which there exists a subset ${S}$ of $\\mathbb{Z}^n$ that satisfies both of these criteria: \\begin{enumerate}"
-        "\\item[(1)] For any point $p$ in ${S}$, all of its adjacent points are outside of ${S}$. \\item[(2)] For any point $p$ in $\\mathbb{Z}^n$ that is not in ${S}$, precisely one of its adjacent points belongs to ${S}$. \\end{enumerate}"),
+        "\\item[(1)] For any point $p$ in ${S}$, all of its neighbor points are outside of ${S}$. \\item[(2)] For any point $p$ in $\\mathbb{Z}^n$ that is not in ${S}$, precisely one of its neighbor points belongs to ${S}$. \\end{enumerate}"),
        {'{S}' : S}
     )
 
