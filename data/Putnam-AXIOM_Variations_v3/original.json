@@ -1,33 +1,5 @@
 [
     {
-        "year": "1965",
-        "id": "A1",
-        "problem": "Let $ABC$ be a triangle with angle $A < \\angle C < 90^\\circ < \\angle B$. Consider the bisectors of the external angles at $A$ and $B$, each measured from the vertex to the opposite side (extended). Suppose both of these line-segments are equal to $AB$. Compute the angle $A$.",
-        "solution": "Suppose the bisector of the exterior angle at $A$ intersects line $BC$ at $X$ and the bisector of the exterior angle at $B$ meets the line $AC$ at $Y$. The assumption that $C$ is between $B$ and $X$ contradicts the fact that $\\angle B > \\angle C$, so we may assume that $B$ is between $X$ and $C$. Similarly, we conclude that $C$ is between $A$ and $Y$ because $\\angle A < \\angle C$.\n\nIf $Z$ is a point on line $AB$ with $B$ between $A$ and $Z$, we have from triangle $ABY$ that $\\angle ZBY = 2A$. Hence, $\\angle BXA = \\angle ABX = \\angle ZBC = 2 \\angle ZBY = 4A$, and the angle sum of triangle $ABX$ is $90^\\circ - \\frac{1}{2}A + 8A$. Thus, $A = \\boxed{12}^\\circ$.",
-        "answer_type": "numerical"
-    },
-    {
-        "year": "1965",
-        "id": "A2",
-        "problem": "Given any positive integer $n$ find the value of \\n\\[ \\sum_{r=0}^{\\lfloor (n-1)/2 \\rfloor} \\left\\{\\frac{n - 2r}{n}\\binom{n}{r}\\right\\}^2, \\]\\n where $\\lfloor x \\rfloor$ means the greatest integer not exceeding $x$, and $\\binom{n}{r}$ is the binomial coefficient \"$n$ choose $r$,\" with the convention $\\binom{0}{0} = 1$. Return your final answer in binomial coefficient form with all other multiplicants reduced to the lowest form.",
-        "solution": "Substituting $s=n-r$ in the given summation reveals that twice this sum is equal to:\n\\[\n\\sum_{r=0}^n \\left(\\frac{n-2r}{n} \\binom{n}{r}\\right)^2 = \\sum \\left(1 - 2\\frac{r}{n}\\right)^2 \\binom{n}{r}^2 = \\sum \\binom{n}{r}^2 - 4\\sum \\frac{r}{n} \\binom{n}{r}^2 + 4\\sum \\left(\\frac{r}{n}\\right)^2 \\binom{n}{r}^2.\n\\]\n\\[\n= \\binom{2n}{n} - 4 \\sum_{r=1}^n \\binom{n-1}{r-1} \\binom{n}{r} + 4 \\sum_{r=1}^n \\binom{n-1}{r-1}^2.\n\\]\n\\[\n= \\binom{2n}{n} - 4\\binom{2n-1}{n-1} + 4\\binom{2n-2}{n-1}.\n\\]\n\\[\n= \\frac{2n(2n-1)}{n^2} - \\frac{4(n-1)}{n}\\binom{2n-2}{n-1} = \\boxed{\\frac{1}{n}\\binom{2n-2}{n-1}}.\\n\\]",
-        "answer_type": "algebraic"
-    },
-    {
-        "year": "1965",
-        "id": "A5",
-        "problem": "In how many ways can the integers from 1 to $n$ be ordered subject to the condition that, except for the first integer on the left, every integer differs by 1 from some integer to the left of it?",
-        "solution": "On the basis of the first few cases we conjecture the answer is $2^{n-1}$ and proceed by induction.\n\nWe first show (also by induction) that an $n$-arrangement ends in 1 or $n$. Note that when $n$ is deleted from an $n$-arrangement, the result is an $(n-1)$-arrangement. If an $n$-arrangement does not end in 1 or $n$, deletion of $n$ produces an $(n-1)$-arrangement ending (by induction) in $(n-1)$. This implies the $n$-arrangement ended in $n$ because $n$ cannot precede $(n-1)$.\n\nFor any $n$-arrangement $(a_1, a_2, \\cdots, a_n)$ there is another $n$-arrangement $(a_1', a_2', \\cdots, a_n')$, where $a_i' = n+1-a_i$. If one of these ends in $n$, the other ends in 1 and consequently exactly half of the $n$-arrangements end in $n$.\n\nAll of the $n$-arrangements which end in $n$ can be obtained by adjoining an $n$ to the end of all $(n-1)$-arrangements, and by induction there are $2^{n-2}$ of these. Hence, there are $\\boxed{2^{n-1}}$ $n$-arrangements.",
-        "answer_type": "numerical"
-    },
-    {
-        "year": "1965",
-        "id": "B1",
-        "problem": "Evaluate \n\\[\n\\lim_{n \\to \\infty} \\int_0^1 \\int_0^1 \\cdots \\int_0^1 \\cos^2 \\left(\\frac{\\pi}{2n}(x_1 + x_2 + \\cdots + x_n)\\right) dx_1 dx_2 \\cdots dx_n.\n\\]",
-        "solution": "The change of variables $x_k \\to 1 - x_k$ yields\n\\[\n\\int_0^1 \\int_0^1 \\cdots \\int_0^1 \\cos^2 \\left(\\frac{\\pi}{2n}(x_1 + x_2 + \\cdots + x_n)\\right) dx_1 dx_2 \\cdots dx_n \\\\\n= \\int_0^1 \\int_0^1 \\cdots \\int_0^1 \\sin^2 \\left(\\frac{\\pi}{2n}(x_1 + x_2 + \\cdots + x_n)\\right) dx_1 dx_2 \\cdots dx_n.\n\\]\nEach of these expressions, being equal to half their sum, must equal $\\frac{1}{2}$. The limit is also $\\boxed{\\frac{1}{2}}$.",
-        "answer_type": "numerical"
-    },
-    {
         "year": "1966",
         "id": "A2",
         "problem": "Let $a, b, c$ be the lengths of the sides of a triangle, let $p = \\frac{a+b+c}{2}$, and $r$ be the radius of the inscribed circle. Find the upper bound of [\n\\frac{1}{(p-a)^2} + \\frac{1}{(p-b)^2} + \\frac{1}{(p-c)^2}\n\\] in terms of the radius.",
@@ -152,6 +124,13 @@
         "problem": "Let $ABC$ be any triangle. Let $X, Y, Z$ be points on the sides $BC, CA, AB$ respectively. Suppose the distances $BX \\leq XC, CY \\leq YA, AZ \\leq ZB$. Given that the area of the triangle $XYZ$ is $\\geq n$ (area of triangle $ABC$) find the lowest non-zero value of $n$.",
         "solution": "(a) If $X, Y, Z$ are at the midpoints of the sides, the area of $\\triangle XYZ$ is one fourth of the area of $\\triangle ABC$. Also, as long as $BX \\leq XC, CY \\leq YA$ and $AZ \\leq ZB$, moving one of $X, Y, Z$ to the midpoint of its side, while leaving the other two fixed, does not increase the area of $\\triangle XYZ$ since the altitude to the fixed base of $\\triangle XYZ$ decreases or remains constant. This gives us \\boxed{\\frac{1}{4}}.",
         "answer_type": "numerical"
+    },
+    {
+        "year": "1975",
+        "id": "B5",
+        "problem": "Let $f_0(x) = e^x$ and $f_n(x) = xf'_n(x)$ for $n = 0, 1, 2, \\dots$ Find \\sum_{n=0}^\\infty \\frac{f_n(1)}{n!} in terms of e.",
+        "solution": "Since $f_0(x) = \\sum_{k=0}^\\infty \\frac{x^k}{k!}$, one easily shows by mathematical induction that \\[ f_n(x) = \\sum_{k=0}^\\infty \\frac{k^n x^k}{k!}. \\] Then, since all terms are positive, one has \\[ \\sum_{n=0}^\\infty \\frac{f_n(1)}{n!} = \\sum_{n=0}^\\infty \\sum_{k=0}^\\infty \\frac{k^n}{k! n!} = \\sum_{k=0}^\\infty \\frac{1}{k!} \\sum_{n=0}^\\infty \\frac{k^n}{n!} = \\sum_{k=0}^\\infty \\frac{e^k}{k!} = \\boxed{e^e}. \\]",
+        "answer_type": "algebraic"
     },
     {
         "year": "1985",

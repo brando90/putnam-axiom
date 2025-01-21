@@ -57,14 +57,13 @@ def putnam_2022a1(
         ),
         {'{a}': a, '{b}': b, '{k}': k}
     )
-
-    k_sqrt = (int) (k ** 0.5)
-    k_frac = (int) (k_sqrt / k)
+    k_sqrt = round((k ** 0.5), 2)
+    k_frac = round((k_sqrt / k), 2)
     two_k = 2 * k
 
     functional_q : str = replace_map(
         (
-            "Consider the inequality 0 < |{a}| < {k_frac}. Find the two boundary conditions for {b} that ensure the line equation $y = {a}x+{b}$ and the logarithmic curve $y = \\ln({k}+x^2)$ have precisely one intersection point. Express your final answer as the sum of the two boundary expressions for {b} (for example, if {b} is bounded by f({a}) and g({a}), then provide f({a}) + g({a}) as your solution)."
+            "Consider the inequality 0 < |{a}| < {k}. Find the two boundary conditions for {b} that ensure the line equation $y = {a}x+{b}$ and the logarithmic curve $y = \\ln({k}+x^2)$ have precisely one intersection point. Express your final answer as the sum of the two boundary expressions for {b} (for example, if {b} is bounded by f({a}) and g({a}), then provide f({a}) + g({a}) as your solution)."
         ),
         {'{a}': a, '{b}': b, '{k}': k, '{k_sqrt}' : k_sqrt, '{k_frac}' : k_frac}
     )
