@@ -45,7 +45,7 @@ def save_dataset_to_file(file_path):
     original_params={
     'c' : 1990, 'x' : 'x'
 })
-def putnam_1999b1(
+def putnam_1990b1(
         c : int = 1990, x : str = 'x') -> dict:
     
     functional_q: str = f'Find the absolute value of the difference across all real-valued continuously differentiable functions $f$ on the real line such that for all ${x}$, \\[ (f(x))^2 = \\int_0^{x} [(f(t))^2 + (f\'(t))^2]\\,dt + {c}. \\]'
