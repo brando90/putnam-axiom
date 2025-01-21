@@ -51,6 +51,7 @@ def putnam_2022a1(
         # debug: bool = False
         ) -> dict:
 
+<<<<<<< HEAD
     functional_q: str = replace_map(
         (
             "Find all possible combinations of real numbers $({a},{b})$ for which the straight line defined by $y = {a}x+{b}$ and the logarithmic curve $y = \\ln({k}+x^2)$ have precisely one point of intersection."
@@ -59,6 +60,17 @@ def putnam_2022a1(
     )
     k_sqrt = round((k ** 0.5), 2)
     k_frac = round((k_sqrt / k), 2)
+=======
+    # functional_q: str = replace_map(
+    #     (
+    #         "Find all possible combinations of real numbers $({a},{b})$ for which the straight line defined by $y = {a}x+{b}$ and the logarithmic curve $y = \\ln({k}+x^2)$ have precisely one point of intersection."
+    #     ),
+    #     {'{a}': a, '{b}': b, '{k}': k}
+    # )
+
+    k_sqrt = (int) (k ** 0.5)
+    k_frac = (int) (k_sqrt / k)
+>>>>>>> 8dd1a7d291ba57e6448f08d63bafcefcdc63136b
     two_k = 2 * k
 
     functional_q : str = replace_map(

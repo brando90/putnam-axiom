@@ -108,7 +108,7 @@ def putnam_1993b1(
 
     functional_q: str = replace_map(
         (
-            "Identify the smallest natural number (positive integer) ${n}$ such that for every integer ${m}$ with $0 < {m} < {a}$, there exists an integer ${k}$ for which satisfies the expression \\[ \\frac{{m}}{{a}} < \\frac{{k}}{{n}} < \\frac{m+1}{{a_plus}}. \\]"
+            "Identify the smallest natural number (positive integer) ${n}$ such that for every integer ${m}$ with $0 < {m} < {a}$, there exists an integer ${k}$ for which satisfies the expression \\[ \\frac{{m}}{{a}} < \\frac{{k}}{{n}} < \\frac{{m}+1}{{a_plus}}. \\]"
         ),
         {'{m}': m, '{n}' : n, '{k}' : k, '{a}' : a, '{a_plus}' : a_plus}
     )
