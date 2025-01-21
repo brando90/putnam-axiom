@@ -72,67 +72,67 @@ def putnam_2013b1(
     }
 
 
-@variation(
-    year='2013', id='B3',
-    generators={  # generators can either be a dictionary of generators or a custom sampling function
-        'f': generators.RandomVariable('both'),
-        'S': generators.RandomVariable('both'),
-        'T': generators.RandomVariable('both'),
-    },
-    original_params={
-        'f': 'f', 'S': 'S', 'T': 'T'
-    })
-def putnam_2013b3(
-        f: str = 'f', S: str = 'S', T: str = 'T'
-) -> dict:
-    functional_q: str = replace_map(
-        (
-            "Consider a nonempty collection $\\mathcal{P}$ of subsets of $\\{1,\\dots, n\\}$ such that: \\begin{enumerate} "
-            "\\item[(i)] if ${S}, {S}' \\in \\mathcal{P}$, then both ${S} \\cup {S}'$ and ${S} \\cap {S}'$ are in $\\mathcal{P}$, "
-            "and \\item[(ii)] if ${S} \\in \\mathcal{P}$ and ${S} \\neq \\emptyset$, then there exists a subset ${T} \\subset {S}$ "
-            "such that ${T} \\in \\mathcal{P}$ and ${T}$ has exactly one element less than ${S}. \\end{enumerate} Suppose there is "
-            "a function ${f}: \\mathcal{P} \\to \\mathbb{R}$ with ${f}(\\emptyset) = 0$ and \\[ {f}({S} \\cup {S}') = {f}({S}) + {f}({S}') - {f}({S} \\cap {S}') \\] "
-            "for all ${S},{S}' \\in \\mathcal{P}$. Is it necessarily true that there exist real numbers ${f}_1,\\dots,{f}_n$ such that "
-            "\\[ {f}({S}) = \\sum_{i \\in {S}} {f}_i \\] for every ${S} \\in \\mathcal{P}$? Provide a yes or no answer."
-        ),
-        {
-            '{f}': f, '{S}': S, '{T}': T
-        }
-    )
+# @variation(
+#     year='2013', id='B3',
+#     generators={  # generators can either be a dictionary of generators or a custom sampling function
+#         'f': generators.RandomVariable('both'),
+#         'S': generators.RandomVariable('both'),
+#         'T': generators.RandomVariable('both'),
+#     },
+#     original_params={
+#         'f': 'f', 'S': 'S', 'T': 'T'
+#     })
+# def putnam_2013b3(
+#         f: str = 'f', S: str = 'S', T: str = 'T'
+# ) -> dict:
+#     functional_q: str = replace_map(
+#         (
+#             "Consider a nonempty collection $\\mathcal{P}$ of subsets of $\\{1,\\dots, n\\}$ such that: \\begin{enumerate} "
+#             "\\item[(i)] if ${S}, {S}' \\in \\mathcal{P}$, then both ${S} \\cup {S}'$ and ${S} \\cap {S}'$ are in $\\mathcal{P}$, "
+#             "and \\item[(ii)] if ${S} \\in \\mathcal{P}$ and ${S} \\neq \\emptyset$, then there exists a subset ${T} \\subset {S}$ "
+#             "such that ${T} \\in \\mathcal{P}$ and ${T}$ has exactly one element less than ${S}. \\end{enumerate} Suppose there is "
+#             "a function ${f}: \\mathcal{P} \\to \\mathbb{R}$ with ${f}(\\emptyset) = 0$ and \\[ {f}({S} \\cup {S}') = {f}({S}) + {f}({S}') - {f}({S} \\cap {S}') \\] "
+#             "for all ${S},{S}' \\in \\mathcal{P}$. Is it necessarily true that there exist real numbers ${f}_1,\\dots,{f}_n$ such that "
+#             "\\[ {f}({S}) = \\sum_{i \\in {S}} {f}_i \\] for every ${S} \\in \\mathcal{P}$? Provide a yes or no answer."
+#         ),
+#         {
+#             '{f}': f, '{S}': S, '{T}': T
+#         }
+#     )
 
-    functional_ans: str = replace_map(
-        (
-            "To define them, we make the following observations.  \\setcounter{lemma}{0} \\begin{lemma} For any $i "
-            "\\in \\{1,\\dots,n\\}$, if there exists any ${S} \\in P$ containing $i$, then there exist ${S},"
-            "{T} \\in P$ such that ${S}$ is the disjoint union of ${T}$ with $\\{i\\}$. \\end{lemma} \\begin{proof} "
-            "Let ${S}$ be an element of $P$ containing $i$ of minimum cardinality. By (ii), there must be a subset "
-            "${T} \\subset {S}$ containing $P$ with exactly one fewer element than ${S}$. These sets have the "
-            "desired form. \\end{proof}  \\begin{lemma} Suppose ${S}_1, {S}_2, {T}_1, {T}_2 \\in P$ have the property "
-            "that for some $i \\in \\{1,\\dots,n\\}$, ${S}_1$ is the disjoint union of ${T}_1$ with $\\{i\\}$ and ${"
-            "S}_2$ is the disjoint union of ${T}_2$ with $\\{i\\}$. Then  \\[ {f}({S}_1) - {f}({T}_1) = {f}({S}_2) - "
-            "{f}({T}_2). \\] \\end{lemma} \\begin{proof} By (i) we have \\begin{align*} {f}({T}_1 \\cup {T}_2 \\cup "
-            "\\{i\\}) &= {f}({S}_1) + {f}({T}_2) - {f}({T}_1 \\cap {T}_2) \\\\ {f}({T}_1 \\cup {T}_2 \\cup \\{i\\}) "
-            "&= {f}({T}_1) + {f}({S}_2) - {f}({T}_1 \\cap {T}_2), \\end{align*} from which the claim follows "
-            "immediately. \\end{proof}  We now define ${f}_1,\\dots,{f}_n$ as follows. If $i$ does not appear in any "
-            "element of $P$, we put ${f}_i = 0$. Otherwise, by Lemma~1, we can find  ${S}, {T} \\in P$ such that ${"
-            "S}$ is the disjoint union of ${T}$ with $\\{i\\}$. We then set ${f}_i = {f}({S}) - {f}({T})$; by "
-            "Lemma~2, this does not depend on the choice of ${S},{T}$.  To check that ${f}({S}) = \\sum_{i \\in {S}} "
-            "{f}_i$ for ${S} \\in P$, note first that $\\emptyset \\in P$ by repeated application of (ii) and that ${"
-            "f}(\\emptyset) = 0$ by hypothesis. This provides the base case for an induction on the cardinality of ${"
-            "S}$; for any nonempty ${S} \\in P$, we may apply (ii) to find ${T} \\subset {S}$ such that ${S}$ is the "
-            "disjoint union of ${T}$ and some singleton set $\\{j\\}$. By construction and the induction hypothesis, "
-            "we have ${f}({S}) = {f}({T}) + {f}_j = j + \\sum_{i \\in {T}} {f}_i = \\sum_{i \\in {S}} {f}_i$ as "
-            "desired. \\boxed{Yes}, such numbers must exist."
-        ),
-        {
-            '{f}': f, '{S}': S, '{T}': T
-        }
-    )
-    return {
-        'problem': functional_q,
-        'solution': functional_ans,
-        'type' : "variable"
-    }
+#     functional_ans: str = replace_map(
+#         (
+#             "To define them, we make the following observations.  \\setcounter{lemma}{0} \\begin{lemma} For any $i "
+#             "\\in \\{1,\\dots,n\\}$, if there exists any ${S} \\in P$ containing $i$, then there exist ${S},"
+#             "{T} \\in P$ such that ${S}$ is the disjoint union of ${T}$ with $\\{i\\}$. \\end{lemma} \\begin{proof} "
+#             "Let ${S}$ be an element of $P$ containing $i$ of minimum cardinality. By (ii), there must be a subset "
+#             "${T} \\subset {S}$ containing $P$ with exactly one fewer element than ${S}$. These sets have the "
+#             "desired form. \\end{proof}  \\begin{lemma} Suppose ${S}_1, {S}_2, {T}_1, {T}_2 \\in P$ have the property "
+#             "that for some $i \\in \\{1,\\dots,n\\}$, ${S}_1$ is the disjoint union of ${T}_1$ with $\\{i\\}$ and ${"
+#             "S}_2$ is the disjoint union of ${T}_2$ with $\\{i\\}$. Then  \\[ {f}({S}_1) - {f}({T}_1) = {f}({S}_2) - "
+#             "{f}({T}_2). \\] \\end{lemma} \\begin{proof} By (i) we have \\begin{align*} {f}({T}_1 \\cup {T}_2 \\cup "
+#             "\\{i\\}) &= {f}({S}_1) + {f}({T}_2) - {f}({T}_1 \\cap {T}_2) \\\\ {f}({T}_1 \\cup {T}_2 \\cup \\{i\\}) "
+#             "&= {f}({T}_1) + {f}({S}_2) - {f}({T}_1 \\cap {T}_2), \\end{align*} from which the claim follows "
+#             "immediately. \\end{proof}  We now define ${f}_1,\\dots,{f}_n$ as follows. If $i$ does not appear in any "
+#             "element of $P$, we put ${f}_i = 0$. Otherwise, by Lemma~1, we can find  ${S}, {T} \\in P$ such that ${"
+#             "S}$ is the disjoint union of ${T}$ with $\\{i\\}$. We then set ${f}_i = {f}({S}) - {f}({T})$; by "
+#             "Lemma~2, this does not depend on the choice of ${S},{T}$.  To check that ${f}({S}) = \\sum_{i \\in {S}} "
+#             "{f}_i$ for ${S} \\in P$, note first that $\\emptyset \\in P$ by repeated application of (ii) and that ${"
+#             "f}(\\emptyset) = 0$ by hypothesis. This provides the base case for an induction on the cardinality of ${"
+#             "S}$; for any nonempty ${S} \\in P$, we may apply (ii) to find ${T} \\subset {S}$ such that ${S}$ is the "
+#             "disjoint union of ${T}$ and some singleton set $\\{j\\}$. By construction and the induction hypothesis, "
+#             "we have ${f}({S}) = {f}({T}) + {f}_j = j + \\sum_{i \\in {T}} {f}_i = \\sum_{i \\in {S}} {f}_i$ as "
+#             "desired. \\boxed{Yes}, such numbers must exist."
+#         ),
+#         {
+#             '{f}': f, '{S}': S, '{T}': T
+#         }
+#     )
+#     return {
+#         'problem': functional_q,
+#         'solution': functional_ans,
+#         'type' : "variable"
+#     }
 
 
 @variation(

@@ -102,7 +102,7 @@ def putnam_2014a4(
     functional_q: str = replace_map(
         (
             "Consider a random variable ${X}$ that only takes nonnegative integer values. It is given that $E\\left[ {X} \\right] = 1$, $E\\left[ {X}^2 \\right] = 2$, and $E \\left[ {X}^3 \\right] = 5$." 
-            " (Here $E\\left[ Y \\right]$ denotes the expectation of the random variable $Y$.) Determine the probability that ${X} = {x}$ under the condition that the probability of ${X}=0$ is minimized."
+            "(Here $E\\left[ Y \\right]$ denotes the expectation of the random variable $Y$.) Minimize the probbality of of ${X}=0$. Under this condition what is the probability that ${X} = {x}$?"
         ),
         {'{X}': X, '{x}' : x}
     )
