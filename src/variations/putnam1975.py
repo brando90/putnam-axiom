@@ -36,6 +36,30 @@ def save_dataset_to_file(file_path):
     print(f"Dataset written to {file_path}.")
 
 
+
+@variation(
+    year='1975', id='A4',
+    generators = {
+        'n' : generators.RandomVariable('lower'),
+        'm' : generators.RandomVariable('lower')
+    },
+    original_params={
+        'n' : 'n',
+        'm' : 'm'
+})
+def putnam_1975a4(
+        n : str = 'n',
+        m : str = 'm'
+    ) -> dict:
+    
+    functional_q : str = f'Let ${n} = 2{m}$, where ${m}$ is an odd integer greater than 1. Let $\\theta = e^{{2\\pi i / {n}}}$. Express $(1-\\theta)^{{-1}}$ explicitly as a polynomial in $\\theta$, \n\n$a_k \\theta^k + a_{{k-1}} \\theta^{{k-1}} + \\cdots + a_1 \\theta + a_0$, \n\nwith integer coefficients $a_i$. \n\n[Note that $\\theta$ is a primitive ${n}$-th root of unity, and thus it satisfies all of the identities which hold for such roots.]'
+    functional_ans : str = f'Let ${n} = 4k + 2$ with $k > 0$. Then\n\n$$0 = \\theta^{n} - 1 = \\theta^{{4k+2}} - 1 = (\\theta^{{2k+1}} - 1)(\\theta + 1)(\\theta^{{2k}} - \\theta^{{2k-1}} + \\theta^{{2k-2}} - \\cdots - \\theta + 1).$$\n\nSince $\\theta$ is a primitive ${n}$-th root of unity with ${n} > 2k + 1$ and ${n} > 2$,\n\n$$(\\theta^{{2k+1}} - 1)(\\theta + 1) \\neq 0.$$ \n\nHence\n\n(A)\n$$\\theta^{{2k}} - \\theta^{{2k-1}} + \\theta^{{2k-2}} - \\cdots + \\theta^2 - \\theta + 1 = 0,$$\n\n$$1 = \\theta - \\theta^2 + \\theta^3 - \\cdots - \\theta^{{2k}} = (1 - \\theta)(\\theta + \\theta^2 + \\theta^3 + \\cdots + \\theta^{{2k-1}}),$$\n\n$$(1 - \\theta)^{{-1}} = \\theta + \\theta^3 + \\cdots + \\theta^{{2k-1}} \\quad \\text{{[where $2k - 1 = (n - 4)/2$]}}.$$ \n\nAnother solution is $(1 - \\theta)^{{-1}} = \\boxed{{1 + \\theta^2 + \\theta^4 + \\cdots + \\theta^{{2k}}}}$ as one sees from (A).'
+    return {
+        'problem' : functional_q,
+        'solution' : functional_ans,
+        'type' : "variable"
+    }
+
 @variation(
     year='1975', id='B5',
     generators = {
