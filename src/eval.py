@@ -14,7 +14,7 @@ from vllm import LLM, SamplingParams
 def main(
     data_dir: str = 'putnam-axiom/data/Putnam_AXIOM_Original.json',
     prompt_name: str = "general_few_shot_prompt",
-    model_name: str = 'mistralai/Mistral-7B-v0.1',
+    model_name: str = 'deepseek-ai/DeepSeek-R1',
     output_dir: str = 'putnam-axiom/data',
     temperature: float = 0.9,
     top_p: float = 0.95,

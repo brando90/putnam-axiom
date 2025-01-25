@@ -50,7 +50,7 @@ def putnam_1992a2(
         c : int = 996, x : str = 'x', y : str = 'y') -> dict:
     
     c = c * 2
-    functional_q: str = f'Evaluate \\[ \\int_0^1 \\left( C(-{y}-1) \\sum_{{k=1}}^{c} \\frac{{1}}{{{y}+k}} \\right)\\,d{y}, \\] where $C(\\alpha)$ is the coefficient of $x^{c}$ in the expansion of the power series of $(1 + {x})^\\alpha$ centered at ${x}=0$.'
+    functional_q: str = f'Evaluate \\[ \\int_0^1 \\left( C(-{y}-1) \\sum_{{k=1}}^{c} \\frac{{1}}{{{y}+k}} \\right)\\,d{y}, \\] where $C(\\alpha)$ is the coefficient of ${x}^{c}$ in the expansion of the power series of $(1 + {x})^\\alpha$ centered at ${x}=0$.'
     functional_ans: str = f'From the binomial series, we see that\n\n\\[ C(-{y} - 1) = \\frac{{(-{y} - 1)(-{y} - 2) \\cdots (-{y} - {c})}}{{{c}!}} = \\frac{{({y} + 1)({y} + 2) \\cdots ({y} + {c})}}{{{c}!}}. \\]\n\nTherefore,\n\n\\[ C(-{y} - 1) \\left( \\frac{{1}}{{{y} + 1}} + \\frac{{1}}{{{y} + 2}} + \\cdots + \\frac{{1}}{{{y} + {c}}} \\right) = \\frac{{d}}{{d{y}}} \\left( \\frac{{({y} + 1)({y} + 2) \\cdots ({y} + {c})}}{{{c}!}} \\right). \\]\n\nHence the integral in question is\n\n\\[ \\int_0^1 \\frac{{d}}{{d{y}}} \\left( \\frac{{({y} + 1)({y} + 2) \\cdots ({y} + {c})}}{{{c}!}} \\right) dy = \\frac{{({y} + 1)({y} + 2) \\cdots ({y} + {c})}}{{{c}!}} \\Big|_0^1 = {c+1} - 1 = \\boxed{{{c}}}. \\]'
     return {
         'problem' : functional_q,
