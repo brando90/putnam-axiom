@@ -1,3 +1,5 @@
+# sft_simple.py
+
 from datetime import datetime
 from typing import Optional
 import random
@@ -10,6 +12,7 @@ import fire
 import wandb
 import sys
 
+from tfa import TfaCallback
 from train.callbacks import GenCallbackHFGen, PUTNAM_AXIOM_PROMPT_TEMPLATE
 from train.data import load_math_style_dataset, print_first_example_after_decode, load_dataset_text_field_only 
 import train.models
@@ -76,6 +79,17 @@ def main(**config):
     print(f'{len(train_dataset)=}\n{len(eval_dataset)=}')
     wandb.config.update({'dataset': f'{ds_name_or_path} ({train_split=} {val_split=})'})
 
+    # 1) Load the ProofNet validation set
+    from datasets import load_dataset
+    # Example of a custom prompt format function
+    def my_prompt_format(prompt: str) -> str:
+        return (
+            "Translate the natural language version of the mathematical statement "
+            f"to a formal Lean version:\n{prompt}\n"
+        )
+    train_dataset = load_dataset("hoskinson-center/proofnet", split="validation")
+    eval_dataset = load_dataset("hoskinson-center/proofnet", split="test")
+
     # -- Prepare output directory
     today: str = datetime.now().strftime('%Y_m%m_d%d_t%Hh_%Mm_%Ss')
     output_dir: str = os.path.expanduser(f"~/data/runs_logic_cont/run_{config.get('today', today)}")
@@ -99,7 +113,8 @@ def main(**config):
         # -- save, eval, logging opts
         # save_steps=config.get('save_steps', 2), 
         save_total_limit=3,
-        save_strategy=config.get('save_strategy', 'steps'),
+        # save_strategy=config.get('save_strategy', 'steps'),
+        save_strategy=config.get('save_strategy', 'no'),
         eval_on_start=config.get('eval_on_start', True),
         evaluation_strategy=config.get('eval_strategy', 'steps'), 
         eval_steps=config.get('eval_steps', 1), 
@@ -113,11 +128,12 @@ def main(**config):
         per_device_train_batch_size=config.get('batch_size', 2),
         gradient_accumulation_steps=config.get('gradient_accumulation_steps', 4),
         # -- optim
-        optim=config.get('optim', 'adamw_torch'),
-        # optim=config.get('optim', 'paged_adamw_32bit'),
+        # optim=config.get('optim', 'adamw_torch'),
+        optim=config.get('optim', 'paged_adamw_32bit'),
         learning_rate=config.get('learning_rate', 1e-5),
         weight_decay=config.get('weight_decay', 1e-4),
-        gradient_checkpointing=config.get('gradient_checkpointing', False), # careful might give issues, but not in skampere1
+        # gradient_checkpointing=config.get('gradient_checkpointing', False), # careful might give issues, but not in skampere1
+        gradient_checkpointing=config.get('gradient_checkpointing', True), # careful might give issues, but not in skampere1
         # -- scheduler
         lr_scheduler_type=config.get('lr_scheduler_type', 'constant'), # this is the hf default btw
         warmup_ratio=config.get('warmup_ratio', 0.0), 
@@ -133,6 +149,7 @@ def main(**config):
         args=training_args,
         # callbacks=[GenCallbackHFGen(model, tok), GenCallbackHFGen(model, tok, PUTNAM_AXIOM_PROMPT_TEMPLATE, 'putnam_axiom_prompt')]
         # callbacks=[GenCallbackHFGen(model, tok)]
+        callbacks=[TfaCallback(eval_dataset, ds_name_or_path, my_prompt_format)]
     )
     print(f"\nStarting fine-tuning...")
     print(f'If traning from scratch, expected initial loss (roughly): {torch.log(torch.tensor(len(tok.vocab)))=}')

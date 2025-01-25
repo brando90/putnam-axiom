@@ -24,7 +24,7 @@ def quick_tokenization_sanity_check(tok, config = {}, test_text="This is a test 
     print(f"Decoded Tokens: {tok.decode(encoded['input_ids'][0])}")
     print(f'{"--"*15}\nEnd Quick Tokenization Sanity Check Hardcoded Example\n')
 
-def load_model_and_tok(pretrained_model_name_or_path, config: dict) -> tuple:
+def load_model_and_tok(pretrained_model_name_or_path, config: dict = {}) -> tuple:
     print(f'----> {pretrained_model_name_or_path=}')
     tok = AutoTokenizer.from_pretrained(pretrained_model_name_or_path, padding_side="right", trust_remote_code=True, add_eos_token=True)
     if 'gemma-' in str(pretrained_model_name_or_path): # note: perhaps eos is same for all gemma-2 models
@@ -54,3 +54,10 @@ def load_model_and_tok(pretrained_model_name_or_path, config: dict) -> tuple:
     print(f'model config max length: {model.config.max_position_embeddings=} (dont overwrite it, its the true max length of the model, most likely)')
     quick_tokenization_sanity_check(tok, config)
     return model, tok
+
+def _test():
+    model, tok = load_model_and_tok('google/gemma-2-2b-it')
+    quick_tokenization_sanity_check(tok)
+
+if __name__ == '__main__':
+    _test()
