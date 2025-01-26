@@ -59,5 +59,5 @@ def putnam_1975a4(
     return {
         'problem' : functional_q,
         'solution' : functional_ans,
-        'type' : "constant"
+        'type' : "variable"
     }

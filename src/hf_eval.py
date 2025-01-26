@@ -47,18 +47,18 @@ class MyLM(LM):
     def generate_until(self, requests: List) -> List[str]:
         results = []
         context = []
-        for request in requests:
-            context.append(request.args[0])
-        
-        params = SamplingParams(temperature=0.9, top_p=0.95, max_tokens=2048, stop='Problem:\n')
-        results = self.model.generate(context, params)
         # for request in requests:
-        #     response = client.chat.completions.create(
-        #         model = 'gpt-4o',
-        #         messages = [{"role": "user", "content": request.args[0]}],
-        #         max_tokens = 2048
-        #     )
-        #     results.append(response.choices[0].message.content)
+        #     context.append(request.args[0])
+        
+        # params = SamplingParams(temperature=0.9, top_p=0.95, max_tokens=2048, stop='Problem:\n')
+        # results = self.model.generate(context, params)
+        for request in requests:
+            response = client.chat.completions.create(
+                model = 'gpt-4o',
+                messages = [{"role": "user", "content": request.args[0]}],
+                max_tokens = 2048
+            )
+            results.append(response.choices[0].message.content)
         return results
 torch.cuda.empty_cache()
 gc.collect()
@@ -70,9 +70,9 @@ model_list = [
 
 for model_name in model_list:
     # Load the model using Hugginface 
-    model = AutoModel.from_pretrained(model_name, trust_remote_code=True)
-    tokenizer = AutoTokenizer.from_pretrained(model_name, trust_remote_code=True)
-    lm = LLM(model, tokenizer)
+    # model = AutoModel.from_pretrained(model_name, trust_remote_code=True)
+    # tokenizer = AutoTokenizer.from_pretrained(model_name, trust_remote_code=True)
+    model = LLM(model_name, trust_remote_code= True)
     lm_obj = MyLM(model=model)
     task_manager = lm_eval.tasks.TaskManager()
 
