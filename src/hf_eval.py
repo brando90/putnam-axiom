@@ -67,6 +67,8 @@ model_list = [
     "deepseek-ai/DeepSeek-R1"
 ]
 
+API_KEY = API_KEY = "sk-83133dfe9dc64d4d8208d8f98f12686a"
+client = OpenAI(api_key=API_KEY, base_url="https://api.deepseek.com")
 
 for model_name in model_list:
     # Load the model using Hugginface 
