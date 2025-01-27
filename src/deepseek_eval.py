@@ -34,18 +34,36 @@ class DeepseekR1LM(LM):
 
     def generate_until(self, requests: List) -> List[str]:
         # This calls the chat completions endpoint with your model.
-        outputs = []
-        for req in requests:
-            prompt = req.args[0]
-            response = client.ChatCompletion.create(
-                model=self.model_name,   # "deepseek-r1" or "gpt-4o" if that’s correct
-                messages=[{"role": "user", "content": prompt}],
-                max_tokens=2048,
-                temperature=0.9,
-                top_p=0.95
+        
+        results = []
+        for request in requests:
+            # response = client.chat.completions.create(
+            #     model = 'DeepSeek-R1',
+            #     messages = [{"role": "user", "content": request.args[0]}],
+            #     max_tokens = 2048
+            # )
+            response = client.chat.completions.create(
+                model="deepseek-reasoner",
+                messages=[
+                    {"role": "user", "content": request.args[0]}
+                ],
+                stream=False
             )
-            outputs.append(response.choices[0].message.content)
-        return outputs
+            results.append(response.choices[0].message.content)
+        
+        # outputs = []
+        # for req in requests:
+        #     prompt = req.args[0]
+            # response = client.ChatCompletion.create(
+            #     model=self.model_name,   # "deepseek-r1" or "gpt-4o" if that’s correct
+            #     messages=[{"role": "user", "content": prompt}],
+            #     max_tokens=2048,
+            #     temperature=0.9,
+            #     top_p=0.95
+            # )
+            # outputs.append(response.choices[0].message.content)
+        print("results", results)
+        return results
 
 
 ################################################################
@@ -108,7 +126,7 @@ for model_name in model_list:
     task_manager = tasks.TaskManager()
     results = evaluator.simple_evaluate(
         model=lm_obj,
-        tasks=["putnam_axiom_original"],  # Example
+        tasks=["putnam_axiom_original"],
         task_manager=task_manager,
         write_out=False,
         random_seed=None

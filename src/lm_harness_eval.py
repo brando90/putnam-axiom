@@ -62,7 +62,7 @@ model_list = [
             #   "mistralai/Mistral-7B-v0.1", 
             #   "mistralai/Mistral-7B-Instruct-v0.1",
             #   "google/gemma-7b",
-            "deepseek-ai/DeepSeek-R1"
+            # "deepseek-ai/DeepSeek-R1"
             #   "google/gemma-2b",
             #   "google/gemma-7b-it",
             #   "google/gemma-2b-it",
