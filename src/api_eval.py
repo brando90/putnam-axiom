@@ -30,20 +30,25 @@ class MyLM(LM):
     
     def generate_until(self, requests: List) -> List[str]:
         results = []
-        for request in requests:
-            response = client.chat.completions.create(
-                model = 'gpt-4o',
-                messages = [{"role": "user", "content": request.args[0]}],
-                max_tokens = 2048
-            )
-            results.append(response.choices[0].message.content)
+        # Want to save responses to a txt file
+        with open("putnam-axiom/src/model_responses/deepseek_reasoner.txt", "w") as f:
+            for i, request in enumerate(requests):
+                print(f"Processing request {i}")
+                response = client.chat.completions.create(
+                    model = "deepseek-reasoner",
+                    messages = [{"role": "user", "content": request.args[0]}],
+                    max_tokens = 300,
+                    stream = False
+                )
+                results.append(response.choices[0].message.content)
+                f.write(response + "\n")
         return results
 
 
 torch.cuda.empty_cache()
 gc.collect()
 
-client = OpenAI(api_key = "")
+client = OpenAI(api_key = "sk-83133dfe9dc64d4d8208d8f98f12686a", base_url="https://api.deepseek.com")
 
 lm_obj = MyLM()
 task_manager = tasks.TaskManager()

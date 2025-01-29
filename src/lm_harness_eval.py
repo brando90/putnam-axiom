@@ -72,35 +72,51 @@ model_list = [
             #   "AI-MO/NuminaMath-7B-TIR",
             #   "Qwen/Qwen2-Math-7B",
             #   "Qwen/Qwen2-Math-7B-Instruct"
+            # 'deepseek-ai/DeepSeek-R1-Distill-Qwen-32B',
+            # 'deepseek-ai/DeepSeek-R1-Distill-Qwen-7B',
+            'deepseek-ai/DeepSeek-R1-Distill-Llama-70B',
+            'deepseek-ai/DeepSeek-R1-Distill-Llama-8B'
 ]
 
 # os.environ["CUDA_VISIBLE_DEVICES"] = 0,2,3,4
 torch.cuda.empty_cache()
 gc.collect()
 
+final_scores = {}
 for model_name in model_list:
     print("=" * 100)
     print(f"running {model_name}")
     print("=" * 100)
 
     model = LLM(model_name, 
-                # tensor_parallel_size = 2,
+                tensor_parallel_size = 2,
+                gpu_memory_utilization = 0.98,
+                max_model_len= 59000,  # Reduce below 69904 (KV cache limit)
                 # pipeline_parallel_size = 1,
                 trust_remote_code=True)
     lm_obj = MyLM(model=model)
     task_manager = lm_eval.tasks.TaskManager()
 
-results = lm_eval.simple_evaluate(
-    model=lm_obj,
-    tasks=["putnam_axiom_original"],
-    task_manager=task_manager,
-    write_out=False,
-    random_seed = None,
-    numpy_random_seed = None,
-    torch_random_seed = None,
-    fewshot_random_seed = None
-)
-print("results:", results["results"]["putnam_axiom_original"].get("exact_match,none", None))
+    results = lm_eval.simple_evaluate(
+        model=lm_obj,
+        tasks=["putnam_axiom_original"],
+        task_manager=task_manager,
+        write_out=False,
+        random_seed = None,
+        numpy_random_seed = None,
+        torch_random_seed = None,
+        fewshot_random_seed = None
+    )
+    # print(results)
+    print('=' * 50)
+    print("results:", results["results"]["putnam_axiom_original"].get("exact_match,none", None))
+    print('=' * 50)
+    final_scores[model_name] = results["results"]["putnam_axiom_original"].get("exact_match,none", None)
+
+print(final_scores)
+# print(type(results))
+# with open('putnam-axiom/src/model_responses/deepseek_qwen32B.json', 'w') as outfile:
+#     json.dump(results, outfile, indent = 6)
 
 # for model_name in model_list:
 #     print("=" * 100)
