@@ -141,9 +141,9 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Generate variations of problems.')
     parser.add_argument('--num_variations', type=int, default=5, help='Number of variations to generate.')
 
-    parser.add_argument('--save_dir', type=str, default='putnam-axiom/data/Putnam-AXIOM_Variations_v3',
+    parser.add_argument('--save_dir', type=str, default='putnam-axiom/data/Putnam-AXIOM_Variations_v4',
                         help='Directory to save variations.')
-    parser.add_argument('--save_orig_dir', type=str, default='putnam-axiom/data/Putnam-AXIOM_Variations_v3',
+    parser.add_argument('--save_orig_dir', type=str, default='putnam-axiom/data/Putnam-AXIOM_Variations_v4',
                         help='Directory to save original version of variations.')
     parser.add_argument('--original_data_dir', type=str, default='putnam-axiom/data/Putnam_AXIOM_Original_v3.json',
                         help='Original data directory. i.e. directory containing original Putnam problems.')
