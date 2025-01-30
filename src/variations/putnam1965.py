@@ -77,8 +77,8 @@ def putnam_1965a1(
         r : str = 'r'
     ) -> dict:
 
-    functional_q: str = f'Given any positive integer ${n}$ find the value of \\n\\[ \\sum_{{{r}=0}}^{{\\lfloor ({n}-1)/2 \\rfloor}} \\left\\{{\\frac{{{n} - 2{r}}}{{{n}}}\\binom{{{n}}}{{{r}}}\\right\\}^2, \\]\\n where $\\lfloor x \\rfloor$ means the greatest integer not exceeding $x$, and $\\binom{{{n}}}{{{r}}}$ is the binomial coefficient \"${n}$ choose ${r}$,\" with the convention $\\binom{{0}}{{0}} = 1$. Return your final answer in binomial coefficient form with all other multiplicants reduced to the lowest form.'
-    functional_ans: str = f'Substituting $s={n}-{r}$ in the given summation reveals that twice this sum is equal to:\n\\[\n\\sum_{{r}=0}^{n} \\left(\\frac{{n}-2{r}}{{n}} \\binom{{n}}{{r}}\\right)^2 = \\sum \\left(1 - 2\\frac{{r}}{{n}}\\right)^2 \\binom{{n}}{{r}}^2 = \\sum \\binom{{n}}{{r}}^2 - 4\\sum \\frac{{r}}{{n}} \\binom{{n}}{{r}}^2 + 4\\sum \\left(\\frac{{r}}{{n}}\\right)^2 \\binom{{n}}{{r}}^2.\n\\]\n\\[\n= \\binom{2{n}}{{n}} - 4 \\sum_{{r}=1}^{n} \\binom{{n}-1}{{r}-1} \\binom{{n}}{{r}} + 4 \\sum_{{r}=1}^{n} \\binom{{n}-1}{{r}-1}^2.\n\\]\n\\[\n= \\binom{2{n}}{{n}} - 4\\binom{2{n}-1}{{n}-1} + 4\\binom{2{n}-2}{{n}-1}.\n\\]\n\\[\n= \\frac{2{n}(2{n}-1)}{{n}^2} - \\frac{4({n}-1)}{{n}}\\binom{2{n}-2}{{n}-1} = \\boxed{\\frac{1}{{n}}\\binom{2{n}-2}{{n}-1}}.\\n\\]'
+    functional_q: str = f'Given any positive integer ${n}$ find the value of \\n\\[ \\sum_{{{r}=0}}^{{\\lfloor ({n}-1)/2 \\rfloor}} \\left\\{{\\frac{{{n} - 2{r}}}{{{n}}}\\binom{{{n}}}{{{r}}}\\right\\}}^2, \\]\\n where $\\lfloor x \\rfloor$ means the greatest integer not exceeding $x$, and $\\binom{{{n}}}{{{r}}}$ is the binomial coefficient \"${n}$ choose ${r}$,\" with the convention $\\binom{{0}}{{0}} = 1$. Return your final answer in binomial coefficient form with all other multiplicants reduced to the lowest form.'
+    functional_ans: str = f'Substituting $s={n}-{r}$ in the given summation reveals that twice this sum is equal to:\n\\[\n\\sum_{{{r}=0}}^{n} \\left(\\frac{{{n}-2{r}}}{{n}} \\binom{{n}}{{r}}\\right)^2 = \\sum \\left(1 - 2\\frac{{{r}}}{{{n}}}\\right)^2 \\binom{{{n}}}{{{r}}}^2 = \\sum \\binom{{{n}}}{{{r}}}^2 - 4\\sum \\frac{{{r}}}{{{n}}} \\binom{{{n}}}{{{r}}}^2 + 4\\sum \\left(\\frac{{{r}}}{{{n}}}\\right)^2 \\binom{{{n}}}{{{r}}}^2.\n\\]\n\\[\n= \\binom{{2{n}}}{{{n}}} - 4 \\sum_{{{r}=1}}^{n} \\binom{{{n}-1}}{{{r}-1}} \\binom{{{n}}}{{{r}}} + 4 \\sum_{{{r}=1}}^{n} \\binom{{{n}-1}}{{{r}-1}}^2.\n\\]\n\\[\n= \\binom{{2{n}}}{{{n}}} - 4\\binom{{2{n}-1}}{{{n}-1}} + 4\\binom{{2{n}-2}}{{{n}-1}}.\n\\]\n\\[\n= \\frac{{2{n}(2{n}-1)}}{{{n}^2}} - \\frac{{4({n}-1)}}{{{n}}}\\binom{{2{n}-2}}{{{n}-1}} = \\boxed{{\\frac{{1}}{{{n}}}\\binom{{2{n}-2}}{{{n}-1}}}}.\\n\\]'
    
     return {
         'problem': functional_q,
@@ -130,7 +130,3 @@ def putnam_1965b1(
         'solution' : functional_ans,
         'type' : "variable"
     }
-
-
-
-

@@ -75,7 +75,7 @@ model_list = [
             # 'deepseek-ai/DeepSeek-R1-Distill-Qwen-32B',
             # 'deepseek-ai/DeepSeek-R1-Distill-Qwen-7B',
             'deepseek-ai/DeepSeek-R1-Distill-Llama-70B',
-            'deepseek-ai/DeepSeek-R1-Distill-Llama-8B'
+            # 'deepseek-ai/DeepSeek-R1-Distill-Llama-8B'
 ]
 
 # os.environ["CUDA_VISIBLE_DEVICES"] = 0,2,3,4
@@ -89,9 +89,9 @@ for model_name in model_list:
     print("=" * 100)
 
     model = LLM(model_name, 
-                tensor_parallel_size = 2,
-                gpu_memory_utilization = 0.98,
-                max_model_len= 59000,  # Reduce below 69904 (KV cache limit)
+                tensor_parallel_size = 4,
+                # gpu_memory_utilization = 0.9,
+                # max_model_len= 10000,  # Reduce below 69904 (KV cache limit)
                 # pipeline_parallel_size = 1,
                 trust_remote_code=True)
     lm_obj = MyLM(model=model)
