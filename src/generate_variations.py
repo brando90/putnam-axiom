@@ -105,7 +105,9 @@ def generate(args):
 
     vars = []
     original = []
-    
+    print("Available years in PUTNAM_VARIATIONS:", PUTNAM_VARIATIONS.keys())
+    print(PUTNAM_VARIATIONS['1946'], PUTNAM_VARIATIONS['1947'])
+
     if args.problem_keys:
         print(f'Generating variations for problems: {args.problem_keys}.\n')
         for year, ids in args.problem_keys.items():

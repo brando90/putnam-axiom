@@ -41,7 +41,7 @@ def save_dataset_to_file(file_path):
     generators = {
         'x' : generators.RandomVariable('lower'),
         'p' : generators.RandomVariable('lower'),
-        'bound' : generators.RandomInteger(1,100)
+        'bound' : generators.RandomInt(1,100)
     },
     original_params={
         'x' : 'x',
