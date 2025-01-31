@@ -46,7 +46,7 @@ def save_dataset_to_file(file_path):
         'z' : 'z',
         'h' : 'h',
 })
-def putnam_1946a1(
+def putnam_1938a1(
         z : str = 'z',
         h : str = 'h'
     ) -> dict:
