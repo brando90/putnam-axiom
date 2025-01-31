@@ -37,94 +37,27 @@ def save_dataset_to_file(file_path):
 
 
 @variation(
-    year='1947', id='2', 
+    year='1948', id='2', 
     generators = {
-        'x' : generators.RandomVariable('lower'),
-        'y' : generators.RandomVariable('lower'),
-        'i' : generators.RandomInt(1,100)
+        'r' : generators.RandomVariable('lower'),
+        'R' : generators.RandomVariable('upper')
     },
     original_params={
-        'x' : 'x',
-        'y' : 'y',
-        'i' : 1
+        'r' : 'r',
+        'R' : 'R',
 })
-def putnam_1947a2(
-        x : str = 'x',
-        y : str = 'y',
-        i : int = 1
+def putnam_19482(
+        r : str = 'r',
+        R : str = 'R'
     ) -> dict:
 
-    functional_q : str = f'A real valued continuous function satisfies for all real $x$ and $y$ the functional equation \n\\[ f(\\sqrt{{{x}^2 + {y}^2}}) = f({x})f({y}). \\]\nFind the value of f(x) in terms of f({i}). \\]'
-    functional_ans : str = f'A slight qualification in the statement of the problem is needed since the real valued continuous function $f(x) \\equiv 0$ satisfies the functional equation for all real ${x}$ and ${y}$, but does not satisfy the relation $f(0) = [f(1)]^0$, since $0^0$ is undefined.\n\nAssume then that for some $y_0$, $f(y_0) \\neq 0$. Since\n\\[ f({x})f(y_0) = f(\\sqrt{{{x}^2 + y_0^2}}) = f(-{x})f(y_0), \\]\nwe have $f({x}) = f(-{x}) = f(|{x}|)$ for all ${x}$. We now show by induction that for any positive integer $n$ and any real number ${x}$, we have\n\\[ f(\\sqrt{{n}}{x}) = [f({x})]^n. \\]\nThis is certainly true for $n = 1$, and assuming it true for $n = k$ we have\n\\[ f(\\sqrt{{k+1}}{x}) = f(\\sqrt{{k+1}}|{x}|) = f(\\sqrt{{(\\sqrt{{k}}{x})^2 + {x}^2}}) = f(\\sqrt{{k}}{x})f({x}) \\]\n\\[ = [f({x})]^k f({x}) = [f({x})]^{{k+1}}. \\]\nTherefore (1) is true for all positive integers $n$.\n\nIf $p$ and $q$ are non-zero integers, then\n\\[ f(p) = f(|p|) = f(\\sqrt{{p^2 \\cdot 1}}) = [f(1)]^{{p^2}} \\]\nand\n\\[ f(|p|) = f\\left(\\sqrt{{\\frac{{q^2}}{{q^2}}|p|^2}}\\right) = \\left[f\\left(\\frac{{|p|}}{{q}}\\right)\\right]^{{q^2}}. \\]\nFrom these two relations it follows that\n\\[ \\left[f\\left(\\frac{{p}}{{q}}\\right)\\right]^{{q^2}} = [f(1)]^{{p^2}}. \\]\nIf $f(1) > 0$ it then follows that\n\\[ \\left[f\\left(\\frac{{p}}{{q}}\\right)\\right] = [f(1)]^{{p^2/q^2}}; \\]\nthat is, the required equation is valid for all rational values of $x$ except, perhaps, $x = 0$. By continuity it follows for all values of $x$.\n\nIf $f({i}) = 0$, then (2) implies that $f(\\frac{{p}}{{q}}) = 0$ for all non-zero integers $p$ and $q$, and thus $f({x}) = 0$ for all rational ${x}$, hence for all real $x$.\n\nFinally we show that $f({i}) < 0$ is impossible. If $p$ is even and $q$ is odd, equation (2) implies that $f(\\frac{{p}}{{q}}) > 0$. Hence $f(x) > 0$ for a dense set of ${x}$, and therefore $f({x}) \\geq 0$ for all ${x}$; in particular, $f({i}) \\geq 0$. This makes the final answer \\boxed{{f({i})^{{{str(x) if i == 1 else '(' + str(x) + '/' + str(i) + ')^2'}}}}}.'
+    functional_q : str = f'Two spheres in contact have a common tangent cone. These three surfaces divide the space into various parts, only one of which is bounded by all three surfaces; it is \"ring-shaped.\" Being given the radii of the spheres, ${r}$ and ${R}$, find the volume of the \"ring-shaped\" part. (The desired expression is a rational function of ${r}$ and ${R}$.)'
+    functional_ans : str = replace_map(
+        'Let $\\alpha$ be the angle of the cone, and place the spheres as shown in the cross-section diagram, with centers at $O_1$ and $O_2$ and origin of the coordinate system at $O$, the point of contact.\n\nThe equation of the larger circle is\n\\[\nx^2 + y^2 + 2{R}x = 0\n\\]\nand the equation of the smaller is\n\\[\nx^2 + y^2 - 2{r}x = 0.\n\\]\nFrom the diagram,\n\\[\n\\sin \\alpha = \\frac{O_1P}{O_1O_2} = \\frac{{R} - {r}}{{R} + {r}},\n\\]\nso\n\\[\n\\cos^2 \\alpha = \\frac{4{R}r}{({R} + {r})^2}.\n\\]\nWe compute $V_1$, the volume of the frustum of the cone obtained by revolving area $A_1A_2B_2B_1$ about the $x$-axis.\n\nVolume of larger cone = \\[\n\\frac{1}{3}\\pi A_1B_1^2 \\cdot B_1T = \\frac{1}{3} \\pi {R}^2 \\cos^2 \\alpha \\cdot {R} \\cot \\alpha \\cos \\alpha = \\frac{16\\pi}{3} {R}^3 \\cdot \\frac{{r}^2{R}^2}{({R} - {r})({R} + {r})^3}.\n\\]\nVolume of smaller cone = \\[\n\\frac{16\\pi}{3} {r}^3 \\cdot \\frac{{r}^2{R}^2}{({R} - {r})({R} + {r})^3}.\n\\]\n\nTheir difference is\n\\[\nV_1 = \\frac{16\\pi}{3} \\cdot \\frac{{r}^2{R}^2}{({R} + {r})^3} \\cdot ({R}^2 + {R}{r} + {r}^2).\n\\]\nLet $V_2$ and $V_3$ be, respectively, the volumes of the larger spherical segment and the smaller spherical segment enclosed in the frustum of the cone.\n\\[\nV_2 = \\pi \\int_{{R} \\sin \\alpha}^0 \\left(-x^2 - 2{R}x\\right) dx = \\frac{4\\pi {R}^3{r}^2}{3({R} + {r})^3}(3{R} + {r}),\n\\]\nand\n\\[\nV_3 = \\pi \\int_0^{{r}(1 + \\sin \\alpha)} \\left(-x^2 + 2{r}x\\right) dx = \\frac{4\\pi}{3} \\cdot \\frac{{R}^2{r}^3}{({R} + {r})^3}({R} + 3{r}).\n\\]\n\nThe desired volume is given by\n\\[\nV_1 - V_2 - V_3 = \\frac{4\\pi}{3} \\cdot \\frac{{R}^2{r}^2}{({R} + {r})^3} \\cdot \\left[4({R}^2 + {R}{r} + {r}^2) - 3{R}^2 - {R}{r} - 3{r}^2 - {R}{r}\\right] = \\boxed{\\frac{4\\pi}{3} \\cdot \\frac{{R}^2{r}^2}{{R} + {r}}}.\n\\]',
+        map = {'{r}' : r, '{R}' : R}
+    )
     return {
         'problem' : functional_q,
         'solution' : functional_ans,
         'type' : "constant"
-    }
-
-@variation(
-    year='1947', id='10', 
-    generators = {
-        'z' : generators.RandomVariable('lower'),
-        'a' : generators.RandomVariable('lower'),
-        'b' : generators.RandomVariable('lower'),
-        'r' : generators.RandomInt(1,100)
-    },
-    original_params={
-        'z' : 'z',
-        'a' : 'a',
-        'b' : 'b',
-        'r' : 1
-})
-def putnam_1947b4(
-        z : str = 'z',
-        a : str = 'a',
-        b : str = 'b',
-        r : int = 1
-    ) -> dict:
-
-    rreplace = r if r != 1 else ''
-    unitreplace = 'unit ' if r == 1 else 'r-'
-    functional_q : str = f"Given $P({z}) = {rreplace}{z}^2 + {a}{z} + {b}$, a quadratic polynomial of the complex variable ${z}$ with complex coefficients ${a}, {b}$. Suppose that $|P({z})| = {r}$ for every ${z}$ such that $|{z}| = {r}$. Find the values of ${a}$ and ${b}$ and give their sum."
-    functional_ans : str = f'In particular, \\( |p({r})| = |p(-{r})| = {r} \\), so \\( {r} + {a} + {b} \\) and \\( {r} - {a} + {b} \\) lie on the {unitreplace}circle. Hence their midpoint \\( {r} + {b} \\) lies in the {unitreplace}disk. Similarly, \\( |p({rreplace}i)| = |p(-{rreplace}i)| = {r} \\), so \\( -{r} + i{a} + {b} \\) and \\( -{r} - i{a} + {b} \\) lie on the {unitreplace}circle and hence their midpoint \\( -{r} + {b} \\) lies in the {unitreplace}disk. But \\( {r} + {b} \\) and \\( -{r} + {b} \\) are a distance {2*r} apart, so they must lie at either end of a diameter of the {unitreplace}circle and hence \\( {b} = 0 \\). Now \\( {r} + {a} \\) and \\( {r} - {a} \\) lie on the {unitreplace}circle, as does their midpoint \\( {r} \\). Hence they must coincide and so \\( {a} = 0 \\). Thus, \\( a + b = 0 \\).'
-    
-    return {
-        'problem' : functional_q,
-        'solution' : functional_ans,
-        'type' : "constant"
-    }
-
-@variation(
-    year='1947', id='11', 
-    generators = {
-        'a' : generators.RandomVariable('lower'),
-        'b' : generators.RandomVariable('lower'),
-        'c' : generators.RandomVariable('lower'),
-        'd' : generators.RandomVariable('lower'),
-        'x' : generators.RandomVariable('lower'),
-        'r' : generators.RandomVariable('lower')
-    },
-    original_params={
-        'a' : 'a',
-        'b' : 'b',
-        'c' : 'c',
-        'd' : 'd',
-        'x' : 'x',
-        'r' : 'r'
-})
-def putnam_1947b5(
-        a : str = 'a',
-        b : str = 'b',
-        c : str = 'c',
-        d : str = 'd',
-        x : str = 'x',
-        r : str = 'r'
-    ) -> dict:
-
-    functional_q : str = f"{a}, {b}, {c}, {d} are distinct integers such that\n\\[ ({x} - {a})({x} - {b})({x} - {c})({x} - {d}) - 4 = 0 \\]\nhas an integral root ${r}$. Find the value of $4{r}$."
-    functional_ans : str = f'Since ${r}$ is a root,\n\\[ ({r} - {a})({r} - {b})({r} - {c})({r} - {d}) = 4, \\]\nand since ${a}, {b}, {c}, {d}$ are distinct integers, ${r} - {a}, {r} - {b}, {r} - {c}, {r} - {d}$ are distinct integers whose product is 4. But the only set of four distinct integers whose product is 4 is the set \\{{1, -1, 2, -2\\}}. Hence\n\\[ ({r} - {a}) + ({r} - {b}) + ({r} - {c}) + ({r} - {d}) = 1 - 1 + 2 - 2 = 0, \\]\nso\n\\[ 4{r} = \\boxed{{a + b + c + d}}. \\]'
-    return {
-        'problem' : functional_q,
-        'solution' : functional_ans,
-        'type' : "variable"
     }
