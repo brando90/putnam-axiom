@@ -89,7 +89,7 @@ def putnam_1939a5(
     }
 
 @variation(
-    year='1939', id='6', 
+    year='1939', id='6_i', 
     generators = {
         'a' : generators.RandomVariable('lower')
     },

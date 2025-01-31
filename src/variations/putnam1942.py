@@ -39,7 +39,8 @@ def save_dataset_to_file(file_path):
 @variation(
     year='1942', id='2', 
     generators = {
-        'a' : generators.RandomVariable('lower')
+        'a' : generators.RandomVariable('lower'),
+        'b' : generators.RandomVariable('lower')
     },
     original_params={
         'a' : 'a',
