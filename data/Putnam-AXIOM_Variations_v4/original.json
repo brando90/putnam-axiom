@@ -42,6 +42,41 @@
         "answer_type": "algebraic"
     },
     {
+        "year": "1948",
+        "id": "11",
+        "problem": "The pairs of numbers $(a, b)$ such that $|a + bt + t^2| \\leq 1$ for $0 \\leq t \\leq 1$ fill a certain region in the $(a, b)$-plane. What is the area of this region?",
+        "solution": "Consider \\[ f(t) = a + bt + t^2. \\] This function has just one critical value, at $t = -b/2$ where its value is $a - b^2/4$. On the interval $[0, 1]$, $f$ can have extreme values only at the endpoints and at the critical point if it should happen to fall in $[0, 1]$ (that is, if $b \\in [-2, 0]$). Hence the extreme values of $f$ are \\[ f(0) = a \\quad \\text{and} \\quad f(1) = a + b + 1 \\] if $b \\notin [-2, 0]$, and they are in the set \\[ \\{a, a + b + 1, a - b^2/4\\} \\] if $b \\in [-2, 0]$.\\nHence $|f(t)| \\leq 1$ for all $t \\in [0, 1]$ if and only if \\[ b \\notin [-2, 0] \\quad \\text{and} \\quad |a| \\leq 1, \\ |a + b + 1| \\leq 1 \\] or \\[ b \\in [-2, 0], \\quad |a| \\leq 1, \\ |a + b + 1| \\leq 1, \\ |a - b^2/4| \\leq 1. \\]\\nThe region required is therefore as shown in the diagram where the arc from $A$ to $B$ is part of the parabola $a - b^2/4 = -1$.\\nThe area of the required region can be obtained in several ways. The parallelogram $CEDF$ evidently has area 4. We must subtract the area of the piece $AFB$. Since $\\overline{AF}$ and $\\overline{FB}$ are tangents to the parabola, the area of $AFB$ is $\\frac{1}{3}$ that of the triangle $AFB$ (Archimedes' rule). But triangle $AFB$ has base $AF$ of length 1 and altitude 1, so its area is $\\frac{1}{2}$ and the curvilinear piece $AFB$ has area $\\frac{1}{6}$. Hence the area of $CEDBA$ is $4 - \\frac{1}{6} = \\boxed{\\frac{23}{6}}$.",
+        "answer_type": "numerical"
+    },
+    {
+        "year": "1950",
+        "id": "1",
+        "problem": "For what values of the ratio $a/b$ is the lima\u00e7on $r = a - b\\cos\\theta$ a convex curve? ($a > b > 0$) Return the lower bound of the values.",
+        "solution": "The graph of $r = f(\\theta)$ in polar coordinates is a simple closed curve surrounding the origin if $f$ is periodic with period $2\\pi$ and everywhere positive. This is the case in the present problem, since by hypothesis $a > b > 0$. Such a curve is nonsingularly parametrized by $\\theta$ if $r^2 + (r')^2 > 0$, again true in the present problem. The curvature is given by\n\\[ \\kappa = \\frac{r^2 + 2(r')^2 - rr''}{[r^2 + (r')^2]^{3/2}} \\]\n(whenever $f$ is of class $C^2$).\n\nThe curve is convex if and only if the curvature is everywhere non-negative, i.e., if and only if\n\\[ r^2 + 2(r')^2 - rr'' \\geq 0. \\]\n\nFor $r = a - b\\cos\\theta$, we have $r' = b\\sin\\theta$, $r'' = b\\cos\\theta$ and\n\\[ r^2 + 2(r')^2 - rr'' = a^2 + 2b^2 - 3ab\\cos\\theta. \\]\n\nThis last expression is always non-negative if and only if\n\\[ a^2 + 2b^2 - 3ab \\geq 0. \\]\n\n(Since $a$ and $b$ are positive, the least value occurs for $\\theta = 0$.) This is equivalent to\n\\[ (a - 2b)(a - b) \\geq 0, \\]\nand since $a - b > 0$ by hypothesis, to\n\\[ a \\geq 2b. \\]\n\nThus the lima\u00e7on is convex if and only if $a \\geq 2b$ which makes the lower bound \\boxed{2}.",
+        "answer_type": "numerical"
+    },
+    {
+        "year": "1950",
+        "id": "9",
+        "problem": "In the Gregorian calendar: \\begin{enumerate} \\item[(i)] years not divisible by 4 are common years; \\item[(ii)] years divisible by 4 but not by 100 are leap years; \\item[(iii)] years divisible by 100 but not by 400 are common years; \\item[(iv)] years divisible by 400 are leap years; \\item[(v)] a leap year contains 366 days; a common year 365 days. \\end{enumerate} Find the probability that Christmas falls on a Wednesday given its calculated across $N$ years.",
+        "solution": "According to the rules given, any 400 consecutive Gregorian years will involve 303 ordinary years and 97 leap years making a total of $400 \\cdot 365 + 97$ days. Since this number is divisible by 7 ($400 \\equiv 1, \\; 365 \\equiv 1, \\; 97 \\equiv -1 \\; \\text{(mod 7)}$), there is an integral number of weeks in 400 years (in fact, 20,871 weeks) and therefore the day of the week on which Christmas (or any other calendar date) falls repeats in cycles of 400. If there are $N$ years in such a period on which Christmas falls on Wednesday, then the probability that Christmas falls on Wednesday is $\\boxed{N/400}$. But $N/400 \\neq 1/7$ for any integer $N$.",
+        "answer_type": "algebraic"
+    },
+    {
+        "year": "1951",
+        "id": "14",
+        "problem": "Find the volume of the four-dimensional hypersphere $x^2 + y^2 + z^2 + t^2 = r^2$, and also the hypervolume of its interior $x^2 + y^2 + z^2 + t^2 < r^2$. Return the hypervolume as the final answer.",
+        "solution": "Let $V_4(r)$ be the hypervolume of the interior of the hypersphere, i.e., the four-dimensional ball of radius $r$. If the hypervolume is \"sliced\" perpendicular to the $x$-axis, one gets \\[ V_4(r) = \\int_{-r}^r V_3(\\sqrt{r^2 - x^2}) dx \\] where \\[ V_3(\\rho) = (4/3) \\pi \\rho^3 \\] is the ordinary volume of the three-dimensional ball of radius $\\rho$. Hence \\[ V_4(r) = (4/3) \\pi \\int_{-r}^r (r^2 - x^2)^{3/2} dx. \\] Making the substitution $x = r \\sin \\theta$ \\[ V_4(r) = \\frac{4 \\pi r^4}{3} \\int_{-\\pi/2}^{\\pi/2} \\cos^4 \\theta \\, d \\theta \\] \\[ = \\frac{\\pi r^4}{3} \\int_{-\\pi/2}^{\\pi/2} \\left( \\frac{3}{8} + \\frac{1}{2} \\cos 2\\theta + \\frac{1}{8} \\cos 4\\theta \\right) d\\theta, \\] where we have used the double-angle formula $2 \\cos^2 \\theta = 1 + \\cos 2\\theta$ twice to simplify the integrand. Hence \\[ V_4(r) = \\frac{\\pi r^4}{3} \\cdot \\frac{3}{2} \\pi = \\boxed{\\frac{\\pi^2 r^4}{2}}| \\] is the hypervolume of the four-dimensional ball. Let $A_4(r)$ be the three-dimensional volume of the hyperspherical surface of radius $r$. We can relate $A_4$ to $V_4$ as follows. If we compute $V_4(r)$ by considering concentric spherical shells we see that \\[ V_4(r) = \\int_0^r A_4(\\rho) d \\rho. \\] Hence by the fundamental theorem of calculus \\[ \\frac{d}{dr} V_4(r) = A_4(r), \\] so that \\[ A_4(r) = 2 \\pi^2 r^3. \\]",
+        "answer_type": "algebraic"
+    },
+    {
+        "year": "1952",
+        "id": "1",
+        "problem": "Let \\[ f(x) = \\sum_{i=0}^n a_i x^{n-i} \\] be a polynomial of degree $n$ with integral coefficients. If $a_0$, $a_n$, and $f(1)$ are odd, find the number of rational roots of $f(x) = 0$.",
+        "solution": "Suppose $f(p/q) = 0$ where $p$ and $q$ are integers having no common factor. Then \\[ q^n f\\left(\\frac{p}{q}\\right) = a_0 p^n + q a_1 p^{n-1} + \\cdots + q^{n-1} a_{n-1} p + q^n a_n = 0. \\] It follows that $q$ divides $a_0$ and $p$ divides $a_n$. Therefore $p$ and $q$ are both odd. Hence \\[ a_0 p^n + q a_1 p^{n-1} + \\cdots + q^{n-1} a_{n-1} p + q^n a_n \\equiv a_0 + a_1 + \\cdots + a_{n-1} + a_n \\equiv f(1) \\equiv 1 \\pmod{2}, \\] contradicting $(1)$. This makes the answer \\boxed{0}.",
+        "answer_type": "numerical"
+    },
+    {
         "year": "1965",
         "id": "A1",
         "problem": "Let $ABC$ be a triangle with angle $A < \\angle C < 90^\\circ < \\angle B$. Consider the bisectors of the external angles at $A$ and $B$, each measured from the vertex to the opposite side (extended). Suppose both of these line-segments are equal to $AB$. Compute the angle $A$.",

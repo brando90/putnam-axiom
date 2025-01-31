@@ -59,5 +59,34 @@ def putnam_19482(
     return {
         'problem' : functional_q,
         'solution' : functional_ans,
-        'type' : "constant"
+        'type' : "variable"
+    }
+
+@variation(
+    year='1948', id='11', 
+    generators = {
+        'a' : generators.RandomVariable('lower'),
+        'b' : generators.RandomVariable('lower'),
+        't' : generators.RandomVariable('lower')
+    },
+    original_params={
+        'a' : 'a',
+        'b' : 'b',
+        't' : 't'
+})
+def putnam_19482(
+        a : str = 'a',
+        b : str = 'b',
+        t : str = 't'
+    ) -> dict:
+
+    functional_q : str = f'The pairs of numbers $({a}, {b})$ such that $|{a} + {b}{t} + {t}^2| \\leq 1$ for $0 \\leq {t} \\leq 1$ fill a certain region in the $({a}, {b})$-plane. What is the area of this region?'
+    functional_ans : str = replace_map(
+        'Consider \\[ f({t}) = {a} + {b}{t} + {t}^2. \\] This function has just one critical value, at ${t} = -{b}/2$ where its value is ${a} - {b}^2/4$. On the interval $[0, 1]$, $f$ can have extreme values only at the endpoints and at the critical point if it should happen to fall in $[0, 1]$ (that is, if ${b} \\in [-2, 0]$). Hence the extreme values of $f$ are \\[ f(0) = [a] \\quad \\text{and} \\quad f(1) = {a} + {b} + 1 \\] if ${b} \\notin [-2, 0]$, and they are in the set \\[ \\{{a}, {a} + {b} + 1, {a} - {b}^2/4\\} \\] if ${b} \\in [-2, 0]$.\\nHence $|f({t})| \\leq 1$ for all ${t} \\in [0, 1]$ if and only if \\[ {b} \\notin [-2, 0] \\quad \\text{and} \\quad |{a}| \\leq 1, \\ |{a} + {b} + 1| \\leq 1 \\] or \\[ {b} \\in [-2, 0], \\quad |{a}| \\leq 1, \\ |{a} + {b} + 1| \\leq 1, \\ |{a} - {b}^2/4| \\leq 1. \\]\\nThe region required is therefore as shown in the diagram where the arc from $A$ to $B$ is part of the parabola ${a} - {b}^2/4 = -1$.\\nThe area of the required region can be obtained in several ways. The parallelogram $CEDF$ evidently has area 4. We must subtract the area of the piece $AFB$. Since $\\overline{AF}$ and $\\overline{FB}$ are tangents to the parabola, the area of $AFB$ is $\\frac{1}{3}$ that of the triangle $AFB$ (Archimedes\' rule). But triangle $AFB$ has base $AF$ of length 1 and altitude 1, so its area is $\\frac{1}{2}$ and the curvilinear piece $AFB$ has area $\\frac{1}{6}$. Hence the area of $CEDBA$ is $4 - \\frac{1}{6} = \\boxed{\\frac{23}{6}}$.',
+        map = {'{a}' : a, '{b}' : b, '{t}' : t}
+    )
+    return {
+        'problem' : functional_q,
+        'solution' : functional_ans,
+        'type' : "variable"
     }
