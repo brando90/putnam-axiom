@@ -32,34 +32,35 @@ class MyLM(LM):
     def generate_until(self, requests: List) -> List[str]:
         results = []
         for request in requests:
-            # response = client.chat.completions.create(
-            #     model = 'o1-preview',
-            #     messages = [{"role": "user", "content": request.args[0]}],
-            #     # max_tokens = 2048
-            # )
-            response = client.messages.create(
-                model = 'claude-3-5-sonnet-20241022',
+            response = client.chat.completions.create(
+                model = 'o1-preview',
                 messages = [{"role": "user", "content": request.args[0]}],
-                max_tokens = 2048
+                # max_tokens = 2048
             )
-            results.append(response.content[0].text)
+            results.append(response.choices[0].message.content)
+            # response = client.messages.create(
+            #     model = 'claude-3-5-sonnet-20241022',
+            #     messages = [{"role": "user", "content": request.args[0]}],
+            #     max_tokens = 2048
+            # )
+            # results.append(response.content[0].text)
         return results
 
 
 torch.cuda.empty_cache()
 gc.collect()
 
-# client = OpenAI(api_key = "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")
-client = anthropic.Anthropic(api_key = "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")
+client = OpenAI(api_key = "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")
+# client = anthropic.Anthropic(api_key = "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")
 
 lm_obj = MyLM()
 task_manager = tasks.TaskManager()
 results = evaluator.simple_evaluate(
     model=lm_obj,
-    tasks=["putnam_axiom_original"],
+    tasks=["putnam_axiom_variations"],
     task_manager=task_manager,
     write_out=False,
     random_seed=None
 )
 
-print("results:", results["results"]["putnam_axiom_original"].get("exact_match,none", None))
+print("results:", results["results"]["putnam_axiom_variations"].get("exact_match,none", None))

@@ -105,7 +105,9 @@ def generate(args):
 
     vars = []
     original = []
-    
+    print("Available years in PUTNAM_VARIATIONS:", PUTNAM_VARIATIONS.keys())
+    print(PUTNAM_VARIATIONS['1946'], PUTNAM_VARIATIONS['1947'])
+
     if args.problem_keys:
         print(f'Generating variations for problems: {args.problem_keys}.\n')
         for year, ids in args.problem_keys.items():
@@ -141,9 +143,9 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Generate variations of problems.')
     parser.add_argument('--num_variations', type=int, default=5, help='Number of variations to generate.')
 
-    parser.add_argument('--save_dir', type=str, default='putnam-axiom/data/Putnam-AXIOM_Variations_v3',
+    parser.add_argument('--save_dir', type=str, default='putnam-axiom/data/Putnam-AXIOM_Variations_v4',
                         help='Directory to save variations.')
-    parser.add_argument('--save_orig_dir', type=str, default='putnam-axiom/data/Putnam-AXIOM_Variations_v3',
+    parser.add_argument('--save_orig_dir', type=str, default='putnam-axiom/data/Putnam-AXIOM_Variations_v4',
                         help='Directory to save original version of variations.')
     parser.add_argument('--original_data_dir', type=str, default='putnam-axiom/data/Putnam_AXIOM_Original_v3.json',
                         help='Original data directory. i.e. directory containing original Putnam problems.')

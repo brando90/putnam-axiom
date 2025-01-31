@@ -1,32 +1,92 @@
 [
   {
-    "id": "1938_1",
-    "original_problem": "A solid is bounded by two bases in the horizontal planes $z = h/2$ and $z = -h/2$, and by such a surface that the area of every section in a horizontal plane is given by a formula of the sort \\[ \\text{Area} = a_0 z^3 + a_1 z^2 + a_2 z + a_3 \\] (where as special cases some of the coefficients may be $0$). Show that the volume is given by the formula \\[ V = \\frac{1}{6} h[B_1 + B_2 + 4M], \\] where $B_1$ and $B_2$ are the areas of the bases, and $M$ is the area of the middle horizontal section. Show that the formulas for the volume of a cone and of a sphere can be included in this formula when $a_0 = 0$.",
-    "original_solution": "The volume in question is given by \\[ V = \\int_{-h/2}^{h/2} (a_0 z^3 + a_1 z^2 + a_2 z + a_3) dz \\] \\[ = \\frac{a_1 h^3}{12} + a_3 h. \\] On the other hand, the base areas and $M$ are given by \\[ B_1 = \\frac{a_0 h^3}{8} + \\frac{a_1 h^2}{4} + \\frac{a_2 h}{2} + a_3, \\] \\[ B_2 = -\\frac{a_0 h^3}{8} + \\frac{a_1 h^2}{4} - \\frac{a_2 h}{2} + a_3, \\] \\[ M = a_3, \\] so that the suggested expression \\( \\frac{1}{6} h[B_1 + B_2 + 4M] \\) works out to be \\[ \\frac{1}{6} h \\left( \\frac{a_1 h^2}{2} + 6a_3 \\right) = \\frac{a_1 h^3}{12} + a_3 h = V \\] as required.\\n\\nThe formula \\( V = \\frac{1}{6} h[B_1 + B_2 + 4M] \\) is known in solid geometry as the prismoidal formula. It is closely related to Simpson's rule in numerical integration.",
-    "problem": "A solid is bounded by two bases in the horizontal planes $z = h/2$ and $z = -h/2$, and by such a surface that the area of every section in a horizontal plane is given by a formula of the sort \\[ \\text{Area} = a_0 z^3 + a_1 z^2 + a_2 z + a_3 \\] (where as special cases some of the coefficients may be $0$). Find the volume formula where $B_1$ and $B_2$ are the areas of the bases, and $M$ is the area of the middle horizontal section. Also fine the value of $a_0$ for which the formulas for the volume of a cone and of a sphere can be included in this formula and add it to the expression of the volume you find for the final answer.",
-    "solution": "The volume in question is given by \\[ V = \\int_{-h/2}^{h/2} (a_0 z^3 + a_1 z^2 + a_2 z + a_3) dz \\] \\[ = \\frac{a_1 h^3}{12} + a_3 h. \\] On the other hand, the base areas and $M$ are given by \\[ B_1 = \\frac{a_0 h^3}{8} + \\frac{a_1 h^2}{4} + \\frac{a_2 h}{2} + a_3, \\] \\[ B_2 = -\\frac{a_0 h^3}{8} + \\frac{a_1 h^2}{4} - \\frac{a_2 h}{2} + a_3, \\] \\[ M = a_3, \\] so that the suggested expression \\( \\frac{1}{6} h[B_1 + B_2 + 4M] \\) works out to be \\[ \\frac{1}{6} h \\left( \\frac{a_1 h^2}{2} + 6a_3 \\right) = \\frac{a_1 h^3}{12} + a_3 h = V \\] as required.\\n\\nThe formula \\( V = \\boxed{\\frac{1}{6}h(B_1 + B_2 + 4M)} \\) is known in solid geometry as the prismoidal formula. It is closely related to Simpson's rule in numerical integration.",
+    "year": "1946",
+    "id": "A1",
+    "problem": "Suppose that the function $g(m) = am^2 + bm + c$, where $a$, $b$, $c$ are real constants, satisfies the condition $|g(m)| \\leq 32$ for $|m| \\leq 1$. Find the upper bound of $|g'(m)|$ for $|x| \\leq 1$.",
+    "solution": "If $a \\neq 0$, the graph of $y = ax^2 + bx + c$ is a parabola that opens upward, i.e., $a > 0$. Without loss of generality, assume $b \\geq 0$. The vertex falls in the left half-plane, and the maximum value of $|f'(x)|$ for $|x| \\leq 1$ occurs at $x = 1$. Therefore, $|f'(1)| = 2a + b$.\n\nNow evaluate $f(1)$ and $f(0)$:\n\\[\nf(1) = a + b + c \\leq 32, \\quad f(0) = c \\geq -32.\n\\]\nFrom these, $a + b \\leq 64$, and since $a, b \\geq 0$, we also have $a \\leq 64$ and $2a + b \\leq 128$.\n\nFor the case $a = 0$, the function is linear: $f(x) = bx + c$, and $f'(x) = b$. Using the conditions $f(1), f(-1)$:\n\\[\n|f'(x)| = |b| = \\frac{|f(1) - f(-1)|}{2} \\leq 128.\n\\]\nThus, $|f'(x)| \\leq \\boxed{128}$ for all $|x| \\leq 1$ as required.",
+    "type": "constant",
+    "answer_type": "numerical",
+    "variation": "1"
+},
+{
+    "year": "1946",
+    "id": "A1",
+    "problem": "Suppose that the function $p(l) = al^2 + bl + c$, where $a$, $b$, $c$ are real constants, satisfies the condition $|p(l)| \\leq 95$ for $|l| \\leq 1$. Find the upper bound of $|p'(l)|$ for $|x| \\leq 1$.",
+    "solution": "If $a \\neq 0$, the graph of $y = ax^2 + bx + c$ is a parabola that opens upward, i.e., $a > 0$. Without loss of generality, assume $b \\geq 0$. The vertex falls in the left half-plane, and the maximum value of $|f'(x)|$ for $|x| \\leq 1$ occurs at $x = 1$. Therefore, $|f'(1)| = 2a + b$.\n\nNow evaluate $f(1)$ and $f(0)$:\n\\[\nf(1) = a + b + c \\leq 95, \\quad f(0) = c \\geq -95.\n\\]\nFrom these, $a + b \\leq 190$, and since $a, b \\geq 0$, we also have $a \\leq 190$ and $2a + b \\leq 380$.\n\nFor the case $a = 0$, the function is linear: $f(x) = bx + c$, and $f'(x) = b$. Using the conditions $f(1), f(-1)$:\n\\[\n|f'(x)| = |b| = \\frac{|f(1) - f(-1)|}{2} \\leq 380.\n\\]\nThus, $|f'(x)| \\leq \\boxed{380}$ for all $|x| \\leq 1$ as required.",
+    "type": "constant",
+    "answer_type": "numerical",
+    "variation": "2"
+},
+{
+    "year": "1946",
+    "id": "A1",
+    "problem": "Suppose that the function $y(b) = ab^2 + bb + c$, where $a$, $b$, $c$ are real constants, satisfies the condition $|y(b)| \\leq 95$ for $|b| \\leq 1$. Find the upper bound of $|y'(b)|$ for $|x| \\leq 1$.",
+    "solution": "If $a \\neq 0$, the graph of $y = ax^2 + bx + c$ is a parabola that opens upward, i.e., $a > 0$. Without loss of generality, assume $b \\geq 0$. The vertex falls in the left half-plane, and the maximum value of $|f'(x)|$ for $|x| \\leq 1$ occurs at $x = 1$. Therefore, $|f'(1)| = 2a + b$.\n\nNow evaluate $f(1)$ and $f(0)$:\n\\[\nf(1) = a + b + c \\leq 95, \\quad f(0) = c \\geq -95.\n\\]\nFrom these, $a + b \\leq 190$, and since $a, b \\geq 0$, we also have $a \\leq 190$ and $2a + b \\leq 380$.\n\nFor the case $a = 0$, the function is linear: $f(x) = bx + c$, and $f'(x) = b$. Using the conditions $f(1), f(-1)$:\n\\[\n|f'(x)| = |b| = \\frac{|f(1) - f(-1)|}{2} \\leq 380.\n\\]\nThus, $|f'(x)| \\leq \\boxed{380}$ for all $|x| \\leq 1$ as required.",
+    "type": "constant",
+    "answer_type": "numerical",
+    "variation": "3"
+},
+{
+    "year": "1946",
+    "id": "A1",
+    "problem": "Suppose that the function $u(k) = ak^2 + bk + c$, where $a$, $b$, $c$ are real constants, satisfies the condition $|u(k)| \\leq 76$ for $|k| \\leq 1$. Find the upper bound of $|u'(k)|$ for $|x| \\leq 1$.",
+    "solution": "If $a \\neq 0$, the graph of $y = ax^2 + bx + c$ is a parabola that opens upward, i.e., $a > 0$. Without loss of generality, assume $b \\geq 0$. The vertex falls in the left half-plane, and the maximum value of $|f'(x)|$ for $|x| \\leq 1$ occurs at $x = 1$. Therefore, $|f'(1)| = 2a + b$.\n\nNow evaluate $f(1)$ and $f(0)$:\n\\[\nf(1) = a + b + c \\leq 76, \\quad f(0) = c \\geq -76.\n\\]\nFrom these, $a + b \\leq 152$, and since $a, b \\geq 0$, we also have $a \\leq 152$ and $2a + b \\leq 304$.\n\nFor the case $a = 0$, the function is linear: $f(x) = bx + c$, and $f'(x) = b$. Using the conditions $f(1), f(-1)$:\n\\[\n|f'(x)| = |b| = \\frac{|f(1) - f(-1)|}{2} \\leq 304.\n\\]\nThus, $|f'(x)| \\leq \\boxed{304}$ for all $|x| \\leq 1$ as required.",
+    "type": "constant",
+    "answer_type": "numerical",
+    "variation": "4"
+},
+{
+    "year": "1946",
+    "id": "A1",
+    "problem": "Suppose that the function $x(z) = az^2 + bz + c$, where $a$, $b$, $c$ are real constants, satisfies the condition $|x(z)| \\leq 4$ for $|z| \\leq 1$. Find the upper bound of $|x'(z)|$ for $|x| \\leq 1$.",
+    "solution": "If $a \\neq 0$, the graph of $y = ax^2 + bx + c$ is a parabola that opens upward, i.e., $a > 0$. Without loss of generality, assume $b \\geq 0$. The vertex falls in the left half-plane, and the maximum value of $|f'(x)|$ for $|x| \\leq 1$ occurs at $x = 1$. Therefore, $|f'(1)| = 2a + b$.\n\nNow evaluate $f(1)$ and $f(0)$:\n\\[\nf(1) = a + b + c \\leq 4, \\quad f(0) = c \\geq -4.\n\\]\nFrom these, $a + b \\leq 8$, and since $a, b \\geq 0$, we also have $a \\leq 8$ and $2a + b \\leq 16$.\n\nFor the case $a = 0$, the function is linear: $f(x) = bx + c$, and $f'(x) = b$. Using the conditions $f(1), f(-1)$:\n\\[\n|f'(x)| = |b| = \\frac{|f(1) - f(-1)|}{2} \\leq 16.\n\\]\nThus, $|f'(x)| \\leq \\boxed{16}$ for all $|x| \\leq 1$ as required.",
+    "type": "constant",
+    "answer_type": "numerical",
+    "variation": "5"
+},
+{
+    "year": "1946",
+    "id": "A5",
+    "problem": "Find the smallest volume bounded by the coordinate planes and by a tangent plane to the ellipsoid\n\\[\n\\frac{y^2}{k^2} + \\frac{j^2}{i^2} + \\frac{q^2}{r^2} = 1.\n\\]",
+    "solution": "The tangent plane to the ellipsoid at the point $(y_1, j_1, z_1)$ has the equation\n\\[\n\\frac{y_1}{k^2} + \\frac{j_1}{i^2} + \\frac{q_1}{r^2} = 1.\n\\]\nIts intercepts on the $y$, $j$, and $q$-axes are respectively $\\frac{k^2}{y_1}$, $\\frac{i^2}{j_1}$, and $\\frac{r^2}{q_1}$. The volume of the solid cut off by the tangent plane and the three coordinate planes is\n\\[\nV = \\frac{1}{6} \\left| \\frac{k^2 i^2 r^2}{y_1 j_1 q_1} \\right|.\n\\]\nUsing the constraint that $(y_1, j_1, q_1)$ is a point on the ellipsoid, we express the volume as:\n\\[\nV^2 = \\frac{1}{36} k^2 i^2 r^2 \\left( \\frac{y_1^2}{k^2} \\cdot \\frac{j_1^2}{i^2} \\cdot \\frac{q_1^2}{r^2} \\right)^{-1}.\n\\]\nUsing the arithmetic-geometric mean inequality:\n\\[\n\\left( \\frac{y_1^2}{k^2} \\cdot \\frac{j_1^2}{i^2} \\cdot \\frac{q_1^2}{r^2} \\right)^{1/3} \\leq \\frac{1}{3} \\left( \\frac{y_1^2}{k^2} + \\frac{j_1^2}{i^2} + \\frac{q_1^2}{r^2} \\right) = \\frac{1}{3}.\n\\]\nEquality holds if and only if $\\frac{y_1^2}{k^2} = \\frac{j_1^2}{i^2} = \\frac{q_1^2}{r^2} = \\frac{1}{3}$. Thus,\n\\[\nV^2 \\geq \\frac{27}{36} k^2 i^2 r^2 \\quad \\text{and} \\quad V \\geq \\boxed{\\frac{1}{2} \\sqrt{3} kir}.\n\\]\nEquality is achieved when $(y_1, j_1, q_1)$ is one of the eight points for which $\\frac{y_1^2}{k^2} = \\frac{j_1^2}{i^2} = \\frac{q_1^2}{r^2} = \\frac{1}{3}$, namely\n\\[\n(\\pm \\frac{k}{\\sqrt{3}}, \\pm \\frac{i}{\\sqrt{3}}, \\pm \\frac{r}{\\sqrt{3}}).\n\\]",
+    "type": "variable",
     "answer_type": "algebraic",
-    "source": "putnam (modified boxing)",
-    "type": "Geometry Calculus"
-  },
-  {
-    "id": "1938_2",
-    "original_problem": "A can buoy is to be made of three pieces, namely, a cylinder and two equal cones, the altitude of each cone being equal to the altitude of the cylinder. For a given area of surface, what shape will have the greatest volume?",
-    "original_solution": "Let $r$ be the radius of the cylinder, and $h$ its altitude. The given condition is \\[ S = 2\\pi rh + 2(\\pi r\\sqrt{h^2 + r^2}) = \\text{constant}, \\] and the volume of the buoy is \\[ V = \\pi r^2 h + \\frac{2\\pi r^2 h}{3} = \\frac{5\\pi r^2 h}{3}. \\] The required problem is to find the maximum value of $V$ subject to condition $(1)$. This can be done by the method of Lagrange multipliers, but in this particular problem it is easier to solve $(1)$ for $h$ and express $V$ as a function of $r$. We have \\[ (S - 2\\pi rh)^2 = 4\\pi^2r^2(h^2 + r^2), \\] whence \\[ h = \\frac{S^2 - 4\\pi^2r^4}{4\\pi S}, \\] and the expression for $V$ becomes \\[ V = \\frac{5r}{12S}(S^2 - 4\\pi^2r^4). \\] Since $r$ and $V$ must be positive, the domain of interest is given by \\[ 0 < r < \\sqrt[4]{\\frac{S^2}{4\\pi^2}}. \\] We compute the derivative and equate it to zero to get \\[ \\frac{dV}{dr} = \\frac{5S}{12} - \\frac{100\\pi^2r^4}{12S} = 0. \\] The only critical value is \\[ r_0 = \\sqrt[4]{\\frac{S^2}{20\\pi^2}}. \\] Since $V \\to 0$ as $r \\to 0$ or as $r \\to \\sqrt[4]{S^2/4\\pi^2}$, and is positive in between, the critical value $r_0$ yields a maximum for $V$. The corresponding value of $h$ is found from $(3)$ to be $h_0 = \\frac{2}{5}\\sqrt{5} r_0$. The shape of the buoy is completely determined by the ratio \\[ \\frac{h_0}{r_0} = \\frac{2}{5}\\sqrt{5}. \\]",
-    "problem": "A can buoy is to be made of three pieces, namely, a cylinder and two equal cones, the altitude of each cone being equal to the altitude of the cylinder. For a given area of surface, find the ratio of $h_0/r_0$ where $h_0$ is the hight at which the maximum volume is achieved and $r_0$ is the corresponding radius at maximum volume?",
-    "solution": "Let $r$ be the radius of the cylinder, and $h$ its altitude. The given condition is \\[ S = 2\\pi rh + 2(\\pi r\\sqrt{h^2 + r^2}) = \\text{constant}, \\] and the volume of the buoy is \\[ V = \\pi r^2 h + \\frac{2\\pi r^2 h}{3} = \\frac{5\\pi r^2 h}{3}. \\] The required problem is to find the maximum value of $V$ subject to condition $(1)$. This can be done by the method of Lagrange multipliers, but in this particular problem it is easier to solve $(1)$ for $h$ and express $V$ as a function of $r$. We have \\[ (S - 2\\pi rh)^2 = 4\\pi^2r^2(h^2 + r^2), \\] whence \\[ h = \\frac{S^2 - 4\\pi^2r^4}{4\\pi S}, \\] and the expression for $V$ becomes \\[ V = \\frac{5r}{12S}(S^2 - 4\\pi^2r^4). \\] Since $r$ and $V$ must be positive, the domain of interest is given by \\[ 0 < r < \\sqrt[4]{\\frac{S^2}{4\\pi^2}}. \\] We compute the derivative and equate it to zero to get \\[ \\frac{dV}{dr} = \\frac{5S}{12} - \\frac{100\\pi^2r^4}{12S} = 0. \\] The only critical value is \\[ r_0 = \\sqrt[4]{\\frac{S^2}{20\\pi^2}}. \\] Since $V \\to 0$ as $r \\to 0$ or as $r \\to \\sqrt[4]{S^2/4\\pi^2}$, and is positive in between, the critical value $r_0$ yields a maximum for $V$. The corresponding value of $h$ is found from $(3)$ to be $h_0 = \\frac{2}{5}\\sqrt{5} r_0$. The shape of the buoy is completely determined by the ratio \\[ \\frac{h_0}{r_0} = \\boxed{\\frac{2}{5}\\sqrt{5}}. \\]",
-    "answer_type": "numerical",
-    "source": "putnam (modified boxing)",
-    "type": "Geometry Calculus"
-  },  
-  {
-    "id": "1938_3",
-    "original_problem": "If a particle moves in the plane, we may express its coordinates $x$ and $y$ as functions of the time $t$. If $x = t^3 - t$ and $y = t^4 + t$, show that the curve has a point of inflection at $t = 0$ and that the velocity of the moving particle has a maximum at $t = 0$.",
-    "original_solution": "First Solution. If the velocity vector at time $t$ is of length $v$ and has direction $\\theta$, then $\\dot{x} = v \\cos \\theta$, $\\dot{y} = v \\sin \\theta$, and $\\ddot{x} = \\dot{v} \\cos \\theta - v \\dot{\\theta} \\sin \\theta$, $\\ddot{y} = \\dot{v} \\sin \\theta + v \\dot{\\theta} \\cos \\theta$. Thus $\\dot{x} \\ddot{y} - \\ddot{x} \\dot{y} = v^2 \\dot{\\theta}$ and $v^2 = \\dot{x}^2 + \\dot{y}^2$. From the given parametric data,\\n\\n$v^2 \\dot{\\theta} = (3t^2 - 1)12t^2 - (4t^3 + 1)6t = 6t(2t^3 - 2t - 1)$\\n\\n$v^2 = 16t^6 + 9t^4 + 8t^3 - 6t^2 + 2.$\\n\\nFrom the $v^2 \\dot{\\theta}$ relation, $\\dot{\\theta}$ changes sign as $t$ passes through 0. To rule out the possibility of a cusp point, one notes that $v^2 \\neq 0$ at $t = 0$. Hence the curve has an inflection point at $t = 0$. Also\\n\\n$\\frac{d(v^2)}{dt} = 96t^5 + 36t^4 + 24t^2 - 12t$\\n\\n$\\left.\\frac{d(v^2)}{dt}\\right|_{t=0} = 0$\\n\\n$\\left.\\frac{d^2(v^2)}{dt^2}\\right|_{t=0} = -12.$\\n\\nSo $v^2$ has a (local) maximum at $t = 0$. Hence the speed $v$ also has a local maximum.",
-    "problem": "If a particle moves in the plane, we may express its coordinates $x$ and $y$ as functions of the time $t$. If $x = t^3 - t$ and $y = t^4 + t$, show that the curve has a point of inflection at $t = 0$ and find the maximum speed/absolute value of velocity it achieves durings its entire movement.$.",
-    "solution": "If the velocity vector at time $t$ is of length $v$ and has direction $\\theta$, then $\\dot{x} = v \\cos \\theta$, $\\dot{y} = v \\sin \\theta$, and $\\ddot{x} = \\dot{v} \\cos \\theta - v \\dot{\\theta} \\sin \\theta$, $\\ddot{y} = \\dot{v} \\sin \\theta + v \\dot{\\theta} \\cos \\theta$. Thus $\\dot{x} \\ddot{y} - \\ddot{x} \\dot{y} = v^2 \\dot{\\theta}$ and $v^2 = \\dot{x}^2 + \\dot{y}^2$. From the given parametric data,\\n\\n$v^2 \\dot{\\theta} = (3t^2 - 1)12t^2 - (4t^3 + 1)6t = 6t(2t^3 - 2t - 1)$\\n\\n$v^2 = 16t^6 + 9t^4 + 8t^3 - 6t^2 + 2.$\\n\\nFrom the $v^2 \\dot{\\theta}$ relation, $\\dot{\\theta}$ changes sign as $t$ passes through 0. To rule out the possibility of a cusp point, one notes that $v^2 \\neq 0$ at $t = 0$. Hence the curve has an inflection point at $t = 0$. Also\\n\\n$\\frac{d(v^2)}{dt} = 96t^5 + 36t^4 + 24t^2 - 12t$\\n\\n$\\left.\\frac{d(v^2)}{dt}\\right|_{t=0} = 0$\\n\\n$\\left.\\frac{d^2(v^2)}{dt^2}\\right|_{t=0} = -\\boxed{12}.$\\n\\nSo $v^2$ has a (local) maximum at $t = 0$. Hence the speed $v$ also has a local maximum.",
-    "answer_type": "numerical",
-    "source": "putnam",
-    "type": "Calculus Analysis"
-  }
+    "variation": "1"
+},
+{
+    "year": "1946",
+    "id": "A5",
+    "problem": "Find the smallest volume bounded by the coordinate planes and by a tangent plane to the ellipsoid\n\\[\n\\frac{h^2}{l^2} + \\frac{a^2}{w^2} + \\frac{i^2}{f^2} = 1.\n\\]",
+    "solution": "The tangent plane to the ellipsoid at the point $(h_1, a_1, z_1)$ has the equation\n\\[\n\\frac{h_1}{l^2} + \\frac{a_1}{w^2} + \\frac{i_1}{f^2} = 1.\n\\]\nIts intercepts on the $h$, $a$, and $i$-axes are respectively $\\frac{l^2}{h_1}$, $\\frac{w^2}{a_1}$, and $\\frac{f^2}{i_1}$. The volume of the solid cut off by the tangent plane and the three coordinate planes is\n\\[\nV = \\frac{1}{6} \\left| \\frac{l^2 w^2 f^2}{h_1 a_1 i_1} \\right|.\n\\]\nUsing the constraint that $(h_1, a_1, i_1)$ is a point on the ellipsoid, we express the volume as:\n\\[\nV^2 = \\frac{1}{36} l^2 w^2 f^2 \\left( \\frac{h_1^2}{l^2} \\cdot \\frac{a_1^2}{w^2} \\cdot \\frac{i_1^2}{f^2} \\right)^{-1}.\n\\]\nUsing the arithmetic-geometric mean inequality:\n\\[\n\\left( \\frac{h_1^2}{l^2} \\cdot \\frac{a_1^2}{w^2} \\cdot \\frac{i_1^2}{f^2} \\right)^{1/3} \\leq \\frac{1}{3} \\left( \\frac{h_1^2}{l^2} + \\frac{a_1^2}{w^2} + \\frac{i_1^2}{f^2} \\right) = \\frac{1}{3}.\n\\]\nEquality holds if and only if $\\frac{h_1^2}{l^2} = \\frac{a_1^2}{w^2} = \\frac{i_1^2}{f^2} = \\frac{1}{3}$. Thus,\n\\[\nV^2 \\geq \\frac{27}{36} l^2 w^2 f^2 \\quad \\text{and} \\quad V \\geq \\boxed{\\frac{1}{2} \\sqrt{3} lwf}.\n\\]\nEquality is achieved when $(h_1, a_1, i_1)$ is one of the eight points for which $\\frac{h_1^2}{l^2} = \\frac{a_1^2}{w^2} = \\frac{i_1^2}{f^2} = \\frac{1}{3}$, namely\n\\[\n(\\pm \\frac{l}{\\sqrt{3}}, \\pm \\frac{w}{\\sqrt{3}}, \\pm \\frac{f}{\\sqrt{3}}).\n\\]",
+    "type": "variable",
+    "answer_type": "algebraic",
+    "variation": "2"
+},
+{
+    "year": "1946",
+    "id": "A5",
+    "problem": "Find the smallest volume bounded by the coordinate planes and by a tangent plane to the ellipsoid\n\\[\n\\frac{g^2}{y^2} + \\frac{p^2}{z^2} + \\frac{l^2}{d^2} = 1.\n\\]",
+    "solution": "The tangent plane to the ellipsoid at the point $(g_1, p_1, z_1)$ has the equation\n\\[\n\\frac{g_1}{y^2} + \\frac{p_1}{z^2} + \\frac{l_1}{d^2} = 1.\n\\]\nIts intercepts on the $g$, $p$, and $l$-axes are respectively $\\frac{y^2}{g_1}$, $\\frac{z^2}{p_1}$, and $\\frac{d^2}{l_1}$. The volume of the solid cut off by the tangent plane and the three coordinate planes is\n\\[\nV = \\frac{1}{6} \\left| \\frac{y^2 z^2 d^2}{g_1 p_1 l_1} \\right|.\n\\]\nUsing the constraint that $(g_1, p_1, l_1)$ is a point on the ellipsoid, we express the volume as:\n\\[\nV^2 = \\frac{1}{36} y^2 z^2 d^2 \\left( \\frac{g_1^2}{y^2} \\cdot \\frac{p_1^2}{z^2} \\cdot \\frac{l_1^2}{d^2} \\right)^{-1}.\n\\]\nUsing the arithmetic-geometric mean inequality:\n\\[\n\\left( \\frac{g_1^2}{y^2} \\cdot \\frac{p_1^2}{z^2} \\cdot \\frac{l_1^2}{d^2} \\right)^{1/3} \\leq \\frac{1}{3} \\left( \\frac{g_1^2}{y^2} + \\frac{p_1^2}{z^2} + \\frac{l_1^2}{d^2} \\right) = \\frac{1}{3}.\n\\]\nEquality holds if and only if $\\frac{g_1^2}{y^2} = \\frac{p_1^2}{z^2} = \\frac{l_1^2}{d^2} = \\frac{1}{3}$. Thus,\n\\[\nV^2 \\geq \\frac{27}{36} y^2 z^2 d^2 \\quad \\text{and} \\quad V \\geq \\boxed{\\frac{1}{2} \\sqrt{3} yzd}.\n\\]\nEquality is achieved when $(g_1, p_1, l_1)$ is one of the eight points for which $\\frac{g_1^2}{y^2} = \\frac{p_1^2}{z^2} = \\frac{l_1^2}{d^2} = \\frac{1}{3}$, namely\n\\[\n(\\pm \\fracp{\\sqrt{3}}, \\pm \\fracl{\\sqrt{3}}, \\pm \\frac{d}{\\sqrt{3}}).\n\\]",
+    "type": "variable",
+    "answer_type": "algebraic",
+    "variation": "3"
+},
+{
+    "year": "1946",
+    "id": "A5",
+    "problem": "Find the smallest volume bounded by the coordinate planes and by a tangent plane to the ellipsoid\n\\[\n\\frac{u^2}{r^2} + \\frac{w^2}{d^2} + \\frac{c^2}{b^2} = 1.\n\\]",
+    "solution": "The tangent plane to the ellipsoid at the point $(u_1, w_1, z_1)$ has the equation\n\\[\n\\frac{u_1}{r^2} + \\frac{w_1}{d^2} + \\frac{c_1}{b^2} = 1.\n\\]\nIts intercepts on the $u$, $w$, and $c$-axes are respectively $\\frac{r^2}{u_1}$, $\\frac{d^2}{w_1}$, and $\\frac{b^2}{c_1}$. The volume of the solid cut off by the tangent plane and the three coordinate planes is\n\\[\nV = \\frac{1}{6} \\left| \\frac{r^2 d^2 b^2}{u_1 w_1 c_1} \\right|.\n\\]\nUsing the constraint that $(u_1, w_1, c_1)$ is a point on the ellipsoid, we express the volume as:\n\\[\nV^2 = \\frac{1}{36} r^2 d^2 b^2 \\left( \\frac{u_1^2}{r^2} \\cdot \\frac{w_1^2}{d^2} \\cdot \\frac{c_1^2}{b^2} \\right)^{-1}.\n\\]\nUsing the arithmetic-geometric mean inequality:\n\\[\n\\left( \\frac{u_1^2}{r^2} \\cdot \\frac{w_1^2}{d^2} \\cdot \\frac{c_1^2}{b^2} \\right)^{1/3} \\leq \\frac{1}{3} \\left( \\frac{u_1^2}{r^2} + \\frac{w_1^2}{d^2} + \\frac{c_1^2}{b^2} \\right) = \\frac{1}{3}.\n\\]\nEquality holds if and only if $\\frac{u_1^2}{r^2} = \\frac{w_1^2}{d^2} = \\frac{c_1^2}{b^2} = \\frac{1}{3}$. Thus,\n\\[\nV^2 \\geq \\frac{27}{36} r^2 d^2 b^2 \\quad \\text{and} \\quad V \\geq \\boxed{\\frac{1}{2} \\sqrt{3} rdb}.\n\\]\nEquality is achieved when $(u_1, w_1, c_1)$ is one of the eight points for which $\\frac{u_1^2}{r^2} = \\frac{w_1^2}{d^2} = \\frac{c_1^2}{b^2} = \\frac{1}{3}$, namely\n\\[\n(\\pm \\frac{r}{\\sqrt{3}}, \\pm \\frac{d}{\\sqrt{3}}, \\pm \\frac{b}{\\sqrt{3}}).\n\\]",
+    "type": "variable",
+    "answer_type": "algebraic",
+    "variation": "4"
+},
+{
+    "year": "1946",
+    "id": "A5",
+    "problem": "Find the smallest volume bounded by the coordinate planes and by a tangent plane to the ellipsoid\n\\[\n\\frac{g^2}{o^2} + \\frac{x^2}{e^2} + \\frac{n^2}{s^2} = 1.\n\\]",
+    "solution": "The tangent plane to the ellipsoid at the point $(g_1, x_1, z_1)$ has the equation\n\\[\n\\frac{g_1}{o^2} + \\frac{x_1}{e^2} + \\frac{n_1}{s^2} = 1.\n\\]\nIts intercepts on the $g$, $x$, and $n$-axes are respectively $\\frac{o^2}{g_1}$, $\\frac{e^2}{x_1}$, and $\\frac{s^2}{n_1}$. The volume of the solid cut off by the tangent plane and the three coordinate planes is\n\\[\nV = \\frac{1}{6} \\left| \\frac{o^2 e^2 s^2}{g_1 x_1 n_1} \\right|.\n\\]\nUsing the constraint that $(g_1, x_1, n_1)$ is a point on the ellipsoid, we express the volume as:\n\\[\nV^2 = \\frac{1}{36} o^2 e^2 s^2 \\left( \\frac{g_1^2}{o^2} \\cdot \\frac{x_1^2}{e^2} \\cdot \\frac{n_1^2}{s^2} \\right)^{-1}.\n\\]\nUsing the arithmetic-geometric mean inequality:\n\\[\n\\left( \\frac{g_1^2}{o^2} \\cdot \\frac{x_1^2}{e^2} \\cdot \\frac{n_1^2}{s^2} \\right)^{1/3} \\leq \\frac{1}{3} \\left( \\frac{g_1^2}{o^2} + \\frac{x_1^2}{e^2} + \\frac{n_1^2}{s^2} \\right) = \\frac{1}{3}.\n\\]\nEquality holds if and only if $\\frac{g_1^2}{o^2} = \\frac{x_1^2}{e^2} = \\frac{n_1^2}{s^2} = \\frac{1}{3}$. Thus,\n\\[\nV^2 \\geq \\frac{27}{36} o^2 e^2 s^2 \\quad \\text{and} \\quad V \\geq \\boxed{\\frac{1}{2} \\sqrt{3} oes}.\n\\]\nEquality is achieved when $(g_1, x_1, n_1)$ is one of the eight points for which $\\frac{g_1^2}{o^2} = \\frac{x_1^2}{e^2} = \\frac{n_1^2}{s^2} = \\frac{1}{3}$, namely\n\\[\n(\\pm \\frac{o}{\\sqrt{3}}, \\pm \\frac{e}{\\sqrt{3}}, \\pm \\frac{s}{\\sqrt{3}}).\n\\]",
+    "type": "variable",
+    "answer_type": "algebraic",
+    "variation": "5"
+}
 ]
