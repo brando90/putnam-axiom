@@ -57,10 +57,10 @@ lm_obj = MyLM()
 task_manager = tasks.TaskManager()
 results = evaluator.simple_evaluate(
     model=lm_obj,
-    tasks=["putnam_axiom_variations"],
+    tasks=["putnam_axiom_variations_org"],
     task_manager=task_manager,
     write_out=False,
     random_seed=None
 )
 
-print("results:", results["results"]["putnam_axiom_variations"].get("exact_match,none", None))
+print("results:", results["results"]["putnam_axiom_variations_org"].get("exact_match,none", None))
