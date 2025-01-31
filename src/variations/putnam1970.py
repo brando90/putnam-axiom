@@ -51,7 +51,7 @@ def putnam_1970a4(
     ) -> dict:
 
     functional_q : str = f'Given a sequence $\\{{{x}_{n}\\}}$, ${n}=1, 2, \\dots$, such that $\\lim_{{{n} \\to \\infty}} \\{{{x}_{n} - {x}_{{{n}-2}}\\}} = 0$, find the value of \\lim_{{{n} \\to \\infty}} \\frac{{{x}_{n} - {x}_{{{n}-1}}}}{{{n}}}.'
-    functional_ans : str = f'For $\\varepsilon > 0$, let $N$ be sufficiently large so that $|{x}_{n} - {x}_{{{n}-2}}| < \\varepsilon$ for all ${n} \\geq N$. Note that for any ${n} > N$, \\[ {x}_{n} - {x}_{{{n}-1}} = ({x}_{n} - {x}_{{{n}-2}}) - ({x}_{{{n}-1}} - {x}_{{{n}-3}}) + ({x}_{{{n}-2}} - {x}_{{{n}-4}}) - \\dots \\pm ({x}_{{N+1}} - {x}_{{N-1}}) \\pm ({x}_N - {x}_{{N-1}}). \\] Thus \\[ |{x}_{{{n}}} - {x}_{{{n}-1}}| \\leq ({n}-N)\\varepsilon + |{x}_N - {x}_{{N-1}}|, \\] and $\\lim_{{{n} \\to \\infty}} \\frac{{{x}_{n} - {x}_{{{n}-1}}}}{{{n}}} = \\boxed{0}.$'
+    functional_ans : str = f'For $\\varepsilon > 0$, let $N$ be sufficiently large so that $|{x}_{n} - {x}_{{{n}-2}}| < \\varepsilon$ for all ${n} \\geq N$. Note that for any ${n} > N$, \\[ {x}_{n} - {x}_{{{n}-1}} = ({x}_{n} - {x}_{{{n}-2}}) - ({x}_{{{n}-1}} - {x}_{{{n}-3}}) + ({x}_{{{n}-2}} - {x}_{{{n}-4}}) - \\dots \\pm ({x}_{{N+1}} - {x}_{{N-1}}) \\pm ({x}_N - {x}_{{N-1}}). \\] Thus \\[ |{x}_{{{n}}} - {x}_{{{n}-1}}| \\leq ({n}-N)\\varepsilon + |{x}_N - {x}_{{N-1}}|, \\] and $\\lim_{{{n} \\to \\infty}} \\frac{{{x}_{n} - {x}_{{{n}-1}}}}{{{n}}} = \\boxed{{0}}.$'
     
     return {
         'problem' : functional_q,

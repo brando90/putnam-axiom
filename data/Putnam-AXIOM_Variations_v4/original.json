@@ -1,35 +1,35 @@
 [
     {
         "year": "1946",
-        "id": "A1",
+        "id": "1",
         "problem": "Suppose that the function $f(x) = ax^2 + bx + c$, where $a$, $b$, $c$ are real constants, satisfies the condition $|f(x)| \\leq 1$ for $|x| \\leq 1$. Find the upper bound of $|f'(x)|$ for $|x| \\leq 1$.",
         "solution": "If $a \\neq 0$, the graph of $y = ax^2 + bx + c$ is a parabola that opens upward, i.e., $a > 0$. Without loss of generality, assume $b \\geq 0$. The vertex falls in the left half-plane, and the maximum value of $|f'(x)|$ for $|x| \\leq 1$ occurs at $x = 1$. Therefore, $|f'(1)| = 2a + b$.\n\nNow evaluate $f(1)$ and $f(0)$:\n\\[\nf(1) = a + b + c \\leq 1, \\quad f(0) = c \\geq -1.\n\\]\nFrom these, $a + b \\leq 2$, and since $a, b \\geq 0$, we also have $a \\leq 2$ and $2a + b \\leq 4$.\n\nFor the case $a = 0$, the function is linear: $f(x) = bx + c$, and $f'(x) = b$. Using the conditions $f(1), f(-1)$:\n\\[\n|f'(x)| = |b| = \\frac{|f(1) - f(-1)|}{2} \\leq 1.\n\\]\nThus, $|f'(x)| \\leq \\boxed{4}$ for all $|x| \\leq 1$ as required.",
         "answer_type": "numerical"
     },
     {
         "year": "1946",
-        "id": "A5",
+        "id": "5",
         "problem": "Find the smallest volume bounded by the coordinate planes and by a tangent plane to the ellipsoid\n\\[\n\\frac{x^2}{a^2} + \\frac{y^2}{b^2} + \\frac{z^2}{c^2} = 1.\n\\]",
         "solution": "The tangent plane to the ellipsoid at the point $(x_1, y_1, z_1)$ has the equation\n\\[\n\\frac{xx_1}{a^2} + \\frac{yy_1}{b^2} + \\frac{zz_1}{c^2} = 1.\n\\]\nIts intercepts on the $x$, $y$, and $z$-axes are respectively $\\frac{a^2}{x_1}$, $\\frac{b^2}{y_1}$, and $\\frac{c^2}{z_1}$. The volume of the solid cut off by the tangent plane and the three coordinate planes is\n\\[\nV = \\frac{1}{6} \\left| \\frac{a^2 b^2 c^2}{x_1 y_1 z_1} \\right|.\n\\]\nUsing the constraint that $(x_1, y_1, z_1)$ is a point on the ellipsoid, we express the volume as:\n\\[\nV^2 = \\frac{1}{36} a^2 b^2 c^2 \\left( \\frac{x_1^2}{a^2} \\cdot \\frac{y_1^2}{b^2} \\cdot \\frac{z_1^2}{c^2} \\right)^{-1}.\n\\]\nUsing the arithmetic-geometric mean inequality:\n\\[\n\\left( \\frac{x_1^2}{a^2} \\cdot \\frac{y_1^2}{b^2} \\cdot \\frac{z_1^2}{c^2} \\right)^{1/3} \\leq \\frac{1}{3} \\left( \\frac{x_1^2}{a^2} + \\frac{y_1^2}{b^2} + \\frac{z_1^2}{c^2} \\right) = \\frac{1}{3}.\n\\]\nEquality holds if and only if $\\frac{x_1^2}{a^2} = \\frac{y_1^2}{b^2} = \\frac{z_1^2}{c^2} = \\frac{1}{3}$. Thus,\n\\[\nV^2 \\geq \\frac{27}{36} a^2 b^2 c^2 \\quad \\text{and} \\quad V \\geq \\boxed{\\frac{1}{2} \\sqrt{3} abc}.\n\\]\nEquality is achieved when $(x_1, y_1, z_1)$ is one of the eight points for which $\\frac{x_1^2}{a^2} = \\frac{y_1^2}{b^2} = \\frac{z_1^2}{c^2} = \\frac{1}{3}$, namely\n\\[\n(\\pm \\frac{a}{\\sqrt{3}}, \\pm \\frac{b}{\\sqrt{3}}, \\pm \\frac{c}{\\sqrt{3}}).\n\\]",
         "answer_type": "algebraic"
     },
     {
         "year": "1947",
-        "id": "A2",
+        "id": "2",
         "problem": "A real valued continuous function satisfies for all real $x$ and $y$ the functional equation \n\\[ f(\\sqrt{x^2 + y^2}) = f(x)f(y). \\]\nFind the value of f(x) in terms of f(1). \\]",
         "solution": "A slight qualification in the statement of the problem is needed since the real valued continuous function $f(x) \\equiv 0$ satisfies the functional equation for all real $x$ and $y$, but does not satisfy the relation $f(0) = [f(1)]^0$, since $0^0$ is undefined.\n\nAssume then that for some $y_0$, $f(y_0) \\neq 0$. Since\n\\[ f(x)f(y_0) = f(\\sqrt{x^2 + y_0^2}) = f(-x)f(y_0), \\]\nwe have $f(x) = f(-x) = f(|x|)$ for all $x$. We now show by induction that for any positive integer $n$ and any real number $x$, we have\n\\[ f(\\sqrt{n}x) = [f(x)]^n. \\]\nThis is certainly true for $n = 1$, and assuming it true for $n = k$ we have\n\\[ f(\\sqrt{k+1}x) = f(\\sqrt{k+1}|x|) = f(\\sqrt{(\\sqrt{k}x)^2 + x^2}) = f(\\sqrt{k}x)f(x) \\]\n\\[ = [f(x)]^k f(x) = [f(x)]^{k+1}. \\]\nTherefore (1) is true for all positive integers $n$.\n\nIf $p$ and $q$ are non-zero integers, then\n\\[ f(p) = f(|p|) = f(\\sqrt{p^2 \\cdot 1}) = [f(1)]^{p^2} \\]\nand\n\\[ f(|p|) = f\\left(\\sqrt{\\frac{q^2}{q^2}|p|^2}\\right) = \\left[f\\left(\\frac{|p|}{q}\\right)\\right]^{q^2}. \\]\nFrom these two relations it follows that\n\\[ \\left[f\\left(\\frac{p}{q}\\right)\\right]^{q^2} = [f(1)]^{p^2}. \\]\nIf $f(1) > 0$ it then follows that\n\\[ \\left[f\\left(\\frac{p}{q}\\right)\\right] = [f(1)]^{p^2/q^2}; \\]\nthat is, the required equation is valid for all rational values of $x$ except, perhaps, $x = 0$. By continuity it follows for all values of $x$.\n\nIf $f(1) = 0$, then (2) implies that $f(\\frac{p}{q}) = 0$ for all non-zero integers $p$ and $q$, and thus $f(x) = 0$ for all rational $x$, hence for all real $x$.\n\nFinally we show that $f(1) < 0$ is impossible. If $p$ is even and $q$ is odd, equation (2) implies that $f(\\frac{p}{q}) > 0$. Hence $f(x) > 0$ for a dense set of $x$, and therefore $f(x) \\geq 0$ for all $x$; in particular, $f(1) \\geq 0$. This makes the final answer \\boxed{f(1)^{x^2}}.",
         "answer_type": "algebraic"
     },
     {
         "year": "1947",
-        "id": "B4",
+        "id": "10",
         "problem": "Given $P(z) = z^2 + az + b$, a quadratic polynomial of the complex variable $z$ with complex coefficients $a, b$. Suppose that $|P(z)| = 1$ for every $z$ such that $|z| = 1$. Find the values of $a$ and $b$ and give their sum.",
-        "solution": "In particular, \\( |p(1)| = |p(-1)| = 1 \\), so \\( 1 + a + b \\) and \\( 1 - a + b \\) lie on the unit circle. Hence their midpoint \\( 1 + b \\) lies in the unit disk. Similarly, \\( |p(i)| = |p(-i)| = 1 \\), so \\( -1 + ia + b \\) and \\( -1 - ia + b \\) lie on the unit circle and hence their midpoint \\( -1 + b \\) lies in the unit disk. But \\( 1 + b \\) and \\( -1 + b \\) are a distance 2 apart, so they must lie at either end of a diameter of the unit circle and hence \\( b = 0 \\). Now \\( 1 + a \\) and \\( 1 - a \\) lie on the unit circle, as does their midpoint \\( 1 \\). Hence they must coincide and so \\( a = 0 \\). Thus, \\( a + b = 0 \\).",
+        "solution": "In particular, \\( |p(1)| = |p(-1)| = 1 \\), so \\( 1 + a + b \\) and \\( 1 - a + b \\) lie on the unit circle. Hence their midpoint \\( 1 + b \\) lies in the unit disk. Similarly, \\( |p(i)| = |p(-i)| = 1 \\), so \\( -1 + ia + b \\) and \\( -1 - ia + b \\) lie on the unit circle and hence their midpoint \\( -1 + b \\) lies in the unit disk. But \\( 1 + b \\) and \\( -1 + b \\) are a distance 2 apart, so they must lie at either end of a diameter of the unit circle and hence \\( b = 0 \\). Now \\( 1 + a \\) and \\( 1 - a \\) lie on the unit circle, as does their midpoint \\( 1 \\). Hence they must coincide and so \\( a = 0 \\). Thus, \\( a + b = \\boxed{0} \\).",
         "answer_type": "numerical"
     },
     {
         "year": "1947",
-        "id": "B5",
+        "id": "11",
         "problem": "a, b, c, d are distinct integers such that\n\\[ (x - a)(x - b)(x - c)(x - d) - 4 = 0 \\]\nhas an integral root $r$. Find the value of $4r$.",
         "solution": "Since $r$ is a root,\n\\[ (r - a)(r - b)(r - c)(r - d) = 4, \\]\nand since $a, b, c, d$ are distinct integers, $r - a, r - b, r - c, r - d$ are distinct integers whose product is 4. But the only set of four distinct integers whose product is 4 is the set \\{1, -1, 2, -2\\}. Hence\n\\[ (r - a) + (r - b) + (r - c) + (r - d) = 1 - 1 + 2 - 2 = 0, \\]\nso\n\\[ 4r = \\boxed{a + b + c + d}. \\]",
         "answer_type": "algebraic"

@@ -37,7 +37,7 @@ def save_dataset_to_file(file_path):
 
 
 @variation(
-    year='1946', id='A1', 
+    year='1946', id='1', 
     generators = {
         'x' : generators.RandomVariable('lower'),
         'p' : generators.RandomVariable('lower'),
@@ -63,7 +63,7 @@ def putnam_1946a1(
     }
 
 @variation(
-    year='1946', id='A5', 
+    year='1946', id='5', 
     generators = {
         'a' : generators.RandomVariable('lower'),
         'b' : generators.RandomVariable('lower'),
