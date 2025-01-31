@@ -33,7 +33,7 @@ class MyLM(LM):
         results = []
         for request in requests:
             response = client.chat.completions.create(
-                model = 'o1-preview',
+                model = 'gpt-4o',
                 messages = [{"role": "user", "content": request.args[0]}],
                 # max_tokens = 2048
             )
@@ -57,10 +57,20 @@ lm_obj = MyLM()
 task_manager = tasks.TaskManager()
 results = evaluator.simple_evaluate(
     model=lm_obj,
+    tasks=["putnam_axiom_variations"],
+    task_manager=task_manager,
+    write_out=False,
+    random_seed=None
+)
+
+print("results variations:", results["results"]["putnam_axiom_variations"].get("exact_match,none", None))
+
+results = evaluator.simple_evaluate(
+    model=lm_obj,
     tasks=["putnam_axiom_variations_org"],
     task_manager=task_manager,
     write_out=False,
     random_seed=None
 )
 
-print("results:", results["results"]["putnam_axiom_variations_org"].get("exact_match,none", None))
+print("results original:", results["results"]["putnam_axiom_variations_org"].get("exact_match,none", None))

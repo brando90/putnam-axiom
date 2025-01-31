@@ -55,30 +55,33 @@ class MyLM(LM):
         return results
 
 model_list = [
-            # 'mistralai/Codestral-22B-v0.1'
-            # 'meta-llama/Llama-3.1-70B'
-            # "meta-llama/Meta-Llama-3.1-8B", 
-            #  "meta-llama/Meta-Llama-3.1-8B-Instruct", 
-            #   "mistralai/Mistral-7B-v0.1", 
-            #   "mistralai/Mistral-7B-Instruct-v0.1",
-            #   "google/gemma-7b",
-            # "deepseek-ai/DeepSeek-R1"
-            #   "google/gemma-2b",
-            #   "google/gemma-7b-it",
-            #   "google/gemma-2b-it",
-            #   "deepseek-ai/deepseek-math-7b-base",
-            #   "deepseek-ai/deepseek-math-7b-rl",
-            #   "deepseek-ai/deepseek-math-7b-instruct",
-            #   "AI-MO/NuminaMath-7B-TIR",
-            #   "Qwen/Qwen2-Math-7B",
-            #   "Qwen/Qwen2-Math-7B-Instruct"
-            # 'deepseek-ai/DeepSeek-R1-Distill-Qwen-32B',
-            # 'deepseek-ai/DeepSeek-R1-Distill-Qwen-7B',
-            'deepseek-ai/DeepSeek-R1-Distill-Llama-70B',
-            # 'deepseek-ai/DeepSeek-R1-Distill-Llama-8B'
+    "meta-llama/Meta-Llama-3.1-8B", 
+    "meta-llama/Meta-Llama-3.1-8B-Instruct", 
+    "mistralai/Mistral-7B-v0.1", 
+    "mistralai/Mistral-7B-Instruct-v0.1",
+    "google/gemma-7b",
+    "deepseek-ai/DeepSeek-R1"
+    "google/gemma-2b",
+    "google/gemma-7b-it",
+    "google/gemma-2b-it",
+    "deepseek-ai/deepseek-math-7b-base",
+    "deepseek-ai/deepseek-math-7b-rl",
+    "deepseek-ai/deepseek-math-7b-instruct",
+    "AI-MO/NuminaMath-7B-TIR",
+    "Qwen/Qwen2-Math-7B",
+    "Qwen/Qwen2-Math-7B-Instruct",
+    'deepseek-ai/DeepSeek-R1-Distill-Qwen-7B',
+    'deepseek-ai/DeepSeek-R1-Distill-Llama-8B'
 ]
 
-# os.environ["CUDA_VISIBLE_DEVICES"] = 0,2,3,4
+model_list_big = [
+    'mistralai/Codestral-22B-v0.1',
+    'meta-llama/Llama-3.1-70B',
+    'deepseek-ai/DeepSeek-R1-Distill-Qwen-32B',
+    'deepseek-ai/DeepSeek-R1-Distill-Llama-70B',
+]
+
+os.environ["CUDA_VISIBLE_DEVICES"] = "7"
 torch.cuda.empty_cache()
 gc.collect()
 
@@ -89,7 +92,7 @@ for model_name in model_list:
     print("=" * 100)
 
     model = LLM(model_name, 
-                tensor_parallel_size = 4,
+                # tensor_parallel_size = 4,
                 # gpu_memory_utilization = 0.9,
                 # max_model_len= 10000,  # Reduce below 69904 (KV cache limit)
                 # pipeline_parallel_size = 1,
@@ -99,7 +102,7 @@ for model_name in model_list:
 
     results = lm_eval.simple_evaluate(
         model=lm_obj,
-        tasks=["putnam_axiom_original"],
+        tasks=["putnam_axiom_variations"],
         task_manager=task_manager,
         write_out=False,
         random_seed = None,
@@ -107,11 +110,33 @@ for model_name in model_list:
         torch_random_seed = None,
         fewshot_random_seed = None
     )
-    # print(results)
+    
     print('=' * 50)
-    print("results:", results["results"]["putnam_axiom_original"].get("exact_match,none", None))
+    print("results variation:", results["results"]["putnam_axiom_variations"].get("exact_match,none", None))
+    var = results["results"]["putnam_axiom_variations"].get("exact_match,none", None)
     print('=' * 50)
-    final_scores[model_name] = results["results"]["putnam_axiom_original"].get("exact_match,none", None)
+
+    results = lm_eval.simple_evaluate(
+        model=lm_obj,
+        tasks=["putnam_axiom_variations_org"],
+        task_manager=task_manager,
+        write_out=False,
+        random_seed = None,
+        numpy_random_seed = None,
+        torch_random_seed = None,
+        fewshot_random_seed = None
+    )
+    
+    print('=' * 50)
+    print("results original:", results["results"]["putnam_axiom_variations_org"].get("exact_match,none", None))
+    og = results["results"]["putnam_axiom_variations_org"].get("exact_match,none", None)
+    print('=' * 50)
+
+    final_scores[model_name] = [var, og]
+    del model
+    del lm_obj
+    torch.cuda.empty_cache()
+    gc.collect()
 
 print(final_scores)
 # print(type(results))
