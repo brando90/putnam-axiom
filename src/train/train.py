@@ -266,7 +266,7 @@ export CUDA_VISIBLE_DEVICES=4; python ~/putnam-axiom/src/train/train.py --mode d
         # remove_columns=['text'], 
         num_proc=48,
     )
-    print(f'{len(ds_train)=} {ds_train.column_names=}')
+    print(f'{len(ds_train)=} {ds_train.column_names=}') 
     
     # Do the same for ds_eval.
     ds_eval = ds_eval.map(
