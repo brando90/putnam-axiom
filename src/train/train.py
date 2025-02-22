@@ -246,7 +246,7 @@ export CUDA_VISIBLE_DEVICES=4; python ~/putnam-axiom/src/train/train.py --mode d
     # ds_eval: Dataset  = load_dataset("Putnam-AXIOM/putnam-axiom-dataset", split="full_original_236_10_30_2024").with_format('torch')
     ds_eval: Dataset  = load_dataset("Putnam-AXIOM/putnam-axiom-dataset", split="func_original_53_10_30_2024").with_format('torch')
     # ds_eval: Dataset  = load_dataset("Putnam-AXIOM/putnam-axiom-dataset", split="func_variations_265_11_23_2024").with_format('torch')
-    # ds_tf_eval: Dataset  = load_dataset("Putnam-AXIOM/putnam-axiom-dataset", split="func_variations_265_11_23_2024").with_format('torch')
+    ds_tf_eval: Dataset  = load_dataset("Putnam-AXIOM/putnam-axiom-dataset", split="func_variations_265_11_23_2024").with_format('torch')
 
     # Create a new "text" field for tokenized datasets by concatenating formatted prompt and formal statement.
     ds_train = ds_train.map(
