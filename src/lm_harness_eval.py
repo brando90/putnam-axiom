@@ -16,7 +16,7 @@ from openai import OpenAI
 import anthropic
 
 class MyLM(LM):
-    def __init__(self, model = None, batch_size: int = 16):
+    def __init__(self, model = None, batch_size: int = 4):
         self.model = model
         super().__init__()
         self.batch_size = batch_size
@@ -43,6 +43,8 @@ class MyLM(LM):
         results = []
         context = []
         for request in requests:
+            # print(request.args[0])
+            # exit()
             context.append(request.args[0])
         
         params = SamplingParams(temperature=0.9, top_p=0.95, max_tokens=2048, stop='Problem:\n')
@@ -92,8 +94,8 @@ if __name__ == "__main__":
     # # ---------------------------------------
     # # STEP 1: Load the base model and LoRA adapter.
     # # ---------------------------------------
-    base_model_name = "deepseek-ai/DeepSeek-R1-Distill-Qwen-7B"  # Base model name.
-    # lora_weights_path = f"putnam-axiom/src/models/lora_finetuned_{base_model_name}"  # <-- Update this to your LoRA adapter directory.
+    base_model_name = "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B"  # Base model name.
+    # lora_weights_path = f"putnam-axiom/src/models/lora_finetuned_ADDITIONAL_TUNING_{base_model_name}"  # <-- Update this to your LoRA adapter directory.
 
     # print("Loading base model...")
     # base_model = AutoModelForCausalLM.from_pretrained(
@@ -110,10 +112,10 @@ if __name__ == "__main__":
     # # Merge the LoRA weights into the base model.
     # merged_model = model_with_lora.merge_and_unload()
 
-    # # # ---------------------------------------
-    # # # STEP 2: Save the merged model to disk.
-    # # # ---------------------------------------
-    merged_model_dir = f"putnam-axiom/src/models/merged_{base_model_name}"
+    # # ---------------------------------------
+    # # STEP 2: Save the merged model to disk.
+    # # ---------------------------------------
+    merged_model_dir = f"putnam-axiom/src/models/merged_ADDITIONAL_TUNING_{base_model_name}"
     # os.makedirs(merged_model_dir, exist_ok=True)
     # merged_model.save_pretrained(merged_model_dir)
     # print(f"Merged model saved to {merged_model_dir}")
@@ -128,6 +130,7 @@ if __name__ == "__main__":
 
     model_list = [
         merged_model_dir
+        # base_model_name
     ]
 
     final_scores = {}
@@ -137,12 +140,13 @@ if __name__ == "__main__":
         print("=" * 100)
 
         model = LLM(model_name, 
-                    tensor_parallel_size = 2,
-                    # gpu_memory_utilization = 0.9,
+                    tensor_parallel_size = 4,
+                    gpu_memory_utilization = 0.9,
                     # max_model_len= 10000,  # Reduce below 69904 (KV cache limit)
                     # pipeline_parallel_size = 1,
                     trust_remote_code=True)
-        lm_obj = MyLM(model=model)
+        lm_obj = MyLM(batch_size = 4,
+                    model=model)
         task_manager = lm_eval.tasks.TaskManager()
 
         results = lm_eval.simple_evaluate(
