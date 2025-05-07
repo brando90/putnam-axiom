@@ -29,6 +29,17 @@ This directory contains essential scripts for managing the Putnam-AXIOM dataset 
    - Script used to clean up unnecessary files in this repository
    - Created backups in the `/data/archive` directory
 
+6. **fix_zipfit_splits.py**
+   - Script to update the zipfit/Putnam-AXIOM-for-zip-fit-splits repository
+   - Creates three splits from the full dataset:
+     - `train` (150 examples)
+     - `validation` (150 examples)
+     - `test` (222 examples)
+
+7. **verify_zipfit_splits.py**
+   - Verification script for the zipfit repository
+   - Checks that all required splits exist with the correct number of examples
+
 ## Data Files
 
 The main dataset file is located at `/home/brandomiranda/putnam-axiom/data/Putnam_AXIOM_Original_v3.json`.
@@ -36,19 +47,35 @@ The main dataset file is located at `/home/brandomiranda/putnam-axiom/data/Putna
 ## HuggingFace Repositories
 
 - **Main Repository**: [Putnam-AXIOM/putnam-axiom-dataset-ICML-2025-522](https://huggingface.co/datasets/Putnam-AXIOM/putnam-axiom-dataset-ICML-2025-522)
-  - Contains the three main splits
+  - Contains the three main splits:
+    - `full_eval` (522 examples)
+    - `originals_for_generating_vars` (100 examples)
+    - `variations` (500 examples)
 
 - **Splits Repository**: [zipfit/Putnam-AXIOM-for-zip-fit-splits](https://huggingface.co/datasets/zipfit/Putnam-AXIOM-for-zip-fit-splits)
-  - Contains validation and test splits for ZIP-FIT methodology research
+  - Contains train/validation/test splits for ZIP-FIT methodology research:
+    - `train` (150 examples)
+    - `validation` (150 examples)
+    - `test` (222 examples)
 
 ## Usage
 
-To verify the current state of the HuggingFace repository:
+To verify the current state of the main HuggingFace repository:
 ```
 python verify_splits_from_hf.py
+```
+
+To verify the zipfit repository:
+```
+python verify_zipfit_splits.py
 ```
 
 To update the README and perform final cleanup:
 ```
 python final_cleanup.py
+```
+
+To update the zipfit repository splits:
+```
+python fix_zipfit_splits.py
 ``` 

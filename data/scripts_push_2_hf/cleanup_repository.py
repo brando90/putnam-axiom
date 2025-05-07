@@ -15,7 +15,10 @@ def main():
         'final_cleanup.py',                    # Final verification and cleanup
         'verify_splits_from_hf.py',            # Essential verification script
         'updated_readme_clean_splits.md',      # Current README file
-        'cleanup_repository.py'                # This script
+        'cleanup_repository.py',               # This script
+        'verify_zipfit_splits.py',             # Verification for zipfit repo
+        'fix_zipfit_splits.py',                # Script to fix zipfit repo
+        'README.md'                            # Directory documentation
     ]
     
     # Current directory
@@ -25,6 +28,7 @@ def main():
     # Essential data files to keep in data directory
     essential_data_files = [
         'Putnam_AXIOM_Original_v3.json',       # Latest version of the dataset
+        'README.md'                            # Directory documentation
     ]
     
     # Create backup directory
