@@ -5,7 +5,9 @@ from vllm import LLM, SamplingParams
 import lm_eval
 from lm_eval import evaluator, tasks, api
 from lm_eval.api.model import LM
-from transformers import AutoModelForCausalLM, AutoTokenizer
+# from transformers.deepspeed import convert_zero_checkpoint_to_fp32_state_dict
+from deepspeed.utils.zero_to_fp32 import get_fp32_state_dict_from_zero_checkpoint
+from transformers import AutoModelForCausalLM, AutoTokenizer, AutoConfig
 from peft import PeftModel
 
 from typing import List, Tuple
@@ -49,6 +51,9 @@ class MyLM(LM):
         
         params = SamplingParams(temperature=0.9, top_p=0.95, max_tokens=2048, stop='Problem:\n')
         results = self.model.generate(context, params)
+        for i, result in enumerate(results):
+            results[i] = result.outputs[0].text
+
         # for request in requests:
         #     response = client.chat.completions.create(
         #         model = 'gpt-4o',
@@ -82,6 +87,15 @@ class MyLM(LM):
 #             'deepseek-ai/DeepSeek-R1-Distill-Llama-8B'
 # ]
 
+# cfg = AutoConfig.from_pretrained("putnam-axiom/src/models/sft_deepseek-ai/DeepSeek-R1-Distill-Llama-8B")
+# print("config.vocab_size =", cfg.vocab_size)
+
+# m = AutoModelForCausalLM.from_pretrained(
+#     "putnam-axiom/src/models/sft_deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+#     low_cpu_mem_usage=True,
+# )
+# print("embedding rows =", m.get_input_embeddings().weight.size(0))
+
 # model_list = [
 #     # 'mistralai/Codestral-22B-v0.1',
 #     # 'meta-llama/Llama-3.1-70B',
@@ -94,40 +108,24 @@ if __name__ == "__main__":
     # # ---------------------------------------
     # # STEP 1: Load the base model and LoRA adapter.
     # # ---------------------------------------
-    base_model_name = "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B"  # Base model name.
+    # Sanity check
+    cfg  = AutoConfig.from_pretrained("putnam-axiom/src/models/sft_deepseek-ai/DeepSeek-R1-Distill-Qwen-7B")
+    model = AutoModelForCausalLM.from_pretrained(
+                "putnam-axiom/src/models/sft_deepseek-ai/DeepSeek-R1-Distill-Qwen-7B",
+                low_cpu_mem_usage=True, trust_remote_code=True)
+
+    print("config.vocab_size :", cfg.vocab_size)
+    print("embedding rows    :", model.get_input_embeddings().weight.shape[0])
+    base_model_name = "deepseek-ai/DeepSeek-R1-Distill-Qwen-7B"
+    # ft_model_dir = "./putnam-axiom/src/models/lora_finetuned_ADDITIONAL_TUNING_deepseek-ai/DeepSeek-R1-Distill-Qwen-7B"
     # lora_weights_path = f"putnam-axiom/src/models/lora_finetuned_ADDITIONAL_TUNING_{base_model_name}"  # <-- Update this to your LoRA adapter directory.
+    # merged_model_dir = f"putnam-axiom/src/models/sft_{base_model_name}"  # Directory to save the merged model.
+    merged_model_dir = f"putnam-axiom/src/models/sft_{base_model_name}" 
 
-    # print("Loading base model...")
-    # base_model = AutoModelForCausalLM.from_pretrained(
-    #     base_model_name,
-    #     torch_dtype=torch.float16,
-    #     device_map="auto"  # Adjust device mapping as needed.
-    # )
+    torch.cuda.empty_cache()
+    gc.collect()
 
-    # print("Loading LoRA adapter...")
-    # # Wrap the base model with the LoRA adapter.
-    # model_with_lora = PeftModel.from_pretrained(base_model, lora_weights_path)
-
-    # print("Merging LoRA weights into the base model...")
-    # # Merge the LoRA weights into the base model.
-    # merged_model = model_with_lora.merge_and_unload()
-
-    # # ---------------------------------------
-    # # STEP 2: Save the merged model to disk.
-    # # ---------------------------------------
-    merged_model_dir = f"putnam-axiom/src/models/merged_ADDITIONAL_TUNING_{base_model_name}"
-    # os.makedirs(merged_model_dir, exist_ok=True)
-    # merged_model.save_pretrained(merged_model_dir)
-    # print(f"Merged model saved to {merged_model_dir}")
-
-    # # Optionally, save the tokenizer if needed:
-    # tokenizer = AutoTokenizer.from_pretrained(base_model_name)
-    # tokenizer.save_pretrained(merged_model_dir)
-    # # # ---------------------------------------
-    # torch.cuda.empty_cache()
-    # gc.collect()
-
-
+    
     model_list = [
         merged_model_dir
         # base_model_name
@@ -140,8 +138,10 @@ if __name__ == "__main__":
         print("=" * 100)
 
         model = LLM(model_name, 
+                    tokenizer = model_name,
                     tensor_parallel_size = 4,
                     gpu_memory_utilization = 0.9,
+                    # tokenizer = base_model_name,  # Use the tokenizer from the base model,
                     # max_model_len= 10000,  # Reduce below 69904 (KV cache limit)
                     # pipeline_parallel_size = 1,
                     trust_remote_code=True)

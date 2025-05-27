@@ -2,9 +2,11 @@ import torch
 from transformers import AutoTokenizer, AutoModelForCausalLM, TrainingArguments, Trainer, DataCollatorForLanguageModeling, TrainerCallback, TrainerControl, TrainerState
 from datasets import load_dataset
 from peft import LoraConfig, get_peft_model, PeftModel
-from lm_eval_utils import process_results
+# from lm_eval_utils import process_results
 import os
-os.environ["CUDA_VISIBLE_DEVICES"] = "4,5,6,7"
+from pathlib import Path
+from deepspeed.utils.zero_to_fp32 import get_fp32_state_dict_from_zero_checkpoint
+os.environ["CUDA_VISIBLE_DEVICES"] = "0,1"
 
 
 # --- 1. Load and Prepare the Dataset ---
@@ -52,12 +54,15 @@ dataset = dataset.map(lambda ex: {"text": generate_prompt(ex)},
                       remove_columns=list(dataset["train"].column_names))
 
 # --- 2. Load the Model and Tokenizer ---
-model_name_or_path = "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B"
-# model_name_or_path = 'meta-llama/Llama-3.1-8B'
-# model_name_or_path = 'mistralai/Mistral-7B-v0.3'
+model_name_or_path = "deepseek-ai/DeepSeek-R1-Distill-Qwen-7B"
+# model_name_or_path = "deepseek-ai/DeepSeek-R1-Distill-Llama-8B"
+# model_name_or_path = "Qwen/Qwen3-8B"
+# model_name_or_path = "deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B"
 tokenizer = AutoTokenizer.from_pretrained(model_name_or_path)
 
 tokenizer.pad_token = tokenizer.eos_token
+
+tokenizer.save_pretrained(f"./putnam-axiom/src/models/{model_name_or_path}")
 
 # Load the model in fp16 to reduce GPU memory usage.
 model = AutoModelForCausalLM.from_pretrained(
@@ -66,43 +71,6 @@ model = AutoModelForCausalLM.from_pretrained(
     torch_dtype=torch.float16,
     # device_map="auto"
 )
-
-
-# # --- 3. Configure and Apply LoRA ---
-# # Load the model in fp16 to reduce GPU memory usage.
-# model = AutoModelForCausalLM.from_pretrained(
-#     model_name_or_path,
-#     torch_dtype=torch.float16,
-# )
-
-# # --- 3. Configure and Apply LoRA or Load a Saved LoRA Model ---
-# # Set this flag to True if you want to load a saved LoRA adapter.
-# use_saved_lora = True
-# saved_lora_path = f"./putnam-axiom/src/models/lora_finetuned_{model_name_or_path}" # update this path if needed
-
-# if use_saved_lora:
-#     # Load the saved LoRA adapter into the base model.
-#     print(f"Loading LoRA model from {saved_lora_path}...")
-#     model = PeftModel.from_pretrained(model, saved_lora_path)
-#     model.train()
-
-#     # Optionally, explicitly re-enable gradients for the LoRA adapter parameters.
-#     for name, param in model.named_parameters():
-#         if "lora" in name:
-#             param.requires_grad = True
-# else:
-#     # Define the LoRA configuration. Adjust r, lora_alpha, target_modules, and dropout as needed.
-#     print("Applying LoRA to the base model")
-#     lora_config = LoraConfig(
-#         r=8,
-#         lora_alpha=32,
-#         target_modules=["q_proj", "v_proj"],  # Adjust based on the model's architecture.
-#         lora_dropout=0.1,
-#         bias="none",
-#         task_type="CAUSAL_LM"
-#     )
-#     # Wrap the base model with LoRA adapters.
-#     model = get_peft_model(model, lora_config)
 
 # --- 4. Tokenize the Dataset ---
 MAX_TOKEN_LENGTH = 2003
@@ -118,18 +86,20 @@ data_collator = DataCollatorForLanguageModeling(tokenizer=tokenizer, mlm=False)
 
 # --- 6. Set Up the Trainer ---
 training_args = TrainingArguments(
-    output_dir="./lora_finetuned_llama",
-    per_device_train_batch_size=1,          # Adjust based on your GPU memory.
-    gradient_accumulation_steps=8,            # Increase for a larger effective batch size.
-    num_train_epochs=10,
-    learning_rate=2e-4,
-    lr_scheduler_type="cosine_with_restarts",
+    output_dir=f"./ft_output/{model_name_or_path}",
+    per_device_train_batch_size=2,          # Adjust based on your GPU memory.
+    gradient_accumulation_steps=4,            # Increase for a larger effective batch size.
+    num_train_epochs=20,
+    learning_rate=1e-5,
+    # lr_scheduler_type="cosine_with_restarts",
     warmup_steps=50,
     fp16=True,
+    max_grad_norm=1.0, 
     logging_steps=10,
     save_steps=100,
     save_total_limit=2,
-    remove_unused_columns=False
+    remove_unused_columns=False,
+    deepspeed = './putnam-axiom/src/ds_config.json'
 )
 
 # --- 7. Define Custom Compute Metrics Function ---
@@ -160,7 +130,8 @@ def compute_metrics(eval_preds):
         results = [DummyResult([DummyOutput(generated_text)])]
         doc = {"answer": sample.get("ground_truth_answer", "")}
         try:
-            metric = process_results(doc, results)
+            # metric = process_results(doc, results)
+            pass
         except Exception as e:
             metric = {"exact_match": 0}
         exact_matches.append(metric["exact_match"])
@@ -173,12 +144,21 @@ trainer = Trainer(
     args=training_args,
     train_dataset=tokenized_datasets["train"],
     data_collator = data_collator,
-    compute_metrics = compute_metrics,
+    # compute_metrics = compute_metrics,
 )
-
 
 # Fine-tune the model using LoRA adapters.
 trainer.train()
 
 # --- 7. Save the Fine-Tuned Model ---
-model.save_pretrained(f"./putnam-axiom/src/models/lora_finetuned_ADDITIONAL_TUNING_{model_name_or_path}")
+
+trainer.save_model(f"./putnam-axiom/src/models/sft_{model_name_or_path}")
+# zero_ckpt = Path(f'ft_output/{model_name_or_path}/checkpoint-65') # change this to your checkpoint path
+# state_dict = get_fp32_state_dict_from_zero_checkpoint(zero_ckpt)
+
+# base_model_name = model_name_or_path   # original model
+# model = AutoModelForCausalLM.from_pretrained(base_model_name, torch_dtype= torch.float16)
+# model.load_state_dict(state_dict, strict=False)                 # ignore missing lora keys if merged
+# save_dir = f"putnam-axiom/src/models/sft_{model_name_or_path}"  # where to save the model
+# model.save_pretrained(save_dir, safe_serialization=True)        # writes model.safetensors
+# tokenizer.save_pretrained(save_dir)  # writes tokenizer files
