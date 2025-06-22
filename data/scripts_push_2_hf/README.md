@@ -42,40 +42,5 @@ This directory contains essential scripts for managing the Putnam-AXIOM dataset 
 
 ## Data Files
 
-The main dataset file is located at `/home/brandomiranda/putnam-axiom/data/Putnam_AXIOM_Original_v3.json`.
-
-## HuggingFace Repositories
-
-- **Main Repository**: [Putnam-AXIOM/putnam-axiom-dataset-ICML-2025-522](https://huggingface.co/datasets/Putnam-AXIOM/putnam-axiom-dataset-ICML-2025-522)
-  - Contains the three main splits:
-    - `full_eval` (522 examples)
-    - `originals_for_generating_vars` (100 examples)
-    - `variations` (500 examples)
-
-- **Splits Repository**: [zipfit/Putnam-AXIOM-for-zip-fit-splits](https://huggingface.co/datasets/zipfit/Putnam-AXIOM-for-zip-fit-splits)
-  - Contains train/validation/test splits for ZIP-FIT methodology research:
-    - `train` (150 examples)
-    - `validation` (150 examples)
-    - `test` (222 examples)
-
-## Usage
-
-To verify the current state of the main HuggingFace repository:
-```
-python verify_splits_from_hf.py
-```
-
-To verify the zipfit repository:
-```
-python verify_zipfit_splits.py
-```
-
-To update the README and perform final cleanup:
-```
-python final_cleanup.py
-```
-
-To update the zipfit repository splits:
-```
-python fix_zipfit_splits.py
+The main dataset file is located at `data/Putnam_AXIOM_Original_v3.json`.
 ``` 

@@ -28,5 +28,3 @@ For instance, to run Llama-3-8B on the original dataset, one would run
 
 See the README in each directory for more details.
 
-## Generating Variation Snapshots
-
