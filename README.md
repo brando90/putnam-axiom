@@ -1,20 +1,6 @@
 # Putnam-AXIOM: A Functional and Static Benchmark for Measuring Higher Level Mathematical Reasoning
 This is the repository for Putnam-AXIOM: A Functional and Static Benchmark for Measuring Higher Level Mathematical Reasoning. This repository contains all of the data and evaluation code, including Putnam-AXIOM Original and Putnam-AXIOM Variations.
 
-## Paper
-The ICML 2025 paper is available on OpenReview: [https://openreview.net/forum?id=kqj2Cn3Sxr](https://openreview.net/forum?id=kqj2Cn3Sxr)
-
-Earlier preprint: [https://openreview.net/pdf?id=YXnwlZe0yf](https://openreview.net/pdf?id=YXnwlZe0yf)
-
-## HuggingFace Datasets
-The dataset is published on HuggingFace in two repositories:
-
-1. **Main Dataset**: [Putnam-AXIOM/putnam-axiom-dataset-ICML-2025-522](https://huggingface.co/datasets/Putnam-AXIOM/putnam-axiom-dataset-ICML-2025-522)
-   - Contains the primary splits: `full_eval` (522 examples), `originals_for_generating_vars` (100 examples), `variations` (500 examples)
-
-2. **ZIP-FIT Splits**: [zipfit/Putnam-AXIOM-for-zip-fit-splits](https://huggingface.co/datasets/zipfit/Putnam-AXIOM-for-zip-fit-splits)
-   - Contains validation and test splits used for the ZIP-FIT research methodology
-
 ## Basic Usage and Evaluation Procedure
 To perform an evaluation on Putnam-AXIOM, run `python putnam-axiom/src/eval.py`, including the appropriate arguments.
 
