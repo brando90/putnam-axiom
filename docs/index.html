@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Putnam-AXIOM Launch</title>
+    <meta
+      name="description"
+      content="Putnam-AXIOM is a functional and static benchmark for measuring higher-level mathematical reasoning on Putnam problems and controlled variations."
+    />
+    <meta property="og:title" content="Putnam-AXIOM Launch" />
+    <meta
+      property="og:description"
+      content="A launch page for the Putnam-AXIOM benchmark, including dataset scale, variation design, evaluation commands, and citation details."
+    />
+    <meta property="og:image" content="assets/putnam-axiom-hero.png" />
+    <link rel="stylesheet" href="styles.css" />
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [
+            ["$", "$"],
+            ["\\(", "\\)"],
+          ],
+          displayMath: [
+            ["\\[", "\\]"],
+            ["$$", "$$"],
+          ],
+        },
+        options: {
+          skipHtmlTags: ["script", "noscript", "style", "textarea", "pre"],
+        },
+      };
+    </script>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+    ></script>
+    <script defer src="script.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header" aria-label="Site header">
+      <a class="brand" href="#top" aria-label="Putnam-AXIOM home">
+        <span class="brand-mark" aria-hidden="true">A</span>
+        <span>Putnam-AXIOM</span>
+      </a>
+      <nav class="top-nav" aria-label="Primary navigation">
+        <a href="#dataset">Dataset</a>
+        <a href="#variations">Variations</a>
+        <a href="#evaluate">Evaluate</a>
+        <a href="#cite">Cite</a>
+      </nav>
+      <a class="header-action" href="https://github.com/brando90/putnam-axiom">
+        GitHub
+      </a>
+    </header>
+
+    <main id="main">
+      <section class="hero" id="top" aria-label="Putnam-AXIOM launch hero">
+        <img
+          class="hero-image"
+          src="assets/putnam-axiom-hero.png"
+          alt="Abstract chalkboard scene showing mathematical problem sheets branching into controlled variants."
+        />
+        <div class="hero-shade" aria-hidden="true"></div>
+        <div class="hero-content">
+          <p class="eyebrow">Benchmark launch</p>
+          <h1>Putnam-AXIOM</h1>
+          <p class="hero-summary">
+            A functional and static benchmark for measuring higher-level
+            mathematical reasoning with Putnam problems and controlled variants.
+          </p>
+          <div class="hero-meta" aria-label="Project metadata">
+            <span>ICML 2025 dataset</span>
+            <span>522 originals</span>
+            <span>500 v4 variations</span>
+          </div>
+          <div class="hero-actions">
+            <a class="button primary" href="#dataset">Read the launch</a>
+            <a class="button secondary" href="#evaluate">Run evaluation</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="metric-band" aria-label="Dataset summary">
+        <div class="metric">
+          <span class="metric-value">522</span>
+          <span class="metric-label">Original Putnam problems</span>
+        </div>
+        <div class="metric">
+          <span class="metric-value">83</span>
+          <span class="metric-label">Contest years represented</span>
+        </div>
+        <div class="metric">
+          <span class="metric-value">100</span>
+          <span class="metric-label">v4 seed problems</span>
+        </div>
+        <div class="metric">
+          <span class="metric-value">500</span>
+          <span class="metric-label">v4 controlled variations</span>
+        </div>
+      </section>
+
+      <article class="article">
+        <section class="article-section opening" id="dataset">
+          <p class="section-kicker">Why this benchmark exists</p>
+          <h2>Advanced reasoning needs stress tests that are hard to memorize.</h2>
+          <p>
+            Putnam-AXIOM packages problems from the William Lowell Putnam
+            Mathematical Competition into an evaluation suite for model
+            reasoning. The repository includes the original benchmark data,
+            variation datasets, and evaluation code for running Hugging Face
+            models through a VLLM-backed pipeline.
+          </p>
+          <p>
+            The static split gives a stable target for comparison. The
+            functional variation split tests whether a model can preserve the
+            proof strategy when symbols, constants, or problem structure change.
+            That combination is the core of the release: one benchmark for
+            historical difficulty, and one for controlled reasoning robustness.
+          </p>
+
+          <div class="fact-grid" aria-label="Dataset facts">
+            <div class="fact-card">
+              <span class="fact-number">318</span>
+              <span class="fact-title">Numerical originals</span>
+              <p>Problems where the expected response reduces to a number.</p>
+            </div>
+            <div class="fact-card">
+              <span class="fact-number">204</span>
+              <span class="fact-title">Algebraic originals</span>
+              <p>Problems where the expected response is a symbolic expression.</p>
+            </div>
+            <div class="fact-card">
+              <span class="fact-number">47</span>
+              <span class="fact-title">v4 seed years</span>
+              <p>Seed problems span contests from 1938 through 2023.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="article-section split-section" id="variations">
+          <div class="section-copy">
+            <p class="section-kicker">Functional variation design</p>
+            <h2>One original problem becomes five controlled tests.</h2>
+            <p>
+              Putnam-AXIOM Variations v4 contains 100 seed problems and 500
+              generated test items. Each seed contributes five variants, letting
+              evaluators ask a sharper question: does the model understand the
+              invariant method, or did it only recognize surface form?
+            </p>
+            <p>
+              The current v4 test set includes variable substitutions, constant
+              changes, and a small set of more significant perturbations.
+            </p>
+          </div>
+          <div class="composition-panel" aria-label="Variation composition">
+            <h3>v4 variation mix</h3>
+            <div class="bar-row">
+              <span>Variable</span>
+              <div class="bar-track" aria-hidden="true">
+                <span class="bar variable" style="width: 63%"></span>
+              </div>
+              <strong>315</strong>
+            </div>
+            <div class="bar-row">
+              <span>Constant</span>
+              <div class="bar-track" aria-hidden="true">
+                <span class="bar constant" style="width: 36%"></span>
+              </div>
+              <strong>180</strong>
+            </div>
+            <div class="bar-row">
+              <span>Significant</span>
+              <div class="bar-track" aria-hidden="true">
+                <span class="bar significant" style="width: 1%"></span>
+              </div>
+              <strong>5</strong>
+            </div>
+          </div>
+        </section>
+
+        <section class="article-section explorer-section">
+          <div class="explorer-heading">
+            <p class="section-kicker">Interactive sample</p>
+            <h2>Inspect a seed problem and its generated variants.</h2>
+          </div>
+
+          <div class="variant-tabs" role="tablist" aria-label="Problem variants">
+            <button class="tab-button active" type="button" role="tab" data-variant="0">
+              Original
+            </button>
+            <button class="tab-button" type="button" role="tab" data-variant="1">
+              Variant 1
+            </button>
+            <button class="tab-button" type="button" role="tab" data-variant="2">
+              Variant 2
+            </button>
+            <button class="tab-button" type="button" role="tab" data-variant="3">
+              Variant 3
+            </button>
+          </div>
+
+          <div class="problem-viewer" role="tabpanel" aria-live="polite">
+            <div class="problem-meta">
+              <span id="problem-kind">Seed problem</span>
+              <span>1938, problem 1</span>
+              <span>Answer type: algebraic</span>
+            </div>
+            <h3 id="problem-title">Prismoidal volume formula</h3>
+            <p id="problem-text"></p>
+            <div class="solution-strip">
+              <span>Target answer</span>
+              <code id="problem-answer"></code>
+            </div>
+          </div>
+        </section>
+
+        <section class="article-section split-section">
+          <div class="section-copy">
+            <p class="section-kicker">What the benchmark covers</p>
+            <h2>Putnam-AXIOM mixes geometry, number theory, algebra, and analysis.</h2>
+            <p>
+              The original file contains 100 topic labels because many Putnam
+              problems cross subject boundaries. The top labels show the shape
+              of the benchmark: geometry and analysis are heavily represented,
+              but the set also includes algebra, number theory, combinatorics,
+              and hybrids across those categories.
+            </p>
+          </div>
+          <div class="topic-list" aria-label="Top original problem topics">
+            <div class="topic-row">
+              <span>Analysis Calculus</span>
+              <strong>33</strong>
+            </div>
+            <div class="topic-row">
+              <span>Geometry</span>
+              <strong>31</strong>
+            </div>
+            <div class="topic-row">
+              <span>Algebra Number Theory</span>
+              <strong>30</strong>
+            </div>
+            <div class="topic-row">
+              <span>Combinatorics Number Theory</span>
+              <strong>28</strong>
+            </div>
+            <div class="topic-row">
+              <span>Algebra</span>
+              <strong>24</strong>
+            </div>
+            <div class="topic-row">
+              <span>Analysis</span>
+              <strong>23</strong>
+            </div>
+          </div>
+        </section>
+
+        <section class="article-section evaluate-section" id="evaluate">
+          <p class="section-kicker">Evaluation</p>
+          <h2>Run a model against originals or variations.</h2>
+          <p>
+            The repository exposes a Python evaluation script. Point
+            <code>--data_dir</code> at the original file or one of the variation
+            JSON files, choose the prompt format, and pass a VLLM-compatible
+            Hugging Face model name.
+          </p>
+
+          <div class="code-panel">
+            <div class="code-header">
+              <span>Example command</span>
+              <button class="copy-button" type="button" data-copy-target="eval-code">
+                Copy
+              </button>
+            </div>
+            <pre><code id="eval-code">python putnam-axiom/src/eval.py \
+  --data_dir putnam-axiom/data/Putnam_AXIOM_Original_v3.json \
+  --model_name meta-llama/Meta-Llama-3-8B \
+  --output_dir results/llama3-putnam-original</code></pre>
+          </div>
+
+          <div class="parameter-grid" aria-label="Evaluation arguments">
+            <div>
+              <span class="parameter-name">--data_dir</span>
+              <p>Original or variation JSON dataset path.</p>
+            </div>
+            <div>
+              <span class="parameter-name">--prompt_name</span>
+              <p>Prompt adapter such as general, mistral, llama, or gemma.</p>
+            </div>
+            <div>
+              <span class="parameter-name">--repeat_eval</span>
+              <p>Number of repeated generations for robustness checks.</p>
+            </div>
+            <div>
+              <span class="parameter-name">--max_tokens</span>
+              <p>Maximum generation length for proof-style completions.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="article-section artifact-section">
+          <p class="section-kicker">Repository artifacts</p>
+          <h2>Everything needed for the benchmark ships in this repo.</h2>
+          <div class="artifact-grid">
+            <a
+              class="artifact-card"
+              href="https://github.com/brando90/putnam-axiom/blob/main/data/Putnam_AXIOM_Original_v3.json"
+            >
+              <span>Original benchmark</span>
+              <strong>data/Putnam_AXIOM_Original_v3.json</strong>
+            </a>
+            <a
+              class="artifact-card"
+              href="https://github.com/brando90/putnam-axiom/blob/main/data/Putnam-AXIOM_Variations_v4/original.json"
+            >
+              <span>v4 seed problems</span>
+              <strong>data/Putnam-AXIOM_Variations_v4/original.json</strong>
+            </a>
+            <a
+              class="artifact-card"
+              href="https://github.com/brando90/putnam-axiom/blob/main/data/Putnam-AXIOM_Variations_v4/test.json"
+            >
+              <span>v4 variation tests</span>
+              <strong>data/Putnam-AXIOM_Variations_v4/test.json</strong>
+            </a>
+            <a
+              class="artifact-card"
+              href="https://github.com/brando90/putnam-axiom/blob/main/src/eval.py"
+            >
+              <span>Evaluation script</span>
+              <strong>src/eval.py</strong>
+            </a>
+          </div>
+        </section>
+
+        <section class="article-section cite-section" id="cite">
+          <p class="section-kicker">Citation</p>
+          <h2>Cite Putnam-AXIOM.</h2>
+          <p>
+            Use this citation for the benchmark paper and include the repository
+            link when referencing this implementation.
+          </p>
+          <div class="code-panel">
+            <div class="code-header">
+              <span>BibTeX</span>
+              <button class="copy-button" type="button" data-copy-target="citation">
+                Copy
+              </button>
+            </div>
+            <pre><code id="citation">@article{putnam_axiom2025,
+  title={Putnam-AXIOM: A Functional and Static Benchmark for Measuring Higher Level Mathematical Reasoning},
+  author={Aryan Gulati and Brando Miranda and Eric Chen and Emily Xia and Kai Fronsdal and Bruno de Moraes Dumont and Sanmi Koyejo},
+  journal={International Conference on Machine Learning},
+  year={2025},
+  note={Repository: https://github.com/brando90/putnam-axiom}
+}</code></pre>
+          </div>
+        </section>
+      </article>
+    </main>
+
+    <footer class="site-footer">
+      <span>Putnam-AXIOM</span>
+      <a href="https://github.com/brando90/putnam-axiom">GitHub repository</a>
+      <a href="https://huggingface.co/datasets/Putnam-AXIOM/putnam-axiom-dataset-ICML-2025-522">
+        Dataset on Hugging Face
+      </a>
+    </footer>
+  </body>
+</html>
