@@ -1,0 +1,26 @@
+{
+	"folders": [
+		{
+			"path": "../.."
+		},
+		{
+			"path": "../../../beyond-scale-2-alignment-coeff"
+		},
+		{
+			"path": "../../../self-opt-data-gen"
+		},
+		{
+			"path": "../../../data"
+		},
+		{
+			"path": "../../../ultimate-utils"
+		},
+		{
+			"path": "../../../beyond-scale-language-data-diversity"
+		},
+		{
+			"path": "../../../putnam-axiom-preview-lm-evaluation-harness"
+		}
+	],
+	"settings": {}
+}

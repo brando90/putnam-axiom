@@ -165,3 +165,8 @@ cython_debug/
 
 # models
 src/models
+
+# Private local recovery material and machine metadata
+/.local/
+.DS_Store
+.env.*

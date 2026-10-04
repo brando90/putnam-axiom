@@ -23,7 +23,7 @@ setup(
     description="Ultimate Eval Benchmark for the Prestigious Putnam Competitions",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url='https://github.com/brando90/putnam-math',
+    url='https://github.com/brando90/putnam-axiom',
     author='Brando Miranda',
     author_email='brandojazz@gmail.com',
     python_requires='>=3.10.0',

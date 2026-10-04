@@ -1,0 +1,1136 @@
+{
+  "date": "10-04-2026",
+  "canonical_repository": "https://github.com/brando90/putnam-axiom",
+  "baseline_commit": "d1bf0cb7b0cf205fa28b55481cda65b811489222",
+  "imports": [
+    {
+      "repository": "https://github.com/brando90/lm-evaluation-harness",
+      "commit": "559bd28095842311d62c9ccdf85687f281d80de4",
+      "source": "lm_eval/tasks/putnam_axiom/README.md",
+      "destination": "src/lm_evaluation_harness/tasks/putnam_axiom/README.md",
+      "sha256": "60bd39ebf2452ca8e84f6201dd8e40663d8f3fb1da622616c2d5b1fb588c324b"
+    },
+    {
+      "repository": "https://github.com/brando90/lm-evaluation-harness",
+      "commit": "559bd28095842311d62c9ccdf85687f281d80de4",
+      "source": "lm_eval/tasks/putnam_axiom/putnam_axiom.yaml",
+      "destination": "src/lm_evaluation_harness/tasks/putnam_axiom/putnam_axiom.yaml",
+      "sha256": "26740599f7dcb90dc969d0bee0d422913695a25142dff743016e8367b3b70d27"
+    },
+    {
+      "repository": "https://github.com/brando90/lm-evaluation-harness",
+      "commit": "559bd28095842311d62c9ccdf85687f281d80de4",
+      "source": "lm_eval/tasks/putnam_axiom/putnam_axiom_original.yaml",
+      "destination": "src/lm_evaluation_harness/tasks/putnam_axiom/putnam_axiom_original.yaml",
+      "sha256": "0efee0cc6743e689e5da09aca98add4dc25e25f6478eae9014204ba945b84da2"
+    },
+    {
+      "repository": "https://github.com/brando90/lm-evaluation-harness",
+      "commit": "559bd28095842311d62c9ccdf85687f281d80de4",
+      "source": "lm_eval/tasks/putnam_axiom/putnam_axiom_variations.yaml",
+      "destination": "src/lm_evaluation_harness/tasks/putnam_axiom/putnam_axiom_variations.yaml",
+      "sha256": "117632543b6c806b9d604119229f1a5d07a0bdad0508deaccaa4581139fc49da"
+    },
+    {
+      "repository": "https://github.com/brando90/lm-evaluation-harness",
+      "commit": "559bd28095842311d62c9ccdf85687f281d80de4",
+      "source": "lm_eval/tasks/putnam_axiom/putnam_axiom_variations_org.yaml",
+      "destination": "src/lm_evaluation_harness/tasks/putnam_axiom/putnam_axiom_variations_org.yaml",
+      "sha256": "8f264b30703b8549d21a899200928ca7332669a29b1c51343b98a46a3288f637"
+    },
+    {
+      "repository": "https://github.com/brando90/lm-evaluation-harness",
+      "commit": "559bd28095842311d62c9ccdf85687f281d80de4",
+      "source": "lm_eval/tasks/putnam_axiom/utils.py",
+      "destination": "src/lm_evaluation_harness/tasks/putnam_axiom/utils.py",
+      "sha256": "239bf91b64a59ff98b4fbede819822773b9d394786eea93c56cb64f845a0d568"
+    },
+    {
+      "repository": "https://github.com/brando90/lm-evaluation-harness",
+      "commit": "5a2fbe7e4f7e1beb6ffaffaac9d1d1ebea6a752f",
+      "source": "lm_eval/tasks/putnam_axiom_zipfit/README.md",
+      "destination": "src/lm_evaluation_harness/tasks/putnam_axiom_zipfit/README.md",
+      "sha256": "8e50c521e740fe15c9107279b7d8cb4a998b74aaa33be11410562bccce7598aa"
+    },
+    {
+      "repository": "https://github.com/brando90/lm-evaluation-harness",
+      "commit": "5a2fbe7e4f7e1beb6ffaffaac9d1d1ebea6a752f",
+      "source": "lm_eval/tasks/putnam_axiom_zipfit/putnam_axiom_zipfit.yaml",
+      "destination": "src/lm_evaluation_harness/tasks/putnam_axiom_zipfit/putnam_axiom_zipfit.yaml",
+      "sha256": "3fe5cfe3f9bcceadaa4d308f081280ec25bd1f2719f6a1e8db72b3927d8bfdd0"
+    },
+    {
+      "repository": "https://github.com/brando90/lm-evaluation-harness",
+      "commit": "5a2fbe7e4f7e1beb6ffaffaac9d1d1ebea6a752f",
+      "source": "lm_eval/tasks/putnam_axiom_zipfit/putnam_axiom_zipfit_test.yaml",
+      "destination": "src/lm_evaluation_harness/tasks/putnam_axiom_zipfit/putnam_axiom_zipfit_test.yaml",
+      "sha256": "56b54699207829e7f791f54574429cdd3c344d1e0fb9d533ad61ed1e94205f39"
+    },
+    {
+      "repository": "https://github.com/brando90/lm-evaluation-harness",
+      "commit": "5a2fbe7e4f7e1beb6ffaffaac9d1d1ebea6a752f",
+      "source": "lm_eval/tasks/putnam_axiom_zipfit/putnam_axiom_zipfit_train.yaml",
+      "destination": "src/lm_evaluation_harness/tasks/putnam_axiom_zipfit/putnam_axiom_zipfit_train.yaml",
+      "sha256": "73889678c650f5bbbaf6b9b854e7792e281d8269c79978a34732b08c59d4f88b"
+    },
+    {
+      "repository": "https://github.com/brando90/lm-evaluation-harness",
+      "commit": "5a2fbe7e4f7e1beb6ffaffaac9d1d1ebea6a752f",
+      "source": "lm_eval/tasks/putnam_axiom_zipfit/putnam_axiom_zipfit_val.yaml",
+      "destination": "src/lm_evaluation_harness/tasks/putnam_axiom_zipfit/putnam_axiom_zipfit_val.yaml",
+      "sha256": "bcfbcf77902e639fd9c99c9fc04164e6a4065ba1001ca8770ecc75d1b9d5fc81"
+    },
+    {
+      "repository": "https://github.com/brando90/lm-evaluation-harness",
+      "commit": "5a2fbe7e4f7e1beb6ffaffaac9d1d1ebea6a752f",
+      "source": "lm_eval/tasks/putnam_axiom_zipfit/utils.py",
+      "destination": "src/lm_evaluation_harness/tasks/putnam_axiom_zipfit/utils.py",
+      "sha256": "14bed0620c8bd77aef5f3064fc4aca8fc2b899c8d3bd075d4b0a618d89260fee"
+    },
+    {
+      "repository": "https://github.com/brando90/lm-evaluation-harness",
+      "commit": "559bd28095842311d62c9ccdf85687f281d80de4",
+      "source": "LICENSE.md",
+      "destination": "src/lm_evaluation_harness/LICENSE.md",
+      "sha256": "a806e42547620dffbc2ec0333322c8b3523b4af11e059be14ef81aa5b1ae021f"
+    },
+    {
+      "repository": "https://github.com/brando90/putnam-axiom",
+      "commit": "f4ea749b082f7c209dd8acd250295c93d3dbf4aa",
+      "source": ".gitmodules",
+      "destination": "experiments/archive/legacy_logic_contamination/snapshot/.gitmodules",
+      "sha256": "9d37353d3b71d1895d188544dd05955adbc4c8c2d768db5676f53fa8a7986a1f"
+    },
+    {
+      "repository": "https://github.com/brando90/putnam-axiom",
+      "commit": "f4ea749b082f7c209dd8acd250295c93d3dbf4aa",
+      "source": "README.md",
+      "destination": "experiments/archive/legacy_logic_contamination/snapshot/README.md",
+      "sha256": "d7431455e7ba2b57b04795cbe4d654076d35a0a1c32d4f9cf45927008c0a1118"
+    },
+    {
+      "repository": "https://github.com/brando90/putnam-axiom",
+      "commit": "f4ea749b082f7c209dd8acd250295c93d3dbf4aa",
+      "source": "experiments/2024/11_nov/_stf_train_rs.py",
+      "destination": "experiments/archive/legacy_logic_contamination/snapshot/experiments/2024/11_nov/_stf_train_rs.py",
+      "sha256": "85eea99a95f38433b6f8d8c7dbdbd36a92c252a383c93906a01bc5172d75e459"
+    },
+    {
+      "repository": "https://github.com/brando90/putnam-axiom",
+      "commit": "f4ea749b082f7c209dd8acd250295c93d3dbf4aa",
+      "source": "experiments/2024/11_nov/debugging_dataset.py",
+      "destination": "experiments/archive/legacy_logic_contamination/snapshot/experiments/2024/11_nov/debugging_dataset.py",
+      "sha256": "e23fbd746ddaf5f9098cf765eefebb838e6fe3beb883904b0c582881e6733aca"
+    },
+    {
+      "repository": "https://github.com/brando90/putnam-axiom",
+      "commit": "f4ea749b082f7c209dd8acd250295c93d3dbf4aa",
+      "source": "experiments/2024/11_nov/gemma_tok_how_does_mask_look_if_eos_pad_both_present_in_tok.py",
+      "destination": "experiments/archive/legacy_logic_contamination/snapshot/experiments/2024/11_nov/gemma_tok_how_does_mask_look_if_eos_pad_both_present_in_tok.py",
+      "sha256": "e356e9f2baf26b3cdbb26613ff675a31ad0a5659bc97dcee3641408d52714e59"
+    },
+    {
+      "repository": "https://github.com/brando90/putnam-axiom",
+      "commit": "f4ea749b082f7c209dd8acd250295c93d3dbf4aa",
+      "source": "experiments/2024/11_nov/sweep_configs/config.yaml",
+      "destination": "experiments/archive/legacy_logic_contamination/snapshot/experiments/2024/11_nov/sweep_configs/config.yaml",
+      "sha256": "9c7adb868247b7cec66d5fd99959f9f575e9f20b0c7140ab7ec3cb92027e50a9"
+    },
+    {
+      "repository": "https://github.com/brando90/putnam-axiom",
+      "commit": "f4ea749b082f7c209dd8acd250295c93d3dbf4aa",
+      "source": "experiments/levenshtein_pg.py",
+      "destination": "experiments/archive/legacy_logic_contamination/snapshot/experiments/levenshtein_pg.py",
+      "sha256": "b9278995f7cebf67ab1b73b83c692b46c4ee79d2a88d646f02775b140a6a71f1"
+    },
+    {
+      "repository": "https://github.com/brando90/putnam-axiom",
+      "commit": "f4ea749b082f7c209dd8acd250295c93d3dbf4aa",
+      "source": "experiments/logic_contamination/_just_the_the_code_for_first_answer_check_code.py",
+      "destination": "experiments/archive/legacy_logic_contamination/snapshot/experiments/logic_contamination/_just_the_the_code_for_first_answer_check_code.py",
+      "sha256": "d9fc5a4357c4d8ce61064cf52c8034b6343bc74a1733dbfc3d97110abd08d175"
+    },
+    {
+      "repository": "https://github.com/brando90/putnam-axiom",
+      "commit": "f4ea749b082f7c209dd8acd250295c93d3dbf4aa",
+      "source": "experiments/logic_contamination/cp_to_dfs.sh",
+      "destination": "experiments/archive/legacy_logic_contamination/snapshot/experiments/logic_contamination/cp_to_dfs.sh",
+      "sha256": "30fd30178f8774c77667386bd7bebe975cc9a495d794a9c332383c9ca4f44fa8"
+    },
+    {
+      "repository": "https://github.com/brando90/putnam-axiom",
+      "commit": "f4ea749b082f7c209dd8acd250295c93d3dbf4aa",
+      "source": "experiments/logic_contamination/dimension_pg.py",
+      "destination": "experiments/archive/legacy_logic_contamination/snapshot/experiments/logic_contamination/dimension_pg.py",
+      "sha256": "68705162d8386ea74499938c2cc29297e76b5a49fd83bb534a4c341db107059f"
+    },
+    {
+      "repository": "https://github.com/brando90/putnam-axiom",
+      "commit": "f4ea749b082f7c209dd8acd250295c93d3dbf4aa",
+      "source": "experiments/logic_contamination/hf_mld_generate.py",
+      "destination": "experiments/archive/legacy_logic_contamination/snapshot/experiments/logic_contamination/hf_mld_generate.py",
+      "sha256": "4599e2301b44a5986ae5fc5803a04bbbec0afbf49f61db646e933c4fe3f77bfc"
+    },
+    {
+      "repository": "https://github.com/brando90/putnam-axiom",
+      "commit": "f4ea749b082f7c209dd8acd250295c93d3dbf4aa",
+      "source": "experiments/logic_contamination/hf_pipeline_generation_inference.py",
+      "destination": "experiments/archive/legacy_logic_contamination/snapshot/experiments/logic_contamination/hf_pipeline_generation_inference.py",
+      "sha256": "18ca1c710e7d72d6bed613dab2f4dd456a22b627b313a53a11368fa73efebe7c"
+    },
+    {
+      "repository": "https://github.com/brando90/putnam-axiom",
+      "commit": "f4ea749b082f7c209dd8acd250295c93d3dbf4aa",
+      "source": "experiments/logic_contamination/push_models.py",
+      "destination": "experiments/archive/legacy_logic_contamination/snapshot/experiments/logic_contamination/push_models.py",
+      "sha256": "82166b98933569dbfb21f099683b73a4ceb9ab4139fe936076cabecb098d19d3"
+    },
+    {
+      "repository": "https://github.com/brando90/putnam-axiom",
+      "commit": "f4ea749b082f7c209dd8acd250295c93d3dbf4aa",
+      "source": "experiments/logic_contamination/putnam-axiom.code-workspace",
+      "destination": "experiments/archive/legacy_logic_contamination/snapshot/experiments/logic_contamination/putnam-axiom.code-workspace",
+      "sha256": "28df3507ee06ad007ca43cb50f8021d18db4736ced2626f505082c5e8eaa662c"
+    },
+    {
+      "repository": "https://github.com/brando90/putnam-axiom",
+      "commit": "f4ea749b082f7c209dd8acd250295c93d3dbf4aa",
+      "source": "experiments/logic_contamination/readme.md",
+      "destination": "experiments/archive/legacy_logic_contamination/snapshot/experiments/logic_contamination/readme.md",
+      "sha256": "6a5e69109d307267159049508bd5d43fa176e3a437c6eddb34e2a7e49a9efa6d"
+    },
+    {
+      "repository": "https://github.com/brando90/putnam-axiom",
+      "commit": "f4ea749b082f7c209dd8acd250295c93d3dbf4aa",
+      "source": "experiments/logic_contamination/seq_len_bug_isolation.py",
+      "destination": "experiments/archive/legacy_logic_contamination/snapshot/experiments/logic_contamination/seq_len_bug_isolation.py",
+      "sha256": "dbbf3941bf007c46d8a07ed7c521e2170d6191aef68de4dd1e5a835c48e0c080"
+    },
+    {
+      "repository": "https://github.com/brando90/putnam-axiom",
+      "commit": "f4ea749b082f7c209dd8acd250295c93d3dbf4aa",
+      "source": "experiments/logic_contamination/test_input_output_ckpts_trained_on_benchmark_53.py",
+      "destination": "experiments/archive/legacy_logic_contamination/snapshot/experiments/logic_contamination/test_input_output_ckpts_trained_on_benchmark_53.py",
+      "sha256": "8e7f6025abffdc62f121ac9d6a4fb564e3e0df0f07909bc022709ba828ce88e0"
+    },
+    {
+      "repository": "https://github.com/brando90/putnam-axiom",
+      "commit": "f4ea749b082f7c209dd8acd250295c93d3dbf4aa",
+      "source": "experiments/logic_contamination/test_llama_3p1_8b_tokenization.py",
+      "destination": "experiments/archive/legacy_logic_contamination/snapshot/experiments/logic_contamination/test_llama_3p1_8b_tokenization.py",
+      "sha256": "a943970b98959f06c584316b3e7554a1e8141a3560455eabf5a73f057a819965"
+    },
+    {
+      "repository": "https://github.com/brando90/putnam-axiom",
+      "commit": "f4ea749b082f7c209dd8acd250295c93d3dbf4aa",
+      "source": "experiments/logic_contamination/test_model_eos_tok_in_seq.py",
+      "destination": "experiments/archive/legacy_logic_contamination/snapshot/experiments/logic_contamination/test_model_eos_tok_in_seq.py",
+      "sha256": "95d6fbcb53474f284aca8a4d76fd4d2a0904d8702539b31edc2fbd9be5fd1646"
+    },
+    {
+      "repository": "https://github.com/brando90/putnam-axiom",
+      "commit": "f4ea749b082f7c209dd8acd250295c93d3dbf4aa",
+      "source": "experiments/logic_contamination/test_vllm_model.py",
+      "destination": "experiments/archive/legacy_logic_contamination/snapshot/experiments/logic_contamination/test_vllm_model.py",
+      "sha256": "2a21ea6ae6ba9dcc22174c38710fb832231c75d1f1c557a26735ef40f2a8f32e"
+    },
+    {
+      "repository": "https://github.com/brando90/putnam-axiom",
+      "commit": "f4ea749b082f7c209dd8acd250295c93d3dbf4aa",
+      "source": "experiments/logic_contamination/tok_decode_skip_special_tokens.py",
+      "destination": "experiments/archive/legacy_logic_contamination/snapshot/experiments/logic_contamination/tok_decode_skip_special_tokens.py",
+      "sha256": "b413c8ba2c45f9d0e9d2202a50c89f2f544c7fba47f817ac128b40b45b96b4c6"
+    },
+    {
+      "repository": "https://github.com/brando90/putnam-axiom",
+      "commit": "f4ea749b082f7c209dd8acd250295c93d3dbf4aa",
+      "source": "experiments/logic_contamination/why_isnt_it_predicting_eos.py",
+      "destination": "experiments/archive/legacy_logic_contamination/snapshot/experiments/logic_contamination/why_isnt_it_predicting_eos.py",
+      "sha256": "e119ba081bca204d2d10c49eb6462163e8814159a8a6d8930c7ba7447a4f0d63"
+    },
+    {
+      "repository": "https://github.com/brando90/putnam-axiom",
+      "commit": "f4ea749b082f7c209dd8acd250295c93d3dbf4aa",
+      "source": "experiments/putnam_human_eval_study/2024_12_05_56d8f3ebf92f7c9c906ag.tex",
+      "destination": "experiments/archive/legacy_logic_contamination/snapshot/experiments/putnam_human_eval_study/2024_12_05_56d8f3ebf92f7c9c906ag.tex",
+      "sha256": "3538b08e9efec1b4be5d6b9c0cf2c7749e5dc1817874b09011d082226487ff50"
+    },
+    {
+      "repository": "https://github.com/brando90/putnam-axiom",
+      "commit": "f4ea749b082f7c209dd8acd250295c93d3dbf4aa",
+      "source": "experiments/putnam_human_eval_study/dummy_test_ocr.json",
+      "destination": "experiments/archive/legacy_logic_contamination/snapshot/experiments/putnam_human_eval_study/dummy_test_ocr.json",
+      "sha256": "d5e3266692fcab7117408257c026ca80549dba48413ecc49722b4ff52ec1cb4c"
+    },
+    {
+      "repository": "https://github.com/brando90/putnam-axiom",
+      "commit": "f4ea749b082f7c209dd8acd250295c93d3dbf4aa",
+      "source": "setup.py",
+      "destination": "experiments/archive/legacy_logic_contamination/snapshot/setup.py",
+      "sha256": "2bf4f80f9940de85fc7c64e19a3d0e74fd9e892063e9fc8e0b41fee57d10d012"
+    },
+    {
+      "repository": "https://github.com/brando90/putnam-axiom",
+      "commit": "f4ea749b082f7c209dd8acd250295c93d3dbf4aa",
+      "source": "src/_lm_harness_eval_emilys.py",
+      "destination": "experiments/archive/legacy_logic_contamination/snapshot/src/_lm_harness_eval_emilys.py",
+      "sha256": "2930605fc049e53e406331cad4457b8e8eadde71162e237a3557c30c0a284035"
+    },
+    {
+      "repository": "https://github.com/brando90/putnam-axiom",
+      "commit": "f4ea749b082f7c209dd8acd250295c93d3dbf4aa",
+      "source": "src/_train/_sft_simple_2.py",
+      "destination": "experiments/archive/legacy_logic_contamination/snapshot/src/_train/_sft_simple_2.py",
+      "sha256": "27d9754477934cffc032fa1c498890b78e2f1522fb5be18cafef4554c0e6c251"
+    },
+    {
+      "repository": "https://github.com/brando90/putnam-axiom",
+      "commit": "f4ea749b082f7c209dd8acd250295c93d3dbf4aa",
+      "source": "src/_train/callbacks.py",
+      "destination": "experiments/archive/legacy_logic_contamination/snapshot/src/_train/callbacks.py",
+      "sha256": "be81cdb8b840fd69aabc71f0d582e750e7edacfb10754fb1ca7e196ebced48c6"
+    },
+    {
+      "repository": "https://github.com/brando90/putnam-axiom",
+      "commit": "f4ea749b082f7c209dd8acd250295c93d3dbf4aa",
+      "source": "src/_train/data.py",
+      "destination": "experiments/archive/legacy_logic_contamination/snapshot/src/_train/data.py",
+      "sha256": "d3d5dd8315af4069a1804a880262f28f98e7da898abb4c315a241ac40be04143"
+    },
+    {
+      "repository": "https://github.com/brando90/putnam-axiom",
+      "commit": "f4ea749b082f7c209dd8acd250295c93d3dbf4aa",
+      "source": "src/_train/models.py",
+      "destination": "experiments/archive/legacy_logic_contamination/snapshot/src/_train/models.py",
+      "sha256": "f69c59364778cac07ce6ce837bb086ab514b1413964d8fda8f6482e389df8f6d"
+    },
+    {
+      "repository": "https://github.com/brando90/putnam-axiom",
+      "commit": "f4ea749b082f7c209dd8acd250295c93d3dbf4aa",
+      "source": "src/_train/sft_simple.py",
+      "destination": "experiments/archive/legacy_logic_contamination/snapshot/src/_train/sft_simple.py",
+      "sha256": "cb5b311beed33900ab15b012d87a7c66c308752afe15fa92b6c2d9ba1daf6d50"
+    },
+    {
+      "repository": "https://github.com/brando90/putnam-axiom",
+      "commit": "f4ea749b082f7c209dd8acd250295c93d3dbf4aa",
+      "source": "src/_train/sft_simple_unsloth.py",
+      "destination": "experiments/archive/legacy_logic_contamination/snapshot/src/_train/sft_simple_unsloth.py",
+      "sha256": "86e0b7b619951267dc57c2198ec7246f94ee8a08aadd17081f8912851e92a277"
+    },
+    {
+      "repository": "https://github.com/brando90/putnam-axiom",
+      "commit": "f4ea749b082f7c209dd8acd250295c93d3dbf4aa",
+      "source": "src/_train/utils.py",
+      "destination": "experiments/archive/legacy_logic_contamination/snapshot/src/_train/utils.py",
+      "sha256": "48b993b4e411f6bd7b800ba7d13e2c7d24edbbbfe3cbeaf218a57f9e51b38cd2"
+    },
+    {
+      "repository": "https://github.com/brando90/putnam-axiom",
+      "commit": "f4ea749b082f7c209dd8acd250295c93d3dbf4aa",
+      "source": "src/eval_logic_contamination.py",
+      "destination": "experiments/archive/legacy_logic_contamination/snapshot/src/eval_logic_contamination.py",
+      "sha256": "47bd3cd48488d690ab58e7908f9a3f0f486c5fe8f29280266731899a3d24faef"
+    },
+    {
+      "repository": "https://github.com/brando90/putnam-axiom",
+      "commit": "f4ea749b082f7c209dd8acd250295c93d3dbf4aa",
+      "source": "src/train/train.py",
+      "destination": "experiments/archive/legacy_logic_contamination/snapshot/src/train/train.py",
+      "sha256": "d56b663f17c968d8a5524eb04361ed364f3649e829de4a60480b12e9d208c795"
+    },
+    {
+      "repository": "https://github.com/brando90/putnam-axiom",
+      "commit": "f4ea749b082f7c209dd8acd250295c93d3dbf4aa",
+      "source": "test-tfa-output/runs/Jan26_21-25-57_skampere1/events.out.tfevents.1737955558.skampere1.3508975.0",
+      "destination": "experiments/archive/legacy_logic_contamination/snapshot/test-tfa-output/runs/Jan26_21-25-57_skampere1/events.out.tfevents.1737955558.skampere1.3508975.0",
+      "sha256": "a783e95258c66a1103d3806759c68c90e88f8289656d2f850f334a7269e4185a"
+    },
+    {
+      "repository": "https://github.com/brando90/putnam-axiom",
+      "commit": "f4ea749b082f7c209dd8acd250295c93d3dbf4aa",
+      "source": "test-tfa-output/runs/Jan26_22-34-06_skampere1/events.out.tfevents.1737959648.skampere1.3594831.0",
+      "destination": "experiments/archive/legacy_logic_contamination/snapshot/test-tfa-output/runs/Jan26_22-34-06_skampere1/events.out.tfevents.1737959648.skampere1.3594831.0",
+      "sha256": "10054dfd84a764918e1430a28bd502d3028438b7066154a3a4ac3ed5129a25d0"
+    },
+    {
+      "repository": "https://github.com/brando90/putnam-axiom",
+      "commit": "f4ea749b082f7c209dd8acd250295c93d3dbf4aa",
+      "source": "test-tfce-output/runs/Jan26_21-48-46_skampere1/events.out.tfevents.1737956927.skampere1.3550250.0",
+      "destination": "experiments/archive/legacy_logic_contamination/snapshot/test-tfce-output/runs/Jan26_21-48-46_skampere1/events.out.tfevents.1737956927.skampere1.3550250.0",
+      "sha256": "c221a48ed8570c85a7107bbc3cd90b4d79dc3d44d2abf581cf1ea0a530a2525b"
+    },
+    {
+      "repository": "https://github.com/brando90/lm-evaluation-harness",
+      "commit": "6af252af7849dcdf2d350c9011de05555ca7e2e4",
+      "source": "README.md",
+      "destination": "src/lm_evaluation_harness/archive/preview-main/README.md",
+      "sha256": "940fa30097470a586a323070b5ac7b21505ae4fedda0dc8638c509a1132c4c60"
+    },
+    {
+      "repository": "https://github.com/brando90/lm-evaluation-harness",
+      "commit": "6af252af7849dcdf2d350c9011de05555ca7e2e4",
+      "source": "lm_eval/tasks/putnam_axiom/putnam_axiom_original.yaml",
+      "destination": "src/lm_evaluation_harness/archive/preview-main/lm_eval/tasks/putnam_axiom/putnam_axiom_original.yaml",
+      "sha256": "beb971bc49a5a27498ddd0b9045c735217f9b2af73c60916be76120163339998"
+    },
+    {
+      "repository": "https://github.com/brando90/lm-evaluation-harness",
+      "commit": "6af252af7849dcdf2d350c9011de05555ca7e2e4",
+      "source": "lm_eval/tasks/putnam_axiom/putnam_axiom_original_53.yaml",
+      "destination": "src/lm_evaluation_harness/archive/preview-main/lm_eval/tasks/putnam_axiom/putnam_axiom_original_53.yaml",
+      "sha256": "b088d32a84a6e22b2ef0ea8712b6e1c4f16c036dc6c3d65f30146ab0e5616815"
+    },
+    {
+      "repository": "https://github.com/brando90/lm-evaluation-harness",
+      "commit": "6af252af7849dcdf2d350c9011de05555ca7e2e4",
+      "source": "lm_eval/tasks/putnam_axiom/putnam_axiom_variations.yaml",
+      "destination": "src/lm_evaluation_harness/archive/preview-main/lm_eval/tasks/putnam_axiom/putnam_axiom_variations.yaml",
+      "sha256": "47d55b7d6bad5f5b4cebeb63af4056bec3f5a01c104d8353a7ec00d07875078d"
+    },
+    {
+      "repository": "https://github.com/brando90/lm-evaluation-harness",
+      "commit": "6af252af7849dcdf2d350c9011de05555ca7e2e4",
+      "source": "lm_eval/tasks/putnam_axiom/utils.py",
+      "destination": "src/lm_evaluation_harness/archive/preview-main/lm_eval/tasks/putnam_axiom/utils.py",
+      "sha256": "f18573b9d0c4751a67e99851cfc1ce7724ead005c503677ce00e36998193771b"
+    },
+    {
+      "repository": "https://github.com/brando90/lm-evaluation-harness",
+      "commit": "6af252af7849dcdf2d350c9011de05555ca7e2e4",
+      "source": "lm_eval_py_run.py",
+      "destination": "src/lm_evaluation_harness/archive/preview-main/lm_eval_py_run.py",
+      "sha256": "e61168859ac8097d191cfb8572490d5c44b77ccfeb0e485f7a43020f7a9a8290"
+    }
+  ],
+  "preserved_baseline": [
+    {
+      "path": "data/Putnam-AXIOM_Variations/original.json",
+      "sha256": "f25088092be1db1bf01a709f495b15127aed95d03d3c5b5bb7259c8c1ae97cbb"
+    },
+    {
+      "path": "data/Putnam-AXIOM_Variations/test.json",
+      "sha256": "3628d391b4e7cbc97f4138f6bc5a4e120efc1c3607e71a1358607e9d73ca66fe"
+    },
+    {
+      "path": "data/Putnam-AXIOM_Variations_v3/original.json",
+      "sha256": "39e7f2c118582398cb3d36eb3fd4941b23150192ba60d38714aa57e8fc0d002f"
+    },
+    {
+      "path": "data/Putnam-AXIOM_Variations_v3/test.json",
+      "sha256": "17089ed02c0b645ea6adde48ae15959d9d9c6bf60cee6a40057108c0eae94f80"
+    },
+    {
+      "path": "data/Putnam-AXIOM_Variations_v4/original.json",
+      "sha256": "71f5cb5e29d1d8c92e8400ac1a31b64c52a2db486cc7bb2fe92dcb4c77805ef1"
+    },
+    {
+      "path": "data/Putnam-AXIOM_Variations_v4/test.json",
+      "sha256": "76c46b3626a8e8c4f09ad3431dc3add7a1e4a4a467064226ebfc0fe957dae96f"
+    },
+    {
+      "path": "data/Putnam_AXIOM_Original_v3.json",
+      "sha256": "b763cba941864a53557d603634dd519f2f9edb9eda342fe9cf4826b67da3d00b"
+    },
+    {
+      "path": "data/README.md",
+      "sha256": "8e9197db13b6277344b1f4f155817e7ac909f5937d69cacf6d88c39af928c42f"
+    },
+    {
+      "path": "data/archive/Putnam_AXIOM_Original.json",
+      "sha256": "914e94f99d23249c425f7fd9c609244ea3d7ebc395256510118d2d12864a3d0f"
+    },
+    {
+      "path": "data/archive/Putnam_AXIOM_Original_v2.json",
+      "sha256": "422d484d6633b019eb9726211bb607408d0652e6bf1d964d7191680a69ecbc82"
+    },
+    {
+      "path": "data/archive/Putnam_AXIOM_testSIngle.json",
+      "sha256": "9b4f366d5420376f1f6a80727cf75fa8c8628da63c7f720f22421c0a52c4de84"
+    },
+    {
+      "path": "data/archive/count.py",
+      "sha256": "4b9aed95764a57c6b398a1b454d3ae36b29cb644109ba7383ec4729612954a13"
+    },
+    {
+      "path": "data/archive/newvariations.json",
+      "sha256": "74f6ca4a1bd53b8462af4c810db0d886040e31ceae1c28997c8df4cbd2b1e693"
+    },
+    {
+      "path": "data/archive/qcounts.py",
+      "sha256": "caf7ed7ccd5c66b5ffb278be5198e9f9f3d6da036043b0c2348bcacd6feddc33"
+    },
+    {
+      "path": "data/archive/scripts_push_2_hf_backup/check_splits.py",
+      "sha256": "4ab82831148b59b475197fbc3ec2d390eb589285c07dc5ba359a02afc553e831"
+    },
+    {
+      "path": "data/archive/scripts_push_2_hf_backup/cleanup_all.sh",
+      "sha256": "3bc6795f2d8d7ab3b7ce6c8c59c401ef9a6f37ab7b934973ed0d4ffa27be7b06"
+    },
+    {
+      "path": "data/archive/scripts_push_2_hf_backup/cleanup_putnam_axiom_splits.py",
+      "sha256": "1cc1267a4f54c0740488064babab6be86b94a3b8fa7a94701198ba90252c4ca1"
+    },
+    {
+      "path": "data/archive/scripts_push_2_hf_backup/continue_reorganization.sh",
+      "sha256": "c607f3e5ead9522c70eb012fb256adbe3f865e0d7902257e83926e8ac3457a0e"
+    },
+    {
+      "path": "data/archive/scripts_push_2_hf_backup/direct_cleanup_putnam_repo.py",
+      "sha256": "22c4d05f3c68b653a67c6100a5bc4729f2027a67f6a62e00a0c507389450e4c1"
+    },
+    {
+      "path": "data/archive/scripts_push_2_hf_backup/fix_type_in_dataset.py",
+      "sha256": "6deccd4894241210e39a4ed21097da887802a8a9a01993409fab6afae53e16c9"
+    },
+    {
+      "path": "data/archive/scripts_push_2_hf_backup/force_delete_splits.py",
+      "sha256": "91b098f9574270b37b965dfde759a7a72198e0dbc3aa3f3c0495d68b38cf661f"
+    },
+    {
+      "path": "data/archive/scripts_push_2_hf_backup/force_delete_splits_auto.py",
+      "sha256": "727038e1641141c916ca944ad6d72d0249c5a049d4368a19b065cc3ea6aca880"
+    },
+    {
+      "path": "data/archive/scripts_push_2_hf_backup/push_readme_to_putnam_axiom.py",
+      "sha256": "7d46cdc05ecf5ecd9245ee42529ae9e04a1b1603938417104b33477e123123e2"
+    },
+    {
+      "path": "data/archive/scripts_push_2_hf_backup/push_updated_readme_to_putnam.py",
+      "sha256": "52fef8c44e2d5652f0e0b66998b28ead407e16bbd87cce6c369d1f03a5a205da"
+    },
+    {
+      "path": "data/archive/scripts_push_2_hf_backup/run_all_reorganization.sh",
+      "sha256": "00016243e98efc76ddefebb8ba34feb9db88c04eea727f74b0a709d36931b086"
+    },
+    {
+      "path": "data/archive/scripts_push_2_hf_backup/update_original_putnam_axiom.py",
+      "sha256": "7799639ed291e1f962433bf29cab60d7f6fcb68728d7ae85574818bb48f57a24"
+    },
+    {
+      "path": "data/archive/scripts_push_2_hf_backup/upload_putnam.py",
+      "sha256": "3bbd911370dce2e08d23ac36c8cc7814c55191228379ef43cc251f148b52bca8"
+    },
+    {
+      "path": "data/archive/test.py",
+      "sha256": "b85541d89107e8c3052a99ce98485efc5abb55aed09b894633ba9f4954353ca8"
+    },
+    {
+      "path": "data/archive/variant_algebraic_boxed_answers_prompting.json",
+      "sha256": "ef4acd024f6f8b4322f3679af641fd1c5bcd1eac19dece411901e8da3f64741f"
+    },
+    {
+      "path": "data/archive/variants.py",
+      "sha256": "e086b6e25fe83235a151d8b14c8f4b1015c397b1ad46a466939ff1d834effed1"
+    },
+    {
+      "path": "data/scripts_push_2_hf/README.md",
+      "sha256": "a36fc497576d4fd5892c36768087a6f49c7b0584ffbf26b359be3da74aa248e3"
+    },
+    {
+      "path": "data/scripts_push_2_hf/cleanup_repository.py",
+      "sha256": "bf4af6cc9711ee5d54a34b255bc79314f74b64ab29f4089276600f069779efa1"
+    },
+    {
+      "path": "data/scripts_push_2_hf/final_cleanup.py",
+      "sha256": "339a83fa9a9e757e8c14934f5a8b7b2abe625300b5daaf9d65e91148f1e44db9"
+    },
+    {
+      "path": "data/scripts_push_2_hf/fix_zipfit_splits.py",
+      "sha256": "514d7c130ae79c603cad6e6e51923b99ff284077f52bb4d4f5f9a25cc0d1958c"
+    },
+    {
+      "path": "data/scripts_push_2_hf/push_variations_to_putnam_axiom.py",
+      "sha256": "9c72db8023a2cec34329a6bfe48e82d331ea281b3f740fd74eed3c268b054a75"
+    },
+    {
+      "path": "data/scripts_push_2_hf/verify_splits_from_hf.py",
+      "sha256": "800fd03b9a37ecfb250ee70a8654137001719fdd0f2fb72171a89d0076ba14e0"
+    },
+    {
+      "path": "data/scripts_push_2_hf/verify_zipfit_splits.py",
+      "sha256": "9466d7dc38e73da3bf8c2a0de323eaba82d8e2db1624d115081b5253a6855975"
+    },
+    {
+      "path": "src/api_eval.py",
+      "sha256": "cbb6d88d75e7b5eede29dc4fbf36e2f0b6cc09bbb01a86622aca1a886a552065"
+    },
+    {
+      "path": "src/claude_eval.py",
+      "sha256": "f60653a88709799d3ee48c23ed1345d09a827909e40c16a8d5c40c41600febcb"
+    },
+    {
+      "path": "src/commands.md",
+      "sha256": "970ee25124d826941e8b77dc471887a3456cced981777b19f7543f3b8deda0d2"
+    },
+    {
+      "path": "src/contamination_ft.py",
+      "sha256": "a01843a39d28aa6922f4d333e7940da68b826b1f51ce05b4a10002a502e55e66"
+    },
+    {
+      "path": "src/convert_from_deepspeed.py",
+      "sha256": "932ed973afaaee9696285549bca4fa5bde75a5137df424ddc49c409e8e7c0c78"
+    },
+    {
+      "path": "src/data_visualization/confidence_interval.png",
+      "sha256": "7f877557d888ec8e1b52bb56643bbd6468499899c30b49fe5ce375675c93b31a"
+    },
+    {
+      "path": "src/data_visualization/confidence_intervals.py",
+      "sha256": "21bdba4590defcf5d00da4fc3a49aae3e6e82bc03b6c2b3b6022e8ee7f72603e"
+    },
+    {
+      "path": "src/data_visualization/interval_gen.py",
+      "sha256": "0047319fd5365e31e686121b43f7794224700a8ec56d383fd076ea2f4e65ae5c"
+    },
+    {
+      "path": "src/deepseek_eval.py",
+      "sha256": "f89d46a4b235bf4fb0da57152c3dde7c1e6b9339a8e94b4f2011293e80696d96"
+    },
+    {
+      "path": "src/ds_config.json",
+      "sha256": "c357bb2a7fd5fd93b1ea405389d8a53b8474e6da4b9d47588357b6da251872bf"
+    },
+    {
+      "path": "src/eval.py",
+      "sha256": "ebed50244a24065c2ecdb6283d12bad997c157731f92fb9d36392a2885feb4b7"
+    },
+    {
+      "path": "src/generate_variations.py",
+      "sha256": "2091db666a8ef35cf4b10668e23abd698c0b267d7869cb613a44bef0dd8938f1"
+    },
+    {
+      "path": "src/hf_eval.py",
+      "sha256": "68c57269caeba29878d7b0e9b377bf8c347b6f136591c2120d6b02b2fc9a4ff9"
+    },
+    {
+      "path": "src/lm_eval_utils.py",
+      "sha256": "2f1dc817c7e50d4677aa15d4478652bafbcaac83b9c8a7f15f8c322ed15c6f87"
+    },
+    {
+      "path": "src/lm_harness_eval.py",
+      "sha256": "183b63c6c1f337ea59bb0c210662b55a71f46bf0f362d40325ef0dd892a733ef"
+    },
+    {
+      "path": "src/lmh_evaluation.py",
+      "sha256": "6f2fccc9df105906ac72963a7611845e5ba10b3a4d532539c8b92c9bc4122e26"
+    },
+    {
+      "path": "src/model_evals/test/Meta-Llama-3.1-70B/run0.json",
+      "sha256": "cb65365fbffc3416a09322890f12a2ba110c1005493f8dd5faa0689700f7d33e"
+    },
+    {
+      "path": "src/model_evals/test/Mistral-7B-Instruct-v0.3/run0.json",
+      "sha256": "b2451412d8960a7cc39e3e989e0938e295cd2bf430005c551996ad0451599747"
+    },
+    {
+      "path": "src/model_evals/test/Mistral-7B-Instruct-v0.3/run1.json",
+      "sha256": "b7b42c2f3533a6c97a2046461e2833d615da458673d39c70c1ab547d2da56e0e"
+    },
+    {
+      "path": "src/model_evals/test/Mistral-7B-Instruct-v0.3/run2.json",
+      "sha256": "e4c13ba3c6584b181ec74f7545e90cbd601ef8ea7e1b8a7f95ebc98afd20598a"
+    },
+    {
+      "path": "src/model_evals/test/Mistral-7B-Instruct-v0.3/run3.json",
+      "sha256": "2cd978cab6e15760b2b23b1b9974303bce3d2c0dc99500a50ff7e576008f8c39"
+    },
+    {
+      "path": "src/model_evals/test/Mistral-7B-Instruct-v0.3/run4.json",
+      "sha256": "27c908f7f6480199c4ae9f9d503b8382641ea8ffa43d211cccdc318df551fc08"
+    },
+    {
+      "path": "src/model_evals/test/Mistral-7B-v0.3/run0.json",
+      "sha256": "24abdc47bc0bbfabb8f64d526a18d05cc7817a37ecd6b064e5fe7bb09b146b39"
+    },
+    {
+      "path": "src/model_evals/test/Mistral-7B-v0.3/run1.json",
+      "sha256": "bc833bd6b2299bd6fcbbf140ded26c3c292bb0b23beafafc3fbed1ae6ed03e63"
+    },
+    {
+      "path": "src/model_evals/test/Mistral-7B-v0.3/run2.json",
+      "sha256": "1c20a5d45efa0545f0520ea137ea7f95563a790491785c0691bb2f7b4ad921fc"
+    },
+    {
+      "path": "src/model_evals/test/Mistral-7B-v0.3/run3.json",
+      "sha256": "bab2ea843cb9407d7f143b3b1735f80097c51f28862e0100c1fa18cecb38d633"
+    },
+    {
+      "path": "src/model_evals/test/Mistral-7B-v0.3/run4.json",
+      "sha256": "1b1e6367cdd99f03f99d635964efd36c9ede7ecceaf93dc80e5a4097ba98b194"
+    },
+    {
+      "path": "src/model_evals/test/NuminaMath-7B-TIR/run0.json",
+      "sha256": "d3fc6bf93954cb7b5f5b255af1d984a73413d8738ff6085ac2e433b9e3accdc0"
+    },
+    {
+      "path": "src/model_evals/test/NuminaMath-7B-TIR/run1.json",
+      "sha256": "437871166bea3c3d88031724d562aff3e493570f08b12de57299e68c27b1dff8"
+    },
+    {
+      "path": "src/model_evals/test/NuminaMath-7B-TIR/run2.json",
+      "sha256": "7eacb7a51bb328f1004180ad4d90b0f61cea2e012069353b9a9b8ff4f7dff7a3"
+    },
+    {
+      "path": "src/model_evals/test/NuminaMath-7B-TIR/run3.json",
+      "sha256": "54943e928dbe0bed01cf1d14cd4745405ed345cd497bd7fba438d46c193cc718"
+    },
+    {
+      "path": "src/model_evals/test/NuminaMath-7B-TIR/run4.json",
+      "sha256": "0dde71d1eb9c42699c03a860d08177632f41e434a21d2a8f1ed7beecf67216cb"
+    },
+    {
+      "path": "src/model_evals/test/Qwen2-Math-7B-Instruct/run0.json",
+      "sha256": "682ab41e566d6ba3adaaeb4a9cc6217f4154a8935217eb54432d25cb0fcd96ec"
+    },
+    {
+      "path": "src/model_evals/test/Qwen2-Math-7B-Instruct/run1.json",
+      "sha256": "31e632263d6374d00eb3a8467ed76f4154e342a5de626cb9517ce29c0ac418cf"
+    },
+    {
+      "path": "src/model_evals/test/Qwen2-Math-7B-Instruct/run2.json",
+      "sha256": "9ec3711f642d30b2c8febbe8bca3b9719a75be7f6a87e08e04308905742d1e4c"
+    },
+    {
+      "path": "src/model_evals/test/Qwen2-Math-7B-Instruct/run3.json",
+      "sha256": "e80228bf917ef6c7566b446eae9520c0592c6af54b6b06a7800bfeac97e17b84"
+    },
+    {
+      "path": "src/model_evals/test/Qwen2-Math-7B-Instruct/run4.json",
+      "sha256": "7df5e36af24da5affbbcb40d5c63b6143cf69fc81ef1eadd5fd24606f02a7404"
+    },
+    {
+      "path": "src/model_evals/test/Qwen2-Math-7B/run0.json",
+      "sha256": "d16da7960dbced2ec8c8bb174a3f497777fff9aea769d22af3e0c98861a9cb0b"
+    },
+    {
+      "path": "src/model_evals/test/Qwen2-Math-7B/run1.json",
+      "sha256": "c0816c6b4e509b4c0f1c5dc9c92048ea2877ef16e0674fe3dbdaec18017e5ee1"
+    },
+    {
+      "path": "src/model_evals/test/Qwen2-Math-7B/run2.json",
+      "sha256": "575226e3ec756c325c8abb16484665c8983ff4f53293261cbb040878f1b105f0"
+    },
+    {
+      "path": "src/model_evals/test/Qwen2-Math-7B/run3.json",
+      "sha256": "6d474928ee488d0d8b572f74656a51fbe17236c04cb99f68b02e4886d3fc0a22"
+    },
+    {
+      "path": "src/model_evals/test/Qwen2-Math-7B/run4.json",
+      "sha256": "d6b7468029f0127e0196ca98391068c2cd14e7d78062ea5c77de3b3c40d5d7a1"
+    },
+    {
+      "path": "src/model_evals/test/deepseek-math-7b-base/run0.json",
+      "sha256": "d99215ffd2fd3c308ba8fb1b80b2679fa3576dd41366ce61394dee25b30c4573"
+    },
+    {
+      "path": "src/model_evals/test/deepseek-math-7b-base/run1.json",
+      "sha256": "a3de101919600e9b65d0688136d58c09a823f635b30b491f957f51d405739f91"
+    },
+    {
+      "path": "src/model_evals/test/deepseek-math-7b-base/run2.json",
+      "sha256": "b089500da05c8e32826a9bbe39404f5db36378487cfda5cdf3bec6e270aa69fa"
+    },
+    {
+      "path": "src/model_evals/test/deepseek-math-7b-base/run3.json",
+      "sha256": "25984aee644270cbce397711f3633013b2d195600bbc4c27235355dd977bbabc"
+    },
+    {
+      "path": "src/model_evals/test/deepseek-math-7b-base/run4.json",
+      "sha256": "fd058838e2291d1297868bae4ac79730d400d8d9f4718483578dedb00eb5eb41"
+    },
+    {
+      "path": "src/model_evals/test/deepseek-math-7b-instruct/run0.json",
+      "sha256": "e4a47e664e0e92f8a1199c0446efb32fb3ca2b1d2fbf5c35a8326345802f1b42"
+    },
+    {
+      "path": "src/model_evals/test/deepseek-math-7b-instruct/run1.json",
+      "sha256": "a4fc727b94c512273b0454edc38a31e025f67ebe8731bdd35498c6c9270215e1"
+    },
+    {
+      "path": "src/model_evals/test/deepseek-math-7b-instruct/run2.json",
+      "sha256": "c05385242e7765fc2b9fe82709c09c4ea43224393b741e1e3873e7d26b0c4f94"
+    },
+    {
+      "path": "src/model_evals/test/deepseek-math-7b-instruct/run3.json",
+      "sha256": "20051a2b5a76c8912d74db2db120eea8d7d2295f10bb0cdbd7b64572ffeb856a"
+    },
+    {
+      "path": "src/model_evals/test/deepseek-math-7b-instruct/run4.json",
+      "sha256": "38a8d9b1b00b323231d71a1e4ebf1497d6291f5503cd3a73f3f0f5d5b7421a9a"
+    },
+    {
+      "path": "src/model_evals/test/deepseek-math-7b-rl/run0.json",
+      "sha256": "5d9b272366651ea5deb34969b64acf481e08952e81b9e0d0833506dd0c53b44e"
+    },
+    {
+      "path": "src/model_evals/test/deepseek-math-7b-rl/run1.json",
+      "sha256": "f0c0b98d5390714189fcbb20e05a81fc1d585aa7fdb0780ee6d57e6c71a113a0"
+    },
+    {
+      "path": "src/model_evals/test/deepseek-math-7b-rl/run2.json",
+      "sha256": "fcaf911e71fbbb4667a71b3ff4145d9a7397011c130468474a7b507777cb8481"
+    },
+    {
+      "path": "src/model_evals/test/deepseek-math-7b-rl/run3.json",
+      "sha256": "e9749ad97317d94352a60559c045124b308387b44d34d6a58132b982d5279fe0"
+    },
+    {
+      "path": "src/model_evals/test/deepseek-math-7b-rl/run4.json",
+      "sha256": "6bb461ca7e6948c99dbb5ba35e54c1acfee61b5c7615393dee5d377448563cab"
+    },
+    {
+      "path": "src/model_evals/test/gemma-2b-it/run0.json",
+      "sha256": "5db2441bafbe26f3714006388c521377a9ad9bfaaee836d7541c2918a223d0c0"
+    },
+    {
+      "path": "src/model_evals/test/gemma-2b-it/run1.json",
+      "sha256": "f711dad5fdc66bdebcc77fb548a66029fb3b51294c4d2ec359b984b48a9ee2ee"
+    },
+    {
+      "path": "src/model_evals/test/gemma-2b-it/run2.json",
+      "sha256": "f50ab3947c42ef078718baeb1cc3671240c30b6ca0a25c61e302ad2045b02f0f"
+    },
+    {
+      "path": "src/model_evals/test/gemma-2b-it/run3.json",
+      "sha256": "21ae185e59e0c14d8d995172ce845760fd38e4f52ad4d9270e8837807731e48d"
+    },
+    {
+      "path": "src/model_evals/test/gemma-2b-it/run4.json",
+      "sha256": "cad62db189ef084e595026001a5cc5df3d8c7edcf2d7df068e6116e14401c655"
+    },
+    {
+      "path": "src/model_evals/test/gemma-2b/run0.json",
+      "sha256": "498fe5d8757e0d3d2473f1c1b450d79dd64d3cc1f95e93b880d48907e0eac420"
+    },
+    {
+      "path": "src/model_evals/test/gemma-2b/run1.json",
+      "sha256": "6282f2faed482c20d816a02af9438aedb19883009367f5cac587415940a1b3a0"
+    },
+    {
+      "path": "src/model_evals/test/gemma-2b/run2.json",
+      "sha256": "66a1fc45bb75aea533a8a3945a0579c4e631bb68614eaba56c1a6b66a74536ff"
+    },
+    {
+      "path": "src/model_evals/test/gemma-2b/run3.json",
+      "sha256": "4cb765ce904368056a900dc160c61006aebfe418a7450b7fde1c960e70170199"
+    },
+    {
+      "path": "src/model_evals/test/gemma-2b/run4.json",
+      "sha256": "bd552ce00abf0025e6bbdb0418f703d411cf370d2bbfdf305bfc3f34ba66fb90"
+    },
+    {
+      "path": "src/model_evals/test/gemma-7b-it/run0.json",
+      "sha256": "73091ccee40991041062961242a259f6ddb9567ef2e75143989aabd894ce9900"
+    },
+    {
+      "path": "src/model_evals/test/gemma-7b-it/run1.json",
+      "sha256": "827c5de13ddc294fbbe0fb8457ec4270ec309e58b152bb238930fd3dc525fdd2"
+    },
+    {
+      "path": "src/model_evals/test/gemma-7b-it/run2.json",
+      "sha256": "6dec486e779fc95c380e95b4d8b122c432c0ca667fbdd65d17ca2418e6327e7f"
+    },
+    {
+      "path": "src/model_evals/test/gemma-7b-it/run3.json",
+      "sha256": "62043100fb5d3bdbc828fc0b2ae67314744593e55a123d0d9490cc3a7f361e60"
+    },
+    {
+      "path": "src/model_evals/test/gemma-7b-it/run4.json",
+      "sha256": "f6c579651e22b9e4100414f13b139755ee65db2916b4196f0a5b2e6537789495"
+    },
+    {
+      "path": "src/model_evals/test/gemma-7b/run0.json",
+      "sha256": "95c24b15326b357ac3283757f81207f172cec67c4d320ae14d68462562eb7119"
+    },
+    {
+      "path": "src/model_evals/test/gemma-7b/run1.json",
+      "sha256": "b8dc2a5243a2a70588c3169d8e53be696210e806e578be7d54762d41b9a641f0"
+    },
+    {
+      "path": "src/model_evals/test/gemma-7b/run2.json",
+      "sha256": "8633fa3d4c20d260c3a0e2dcb574e704b4fc2ab21132a2d54eea5b677587678d"
+    },
+    {
+      "path": "src/model_evals/test/gemma-7b/run3.json",
+      "sha256": "841c1434ec5e316cb548fb34622b5bb8a21a7c5b70634d21d7dd3ebb50d087be"
+    },
+    {
+      "path": "src/model_evals/test/gemma-7b/run4.json",
+      "sha256": "946812645e81952dcf1c5a20bc036005812f293254102a1bdb5a480c7effb0a6"
+    },
+    {
+      "path": "src/model_output/baseline/finetuning_output_original.json",
+      "sha256": "7a597156c6be2216d274f789d4463c0cb819159557b76187d2b214dbcd01b119"
+    },
+    {
+      "path": "src/model_output/baseline/finetuning_output_variation.json",
+      "sha256": "86cc2898b08b84fdd07e5c16a6543c2ceabb456d6a2c6e6b79ddda51a8824b1f"
+    },
+    {
+      "path": "src/model_responses/deepseek_qwen32B.json",
+      "sha256": "20970d1ccfe10bd8f309a65f013ac269ac1b9138f732330c21bcc99cc403d3c3"
+    },
+    {
+      "path": "src/model_responses/deepseek_reasoner.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "src/prompts.py",
+      "sha256": "f2339227b8d5d30492a3e7c575cddd028defaa95a7c6f3157ec657e4f0b996fa"
+    },
+    {
+      "path": "src/tfa.py",
+      "sha256": "a8fa1c43b1e375e6bd2123a8f1d1a5da355980afdfb79eee3ea01ac305e7afb0"
+    },
+    {
+      "path": "src/util.py",
+      "sha256": "5c27ad2a881ee9f8ccd05b54918f81dee4c02b769e57a2d5391b80efebaf2464"
+    },
+    {
+      "path": "src/variations/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "src/variations/combine_jsons.py",
+      "sha256": "4fc6b72bafe7a6fcf174770c16350967c08a78384225e76b6bdc9314f6ec9018"
+    },
+    {
+      "path": "src/variations/correctProblems.txt",
+      "sha256": "8f8a1c428737a423f1ca41305e8f6615a71dc84b80a79c3d75dcb3dec175f745"
+    },
+    {
+      "path": "src/variations/examples.ipynb",
+      "sha256": "9e7831fabfb2fda060d4dec90adccb94528b033cc6a185acb07bf3bf66d49537"
+    },
+    {
+      "path": "src/variations/generate_variations.py",
+      "sha256": "b2a1c65fbddb92cfcc64d4c57d578b3c893cbd0577ba742aef54fecf447ef288"
+    },
+    {
+      "path": "src/variations/generators.py",
+      "sha256": "be1ddd4484bb7938cd257c6f76c39b089b1a279bcd0c8e01711b7487b241e043"
+    },
+    {
+      "path": "src/variations/getAccWithoutBinary.py",
+      "sha256": "023824fd467758ae1b13ade24cc717d8189a9ef71522a95561ab354d394a9587"
+    },
+    {
+      "path": "src/variations/originalProblems.ipynb",
+      "sha256": "8957739bf4352c2948f77eb62243639bf268a98918d421aa2efb3523e4001b3b"
+    },
+    {
+      "path": "src/variations/putnam1938.py",
+      "sha256": "1f288b71451f98bb94feaf6cd4fc24a164e5a2ccdb49316593121bbaf6a70a55"
+    },
+    {
+      "path": "src/variations/putnam1939.py",
+      "sha256": "4b4a29393ff10161e0bc2aae847ffd35a8be0a841294a93eaafcaf592942e143"
+    },
+    {
+      "path": "src/variations/putnam1940.py",
+      "sha256": "4bbba735b95ed790caae6e2505bde273b839463069336478bf282aacb8a36c5e"
+    },
+    {
+      "path": "src/variations/putnam1942.py",
+      "sha256": "e1437749c867fddd5c11c2b36d5ecf67a7a516225c0b30123890d9a1e75180a4"
+    },
+    {
+      "path": "src/variations/putnam1946.py",
+      "sha256": "aec35ccbfa81d022160626082a0aa18bf7f5447eea6ea98d404a3dcc7cefee06"
+    },
+    {
+      "path": "src/variations/putnam1947.py",
+      "sha256": "abb936b11884eef30ef762cf26cd60545177d273a12bbbe75178f16617b3b28c"
+    },
+    {
+      "path": "src/variations/putnam1948.py",
+      "sha256": "65443df5974e87886bc257d8a5b1f3f0bab23550bf09c3d54e14e75cde6ff571"
+    },
+    {
+      "path": "src/variations/putnam1950.py",
+      "sha256": "aef508a9770c25c2e0a57eb5b32b6cec4998132bb9e33dbd1676bd1c086335a3"
+    },
+    {
+      "path": "src/variations/putnam1951.py",
+      "sha256": "68ec29506bff22f6dd331c765613c685b4f3865e66d38e7dbdae261e2543ea71"
+    },
+    {
+      "path": "src/variations/putnam1952.py",
+      "sha256": "bb8094b43b7b8ea33ee3b5a82cc73b551fbee3894f1cb817f90ee2dd954cdcdd"
+    },
+    {
+      "path": "src/variations/putnam1955.py",
+      "sha256": "a548a787ee2a5c84da09dcbc3caa4f59e8b0a4257ed10c44c40eb1de3ecf2cc0"
+    },
+    {
+      "path": "src/variations/putnam1957.py",
+      "sha256": "11ae7609fdb2c3b97e7cad8ac7b712cc76aab6b389d1e998c2e3c73760cccc21"
+    },
+    {
+      "path": "src/variations/putnam1958.py",
+      "sha256": "bb49a17963ca218f2241bc7735dbf4cc6d217bdeebfb212ee7e3978a5bcf2dac"
+    },
+    {
+      "path": "src/variations/putnam1965.py",
+      "sha256": "813154f39d0f4e120faa0882477df02c91ad55f0343e0ef3143537023eb07cf5"
+    },
+    {
+      "path": "src/variations/putnam1966.py",
+      "sha256": "9ddc0ddd50cbf6208e0860012e235b61e73af9a80a3831e5eaf8fe6c04a8d0a3"
+    },
+    {
+      "path": "src/variations/putnam1967.py",
+      "sha256": "5ef43cf334587eb68a275ff97d46bd8afec12b37f3f4eceddd2aff336b5ac406"
+    },
+    {
+      "path": "src/variations/putnam1968.py",
+      "sha256": "31bdbde9c8db4b999909bf8fe8ce61e607a64cf57ed24d50544954912fd0eac2"
+    },
+    {
+      "path": "src/variations/putnam1969.py",
+      "sha256": "eed447d685a7b04bc9c75b4522ffa1aee6a39713570988463cf0bc2fe314e60e"
+    },
+    {
+      "path": "src/variations/putnam1970.py",
+      "sha256": "4a6d41d7f3e3dba10d80bb540d1c220dfa1738b2e19f8b0c8873a9f5f421750e"
+    },
+    {
+      "path": "src/variations/putnam1971.py",
+      "sha256": "253566505d78aa7441b3eaa78a9e4ea416c3b55d1e251243af249c712b070f49"
+    },
+    {
+      "path": "src/variations/putnam1972.py",
+      "sha256": "6bc2b23e789aa19c6dbacdbada14e29de53d0dcc1107b76d50fa3417c3305a76"
+    },
+    {
+      "path": "src/variations/putnam1973.py",
+      "sha256": "cf73832dfc60d7444e122015024297d189d8e29c96a080f501fa0a09b2c91f93"
+    },
+    {
+      "path": "src/variations/putnam1975.py",
+      "sha256": "0fa133d8f8fd6e988c29c38946c9a01ab9af064c856ea1b638dacff880c8972b"
+    },
+    {
+      "path": "src/variations/putnam1976.py",
+      "sha256": "e9daf7af919b529a33760641524fa67a59a58aa8fc8ef36948527789a40873b9"
+    },
+    {
+      "path": "src/variations/putnam1985.py",
+      "sha256": "0d4d846199a6b596e289cc7da675fa212923f1d39a3b4c5ab4ad876f45ed97d7"
+    },
+    {
+      "path": "src/variations/putnam1986.py",
+      "sha256": "f8f44ce223dfcba3efaa9363c543ab61d6cb389590662262075d2ebb2f379f93"
+    },
+    {
+      "path": "src/variations/putnam1988.py",
+      "sha256": "c582a81f233e7dd9705c412549aa29458950fafe55501305ab3baeeff2c3b967"
+    },
+    {
+      "path": "src/variations/putnam1989.py",
+      "sha256": "05548c850d7e3a7880a09433fceede6261ac617316901ebaefc6beceb4da07a0"
+    },
+    {
+      "path": "src/variations/putnam1990.py",
+      "sha256": "269c31a23c888f3dbc93f4e74689ae1b93642871277ce7253dfa5eb84a2ed719"
+    },
+    {
+      "path": "src/variations/putnam1992.py",
+      "sha256": "ef722bfd1269ea5ca429dfdee2289c9d3c06291942b6cd3191f2f8d0d8c7d9ca"
+    },
+    {
+      "path": "src/variations/putnam1993.py",
+      "sha256": "80d42aa0f49a2bfee38698d0359e4b3e792ace3c79f2f2aef6b95297480ac15d"
+    },
+    {
+      "path": "src/variations/putnam1994.py",
+      "sha256": "9f9ebe015a9b8b4ba90c3b340f737d6d9590418528837f79f8f76bc061704ced"
+    },
+    {
+      "path": "src/variations/putnam1998.py",
+      "sha256": "a440b955d1b136774b2d64875cf9be91a0b2f3c6b1021ae6db3f47a2983a098c"
+    },
+    {
+      "path": "src/variations/putnam2001.py",
+      "sha256": "d0f64bed4b865dd1b89712c9593426630a4f93925383359930831b8c604bb6da"
+    },
+    {
+      "path": "src/variations/putnam2002.py",
+      "sha256": "087daf04bc461bd88762f91028a558870b3e69daeedf491b284aea42c0a1d819"
+    },
+    {
+      "path": "src/variations/putnam2004.py",
+      "sha256": "2ded1a55c53df2ee0b317ab50ecba9cbfdaa36c1607cacdfe6d2983deff0f483"
+    },
+    {
+      "path": "src/variations/putnam2006.py",
+      "sha256": "95d15fb3dbc18fad0c06decc8a3985caae2a6894ef6077c308026886ac0f43ad"
+    },
+    {
+      "path": "src/variations/putnam2011.py",
+      "sha256": "a840019871403e5bff35085140712bcaeeae22104a933d6f9319e4973db17567"
+    },
+    {
+      "path": "src/variations/putnam2012.py",
+      "sha256": "20fd6b618b294f4bf949e5aa4072753584b87e0b12a2963d1ba2da70cdfebcaf"
+    },
+    {
+      "path": "src/variations/putnam2013.py",
+      "sha256": "a9d99475b754217a1e4fd871abcb22b31dc7ecaf881db99ba661def364cd7b8d"
+    },
+    {
+      "path": "src/variations/putnam2014.py",
+      "sha256": "6b3a47b2749286ccd6d941ed725a3894f6f236b14d468504949e52d5c999d96a"
+    },
+    {
+      "path": "src/variations/putnam2015.py",
+      "sha256": "dcf7c0e002b25fbf35a76fded366369332522ce75a2bf85bc3722e5812f63114"
+    },
+    {
+      "path": "src/variations/putnam2016.py",
+      "sha256": "c40de5660905a2d4f9c7f2972e971cf8e88590a124db1833f4f4c261414ebaad"
+    },
+    {
+      "path": "src/variations/putnam2017.py",
+      "sha256": "7a5c47fd51962a64877aa8542bad2912cb2411a83b0bf9052ccdbe6194c27589"
+    },
+    {
+      "path": "src/variations/putnam2018.py",
+      "sha256": "062254d2c7db42f62d921842a0f7d7bc7704b190cb6dc443681a1b84c6f49f90"
+    },
+    {
+      "path": "src/variations/putnam2019.py",
+      "sha256": "92c624f9e8d192e97cc697f87cb1dc94ae8f1f481a73c77e8a24c4b7d028ca79"
+    },
+    {
+      "path": "src/variations/putnam2020.py",
+      "sha256": "04ef1eb3168e39344f05a1f0bd4b49faee2b3d9fc0f93834d27ba8c49019b120"
+    },
+    {
+      "path": "src/variations/putnam2021.py",
+      "sha256": "7ae02a584ca525ed23168e28f836c3b8d9d92b79fb1ed4436c863e1f3c43ead3"
+    },
+    {
+      "path": "src/variations/putnam2022.py",
+      "sha256": "827a0f4c82b8f99744ed6a0646efcf539446cf25d5de4273ed0021e8e533be4e"
+    },
+    {
+      "path": "src/variations/putnam2023.py",
+      "sha256": "d4b17621ea0b230c68ac749449fc5be10240708191a2d80102cac69b96ad8235"
+    },
+    {
+      "path": "src/variations/readme.md",
+      "sha256": "74eef794ad423a22de958115ced2f37c0ffac099e4b69112a6058e7295b22155"
+    },
+    {
+      "path": "src/variations/stuff.ipynb",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "src/variations/utils.py",
+      "sha256": "d675369ce40e7fb2963d5a335bf7a616afd4a18dc2520b0ac238fb5c2c290cab"
+    }
+  ]
+}

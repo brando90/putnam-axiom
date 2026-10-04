@@ -1,0 +1,243 @@
+import sys
+from typing import Optional
+from datasets import load_dataset
+import os
+from transformers import AutoTokenizer
+import torch
+
+def get_lm_examples_train_all_tokens(
+        examples,
+        tok: AutoTokenizer,
+        debug: bool = False,
+) -> dict[str, torch.Tensor]:
+    """
+    Train on all tokens, including padding (assumes padding == <eos>).
+    If padding tokens are being used as <eos>, ensures they are included in the loss.
+    """
+    # Copy input_ids to labels
+    examples["labels"] = examples["input_ids"].clone()
+
+    # Debugging information
+    if debug:
+        print(f'{examples["input_ids"].size()=}, seq_length={examples["input_ids"].size(-1)}')
+        print(f'{tok.pad_token_id=}, {tok.eos_token_id=}')
+
+    # Ensure the attention_mask covers the entire sequence
+    examples["attention_mask"] = (examples["input_ids"] != tok.pad_token_id).long()
+    
+    # Ensure no -100 in labels (we're training on all tokens, including padding)
+    assert -100 not in examples["labels"], "Labels should not contain -100 as we train on all tokens."
+
+    # Debug: Check sample values
+    if debug:
+        print(f"Sample input_ids: {examples['input_ids'][0]}")
+        print(f"Sample attention_mask: {examples['attention_mask'][0]}")
+        print(f"Sample labels: {examples['labels'][0]}")
+
+    return examples
+
+def get_lm_examples_1st_eos_mask_remaining_eos(
+        examples,
+        tok: AutoTokenizer, 
+        remove_to_long_seqs: bool = False,
+        debug: bool = False,
+        ) -> dict[str, torch.Tensor]:
+    """ 
+    Train only on first occurence of eos. The remaining eos are masked out. If 
+        - train up to 1st ocurrence of eos token, mask out the rest of the eos tokens.
+        - drop or not seqs that are too long, i.e., have no eos token.
+    
+    Assumes: pad == eos
+
+    if model already adds eos correctly when setting up the tokenizer, this code is not needed.
+    e.g., see gemma tokenizing and masking properly: https://gist.github.com/brando90/4cd94ad3730218dca75dba779f770c9d
+
+    ref: https://stackoverflow.com/questions/76633368/how-does-one-set-the-pad-token-correctly-not-to-eos-during-fine-tuning-to-avoi
+    """
+    # assert tok.pad_token == tok.eos_token, 'Error: if eos_token and pad_token are not the same, this function doesnt work. This function tries to mask the '
+    # - Get lm example
+    seq_length: int = examples['input_ids'].size(0)
+    print(f'{examples["input_ids"].size()=}, {seq_length=}') if debug else None
+    examples["labels"] = examples["input_ids"].clone()  # labels is hardcoded in HF so put it!
+    eos_token_id = tok.eos_token_id
+    print(f'{tok.pad_token_id=}, {tok.eos_token_id=}') if debug else None
+    seqs_to_drop: list[int] = [] # store idx to drop (to long), we don't want to modify the two lists at the same time as we are looping through them
+    for idx, input_ids in enumerate(examples["input_ids"]):
+        assert len(input_ids.size()) == 1, 'Should be 1 example at a time in the batch or set of examples (e.g., 1 of 1000 if batched=True).'
+        # Find all occurrences of eos_token
+        _eos_positions = (input_ids == eos_token_id).nonzero() # get idxs for eos as a [z, 1] tensor or [z, n] for n dim tensors since all idxs for eos are needed to locate it. 
+        eos_positions = _eos_positions[:, 0] # get the [z] values for eos
+        if eos_positions.nelement() > 0:  # Check if eos_token is present --> if yes then make sure to train on only 1st, att mask eos after and not train on those eos's either
+            first_eos_position = eos_positions[0]
+            examples["attention_mask"][idx, first_eos_position] = 1  # Set the mask value to 1
+            examples["attention_mask"][idx, first_eos_position + 1:] = 0 
+            assert examples["labels"][idx, first_eos_position] == eos_token_id, f"The label for the first eos_token is not eos, it's {eos_token_id=}"
+            # after first eos token mask everything (eos AND pad, hopefully that's all there but we can sanity check later)
+            examples["labels"][idx, first_eos_position + 1:] = -100
+        elif remove_to_long_seqs:
+            assert eos_positions.nelement() == 0, 'Error: there should be no eos if this if stmt is exexuted.'
+            # record to drop this seq, has no eos so too long + flag says to drop it
+            seqs_to_drop.append(idx)
+        else:
+            # no eos should be present at all
+            assert sum(examples["labels"][idx] == -100) == 0, f"If it's too long then no pad as eos token present but got some pad token to ignore incorrectly:\n{examples['labels']=}"
+            assert sum(examples["attention_mask"][idx] == 0) == 0, f"If it's too long then no pad as eos token present but got some pad token to ignore incorrectly:\n{examples['input_ids']=}"
+            pass # nop: no eos in seq so too long, but keep it for training anyway
+    # -- Drop seqs with no eos
+    if seqs_to_drop:
+        examples["input_ids"] = torch.stack([input_ids for idx, input_ids in enumerate(examples["input_ids"]) if idx not in seqs_to_drop])
+        examples["attention_mask"] = torch.stack([mask for idx, mask in enumerate(examples["attention_mask"]) if idx not in seqs_to_drop])
+        examples["labels"] = torch.stack([labels for idx, labels in enumerate(examples["labels"]) if idx not in seqs_to_drop])
+    return examples
+
+def load_math_style_dataset(
+        ds_path: str, 
+        tok, 
+        max_length: int, 
+        config,
+        model: Optional = None,
+        num_proc: Optional[int] = None, # for .map
+        # num_proc: Optional[int] = os.cpu_count(), # for .map
+        # num_proc: Optional[int] = 10, # for .map
+        shuffle: bool = False, # but slows things down
+        truncation: bool = True, 
+        seed: int = 0,
+        end: Optional[int] = None, 
+        split: Optional[str] = None,
+        batched: bool = True
+        ):
+    print(f'{num_proc=}')
+    end: int = end if end is not None else sys.maxsize
+    ds = load_dataset(ds_path, split=split)
+    ds = ds.shuffle(seed=seed) if shuffle else ds
+    try:
+        ds = ds.select(range(end)) if end is not None else ds
+    except Exception as e:
+        ds = ds.take(end) if end is not None else ds
+    # - Step1: to train str
+    # raw_str_2_train_str = lambda examples : {'text': [f'Problem:\n{prob}\n\nSolution:\n{sol}' for prob, sol in zip(examples['problem'], examples['solution'])]}
+    raw_str_2_train_str = lambda examples : {'text': [f'Problem:\n{prob}\n\nSolution: {sol}' for prob, sol in zip(examples['problem'], examples['solution'])]}
+    train_str_ds = ds.map(raw_str_2_train_str, batched=batched, num_proc=num_proc)
+    # - Step2: to train tokenized ds
+    tok_ds = train_str_ds.with_format('torch')  
+    tokenize_function = lambda examples: tok(examples['text'], padding='max_length', max_length=max_length, truncation=truncation, return_tensors='pt')
+    tok_ds = tok_ds.map(tokenize_function, batched=batched, remove_columns=tok_ds.column_names, num_proc=num_proc)
+    # - Step3: to lm dataset
+    lm_ds = tok_ds
+    get_lm_examples_function = lambda examples : get_lm_examples_1st_eos_mask_remaining_eos(examples, tok)
+    # get_lm_examples_function = lambda examples : get_lm_examples_train_all_tokens(examples, tok)
+    lm_ds = tok_ds.map(get_lm_examples_function, batched=batched, num_proc=num_proc)
+    # - Sanity check data
+    print_1st_example_from_ds(lm_ds, tok, config)
+    return lm_ds
+
+def load_dataset_text_field_only(
+        ds_path: str, 
+        tok, 
+        max_length: int, 
+        config,
+        model: Optional = None,
+        num_proc: Optional[int] = None, # for .map
+        # num_proc: Optional[int] = os.cpu_count(), # for .map
+        # num_proc: Optional[int] = 10, # for .map
+        shuffle: bool = False, # but slows things down
+        truncation: bool = True, 
+        seed: int = 0,
+        end: Optional[int] = None, 
+        split: Optional[str] = None,
+        batched: bool = True
+        ):
+    print(f'{num_proc=}')
+    end: int = end if end is not None else sys.maxsize
+    ds = load_dataset(ds_path, split=split)
+    ds = ds.shuffle(seed=seed) if shuffle else ds
+    try:
+        ds = ds.select(range(end)) if end is not None else ds
+    except Exception as e:
+        ds = ds.take(end) if end is not None else ds
+    # - Step1: to train str
+    raw_str_2_train_str = lambda examples : {'text': [f'Text: {text}' for text in examples['text']]}
+    train_str_ds = ds.map(raw_str_2_train_str, batched=batched, num_proc=num_proc)
+    # - Step2: to train tokenized ds
+    tok_ds = train_str_ds.with_format('torch')  
+    tokenize_function = lambda examples: tok(examples['text'], padding='max_length', max_length=max_length, truncation=truncation, return_tensors='pt')
+    tok_ds = tok_ds.map(tokenize_function, batched=batched, remove_columns=tok_ds.column_names, num_proc=num_proc)
+    # - Step3: to lm dataset
+    # lm_ds = tok_ds
+    get_lm_examples_function = lambda examples : get_lm_examples_1st_eos_mask_remaining_eos(examples, tok)
+    # get_lm_examples_function = lambda examples : get_lm_examples_train_all_tokens(examples, tok)
+    lm_ds = tok_ds.map(get_lm_examples_function, batched=batched, num_proc=num_proc)
+    # - Sanity check data
+    print_1st_example_from_ds(lm_ds, tok, config)
+    return lm_ds
+
+# -- Sanity checks
+
+def print_1st_example_from_ds(lm_ds, tok: AutoTokenizer, config = {}, data_idx: int = 0):
+    """
+    lm_ds := final ds to train on e.g., tokenized data or tokenized data + further preprocessing
+    """
+    print(f'{"--"*15}\nStart Analysis of 1st Example from Data Set')
+    import time
+    input_ids = lm_ds[data_idx]['input_ids']
+    attention_mask = lm_ds[data_idx]['attention_mask']
+    labels = lm_ds[data_idx]['labels']
+    print(f"Shape/size of 1st data pint: {lm_ds[data_idx]['input_ids'].size()=}")
+    print(f'Row {data_idx} we will inspect')
+
+    # - Display the tokenizer outputs
+    print()
+    print(f'Nice Tokenizer Settings to see: ')
+    print(f'Tokenizer name: {type(tok)=}')
+    print(f"Pad Token ID: {tok.pad_token_id}") if tok.pad_token_id is not None else print("Pad Token ID is None")
+    print(f"EOS Token ID: {tok.eos_token_id}")
+    print(f"Max Seq Length in run Config: {config.get('max_seq_length', 'Max Seq Length Not Set in Config.')} vs Actual size of seq: {input_ids.size()=}")
+    print()
+
+    print(rf"Input Text: {repr(tok.decode(input_ids[:10]))}")
+    print(f"Input Tokenized IDs: {input_ids[:10]}")
+    print(f"Input Attention Mask: {attention_mask[:10]}")
+    print(f"Input Labels as a Text: {repr(tok.decode(labels[:10]))}")
+    print(f"Input Labels: {labels[:10]}")
+    time.sleep(2)
+
+    # - Does idx of 1st eos match the idx of a trained token (1st 1 mask token)?
+    first_eos_idx: int = (tok.eos_token_id == input_ids).nonzero()[0, 0] # z, n, where z is num nonezeros & n is of dimensions/indicies to get the n-idx for the non zeros. 
+    assert first_eos_idx >= 0, f'If first eos idx is zero, then seq is only eos, which must be a bug, data is: {input_ids[:10]=}.'
+    mask_val_at_1st_eos: int = attention_mask[first_eos_idx]
+    print()
+    print(f'Idx of 1st eos: {first_eos_idx}. Mask value should be 1 for 1st eos, it is: {mask_val_at_1st_eos}')
+
+    print(f'\nToken Text at eos (should be eos): {tok.decode(input_ids[first_eos_idx])}')
+    print(f'Token ID at eos (should be eos): {input_ids[first_eos_idx]}')
+
+    print(f'\nToken Text right before eos (ideally not a special token): {tok.decode(input_ids[first_eos_idx-1])}')
+    print(f'Token ID right before eos (ideally not a special token): {input_ids[first_eos_idx-1]}')
+
+    print(f'\nToken Text right after eos (usually pad or eos): {tok.decode(input_ids[first_eos_idx+1])}') if first_eos_idx+1 < input_ids.size(0) else print(f'Token right after eos is nothing, since eos idx is the end: {first_eos_idx=} {input_ids.size()=}')
+    print(f'Token ID right after eos (usually pad or eos): {input_ids[first_eos_idx+1]}') if first_eos_idx+1 < input_ids.size(0) else print(f'Token right after eos is nothing, since eos idx is the end: {first_eos_idx=} {input_ids.size()=}')
+    time.sleep(3)
+
+    # mask
+    print(f'\nMask Value at eos should be 1: {attention_mask[first_eos_idx]=}')
+    print(f'Mask Value right before eos, should be 1: {attention_mask[first_eos_idx-1]=}')
+    print(f'Mask Value right after eos, should 0: {attention_mask[first_eos_idx+1]=}') if first_eos_idx+1 < input_ids.size(0) else print(f'Token right after eos is nothing, since eos idx is the end: {first_eos_idx=} {input_ids.size()=}')
+    time.sleep(1)
+
+    # label
+    print(f'\nLabel Text at eos should be eos: {labels[first_eos_idx]=}')
+    print(f'Label Text right before at eos, should not be eos: {labels[first_eos_idx-1]=}')
+    print(f'Label Text right after eos, should -100 (dont predict): {labels[first_eos_idx+1]=}') if first_eos_idx+1 < input_ids.size(0) else print(f'Token right after eos is nothing, since eos idx is the end: {first_eos_idx=} {input_ids.size()=}')
+    time.sleep(1)
+
+    print()
+    print(f'Max seq Length of one sequence: {len(input_ids)}, {len(input_ids)=}, {input_ids.size()=}')
+    time.sleep(1)
+    print(f'{"--"*15}\nEnd Analysis of 1st Example from Data Set')
+    print()
+
+def print_first_example_after_decode(lm_ds, tok: AutoTokenizer):
+    input_ids = lm_ds[0]['input_ids']
+
+    print()
+    print(f'Input Text from data set after tok decodes IDs back to Text:\n{tok.decode(input_ids)=}')

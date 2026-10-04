@@ -1,0 +1,46 @@
+\documentclass[10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=blue, filecolor=magenta, urlcolor=cyan,}
+\urlstyle{same}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[version=4]{mhchem}
+\usepackage{stmaryrd}
+\usepackage{bbold}
+
+\title{The 84th William Lowell Putnam Mathematical Competition 2023 }
+
+\author{}
+\date{}
+
+
+\begin{document}
+\maketitle
+\href{http://maa.org/putnam}{maa.org/putnam}
+
+A1 For a positive integer $n$, let $f_{n}(x)=\cos (x) \cos (2 x) \cos (3 x) \cdots \cos (n x)$. Find the smallest $n$ such that $\left|f_{n}^{\prime \prime}(0)\right|>2023$.
+
+A2 Let $n$ be an even positive integer. Let $p$ be a monic, real polynomial of degree $2 n$; that is to say, $p(x)=$ $x^{2 n}+a_{2 n-1} x^{2 n-1}+\cdots+a_{1} x+a_{0}$ for some real coefficients $a_{0}, \ldots, a_{2 n-1}$. Suppose that $p(1 / k)=k^{2}$ for all integers $k$ such that $1 \leq|k| \leq n$. Find all other real numbers $x$ for which $p(1 / x)=x^{2}$.
+
+A3 Determine the smallest positive real number $r$ such that there exist differentiable functions $f: \mathbb{R} \rightarrow \mathbb{R}$ and $g: \mathbb{R} \rightarrow \mathbb{R}$ satisfying\\
+(a) $f(0)>0$,\\
+(b) $g(0)=0$,\\
+(c) $\left|f^{\prime}(x)\right| \leq|g(x)|$ for all $x$,\\
+(d) $\left|g^{\prime}(x)\right| \leq|f(x)|$ for all $x$, and\\
+(e) $f(r)=0$.
+
+A4 Let $v_{1}, \ldots, v_{12}$ be unit vectors in $\mathbb{R}^{3}$ from the origin to the vertices of a regular icosahedron. Show that for every vector $v \in \mathbb{R}^{3}$ and every $\varepsilon>0$, there exist integers $a_{1}, \ldots, a_{12}$ such that $\left\|a_{1} v_{1}+\cdots+a_{12} v_{12}-v\right\|<\varepsilon$.
+
+A5 For a nonnegative integer $k$, let $f(k)$ be the number of ones in the base 3 representation of $k$. Find all complex numbers $z$ such that
+
+$$
+\sum_{k=0}^{3^{1010}-1}(-2)^{f(k)}(z+k)^{2023}=0
+$$
+
+A6 Alice and Bob play a game in which they take turns choosing integers from 1 to $n$. Before any integers are chosen, Bob selects a goal of "odd" or "even". On the first turn, Alice chooses one of the $n$ integers. On the second turn, Bob chooses one of the remaining integers. They continue alternately choosing one of the integers that has not yet been chosen, until the $n$th turn, which is forced and ends the game. Bob wins if the parity of $\{k$ : the number $k$ was chosen on the $k$ th turn $\}$ matches his goal. For which values of $n$ does Bob have a winning strategy?
+
+
+\end{document}

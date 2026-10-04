@@ -1,0 +1,3 @@
+[submodule "lm-evaluation-harness"]
+	path = lm-evaluation-harness
+	url = git@github.com:emxia18/lm-evaluation-harness.git
