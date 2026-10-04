@@ -23,7 +23,7 @@ If you already have `~/putnam-axiom`, use that checkout instead of cloning again
 
 Read [`AGENTS.md`](AGENTS.md) or [`CLAUDE.md`](CLAUDE.md) before agent work. New experiments follow [`experiments/README.md`](experiments/README.md): one descriptive numbered folder owns its code, inputs, prompts and results.
 
-The historical harness fork is a preservation source, not another project home. Its Putnam contribution was merged upstream in [EleutherAI pull request #3998](https://github.com/EleutherAI/lm-evaluation-harness/pull/3998). The [integration guide](src/lm_evaluation_harness/README.md) explains how to load this repository's task definitions using an installed harness.
+The historical harness fork is archived and points here. Its Putnam contribution was merged upstream in [EleutherAI pull request #3998](https://github.com/EleutherAI/lm-evaluation-harness/pull/3998). The [integration guide](src/lm_evaluation_harness/README.md) explains how to load this repository's task definitions using an installed harness.
 
 The launch page remains an unmerged draft in [pull request #5](https://github.com/brando90/putnam-axiom/pull/5). Its source branch is preserved; the consolidation does not publish the website.
 

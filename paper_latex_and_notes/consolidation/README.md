@@ -36,11 +36,15 @@ Use the canonical checkout for new work. To inspect a retired checkout, extract 
 
 ## Online repositories and in-flight work
 
-The historical [harness fork](https://github.com/brando90/lm-evaluation-harness) is a secondary preservation source; the old preview repository address redirects to it. Its three original branches are recorded above and in local recovery history. The original EleutherAI [pull request #2946](https://github.com/EleutherAI/lm-evaluation-harness/pull/2946) closed unmerged; its successor [#3998](https://github.com/EleutherAI/lm-evaluation-harness/pull/3998) merged on 08-14-2026 as `73da0818e886431c915c9d3356d6eb083a57f3f3`. No open upstream submission depends on keeping this fork writable.
+The historical [harness fork](https://github.com/brando90/lm-evaluation-harness) was archived on 10-04-2026 after canonical commit [`4137e44`](https://github.com/brando90/putnam-axiom/commit/4137e449965d04755e44eb5c4cf80d21a3e897a1) was pushed. Its description, homepage and README now direct readers here. The [retirement notice](https://github.com/brando90/lm-evaluation-harness/commit/53c820e15e7d702dae5d7cff27d97371d7f25290) is its only added commit; all previous branches and history remain available. The old preview repository address redirects to this archived fork.
+
+The original EleutherAI [pull request #2946](https://github.com/EleutherAI/lm-evaluation-harness/pull/2946) closed unmerged; its successor [#3998](https://github.com/EleutherAI/lm-evaluation-harness/pull/3998) merged on 08-14-2026 as `73da0818e886431c915c9d3356d6eb083a57f3f3`. No open upstream submission depends on keeping this fork writable.
 
 The launch-page [draft pull request #5](https://github.com/brando90/putnam-axiom/pull/5) remains open on `codex/putnam-axiom-launch-page` at `36d6d728ddfe4c2785f39146a2955f82ac85442f`. Its four website files and source branch remain unchanged. They were not relocated into `main` or deployed. The prior agent-instruction branch and original experiment branch are also retained for provenance.
 
 Private predecessor material is retained privately. Separate related research and unrelated repositories are outside this consolidation; no repository visibility was changed.
+
+Final local checks confirmed the three retired checkout paths are absent and all three verified compressed archives remain. The working checkout is on `main`; the public project has zero tracked submodules and zero tracked local recovery files. Detailed before/after remote settings remain in the ignored local receipt.
 
 ## Verification scope
 
