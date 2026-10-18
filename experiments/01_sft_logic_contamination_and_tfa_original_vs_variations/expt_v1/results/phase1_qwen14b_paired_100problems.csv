@@ -1,0 +1,101 @@
+problem_id,year,topic,answer_type,orig_exact_match,var_exact_match,diff_orig_minus_var,orig_output_chars,var_output_chars,gold_solution_chars
+1938_1,1938,Geometry Calculus,algebraic,0,0,0,4326,4157,729
+1938_11,1938,Geometry Calculus,algebraic,0,0,0,731,1806,962
+1939_2,1939,Geometry Calculus,numerical,1,1,0,473,389,794
+1939_5,1939,Calculus Differential Equations,algebraic,0,0,0,754,1232,1739
+1939_6_i,1939,Geometry Calculus,algebraic,1,0,1,5402,5986,799
+1940_4,1940,Geometry Analysis,algebraic,1,0,1,497,7221,1371
+1940_5,1940,Geometry Analysis,numerical,0,0,0,6806,5776,2009
+1942_2,1942,Algebra,algebraic,0,0,0,1472,853,1044
+1946_1,1946,Algebra Analysis,numerical,0,0,0,5256,819,708
+1946_5,1946,Geometry Analysis,algebraic,0,0,0,1248,5241,1357
+1947_2,1947,Analysis Algebra,algebraic,1,0,1,1134,1267,1819
+1947_10,1947,Complex Numbers Algebra,numerical,0,1,-1,4564,7751,635
+1947_11,1947,Algebra Number Theory,algebraic,0,0,0,5779,4132,376
+1948_2,1948,Geometry Calculus,algebraic,0,0,0,5709,7393,1568
+1948_11,1948,Calculus Geometry,numerical,0,0,0,5852,794,1375
+1950_1,1950,Geometry Analysis,numerical,0,1,-1,809,1366,1113
+1950_9,1950,Probability Number Theory,algebraic,0,0,0,382,1390,650
+1951_14,1951,Geometry Analysis,algebraic,1,0,1,294,177,1302
+1952_1,1952,Algebra Number Theory,numerical,1,0,1,6468,889,482
+1955_1,1955,Number Theory,numerical,1,1,0,292,279,1131
+1955_6,1955,Number Theory,algebraic,1,1,0,2430,5542,1053
+1957_5,1957,Geometry Combinatorics,algebraic,1,0,1,394,7939,935
+1957_8,1957,Number Theory Linear Algebra,numerical,1,0,1,6313,5625,398
+1958_3,1958,Probability,numerical,1,0,1,7627,349,1933
+1965_A1,1965,Geometry,numerical,1,1,0,7113,697,665
+1965_A2,1965,Combinatorics Algebra,algebraic,1,0,1,613,4061,585
+1965_A5,1965,Combinatorics,numerical,1,0,1,8120,669,956
+1965_B1,1965,Calculus,numerical,1,1,0,662,609,419
+1966_A2,1966,Geometry,algebraic,1,0,1,5800,754,575
+1966_B1,1966,Geometry,numerical,1,0,1,7635,2010,680
+1967_A3,1967,Algebra Analysis,numerical,0,0,0,4067,2508,677
+1967_B5,1967,Combinatorics,numerical,0,0,0,6647,215,513
+1968_A4,1968,Geometry Algebra,algebraic,1,0,1,6216,598,1017
+1968_B1,1968,Probability,algebraic,0,0,0,365,4243,473
+1968_B5,1968,Algebra Linear Algebra,algebraic,0,0,0,1857,5504,580
+1969_A2,1969,Linear Algebra,algebraic,0,0,0,5529,5822,479
+1969_B3,1969,Algebra Calculus,numerical,0,0,0,5205,5460,949
+1969_B5,1969,Analysis,numerical,1,1,0,301,238,696
+1970_A4,1970,Analysis,numerical,1,1,0,6056,2563,405
+1970_A5,1970,Geometry,algebraic,0,0,0,145,400,1011
+1970_A6,1970,Probability Calculus,algebraic,0,0,0,3992,1458,844
+1971_A5,1971,Number Theory,numerical,1,0,1,4672,2033,1798
+1971_B4,1971,Geometry Algebra,algebraic,0,0,0,640,502,3104
+1972_B2,1972,Differential Equations Calculus,algebraic,0,0,0,7576,1421,859
+1972_B3,1972,Algebra,numerical,1,1,0,5755,1123,308
+1973_A1,1973,Geometry,numerical,1,1,0,552,1763,441
+1975_A4,1975,Algebra Complex Numbers,algebraic,0,0,0,890,5293,770
+1975_B5,1975,Calculus Analysis,algebraic,0,0,0,3984,5314,409
+1976_A4,1976,Algebra,algebraic,0,0,0,1110,338,752
+1985_B5,1985,Calculus Analysis,numerical,0,0,0,850,446,782
+1986_A1,1986,Calculus Algebra,numerical,1,0,1,5453,3347,409
+1988_B3,1988,Number Theory Analysis,numerical,0,0,0,819,6493,617
+1989_A1,1989,Number Theory,numerical,1,0,1,370,1980,543
+1990_B1,1990,Calculus Analysis,algebraic,1,1,0,1050,1352,465
+1992_A2,1992,Calculus Algebra,numerical,0,0,0,1116,5306,557
+1993_A1,1993,Calculus Algebra,numerical,0,0,0,6851,1556,328
+1993_B1,1993,Number Theory Analysis,numerical,0,0,0,997,435,465
+1993_B2,1993,Number Theory Probability Combinatorics,numerical,0,1,-1,734,7812,592
+1993_B3,1993,Probability Calculus Analysis,numerical,0,0,0,1641,602,921
+1994_A2,1994,Geometry Linear Algebra,numerical,0,0,0,1075,5827,781
+1998_A1,1998,Algebra Geometry,numerical,1,0,1,5706,982,488
+1998_B5,1998,Calculus Number Theory,numerical,0,1,-1,7554,646,514
+2001_A4,2001,Algebra Geometry,numerical,0,0,0,4390,282,1031
+2002_B1,2002,Probability,numerical,0,0,0,476,7174,476
+2006_B4,2006,Combinatorics Linear Algebra,algebraic,1,0,1,6143,403,923
+2011_A1,2011,Combinatorics Geometry,numerical,0,0,0,8807,7601,1972
+2013_B1,2013,Combinatorics Number Theory,numerical,0,1,-1,1057,1727,279
+2013_B6,2013,Combinatorics Number Theory,algebraic,1,0,1,439,2727,3866
+2014_A2,2014,Combinatorics,algebraic,0,0,0,804,5243,730
+2014_A4,2014,Probability,numerical,1,0,1,7154,507,646
+2014_B2,2014,Analysis Calculus,numerical,0,0,0,2373,3907,654
+2014_B5,2014,Linear Algebra Number Theory,numerical,1,1,0,1101,3249,2340
+2015_A2,2015,Number Theory,numerical,0,0,0,4389,3317,764
+2016_A1,2016,Calculus Number Theory,numerical,0,1,-1,2740,976,612
+2016_A2,2016,Analysis Calculus Combinatorics,numerical,0,0,0,4745,5380,1321
+2017_A1,2017,Number Theory,algebraic,0,0,0,5106,6518,1223
+2017_B2,2017,Algebra Number Theory,numerical,0,0,0,847,5549,879
+2018_A1,2018,Algebra Number Theory,numerical,0,0,0,1032,3848,694
+2018_A2,2018,Combinatorics Linear Algebra,numerical,0,0,0,726,1853,2320
+2018_A3,2018,Calculus Trigonometry,numerical,0,0,0,5204,5468,2190
+2018_B1,2018,Combinatorics Linear Algebra,numerical,0,0,0,4868,6439,2269
+2018_B6,2018,Analysis Combinatorics,numerical,0,0,0,5766,6497,1275
+2019_A2,2019,Geometry Trigonometry,numerical,0,0,0,4895,7273,734
+2019_B5,2019,Algebra Number Theory,numerical,0,0,0,2121,7149,1161
+2019_B6,2019,Combinatorics Number Theory,algebraic,0,0,0,573,357,814
+2020_A1,2020,Combinatorics Number Theory,numerical,0,0,0,855,5046,1195
+2020_A2,2020,Analysis Calculus,algebraic,0,0,0,1137,893,571
+2021_A1,2021,Combinatorics Number Theory,numerical,0,0,0,6028,5636,676
+2021_A2,2021,Analysis Calculus,numerical,1,0,1,1262,1870,616
+2021_A3,2021,Geometry Number Theory,numerical,0,0,0,6864,524,951
+2021_A5,2021,Algebra Number Theory,numerical,0,0,0,6738,2399,1212
+2021_B6,2021,Analysis Combinatorics Probability,numerical,0,0,0,6562,6021,2314
+2023_A1,2023,Calculus Trigonometry,numerical,0,0,0,606,826,676
+2023_A2,2023,Algebra Number Theory,algebraic,0,0,0,2353,4919,834
+2023_A3,2023,Analysis Calculus,numerical,1,0,1,626,6190,1643
+2023_A5,2023,Algebra Complex Numbers,numerical,0,0,0,6143,976,2393
+2023_A6,2023,Combinatorics,algebraic,0,0,0,755,8370,1646
+2023_B1,2023,Algebra Combinatorics,algebraic,1,0,1,5334,7722,975
+2023_B2,2023,Algebra Number Theory,numerical,0,0,0,369,5045,1291
+2023_B3,2023,Combinatorics Probability,algebraic,0,0,0,3870,7032,1227

@@ -1,0 +1,21 @@
+model,original_em_pct,variation_em_pct,contamination_gap_orig_minus_var_pp,relative_drop_pct
+OpenAI o1 Preview,50.61,43.2,7.41,14.64
+Chat GPT 4o,30.0,22.0,8.0,26.67
+Claude-3.5-Sonnet,28.0,27.0,1.0,3.57
+DeepSeek-R1-Distill-Llama-70B,26.0,20.0,6.0,23.08
+DeepSeek-R1-Distill-Qwen-32B,33.0,24.0,9.0,27.27
+DeepSeek-R1-Distill-Qwen-7B,23.0,12.0,11.0,47.83
+DeepSeek-R1-Distill-Llama-8B,19.0,7.0,12.0,63.16
+Llama-3.1-70B,11.0,6.0,5.0,45.45
+Mistral-Codestral-22B-v0.1,16.0,9.0,7.0,43.75
+Meta-Llama-3.1-8B,6.0,7.0,-1.0,-16.67
+Meta-Llama-3.1-8B-Instruct,10.0,7.0,3.0,30.0
+Mistral-7B-v0.1,7.1,6.9,0.2,2.82
+Mistral-7B-Instruct-v0.1,8.0,2.0,6.0,75.0
+Google-Gemma-7b,7.0,6.0,1.0,14.29
+Google-Gemma-2b,5.0,3.0,2.0,40.0
+Deepseek-math-7b-base,10.0,6.0,4.0,40.0
+Deepseek-math-7b-rl,12.0,10.0,2.0,16.67
+Deepseek-math-7b-instruct,12.0,11.0,1.0,8.33
+Qwen2-math-7b,9.1,8.9,0.2,2.2
+Qwen2-math-7b-instruct,18.0,14.0,4.0,22.22

@@ -6,10 +6,9 @@
 
 ## Current index
 
-There are no newly launched experiments from the consolidation. Historical runtime activity and scientific outcomes have not been established by this file inventory.
-
 | Canonical home | Scope and provenance | Verified status |
 |---|---|---|
+| [`01_sft_logic_contamination_and_tfa_original_vs_variations/`](01_sft_logic_contamination_and_tfa_original_vs_variations/) | Supervised fine-tuning (SFT) logic contamination (`Epoch 0, 1, 3, 5, 10` on `google/gemma-2b-it` and `Qwen/Qwen3-1.7B`) and reference-based Teacher-Forced Accuracy ($\text{TFA}_{\text{sol}}$, $\text{TFA}_{\text{box}}$, $\text{TFCE}_{\text{sol}}$) vs. free-generation Boxed-Answer Exact Match ($\text{EM}$) across 20 published baselines, 8 live open-weight models on SNAP (`skampere1`), and 3 evaluation splits (`orig_contaminated` [$N=100$], `func_variations` [$N=500$], `orig_unseen_control` [$N=100$]). | `COMPLETE` (10-18-2026): [`RESULTS_v1`](01_sft_logic_contamination_and_tfa_original_vs_variations/RESULTS_sft_logic_contamination_and_tfa_v1.md), [`results.md`](01_sft_logic_contamination_and_tfa_original_vs_variations/results.md), [`CKPT`](01_sft_logic_contamination_and_tfa_original_vs_variations/CKPT_sft_logic_contamination_and_tfa.md). |
 | [`archive/legacy_logic_contamination/`](archive/legacy_logic_contamination/) | Preserved experiment-specific material from the historical `logic_contamination_experiments` branch; original paths and source revisions are recorded in the [consolidation receipt](../paper_latex_and_notes/consolidation/README.md). | Historical snapshot preserved; execution and results unverified. Archival storage is not a scientific completion verdict. |
 
 The historical snapshot includes the following legacy names. They remain identifiable without allocating new experiment numbers or rewriting their records:

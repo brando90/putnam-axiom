@@ -1,0 +1,310 @@
+[
+  {
+    "model": "Qwen/Qwen3-1.7B",
+    "phase": "phase2_baseline",
+    "epoch": 0,
+    "splits": {
+      "orig_contaminated": {
+        "n": 100,
+        "em_mean": 0.05,
+        "em_sum": 5,
+        "tfa_sol_mean": 0.7116,
+        "tfa_box_mean": 0.702,
+        "tfce_sol_mean": 1.3801
+      },
+      "func_variations_v1": {
+        "n": 100,
+        "em_mean": 0.04,
+        "em_sum": 4,
+        "tfa_sol_mean": 0.7048,
+        "tfa_box_mean": 0.715,
+        "tfce_sol_mean": 1.414
+      },
+      "orig_unseen_control": {
+        "n": 100,
+        "em_mean": 0.08,
+        "em_sum": 8,
+        "tfa_sol_mean": 0.7079,
+        "tfa_box_mean": 0.7159,
+        "tfce_sol_mean": 1.4191
+      },
+      "func_variations_all5": {
+        "n": 500,
+        "tfa_sol_mean": 0.7042,
+        "tfa_box_mean": 0.7036,
+        "tfce_sol_mean": 1.4119
+      }
+    },
+    "elapsed_sec": 224.71
+  },
+  {
+    "model": "Qwen/Qwen3-4B",
+    "phase": "phase2_baseline",
+    "epoch": 0,
+    "splits": {
+      "orig_contaminated": {
+        "n": 100,
+        "em_mean": 0.08,
+        "em_sum": 8,
+        "tfa_sol_mean": 0.7324,
+        "tfa_box_mean": 0.7426,
+        "tfce_sol_mean": 1.2769
+      },
+      "func_variations_v1": {
+        "n": 100,
+        "em_mean": 0.13,
+        "em_sum": 13,
+        "tfa_sol_mean": 0.726,
+        "tfa_box_mean": 0.7337,
+        "tfce_sol_mean": 1.305
+      },
+      "orig_unseen_control": {
+        "n": 100,
+        "em_mean": 0.13,
+        "em_sum": 13,
+        "tfa_sol_mean": 0.7326,
+        "tfa_box_mean": 0.7351,
+        "tfce_sol_mean": 1.3106
+      },
+      "func_variations_all5": {
+        "n": 500,
+        "tfa_sol_mean": 0.726,
+        "tfa_box_mean": 0.7361,
+        "tfce_sol_mean": 1.3024
+      }
+    },
+    "elapsed_sec": 300.97
+  },
+  {
+    "model": "deepseek-ai/deepseek-math-7b-base",
+    "phase": "phase2_baseline",
+    "epoch": 0,
+    "splits": {
+      "orig_contaminated": {
+        "n": 100,
+        "em_mean": 0.03,
+        "em_sum": 3,
+        "tfa_sol_mean": 0.7431,
+        "tfa_box_mean": 0.8005,
+        "tfce_sol_mean": 0.9768
+      },
+      "func_variations_v1": {
+        "n": 100,
+        "em_mean": 0.1,
+        "em_sum": 10,
+        "tfa_sol_mean": 0.7339,
+        "tfa_box_mean": 0.7631,
+        "tfce_sol_mean": 1.0146
+      },
+      "orig_unseen_control": {
+        "n": 100,
+        "em_mean": 0.04,
+        "em_sum": 4,
+        "tfa_sol_mean": 0.7374,
+        "tfa_box_mean": 0.7576,
+        "tfce_sol_mean": 1.0225
+      },
+      "func_variations_all5": {
+        "n": 500,
+        "tfa_sol_mean": 0.7343,
+        "tfa_box_mean": 0.7662,
+        "tfce_sol_mean": 1.0123
+      }
+    },
+    "elapsed_sec": 217.71
+  },
+  {
+    "model": "Qwen/Qwen3-1.7B",
+    "phase": "phase3_sft_trajectory",
+    "epoch": 0,
+    "splits": {
+      "orig_contaminated": {
+        "n": 100,
+        "em_mean": 0.05,
+        "em_sum": 5,
+        "tfa_sol_mean": 0.7116,
+        "tfa_box_mean": 0.702,
+        "tfce_sol_mean": 1.3801
+      },
+      "func_variations_v1": {
+        "n": 100,
+        "em_mean": 0.04,
+        "em_sum": 4,
+        "tfa_sol_mean": 0.7048,
+        "tfa_box_mean": 0.715,
+        "tfce_sol_mean": 1.414
+      },
+      "orig_unseen_control": {
+        "n": 100,
+        "em_mean": 0.08,
+        "em_sum": 8,
+        "tfa_sol_mean": 0.7079,
+        "tfa_box_mean": 0.7159,
+        "tfce_sol_mean": 1.4191
+      },
+      "func_variations_all5": {
+        "n": 500,
+        "tfa_sol_mean": 0.7042,
+        "tfa_box_mean": 0.7036,
+        "tfce_sol_mean": 1.4119
+      }
+    },
+    "elapsed_sec": 224.71
+  },
+  {
+    "model": "Qwen/Qwen3-1.7B",
+    "phase": "phase3_sft_trajectory",
+    "epoch": 1,
+    "splits": {
+      "orig_contaminated": {
+        "n": 100,
+        "em_mean": 0.03,
+        "em_sum": 3,
+        "tfa_sol_mean": 0.7386,
+        "tfa_box_mean": 0.7606,
+        "tfce_sol_mean": 1.0106
+      },
+      "func_variations_v1": {
+        "n": 100,
+        "em_mean": 0.02,
+        "em_sum": 2,
+        "tfa_sol_mean": 0.7277,
+        "tfa_box_mean": 0.7344,
+        "tfce_sol_mean": 1.0497
+      },
+      "orig_unseen_control": {
+        "n": 100,
+        "em_mean": 0.03,
+        "em_sum": 3,
+        "tfa_sol_mean": 0.7271,
+        "tfa_box_mean": 0.7441,
+        "tfce_sol_mean": 1.0774
+      },
+      "func_variations_all5": {
+        "n": 500,
+        "tfa_sol_mean": 0.7284,
+        "tfa_box_mean": 0.7331,
+        "tfce_sol_mean": 1.0483
+      }
+    },
+    "elapsed_sec": 214.73,
+    "train_loss": 1.131715
+  },
+  {
+    "model": "Qwen/Qwen3-1.7B",
+    "phase": "phase3_sft_trajectory",
+    "epoch": 3,
+    "splits": {
+      "orig_contaminated": {
+        "n": 100,
+        "em_mean": 0.05,
+        "em_sum": 5,
+        "tfa_sol_mean": 0.7709,
+        "tfa_box_mean": 0.8652,
+        "tfce_sol_mean": 0.831
+      },
+      "func_variations_v1": {
+        "n": 100,
+        "em_mean": 0.02,
+        "em_sum": 2,
+        "tfa_sol_mean": 0.7571,
+        "tfa_box_mean": 0.8222,
+        "tfce_sol_mean": 0.8883
+      },
+      "orig_unseen_control": {
+        "n": 100,
+        "em_mean": 0.04,
+        "em_sum": 4,
+        "tfa_sol_mean": 0.7393,
+        "tfa_box_mean": 0.813,
+        "tfce_sol_mean": 0.9911
+      },
+      "func_variations_all5": {
+        "n": 500,
+        "tfa_sol_mean": 0.757,
+        "tfa_box_mean": 0.8207,
+        "tfce_sol_mean": 0.888
+      }
+    },
+    "elapsed_sec": 215.84,
+    "train_loss": 0.875734
+  },
+  {
+    "model": "Qwen/Qwen3-1.7B",
+    "phase": "phase3_sft_trajectory",
+    "epoch": 5,
+    "splits": {
+      "orig_contaminated": {
+        "n": 100,
+        "em_mean": 0.03,
+        "em_sum": 3,
+        "tfa_sol_mean": 0.7942,
+        "tfa_box_mean": 0.8848,
+        "tfce_sol_mean": 0.7323
+      },
+      "func_variations_v1": {
+        "n": 100,
+        "em_mean": 0.08,
+        "em_sum": 8,
+        "tfa_sol_mean": 0.7754,
+        "tfa_box_mean": 0.8315,
+        "tfce_sol_mean": 0.8091
+      },
+      "orig_unseen_control": {
+        "n": 100,
+        "em_mean": 0.02,
+        "em_sum": 2,
+        "tfa_sol_mean": 0.7387,
+        "tfa_box_mean": 0.8122,
+        "tfce_sol_mean": 0.9911
+      },
+      "func_variations_all5": {
+        "n": 500,
+        "tfa_sol_mean": 0.7754,
+        "tfa_box_mean": 0.831,
+        "tfce_sol_mean": 0.8093
+      }
+    },
+    "elapsed_sec": 212.39,
+    "train_loss": 0.766075
+  },
+  {
+    "model": "Qwen/Qwen3-1.7B",
+    "phase": "phase3_sft_trajectory",
+    "epoch": 10,
+    "splits": {
+      "orig_contaminated": {
+        "n": 100,
+        "em_mean": 0.06,
+        "em_sum": 6,
+        "tfa_sol_mean": 0.8575,
+        "tfa_box_mean": 0.9208,
+        "tfce_sol_mean": 0.5017
+      },
+      "func_variations_v1": {
+        "n": 100,
+        "em_mean": 0.06,
+        "em_sum": 6,
+        "tfa_sol_mean": 0.8089,
+        "tfa_box_mean": 0.8497,
+        "tfce_sol_mean": 0.6946
+      },
+      "orig_unseen_control": {
+        "n": 100,
+        "em_mean": 0.05,
+        "em_sum": 5,
+        "tfa_sol_mean": 0.728,
+        "tfa_box_mean": 0.7961,
+        "tfce_sol_mean": 1.1359
+      },
+      "func_variations_all5": {
+        "n": 500,
+        "tfa_sol_mean": 0.8081,
+        "tfa_box_mean": 0.8537,
+        "tfce_sol_mean": 0.6955
+      }
+    },
+    "elapsed_sec": 209.57,
+    "train_loss": 0.543666
+  }
+]

@@ -1,0 +1,48 @@
+topic,n_problems,orig_em_count,orig_em_rate,var_em_count,var_em_rate,gap_orig_minus_var
+Algebra Number Theory,8,1,0.125,0,0.0,0.125
+Number Theory,6,4,0.6667,2,0.3333,0.3333
+Combinatorics Number Theory,5,1,0.2,1,0.2,0.0
+Geometry,5,4,0.8,2,0.4,0.4
+Geometry Analysis,5,2,0.4,1,0.2,0.2
+Geometry Calculus,5,2,0.4,1,0.2,0.2
+Analysis Calculus,4,2,0.5,0,0.0,0.5
+Combinatorics,4,1,0.25,0,0.0,0.25
+Probability,4,2,0.5,0,0.0,0.5
+Algebra,3,1,0.3333,1,0.3333,0.0
+Calculus Algebra,3,1,0.3333,0,0.0,0.3333
+Calculus Analysis,3,1,0.3333,1,0.3333,0.0
+Combinatorics Linear Algebra,3,1,0.3333,0,0.0,0.3333
+Algebra Analysis,2,0,0.0,0,0.0,0.0
+Algebra Complex Numbers,2,0,0.0,0,0.0,0.0
+Algebra Geometry,2,1,0.5,0,0.0,0.5
+Analysis,2,2,1.0,2,1.0,0.0
+Calculus Number Theory,2,0,0.0,2,1.0,-1.0
+Calculus Trigonometry,2,0,0.0,0,0.0,0.0
+Geometry Algebra,2,1,0.5,0,0.0,0.5
+Number Theory Analysis,2,0,0.0,0,0.0,0.0
+Algebra Calculus,1,0,0.0,0,0.0,0.0
+Algebra Combinatorics,1,1,1.0,0,0.0,1.0
+Algebra Linear Algebra,1,0,0.0,0,0.0,0.0
+Analysis Algebra,1,1,1.0,0,0.0,1.0
+Analysis Calculus Combinatorics,1,0,0.0,0,0.0,0.0
+Analysis Combinatorics,1,0,0.0,0,0.0,0.0
+Analysis Combinatorics Probability,1,0,0.0,0,0.0,0.0
+Calculus,1,1,1.0,1,1.0,0.0
+Calculus Differential Equations,1,0,0.0,0,0.0,0.0
+Calculus Geometry,1,0,0.0,0,0.0,0.0
+Combinatorics Algebra,1,1,1.0,0,0.0,1.0
+Combinatorics Geometry,1,0,0.0,0,0.0,0.0
+Combinatorics Probability,1,0,0.0,0,0.0,0.0
+Complex Numbers Algebra,1,0,0.0,1,1.0,-1.0
+Differential Equations Calculus,1,0,0.0,0,0.0,0.0
+Geometry Combinatorics,1,1,1.0,0,0.0,1.0
+Geometry Linear Algebra,1,0,0.0,0,0.0,0.0
+Geometry Number Theory,1,0,0.0,0,0.0,0.0
+Geometry Trigonometry,1,0,0.0,0,0.0,0.0
+Linear Algebra,1,0,0.0,0,0.0,0.0
+Linear Algebra Number Theory,1,1,1.0,1,1.0,0.0
+Number Theory Linear Algebra,1,1,1.0,0,0.0,1.0
+Number Theory Probability Combinatorics,1,0,0.0,1,1.0,-1.0
+Probability Calculus,1,0,0.0,0,0.0,0.0
+Probability Calculus Analysis,1,0,0.0,0,0.0,0.0
+Probability Number Theory,1,0,0.0,0,0.0,0.0
