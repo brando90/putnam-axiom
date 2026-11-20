@@ -1,0 +1,66 @@
+[
+ {
+  "id": "astra62",
+  "label": "gpt-6.2-astra (effort max)",
+  "harness": "none (plain call, no tools)",
+  "route": "OpenAI Responses API, Koyejo-lab key, run from skampere2",
+  "price_in": 8,
+  "price_out": 40
+ },
+ {
+  "id": "astra6",
+  "label": "gpt-6-astra (effort max)",
+  "harness": "none (plain call, no tools)",
+  "route": "OpenAI Responses API, Koyejo-lab key, run from skampere2",
+  "price_in": 10,
+  "price_out": 50
+ },
+ {
+  "id": "gpt55",
+  "label": "gpt-5.5 (effort high)",
+  "harness": "none (plain call, no tools)",
+  "route": "OpenAI Responses API, Koyejo-lab key, run from skampere2",
+  "price_in": 5,
+  "price_out": 30
+ },
+ {
+  "id": "gpt4o",
+  "label": "gpt-4o (same model as the paper)",
+  "harness": "none (plain call, no tools)",
+  "route": "OpenAI Responses API, Koyejo-lab key, run from skampere2",
+  "price_in": 2.5,
+  "price_out": 10
+ },
+ {
+  "id": "sonnet55",
+  "label": "claude-sonnet-5-5 (default effort), substitute for Claude 6.2",
+  "harness": "none (Claude Code 2.1.278 print mode, tools off, one turn)",
+  "route": "Stanford enterprise login (claude-su) on skampere2",
+  "price_in": null,
+  "price_out": null
+ },
+ {
+  "id": "opus55",
+  "label": "claude-opus-5-5 (default effort)",
+  "harness": "none (Claude Code 2.1.329 print mode, tools off, one turn)",
+  "route": "Stanford enterprise login (claude-su profile) on skampere2; stopped by the 5-hour usage limit",
+  "price_in": 4,
+  "price_out": 20
+ },
+ {
+  "id": "gem38flash",
+  "label": "gemini-3.8-flash (thinking high)",
+  "harness": "none (plain call, no tools)",
+  "route": "Gemini API generateContent, Allen's key, run from skampere2",
+  "price_in": 0.75,
+  "price_out": 3.75
+ },
+ {
+  "id": "qwen2math7b",
+  "label": "Qwen2-Math-7B-Instruct (same model as the paper)",
+  "harness": "none (HF transformers, greedy, plain few-shot completion prompt, 1024 new tokens)",
+  "route": "local weights on skampere2 GPU 0",
+  "price_in": null,
+  "price_out": null
+ }
+]
