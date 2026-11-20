@@ -6,7 +6,7 @@
 
 ## Status
 
-`PARTIAL` (11-20-2026): all rows done except Claude Opus 5.5 (346 of 500 variation problems, 521 of 522 originals; stopped by the Claude Code 5-hour limit, resets 8:30) and Gemini 3.8 Flash (100 matched originals and variation snapshot 1 only). Not run: Fable 5.2, Fable 5.1 (usage credits or an API gateway key needed), "Claude 6.2" (no such model).
+`PARTIAL` (11-20-2026): all rows done except Gemini 3.8 Flash (100 matched originals and variation snapshot 1 only). Claude Opus 5.5 is complete (522 originals, 500 variation problems) after the 8:30 limit reset, and the one Claude Sonnet 5.5 problem that hung is rerun (500 variation problems). Not run: Fable 5.2, Fable 5.1 (usage credits or an API gateway key needed), "Claude 6.2" (no such model).
 
 ## Layout
 
@@ -15,12 +15,11 @@
 - `data/scored/`: per-problem scores. `data/judge_in/`, `data/judge_out_gpt/`: equivalence-judge items and gpt-5.5 verdicts.
 - `data/models.json`, `data/results.json`, `data/tables.md`: aggregated results.
 
-## Resume the unfinished rows
+## Resume the unfinished row
 
 Run from a directory with `tasks.jsonl` (`gunzip data/tasks.jsonl.gz`) and `fewshot.json`; the runner skips finished problems.
 
 ```text
-python3 code/run_eval.py --provider claude_cli --model claude-opus-5-5 --key-file <claude launcher> --out out/opus55.jsonl --workers 8 --timeout 600
 python3 code/run_eval.py --provider gemini --model gemini-3.8-flash --effort high --key-file <key file> --out out/gem38flash.jsonl --workers 1
 ```
 

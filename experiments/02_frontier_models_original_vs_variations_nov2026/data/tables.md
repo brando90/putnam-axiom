@@ -2,7 +2,7 @@
 
 | Model | Harness and route | n | Accuracy, paper grader (%) | 95% CI | Accuracy, answer-equivalence judge (%) |
 |---|---|---|---|---|---|
-| claude-opus-5-5 (default effort) | none (Claude Code 2.1.329 print mode, tools off, one turn); Stanford enterprise login (claude-su profile) on skampere2; stopped by the 5-hour usage limit | 521 | 78.9 | 75.2 to 82.2 | 90.6 |
+| claude-opus-5-5 (default effort) | none (Claude Code 2.1.329 print mode, tools off, one turn); Stanford enterprise login (claude-su profile) on skampere2 | 522 | 78.9 | 75.2 to 82.2 | 90.6 |
 | claude-sonnet-5-5 (default effort), substitute for Claude 6.2 | none (Claude Code 2.1.278 print mode, tools off, one turn); Stanford enterprise login (claude-su) on skampere2 | 522 | 77.4 | 73.6 to 80.8 | 89.5 |
 | gpt-6.2-astra (effort max) | none (plain call, no tools); OpenAI Responses API, Koyejo-lab key, run from skampere2 | 522 | 72.0 | 68.0 to 75.7 | 87.9 |
 | gpt-6-astra (effort max) | none (plain call, no tools); OpenAI Responses API, Koyejo-lab key, run from skampere2 | 522 | 72.4 | 68.4 to 76.1 | 87.9 |
@@ -15,8 +15,8 @@
 
 | Model | Harness and route | n | Accuracy, paper grader (%) | 95% CI | Accuracy, answer-equivalence judge (%) | Matched 100 originals, paper grader (%) | Gap original minus variation, paper grader (points) | Gap, judge (points) |
 |---|---|---|---|---|---|---|---|---|
-| claude-opus-5-5 (default effort) | none (Claude Code 2.1.329 print mode, tools off, one turn); Stanford enterprise login (claude-su profile) on skampere2; stopped by the 5-hour usage limit | 346 | 74.3 | 69.4 to 78.6 | 85.5 | 83.0 (n=100) | 8.7 | 6.5 |
-| claude-sonnet-5-5 (default effort), substitute for Claude 6.2 | none (Claude Code 2.1.278 print mode, tools off, one turn); Stanford enterprise login (claude-su) on skampere2 | 499 | 71.3 | 67.2 to 75.1 | 82.6 | 83.0 (n=100) | 11.7 | 10.4 |
+| claude-opus-5-5 (default effort) | none (Claude Code 2.1.329 print mode, tools off, one turn); Stanford enterprise login (claude-su profile) on skampere2 | 500 | 73.6 | 69.6 to 77.3 | 85.8 | 83.0 (n=100) | 9.4 | 6.2 |
+| claude-sonnet-5-5 (default effort), substitute for Claude 6.2 | none (Claude Code 2.1.278 print mode, tools off, one turn); Stanford enterprise login (claude-su) on skampere2 | 500 | 71.2 | 67.1 to 75.0 | 82.4 | 83.0 (n=100) | 11.8 | 10.6 |
 | gpt-6.2-astra (effort max) | none (plain call, no tools); OpenAI Responses API, Koyejo-lab key, run from skampere2 | 500 | 69.0 | 64.8 to 72.9 | 79.4 | 81.0 (n=100) | 12.0 | 9.6 |
 | gpt-6-astra (effort max) | none (plain call, no tools); OpenAI Responses API, Koyejo-lab key, run from skampere2 | 500 | 69.4 | 65.2 to 73.3 | 80.8 | 82.0 (n=100) | 12.6 | 8.2 |
 | gpt-5.5 (effort high) | none (plain call, no tools); OpenAI Responses API, Koyejo-lab key, run from skampere2 | 500 | 68.6 | 64.4 to 72.5 | 78.8 | 80.0 (n=100) | 11.4 | 8.2 |

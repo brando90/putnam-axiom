@@ -17,7 +17,7 @@ md = f"""# Putnam-AXIOM on the newest frontier models: Original and Functional V
 
 ## Bottom line
 
-Frontier models now solve about three quarters of Putnam-AXIOM Original under the paper's own grader, against 42% for o1-preview and 19% for GPT-4o at release (arXiv 2508.08292, Table 1): Claude Opus 5.5 {f(o['orig']['acc'])}% (n={o['orig']['n']} of 522), Claude Sonnet 5.5 {f(s['orig']['acc'])}%, gpt-6-astra {f(R['astra6']['orig']['acc'])}%, gpt-6.2-astra {f(R['astra62']['orig']['acc'])}%, gpt-5.5 {f(R['gpt55']['orig']['acc'])}%. The paper grader marks many correct answers wrong (formatting, extra cases), so an answer-equivalence judge on the misses lifts these models to 86% to 91%. The original-versus-variation gap has not closed: on the matched 100 problems the new models score 6 to 14 points lower on Functional Variations, about the same size as the 8-point gaps of o1-preview and GPT-4o in the paper. Our reruns of GPT-4o ({f(R['gpt4o']['orig']['acc'])}% vs 19.35% in the paper) and Qwen2-Math-7B-Instruct ({f(R['qwen2math7b']['orig']['acc'])}% vs 11.49%) land close to the published numbers, so the pipeline is sound. Gemini 3.8 Flash scored {f(g['m100']['acc'])}% on the matched 100 originals (n={g['m100']['n']}); its variation row is snapshot 1 only (n={gv_n}). Claude Opus 5.5 stopped at the 5-hour usage limit with {o['var_n']} of 500 variation problems done, and Fable 5.2, Fable 5.1 and "Claude 6.2" did not run (Appendix D).
+Frontier models now solve about three quarters of Putnam-AXIOM Original under the paper's own grader, against 42% for o1-preview and 19% for GPT-4o at release (arXiv 2508.08292, Table 1): Claude Opus 5.5 {f(o['orig']['acc'])}% (n={o['orig']['n']} of 522), Claude Sonnet 5.5 {f(s['orig']['acc'])}%, gpt-6-astra {f(R['astra6']['orig']['acc'])}%, gpt-6.2-astra {f(R['astra62']['orig']['acc'])}%, gpt-5.5 {f(R['gpt55']['orig']['acc'])}%. The paper grader marks many correct answers wrong (formatting, extra cases), so an answer-equivalence judge on the misses lifts these models to 86% to 91%. The original-versus-variation gap has not closed: on the matched 100 problems the new models score 9 to 14 points lower on Functional Variations (paper grader; 6 to 11 points with the judge), about the same size as the 8-point gaps of o1-preview and GPT-4o in the paper. Our reruns of GPT-4o ({f(R['gpt4o']['orig']['acc'])}% vs 19.35% in the paper) and Qwen2-Math-7B-Instruct ({f(R['qwen2math7b']['orig']['acc'])}% vs 11.49%) land close to the published numbers, so the pipeline is sound. Gemini 3.8 Flash scored {f(g['m100']['acc'])}% on the matched 100 originals (n={g['m100']['n']}); its variation row is snapshot 1 only (n={gv_n}). Claude Opus 5.5 finished all 522 originals and all {o['var_n']} variation problems after a 5-hour usage limit pause, and Fable 5.2, Fable 5.1 and "Claude 6.2" did not run (Appendix D).
 
 ## Tables
 
@@ -56,8 +56,8 @@ Paper numbers for comparison (arXiv 2508.08292). Table 1, original 522, boxed ac
 
 ### C. Rows, sample sizes and caveats
 
-- Claude Opus 5.5: {o['orig']['n']} of 522 originals (one problem missing, not retried), all 100 matched originals, and {o['var_n']} of 500 variation problems (snapshot 1 complete, snapshots 2 to 5 about 61 each). The Claude Code 5-hour limit on the shared login stopped the run at 04:00 and it resets at 8:30. The Opus gap uses pooled variation accuracy over those {o['var_n']} problems, so treat it as indicative. Resuming is a one-line rerun of the same command (the runner skips finished problems).
-- Claude Sonnet 5.5: 1021 of 1022 problems; one snapshot-4 problem hung and was not retried (variation n=499).
+- Claude Opus 5.5: all {o['orig']['n']} of 522 originals and all {o['var_n']} of 500 variation problems. The Claude Code 5-hour limit on the shared login stopped the first pass at 04:00 with 346 of 500 variation problems done; after the 8:30 reset the same command (the runner skips finished problems) finished the rest, and the few problems that timed out at 10 minutes were rerun with a 28-minute timeout. The Opus variation score is the mean of the 5 complete snapshots, with no partial rows. The earlier partial Opus variation numbers (gap 8.7 points) are replaced by these.
+- Claude Sonnet 5.5: all 1022 problems (variation n=500). One snapshot-4 problem hung in the first pass and was rerun with a 20-minute timeout on the same Claude Code 2.1.278 setup.
 - Gemini 3.8 Flash: matched-100 originals complete; variation snapshot 1 only (n={gv_n} of 500); the other 422 originals and snapshots 2 to 5 were not run (about 11k to 14k output tokens per problem and one worker, so about 0.5 problems a minute). Its gap compares the matched 100 originals with snapshot 1.
 - Matched-100 accuracy and variation accuracy come from different problem sets, so a gap of a few points is within noise: the 95% interval on a 100-problem score is roughly plus or minus 8 points.
 - Single run per model, no repeats; token counts are as reported by each API or CLI.
@@ -73,14 +73,13 @@ Paper numbers for comparison (arXiv 2508.08292). Table 1, original 522, boxed ac
 
 - OpenAI API (Koyejo-lab key), at list prices from third-party trackers: gpt-6.2-astra ${f(R['astra62']['cost'])}, gpt-6-astra ${f(R['astra6']['cost'])}, gpt-5.5 ${f(R['gpt55']['cost'])}, gpt-4o ${f(R['gpt4o']['cost'])}; judge about $13. Total about ${f(oai_cost + 13, 0)}.
 - Gemini 3.8 Flash (Allen's key): about ${f(gem_cost, 0)} at list price ($0.75 in, $3.75 out per million).
-- Claude: no cash cost on the Stanford enterprise login; the Claude Code CLI reports an API-equivalent $23.47 for Sonnet 5.5 and $38.34 for Opus 5.5.
+- Claude: no cash cost on the Stanford enterprise login; the Claude Code CLI reported an API-equivalent $23.47 for the first Sonnet 5.5 pass; for Opus 5.5 the token counts (2.90M in, 1.50M out) at list price ($4 and $20 per million) come to about $42.
 - Qwen: local GPU, no cost.
 
 ## Open for Brando
 
 - Fable 5.2 and 5.1 route: a Stanford AI API Gateway key on your PTA (form "Add AI API Gateway Key": tick Opus 5.5, Fable 5.1 and Fable 5.2, set a monthly cap, 2 to 5 days, PTA owner approval). List prices per million input and output tokens: Opus 5.5 $4 and $20, Fable 5.2 $8 and $40, Fable 5.1 $10 and $50. A Fable 5.2 run like the OpenAI ones (about 1.7M in, 2.5M to 3.5M out) would cost roughly $115 to $155.
 - Anthropic's AI for Science program offers up to $20,000 of API credits.
-- Finish Opus 5.5 after 8:30 (about 150 variation problems left), and run the one hung Sonnet problem.
 """
 open("RESULTS_frontier_models_original_vs_variations_nov2026.md", "w").write(md)
 print(len(md), "chars")

@@ -43,7 +43,7 @@
   "id": "opus55",
   "label": "claude-opus-5-5 (default effort)",
   "harness": "none (Claude Code 2.1.329 print mode, tools off, one turn)",
-  "route": "Stanford enterprise login (claude-su profile) on skampere2; stopped by the 5-hour usage limit",
+  "route": "Stanford enterprise login (claude-su profile) on skampere2",
   "price_in": 4,
   "price_out": 20
  },

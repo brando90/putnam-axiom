@@ -2,7 +2,7 @@
 
 ## Bottom line
 
-Frontier models now solve about three quarters of Putnam-AXIOM Original under the paper's own grader, against 42% for o1-preview and 19% for GPT-4o at release (arXiv 2508.08292, Table 1): Claude Opus 5.5 78.9% (n=521 of 522), Claude Sonnet 5.5 77.4%, gpt-6-astra 72.4%, gpt-6.2-astra 72.0%, gpt-5.5 71.8%. The paper grader marks many correct answers wrong (formatting, extra cases), so an answer-equivalence judge on the misses lifts these models to 86% to 91%. The original-versus-variation gap has not closed: on the matched 100 problems the new models score 6 to 14 points lower on Functional Variations, about the same size as the 8-point gaps of o1-preview and GPT-4o in the paper. Our reruns of GPT-4o (21.3% vs 19.35% in the paper) and Qwen2-Math-7B-Instruct (15.3% vs 11.49%) land close to the published numbers, so the pipeline is sound. Gemini 3.8 Flash scored 87.0% on the matched 100 originals (n=100); its variation row is snapshot 1 only (n=100). Claude Opus 5.5 stopped at the 5-hour usage limit with 346 of 500 variation problems done, and Fable 5.2, Fable 5.1 and "Claude 6.2" did not run (Appendix D).
+Frontier models now solve about three quarters of Putnam-AXIOM Original under the paper's own grader, against 42% for o1-preview and 19% for GPT-4o at release (arXiv 2508.08292, Table 1): Claude Opus 5.5 78.9% (n=522 of 522), Claude Sonnet 5.5 77.4%, gpt-6-astra 72.4%, gpt-6.2-astra 72.0%, gpt-5.5 71.8%. The paper grader marks many correct answers wrong (formatting, extra cases), so an answer-equivalence judge on the misses lifts these models to 86% to 91%. The original-versus-variation gap has not closed: on the matched 100 problems the new models score 9 to 14 points lower on Functional Variations (paper grader; 6 to 11 points with the judge), about the same size as the 8-point gaps of o1-preview and GPT-4o in the paper. Our reruns of GPT-4o (21.3% vs 19.35% in the paper) and Qwen2-Math-7B-Instruct (15.3% vs 11.49%) land close to the published numbers, so the pipeline is sound. Gemini 3.8 Flash scored 87.0% on the matched 100 originals (n=100); its variation row is snapshot 1 only (n=100). Claude Opus 5.5 finished all 522 originals and all 500 variation problems after a 5-hour usage limit pause, and Fable 5.2, Fable 5.1 and "Claude 6.2" did not run (Appendix D).
 
 ## Tables
 
@@ -12,7 +12,7 @@ Accuracy is boxed exact match under the paper protocol (lm-eval-harness 4-shot p
 
 | Model | Harness and route | n | Accuracy, paper grader (%) | 95% CI | Accuracy, answer-equivalence judge (%) |
 |---|---|---|---|---|---|
-| claude-opus-5-5 (default effort) | none (Claude Code 2.1.329 print mode, tools off, one turn); Stanford enterprise login (claude-su profile) on skampere2; stopped by the 5-hour usage limit | 521 | 78.9 | 75.2 to 82.2 | 90.6 |
+| claude-opus-5-5 (default effort) | none (Claude Code 2.1.329 print mode, tools off, one turn); Stanford enterprise login (claude-su profile) on skampere2 | 522 | 78.9 | 75.2 to 82.2 | 90.6 |
 | claude-sonnet-5-5 (default effort), substitute for Claude 6.2 | none (Claude Code 2.1.278 print mode, tools off, one turn); Stanford enterprise login (claude-su) on skampere2 | 522 | 77.4 | 73.6 to 80.8 | 89.5 |
 | gpt-6.2-astra (effort max) | none (plain call, no tools); OpenAI Responses API, Koyejo-lab key, run from skampere2 | 522 | 72.0 | 68.0 to 75.7 | 87.9 |
 | gpt-6-astra (effort max) | none (plain call, no tools); OpenAI Responses API, Koyejo-lab key, run from skampere2 | 522 | 72.4 | 68.4 to 76.1 | 87.9 |
@@ -25,8 +25,8 @@ Accuracy is boxed exact match under the paper protocol (lm-eval-harness 4-shot p
 
 | Model | Harness and route | n | Accuracy, paper grader (%) | 95% CI | Accuracy, answer-equivalence judge (%) | Matched 100 originals, paper grader (%) | Gap original minus variation, paper grader (points) | Gap, judge (points) |
 |---|---|---|---|---|---|---|---|---|
-| claude-opus-5-5 (default effort) | none (Claude Code 2.1.329 print mode, tools off, one turn); Stanford enterprise login (claude-su profile) on skampere2; stopped by the 5-hour usage limit | 346 | 74.3 | 69.4 to 78.6 | 85.5 | 83.0 (n=100) | 8.7 | 6.5 |
-| claude-sonnet-5-5 (default effort), substitute for Claude 6.2 | none (Claude Code 2.1.278 print mode, tools off, one turn); Stanford enterprise login (claude-su) on skampere2 | 499 | 71.3 | 67.2 to 75.1 | 82.6 | 83.0 (n=100) | 11.7 | 10.4 |
+| claude-opus-5-5 (default effort) | none (Claude Code 2.1.329 print mode, tools off, one turn); Stanford enterprise login (claude-su profile) on skampere2 | 500 | 73.6 | 69.6 to 77.3 | 85.8 | 83.0 (n=100) | 9.4 | 6.2 |
+| claude-sonnet-5-5 (default effort), substitute for Claude 6.2 | none (Claude Code 2.1.278 print mode, tools off, one turn); Stanford enterprise login (claude-su) on skampere2 | 500 | 71.2 | 67.1 to 75.0 | 82.4 | 83.0 (n=100) | 11.8 | 10.6 |
 | gpt-6.2-astra (effort max) | none (plain call, no tools); OpenAI Responses API, Koyejo-lab key, run from skampere2 | 500 | 69.0 | 64.8 to 72.9 | 79.4 | 81.0 (n=100) | 12.0 | 9.6 |
 | gpt-6-astra (effort max) | none (plain call, no tools); OpenAI Responses API, Koyejo-lab key, run from skampere2 | 500 | 69.4 | 65.2 to 73.3 | 80.8 | 82.0 (n=100) | 12.6 | 8.2 |
 | gpt-5.5 (effort high) | none (plain call, no tools); OpenAI Responses API, Koyejo-lab key, run from skampere2 | 500 | 68.6 | 64.4 to 72.5 | 78.8 | 80.0 (n=100) | 11.4 | 8.2 |
@@ -43,7 +43,7 @@ Paper numbers for comparison (arXiv 2508.08292). Table 1, original 522, boxed ac
 | o1-preview | 41.94% | not rerun |
 | GPT-4o | 19.35% | 21.3% (same model, our rerun) |
 | Qwen2-Math-7B-Instruct | 11.49% | 15.3% (same model, our rerun) |
-| Best new model | n/a | 78.9% Claude Opus 5.5 (n=521) |
+| Best new model | n/a | 78.9% Claude Opus 5.5 (n=522) |
 
 ## Appendix
 
@@ -66,8 +66,8 @@ Paper numbers for comparison (arXiv 2508.08292). Table 1, original 522, boxed ac
 
 ### C. Rows, sample sizes and caveats
 
-- Claude Opus 5.5: 521 of 522 originals (one problem missing, not retried), all 100 matched originals, and 346 of 500 variation problems (snapshot 1 complete, snapshots 2 to 5 about 61 each). The Claude Code 5-hour limit on the shared login stopped the run at 04:00 and it resets at 8:30. The Opus gap uses pooled variation accuracy over those 346 problems, so treat it as indicative. Resuming is a one-line rerun of the same command (the runner skips finished problems).
-- Claude Sonnet 5.5: 1021 of 1022 problems; one snapshot-4 problem hung and was not retried (variation n=499).
+- Claude Opus 5.5: all 522 of 522 originals and all 500 of 500 variation problems. The Claude Code 5-hour limit on the shared login stopped the first pass at 04:00 with 346 of 500 variation problems done; after the 8:30 reset the same command (the runner skips finished problems) finished the rest, and the few problems that timed out at 10 minutes were rerun with a 28-minute timeout. The Opus variation score is the mean of the 5 complete snapshots, with no partial rows. The earlier partial Opus variation numbers (gap 8.7 points) are replaced by these.
+- Claude Sonnet 5.5: all 1022 problems (variation n=500). One snapshot-4 problem hung in the first pass and was rerun with a 20-minute timeout on the same Claude Code 2.1.278 setup.
 - Gemini 3.8 Flash: matched-100 originals complete; variation snapshot 1 only (n=100 of 500); the other 422 originals and snapshots 2 to 5 were not run (about 11k to 14k output tokens per problem and one worker, so about 0.5 problems a minute). Its gap compares the matched 100 originals with snapshot 1.
 - Matched-100 accuracy and variation accuracy come from different problem sets, so a gap of a few points is within noise: the 95% interval on a 100-problem score is roughly plus or minus 8 points.
 - Single run per model, no repeats; token counts are as reported by each API or CLI.
@@ -83,11 +83,10 @@ Paper numbers for comparison (arXiv 2508.08292). Table 1, original 522, boxed ac
 
 - OpenAI API (Koyejo-lab key), at list prices from third-party trackers: gpt-6.2-astra $112.7, gpt-6-astra $192.6, gpt-5.5 $121.3, gpt-4o $10.6; judge about $13. Total about $450.
 - Gemini 3.8 Flash (Allen's key): about $10 at list price ($0.75 in, $3.75 out per million).
-- Claude: no cash cost on the Stanford enterprise login; the Claude Code CLI reports an API-equivalent $23.47 for Sonnet 5.5 and $38.34 for Opus 5.5.
+- Claude: no cash cost on the Stanford enterprise login; the Claude Code CLI reported an API-equivalent $23.47 for the first Sonnet 5.5 pass; for Opus 5.5 the token counts (2.90M in, 1.50M out) at list price ($4 and $20 per million) come to about $42.
 - Qwen: local GPU, no cost.
 
 ## Open for Brando
 
 - Fable 5.2 and 5.1 route: a Stanford AI API Gateway key on your PTA (form "Add AI API Gateway Key": tick Opus 5.5, Fable 5.1 and Fable 5.2, set a monthly cap, 2 to 5 days, PTA owner approval). List prices per million input and output tokens: Opus 5.5 $4 and $20, Fable 5.2 $8 and $40, Fable 5.1 $10 and $50. A Fable 5.2 run like the OpenAI ones (about 1.7M in, 2.5M to 3.5M out) would cost roughly $115 to $155.
 - Anthropic's AI for Science program offers up to $20,000 of API credits.
-- Finish Opus 5.5 after 8:30 (about 150 variation problems left), and run the one hung Sonnet problem.
