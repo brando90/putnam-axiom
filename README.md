@@ -73,7 +73,7 @@ If you find Putnam-AXIOM useful in your research, please cite our ICML 2025 pape
 
 ## Known inconsistencies and fixes (Nov 20 2026)
 
-Recomputed on Nov 20 2026 from the published Table 2 counts and, for the 2026 runs, from the per-question files in `experiments/02_frontier_models_original_vs_variations_nov2026/data/scored/`. The raw per-question logs of the 2024-25 paper runs (o1-preview, GPT-4o, Claude-3.5 Sonnet and the open models) are not in this repository (any branch, any commit), so no paired test is possible for them.
+Recomputed on Nov 20 2026 from the published Table 2 counts and, for the 2026 runs, from the per-question files in `experiments/02_frontier_models_original_vs_variations_nov2026/data/scored/`. The raw per-question logs of the 2024-25 paper runs (o1-preview, GPT-4o, Claude-3.5 Sonnet and the open models) are not in this repository (any branch, any commit), so no paired test is possible for them. They are also not on Brando's Drive, and a file-name search of skampere1, skampere2 and /dfs on Nov 20 2026 (names with o1-preview, LM_outputs, Binary_Analysis) found none. Open items that the repo cannot settle are listed in [`future-work.md`](future-work.md).
 
 | Old figure (paper v2) | Corrected figure | Source file and subset | Still open |
 |---|---|---|---|
