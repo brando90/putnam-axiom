@@ -52,3 +52,21 @@ To perform an evaluation on Putnam-AXIOM, run `python src/eval.py`, including th
 For instance, to run Llama-3-8B on the original dataset, one would run
 
 `python src/eval.py --data_dir data/Putnam_AXIOM_Original_v3.json --model_name meta-llama/Meta-Llama-3-8B --output_dir DIRECTORY_PATH`
+
+## Citation
+
+If you find Putnam-AXIOM useful in your research, please cite our ICML 2025 paper ([PMLR](https://proceedings.mlr.press/v267/gulati25a.html) · [arXiv](https://arxiv.org/abs/2508.08292) · [OpenReview](https://openreview.net/forum?id=kqj2Cn3Sxr)):
+
+```bibtex
+@inproceedings{gulati2025putnamaxiom,
+  title     = {Putnam-{AXIOM}: A Functional \& Static Benchmark for Measuring Higher Level Mathematical Reasoning in {LLM}s},
+  author    = {Aryan Gulati and Brando Miranda and Eric Chen and Emily Xia and Kai Fronsdal and Bruno de Moraes Dumont and Sanmi Koyejo},
+  booktitle = {Proceedings of the 42nd International Conference on Machine Learning},
+  pages     = {20723--20747},
+  year      = {2025},
+  volume    = {267},
+  series    = {Proceedings of Machine Learning Research},
+  publisher = {PMLR},
+  url       = {https://proceedings.mlr.press/v267/gulati25a.html}
+}
+```
