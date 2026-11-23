@@ -1,5 +1,13 @@
 [
  {
+  "id": "fable52max",
+  "label": "claude-fable-5-2 (effort max)",
+  "harness": "none (Claude Code 2.1.330 print mode, safe-mode, tools off, one turn)",
+  "route": "Claude Ultra personal subscription (~/.claude) on Mac",
+  "price_in": 8,
+  "price_out": 40
+ },
+ {
   "id": "astra62",
   "label": "gpt-6.2-astra (effort max)",
   "harness": "none (plain call, no tools)",

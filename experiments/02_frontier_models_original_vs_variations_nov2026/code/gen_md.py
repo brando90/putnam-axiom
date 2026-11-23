@@ -3,7 +3,7 @@
 import json, sys
 R = json.load(open("results.json"))
 extra = json.load(open("extra.json")) if __import__("os").path.exists("extra.json") else {}
-ORDER = ["opus55", "sonnet55", "astra62", "astra6", "gpt55", "gem38flash", "gpt4o", "qwen2math7b"]
+ORDER = ["fable52max", "opus55", "sonnet55", "astra62", "astra6", "gpt55", "gem38flash", "gpt4o", "qwen2math7b"]
 
 def f(x, d=1):
     return "n/a" if x is None else f"{x:.{d}f}"

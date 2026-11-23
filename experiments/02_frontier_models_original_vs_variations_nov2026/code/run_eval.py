@@ -69,17 +69,23 @@ def call_gemini(key, model, effort, prompt, max_out, timeout):
 
 def call_claude_cli(key, model, effort, prompt, max_out, timeout):
     import subprocess
-    cmd = [key, "-p", "--model", model, "--tools", "", "--output-format", "json", "--no-session-persistence",
-           "--system-prompt", "You are a helpful assistant."]
+    cmd = [key, "-p", "--safe-mode", "--model", model]
+    if effort:
+        cmd += ["--effort", effort]
+    cmd += ["--tools", "", "--output-format", "json", "--no-session-persistence",
+            "--system-prompt", "You are a helpful assistant."]
     p = subprocess.run(cmd, input=prompt, capture_output=True, text=True, timeout=timeout, cwd="/tmp")
     out = p.stdout
     j = json.loads(out[out.find("{"):] if "{" in out else "{}") if out.strip() else {}
     if not j or j.get("is_error"):
-        raise RuntimeError((j.get("result") if j else (p.stderr or out))[:300])
+        err_prefix = f"{j.get('api_error')}: " if j and j.get("api_error") else ""
+        err_msg = (j.get("result") if j else None) or p.stderr or out or f"returncode={p.returncode}"
+        raise RuntimeError((err_prefix + str(err_msg))[:300])
     u = j.get("usage", {})
     return j.get("result", ""), {"input": (u.get("input_tokens") or 0) + (u.get("cache_creation_input_tokens") or 0) + (u.get("cache_read_input_tokens") or 0),
                                  "output": u.get("output_tokens"), "reasoning": (u.get("output_tokens_details") or {}).get("thinking_tokens"),
-                                 "status": j.get("stop_reason"), "incomplete": None, "cost_usd": j.get("total_cost_usd")}
+                                 "status": j.get("stop_reason"), "incomplete": None, "cost_usd": j.get("total_cost_usd"),
+                                 "actual_models": sorted((j.get("modelUsage") or {}).keys())}
 
 
 def main():
@@ -157,8 +163,17 @@ def main():
                     break
                 time.sleep(min(120, 8 * 2 ** attempt))
             except Exception as e:
-                rec.update(ok=False, error=f"{type(e).__name__}: {str(e)[:300]}")
-                if "hit your" in str(e) and "limit" in str(e):
+                msg = str(e)
+                el = msg.lower()
+                rec.update(ok=False, error=f"{type(e).__name__}: {msg[:300]}")
+                if (
+                    ("hit your" in el and "limit" in el)
+                    or "usage_limit_reached" in el
+                    or "usage credits required" in el
+                    or "out of extra usage" in el
+                    or "weekly limit" in el
+                    or "not logged in" in el
+                ):
                     stat["stop"] = True
                     break
                 time.sleep(min(120, 8 * 2 ** attempt))
