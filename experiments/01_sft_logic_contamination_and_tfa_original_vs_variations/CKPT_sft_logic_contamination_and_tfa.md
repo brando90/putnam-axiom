@@ -1,40 +1,28 @@
-# Checkpoint: SFT Logic Contamination and TFA on Putnam-AXIOM Original vs. Functional Variations
+# Checkpoint: Experiment 01 — SFT Logic Contamination and TFA on Putnam-AXIOM Original vs. Functional Variations
 
-Created: 10-16-2026 18:18 PDT  
-Last updated: 10-18-2026 14:35 PDT  
+Created: 10-16-2026 18:18 PDT | Last updated: 11-23-2026 13:34 PST
 
-## 1. Current agent / model / host / surface
-- **Agent & Model:** Antigravity coordinator (Claude Opus 4.6 Thinking / `inherit`)
-- **Local Workspace:** `/Users/brandomiranda/putnam-axiom` (`main` branch)
-- **Remote GPU Host:** `brando9@skampere1.stanford.edu` (NVIDIA A100-SXM4-80GB GPUs; Python `/lfs/skampere1/0/brando9/vllm_env/bin/python`)
+## 1. Goal
+Quantify SFT logic contamination (`orig_contaminated` vs. paired `func_variations` vs. `orig_unseen_control`) and evaluate Teacher-Forced Accuracy ($\text{TFA}_{\text{sol}}$, $\text{TFA}_{\text{box}}$, $\text{TFCE}_{\text{sol}}$) vs. Boxed-Answer Exact Match ($\text{EM}$) on `experiments/01_sft_logic_contamination_and_tfa_original_vs_variations/`.
 
-## 2. Task state
-- **Phase:** `PHASE 1 COMPLETE / PHASE 2 COMPLETE / PHASE 3 COMPLETE` — Protocol frozen in [`PROTOCOL.md`](PROTOCOL.md); Phase 1 deterministic audit completed; Phase 2 multi-model calibration completed across 8 open-weight models; Phase 3 SFT logic-contamination trajectories completed across all 10 epochs on both `Qwen/Qwen3-1.7B` and `google/gemma-2b-it` on Stanford SNAP A100 GPUs.
+## 2. What ran
+Phase 1 local audit; Phase 2 across 10 open-weight models (`5` families, `8,000` items) and Phase 3 SFT across `Qwen/Qwen3-1.7B`, `google/gemma-2b-it`, and `deepseek-ai/deepseek-math-7b-instruct` through Epoch 10 (`12,000` items) on `skampere1.stanford.edu` (`$0.00` spend); 3-stage sequential `agy` Mega Quality Assurance (`gemini-4-neon-xhigh` $\to$ `gemini-pro-orchestrator-neon` $\to$ `gemini-4-hydrogen-xhigh`).
 
-## 3. What is done
-- Verified benchmark consolidation integrity (`python3 src/scripts/verify_consolidation.py` -> `PASS`, 57/57 imports match, 182/182 preserved baseline SHA-256 hashes match).
-- Completed Phase 1 deterministic existing-data audit across 20 open-weight models ($N=100$ originals vs. $N=500$ functional variations: drop = `+4.44 pp`, $p = 0.00010$; exact sign test $p = 4.01 \times 10^{-5}$) and paired problem contingency audit on `DeepSeek-R1-Distill-Qwen-14B` (drop = `+17.0 pp`, exact McNemar $p = 0.00232$; $67.6\%$ of solved originals fail under functional variation).
-- Completed Phase 2 baseline calibration across 8 open-weight models (`Qwen3-1.7B`, `Qwen3-1.7B-Base`, `Qwen3-4B`, `deepseek-math-7b-base`, `deepseek-math-7b-instruct`, `deepseek-math-7b-rl`, `google/gemma-2b`, `google/gemma-2b-it`). Proved that 8/8 models exhibit statistically significant TFA drops on functional variations ($p \le 0.0002$), while discrete Boxed EM differences at $N=100$ fail significance ($p > 0.15$).
-- Completed Phase 3 SFT 10-epoch trajectories for both `Qwen/Qwen3-1.7B` and `google/gemma-2b-it`. Empirically verified logic contamination:
-  * On `google/gemma-2b-it`, fine-tuning on originals yields a net logic transfer of $+25.00\text{ pp}$ $[+17.0, +34.0]$, $p = 0.00010$ in free-generation Boxed EM and $+31.82\text{ pp}$ $[+30.15, +33.46]$, $p = 0.00010$ in TFA_sol over held-out unseen Putnam competition problems.
-  * On `Qwen/Qwen3-1.7B`, fine-tuning transfers $+8.38\text{ pp}$ $[+7.61, +9.19]$, $p = 0.00010$ net TFA_sol gain to unseen functional variations over unseen controls.
-  * Cross-cell correlation across 33 evaluation cells confirms strong agreement between continuous TFA and discrete solve rate: Pearson $r = 0.8012$, $p = 2.13 \times 10^{-8}$.
-- Authored canonical comprehensive scientific report [`RESULTS_sft_logic_contamination_and_tfa_v1.md`](RESULTS_sft_logic_contamination_and_tfa_v1.md), live ledger [`results.md`](results.md), and synchronized all raw CSV and summary test artifacts.
+## 3. Results
+Phase 1 (`19/20` drop, `+4.44 pp`, `p=0.00010`; Qwen-14B McNemar `p=0.00232`); Phase 2 (`10/10` positive TFA drop, exact binomial `p=0.001953`; Epoch-0 floor `r=0.1785`); Phase 3 (`45` cells `r=0.7909`, `p=1.01e-10`; significant $\text{TFA}_{\text{sol}}$ net logic transfer `+31.82 pp` `gemma-2b-it`, `+8.38 pp` `Qwen3-1.7B`, `+3.71 pp` `deepseek-math-7b-instruct`, all `p=0.00010`); Mega QA PASSED (`FIXED -> PASS -> PASS`, `0` verification errors).
 
-## 4. What remains
-- Optional frontier extension: evaluate cached `Meta-Llama-3.1-8B` and `Mistral-7B-v0.3` on GPU 0 to extend Phase 2 calibration to 8B frontier architectures.
-- Commit and push verified results and reports to `origin/main`.
+## 4. Stuck / blocked
+No SNAP/code blockers. Optional cross-company Anthropic acceptance gate unmet (`claude-opus-5-5-high` HTTP 429 resets in `55h58m35s`).
 
-## 5. Blockers
-- None.
+## 5. Next steps
+Integrate verified Experiment 01 tables into `paper_latex_and_notes/` (`p=9/10`), install `antlr4-python3-runtime` in `skampere1` `vllm_env`, and optionally run Anthropic/OpenAI cross-company QA after quota reset.
 
-## 6. Exact next action / command
-```bash
-git status
-```
+## 6. Brando to-do
+Optional: manually rename Antigravity conversation `6f991431-c70f-447c-a90b-96ee28bd1a78` in the sidebar using the copy-ready title (`11-23-2026`).
 
 ## Log
 - `10-16-2026 18:18 PDT`: Initialized Experiment 01, locked `PROTOCOL.md`, and prepared Phase 1–3 scripts.
-- `10-18-2026 14:10 PDT`: Phase 1 audit and Phase 2 calibration completed for 8 models on `skampere1`; Phase 3 SFT launched.
-- `10-18-2026 14:20 PDT`: Phase 3 SFT Epoch 1 results recorded and aggregated.
-- `10-18-2026 14:35 PDT`: Phase 3 SFT full 10-epoch trajectories completed on both `Qwen3-1.7B` and `gemma-2b-it`; confirmed net logic contamination at $p = 0.00010$.
+- `10-18-2026 14:35 PDT`: Phase 1, initial 8-model Phase 2, and `Qwen3-1.7B` / `gemma-2b-it` Phase 3 trajectories completed (`worker_gpu7` OOM recorded).
+- `11-23-2026 12:55 PST`: Completed 10-model Phase 2 (`frontier8b` synced) and `deepseek-math-7b-instruct` Phase 3 Epochs 1–10 on `skampere1`, aggregated `8,000` Phase-2 + `12,000` Phase-3 rows, refactored Python scripts to `CC <= 10 / SLOC <= 60`, and updated all reports from verified JSON/CSV outputs prior to 3-stage `agy` Mega QA.
+- `11-23-2026 13:14 PST`: Mega QA audit fixed `B=10,000` bootstrap / exact $2^{10}$ sign-flip / unrounded exact McNemar precision, deduplicated stats helpers and eliminated all `3+` nesting in `expt_v1/*.py`, fixed latent Phase-3 resume and `HAS_SYMPY` probe in `run_snap_tfa_and_sft_contamination.py`, and aligned all reports (including `skampere1` `antlr4` fallback sensitivity audit and exact H1/H2 gate verdicts).
+- `11-23-2026 13:34 PST`: Completed Stage 2 (`gemini-pro-orchestrator-neon` [`PASS`, `0/0/0`]) and Stage 3 (`gemini-4-hydrogen-xhigh` [`PASS`, `0/0/0`]); saved receipt `mega_qa_agy_11-23-2026.json` (`claude-opus-5-5-high` HTTP 429 unmet cross-company gate disclosed) and prepared landing on `main`.

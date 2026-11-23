@@ -1,0 +1,25 @@
+domain_multilabel,sft_model,n_orig_problems,n_unseen_problems,phase2_10model_tfa_orig_mean,phase2_10model_tfa_var5_mean,phase2_10model_tfa_gap_pp,sft_orig_gain_pp,sft_var1_gain_pp,sft_unseen_gain_pp,net_logic_contamination_pp
+Number Theory,Qwen/Qwen3-1.7B,28,22,0.7068,0.7014,0.538,16.1,11.26,1.45,9.8
+Number Theory,deepseek-ai/deepseek-math-7b-instruct,28,22,0.7068,0.7014,0.538,8.12,5.94,1.36,4.59
+Number Theory,google/gemma-2b-it,28,22,0.7068,0.7014,0.538,36.8,35.34,0.38,34.96
+Geometry,Qwen/Qwen3-1.7B,25,20,0.7162,0.7107,0.551,13.73,10.22,2.51,7.71
+Geometry,deepseek-ai/deepseek-math-7b-instruct,25,20,0.7162,0.7107,0.551,6.78,5.87,1.68,4.19
+Geometry,google/gemma-2b-it,25,20,0.7162,0.7107,0.551,35.02,33.09,0.22,32.87
+Calculus,Qwen/Qwen3-1.7B,27,26,0.7531,0.7421,1.104,13.47,9.75,2.87,6.88
+Calculus,deepseek-ai/deepseek-math-7b-instruct,27,26,0.7531,0.7421,1.104,6.46,5.24,1.69,3.55
+Calculus,google/gemma-2b-it,27,26,0.7531,0.7421,1.104,31.24,29.58,1.47,28.11
+Analysis,Qwen/Qwen3-1.7B,23,39,0.7594,0.7504,0.894,13.29,10.01,2.12,7.88
+Analysis,deepseek-ai/deepseek-math-7b-instruct,23,39,0.7594,0.7504,0.894,6.06,4.79,1.96,2.83
+Analysis,google/gemma-2b-it,23,39,0.7594,0.7504,0.894,30.63,29.75,0.83,28.92
+Combinatorics,Qwen/Qwen3-1.7B,21,19,0.714,0.7109,0.316,14.75,10.54,1.24,9.3
+Combinatorics,deepseek-ai/deepseek-math-7b-instruct,21,19,0.714,0.7109,0.316,7.21,5.73,1.58,4.15
+Combinatorics,google/gemma-2b-it,21,19,0.714,0.7109,0.316,35.68,34.44,0.23,34.21
+Algebra,Qwen/Qwen3-1.7B,28,33,0.7274,0.715,1.233,15.14,9.73,1.71,8.02
+Algebra,deepseek-ai/deepseek-math-7b-instruct,28,33,0.7274,0.715,1.233,8.0,5.47,1.39,4.08
+Algebra,google/gemma-2b-it,28,33,0.7274,0.715,1.233,34.8,31.19,1.13,30.05
+Linear Algebra,Qwen/Qwen3-1.7B,8,6,0.711,0.7083,0.271,15.6,13.68,1.31,12.37
+Linear Algebra,deepseek-ai/deepseek-math-7b-instruct,8,6,0.711,0.7083,0.271,6.64,5.49,1.29,4.2
+Linear Algebra,google/gemma-2b-it,8,6,0.711,0.7083,0.271,37.21,36.82,-0.33,37.15
+Probability,Qwen/Qwen3-1.7B,10,3,0.7322,0.7287,0.357,13.86,10.22,3.22,7.0
+Probability,deepseek-ai/deepseek-math-7b-instruct,10,3,0.7322,0.7287,0.357,7.24,6.44,1.75,4.69
+Probability,google/gemma-2b-it,10,3,0.7322,0.7287,0.357,32.19,31.24,0.94,30.3

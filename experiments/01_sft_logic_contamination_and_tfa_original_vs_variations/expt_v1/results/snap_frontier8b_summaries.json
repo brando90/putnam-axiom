@@ -1,0 +1,78 @@
+[
+  {
+    "model": "meta-llama/Meta-Llama-3.1-8B",
+    "phase": "phase2_baseline",
+    "epoch": 0,
+    "splits": {
+      "orig_contaminated": {
+        "n": 100,
+        "em_mean": 0.03,
+        "em_sum": 3,
+        "tfa_sol_mean": 0.7486,
+        "tfa_box_mean": 0.6819,
+        "tfce_sol_mean": 0.9289
+      },
+      "func_variations_v1": {
+        "n": 100,
+        "em_mean": 0.01,
+        "em_sum": 1,
+        "tfa_sol_mean": 0.7428,
+        "tfa_box_mean": 0.6998,
+        "tfce_sol_mean": 0.9731
+      },
+      "orig_unseen_control": {
+        "n": 100,
+        "em_mean": 0.03,
+        "em_sum": 3,
+        "tfa_sol_mean": 0.7504,
+        "tfa_box_mean": 0.7069,
+        "tfce_sol_mean": 0.9339
+      },
+      "func_variations_all5": {
+        "n": 500,
+        "tfa_sol_mean": 0.7423,
+        "tfa_box_mean": 0.6997,
+        "tfce_sol_mean": 0.9736
+      }
+    },
+    "elapsed_sec": 244.12
+  },
+  {
+    "model": "mistralai/Mistral-7B-v0.3",
+    "phase": "phase2_baseline",
+    "epoch": 0,
+    "splits": {
+      "orig_contaminated": {
+        "n": 100,
+        "em_mean": 0.02,
+        "em_sum": 2,
+        "tfa_sol_mean": 0.7479,
+        "tfa_box_mean": 0.81,
+        "tfce_sol_mean": 0.8988
+      },
+      "func_variations_v1": {
+        "n": 100,
+        "em_mean": 0.0,
+        "em_sum": 0,
+        "tfa_sol_mean": 0.741,
+        "tfa_box_mean": 0.7839,
+        "tfce_sol_mean": 0.9315
+      },
+      "orig_unseen_control": {
+        "n": 100,
+        "em_mean": 0.01,
+        "em_sum": 1,
+        "tfa_sol_mean": 0.7512,
+        "tfa_box_mean": 0.7939,
+        "tfce_sol_mean": 0.9084
+      },
+      "func_variations_all5": {
+        "n": 500,
+        "tfa_sol_mean": 0.7408,
+        "tfa_box_mean": 0.7908,
+        "tfce_sol_mean": 0.9306
+      }
+    },
+    "elapsed_sec": 280.19
+  }
+]

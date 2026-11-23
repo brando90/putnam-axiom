@@ -1,0 +1,78 @@
+{
+  "date": "11-23-2026",
+  "reviewed_base_commit": "cf1bda2",
+  "reviewed_paths": [
+    "experiments/01_sft_logic_contamination_and_tfa_original_vs_variations/",
+    "experiments/README.md#row-1"
+  ],
+  "cross_company_gate": {
+    "anthropic_requested": "claude-opus-5-5-high",
+    "status": "UNMET_QUOTA_429",
+    "attempt_conversation_id": "97c8e996-9c2a-4703-be42-f9845468834b",
+    "error": "Individual quota reached. Please upgrade your subscription to increase your limits. Resets in 55h58m35s.",
+    "note": "benchmark reference data (data/) was untouched (Trigger Rule 43 not invoked); all 3 acceptance stages executed sequentially on flagship agy Google models after Anthropic HTTP 429 cooldown."
+  },
+  "stages": [
+    {
+      "stage": 1,
+      "requested_model": "claude-opus-5-5-high",
+      "actual_model": "gemini-4-neon-xhigh",
+      "fallback_reason": "Individual quota reached. Please upgrade your subscription to increase your limits. Resets in 55h58m35s.",
+      "conversation_id": "958e8170-4df8-4dd7-8d1d-0017eb37571f",
+      "status": "SUCCESS",
+      "duration_seconds": 992.03,
+      "usage": {
+        "input_tokens": 363687,
+        "output_tokens": 109782,
+        "thinking_tokens": 40161,
+        "cache_read_tokens": 5282028,
+        "total_tokens": 473469
+      },
+      "verdict": "FIXED",
+      "critical_issues": 0,
+      "major_issues": 4,
+      "fixes_applied": 10,
+      "structural": "IMPROVED"
+    },
+    {
+      "stage": 2,
+      "requested_model": "gemini-pro-orchestrator-neon",
+      "actual_model": "gemini-pro-orchestrator-neon",
+      "conversation_id": "210952b9-865b-44bc-b569-2196153525ce",
+      "status": "SUCCESS",
+      "duration_seconds": 440.87,
+      "usage": {
+        "input_tokens": 237065,
+        "output_tokens": 43337,
+        "thinking_tokens": 24494,
+        "cache_read_tokens": 2694341,
+        "total_tokens": 280402
+      },
+      "verdict": "PASS",
+      "critical_issues": 0,
+      "major_issues": 0,
+      "fixes_applied": 0,
+      "structural": "PASS"
+    },
+    {
+      "stage": 3,
+      "requested_model": "gemini-4-hydrogen-xhigh",
+      "actual_model": "gemini-4-hydrogen-xhigh",
+      "conversation_id": "0d1d3132-9490-45b8-95f6-fca38552234f",
+      "status": "SUCCESS",
+      "duration_seconds": 402.36,
+      "usage": {
+        "input_tokens": 307049,
+        "output_tokens": 64143,
+        "thinking_tokens": 42065,
+        "cache_read_tokens": 4306859,
+        "total_tokens": 371192
+      },
+      "verdict": "PASS",
+      "critical_issues": 0,
+      "major_issues": 0,
+      "fixes_applied": 0,
+      "structural": "PASS"
+    }
+  ]
+}
