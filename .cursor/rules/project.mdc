@@ -1,0 +1,12 @@
+---
+description: Shared project instructions and mandatory thinking-effort reporting for brando90/putnam-axiom
+alwaysApply: true
+---
+
+# Project instructions: brando90/putnam-axiom
+
+**Doc link:** <https://github.com/brando90/putnam-axiom/blob/main/.cursor/rules/project.mdc>
+
+**TLDR:** Read and follow repository-root `AGENTS.md` (mirrored in `CLAUDE.md`) and `~/agents-config/INDEX_RULES.md`. Every model evaluation table, `README.md` leaderboard, `results.md`, `RESULTS_*.md` report, checkpoint and chat summary must explicitly report the exact `Thinking effort` (`max`, `xhigh` / extra-high, `high`, `medium`, `low`, `default (unset)`, or `n/a (non-reasoning)`) read from the run configuration or raw logs, alongside model, harness and date.
+
+@AGENTS.md

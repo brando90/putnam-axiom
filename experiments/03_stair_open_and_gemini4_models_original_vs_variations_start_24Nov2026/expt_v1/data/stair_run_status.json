@@ -1,0 +1,15 @@
+{
+  "updated_at": "11-24-2026 02:47:15 PST",
+  "day": "2026-11-24",
+  "today_calls": 239,
+  "daily_cap": 239,
+  "cum_est_cost_usd": 4.686198,
+  "cost_cap_usd": 15.0,
+  "stop_reason": "DAILY_CAP_REACHED (239)",
+  "counts": {
+    "glm53": 200,
+    "kimik3": 37,
+    "deepseekv41flash": 1
+  },
+  "all_600_complete": false
+}

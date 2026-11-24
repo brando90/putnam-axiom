@@ -85,19 +85,23 @@ Recomputed on Nov 20 2026 from the published Table 2 counts and, for the 2026 ru
 
 ### Frontier models in 2026 (different models and a different harness than the paper)
 
-Per-question paired drop on the 100 matched originals vs their variations (paper grader, `experiments/02_frontier_models_original_vs_variations_nov2026`; 5 snapshots, so 500 pairs; Gemini 3.8 Flash has snapshot 1 only, 100 pairs). Interval: bootstrap over the 100 problems (10000 resamples). GPT-4o and Qwen2-Math-7B-Instruct are the paper's models, re-run in Nov 2026.
+Per-question paired drop on the 100 matched originals vs their variations (paper grader, `experiments/02_frontier_models_original_vs_variations_nov2026` and `experiments/03_stair_open_and_gemini4_models_original_vs_variations_start_24Nov2026`; 5 snapshots = 500 pairs where noted, otherwise snapshot 1 = 100 pairs). Interval: bootstrap over the 100 problems (10000 resamples). GPT-4o and Qwen2-Math-7B-Instruct are the paper's models, re-run in Nov 2026.
 
-| Model | Original (100) | Variation | Paired drop, points [95% interval] |
-|---|---|---|---|
-| claude-fable-5-2 (effort max, snapshot 1) | 88.0 | 74.0 | 14.0 [8.0, 21.0] |
-| gpt-6.2-astra | 81.0 | 69.0 | 12.0 [6.4, 18.2] |
-| gpt-6-astra | 82.0 | 69.4 | 12.6 [7.0, 19.0] |
-| gpt-5.5 | 80.0 | 68.6 | 11.4 [5.6, 18.0] |
-| claude-sonnet-5-5 | 83.0 | 71.2 | 11.8 [5.2, 18.8] |
-| claude-opus-5-5 | 83.0 | 73.6 | 9.4 [3.2, 16.0] |
-| gemini-3.8-flash (snapshot 1) | 87.0 | 73.0 | 14.0 [7.0, 21.0] |
-| gpt-4o (2026 rerun) | 27.0 | 23.4 | 3.6 [-3.8, 11.2] |
-| Qwen2-Math-7B-Instruct (2026 rerun) | 19.0 | 16.0 | 3.0 [-2.8, 9.2] |
+| Model | Thinking effort | Harness | Date | Original (100) | Variation | Paired drop, points [95% interval] |
+|---|---|---|---|---|---|---|
+| claude-fable-5-2 (snapshot 1) | max (`--effort max`) | Claude Code 2.1.330 (`--safe-mode -p --tools ""`) | 24Nov2026 | 88.0 | 74.0 | 14.0 [8.0, 21.0] |
+| gemini-4-neon-xhigh (snapshot 1) | xhigh (`--effort xhigh`, extra-high) | single-call agy 1.5.15 (`permission_mode=request-review`, `num_turns=1`) | 24Nov2026 | 87.0 | 77.0 | 10.0 [3.0, 18.0] |
+| gemini-4-argon-high (snapshot 1) | high (`--effort high`) | single-call agy 1.5.15 (`permission_mode=request-review`, `num_turns=1`) | 24Nov2026 | 88.0 | 77.0 | 11.0 [5.0, 18.0] |
+| gemini-4-carbon-high (snapshot 1) | high (`--effort high`) | single-call agy 1.5.15 (`permission_mode=request-review`, `num_turns=1`) | 24Nov2026 | 86.0 | 77.0 | 9.0 [2.0, 16.0] |
+| GLM 5.3 (snapshot 1) | default (unset; reasoning active) | STAIR Gateway OpenAI chat API (`temp=0`, `max_tokens=8192`, 0 retries) | 24Nov2026 | 34.0 | 28.0 | 6.0 [-2.0, 14.0] |
+| gpt-6.2-astra | max (`reasoning.effort=max`) | OpenAI Responses API (no tools) | 20Nov2026 | 81.0 | 69.0 | 12.0 [6.4, 18.2] |
+| gpt-6-astra | max (`reasoning.effort=max`) | OpenAI Responses API (no tools) | 20Nov2026 | 82.0 | 69.4 | 12.6 [7.0, 19.0] |
+| gpt-5.5 | high (`reasoning.effort=high`) | OpenAI Responses API (no tools) | 20Nov2026 | 80.0 | 68.6 | 11.4 [5.6, 18.0] |
+| claude-sonnet-5-5 | default (unset; no `--effort`) | Claude Code 2.1.278 (`-p --tools ""`) | 20Nov2026 | 83.0 | 71.2 | 11.8 [5.2, 18.8] |
+| claude-opus-5-5 | default (unset; no `--effort`) | Claude Code 2.1.329 (`-p --tools ""`) | 20Nov2026 | 83.0 | 73.6 | 9.4 [3.2, 16.0] |
+| gemini-3.8-flash (snapshot 1) | high (`thinkingLevel=high`) | Gemini API `generateContent` (no tools) | 20Nov2026 | 87.0 | 73.0 | 14.0 [7.0, 21.0] |
+| gpt-4o (2026 rerun) | n/a (non-reasoning; unset) | OpenAI Responses API (no tools) | 20Nov2026 | 27.0 | 23.4 | 3.6 [-3.8, 11.2] |
+| Qwen2-Math-7B-Instruct (2026 rerun) | n/a (non-reasoning; greedy) | HF `transformers` completion (`1024` tokens) | 20Nov2026 | 19.0 | 16.0 | 3.0 [-2.8, 9.2] |
 
 ### Which model was fine-tuned, and is there an evaluation harness?
 
