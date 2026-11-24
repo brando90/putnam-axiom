@@ -1,7 +1,7 @@
 # Checkpoint: Putnam-AXIOM Experiment 02 claude-fable-5-2 (max effort)
 
 Created: 11-23-2026 12:37 PST
-Last updated: 11-23-2026 15:06 PST
+Last updated: 11-23-2026 18:08 PST
 
 ## Goal
 Measure single-call LLM accuracy and matched original-vs-variation drop of `claude-fable-5-2` (`effort=max`, Claude Code `--safe-mode -p --tools ""`) on the 100 matched Originals and 100 Snapshot-1 Functional Variations (`$0.00` cash budget).
@@ -15,7 +15,7 @@ Measure single-call LLM accuracy and matched original-vs-variation drop of `clau
 - none yet (200/200 pending launch after `11-23-2026 23:01 PST`).
 
 ## Stuck / blocked
-- Waiting until `11-23-2026 23:01 PST` for personal Claude Ultra Fable quota reset (`100% used` as of `12:20 PST`); STAIR `bm` key (`34398f0964464299bad9`) change (`+ Claude 5.2-fable`, `$1000 -> $300/mo`) logged at `14:56 PST` for Sanmi Koyejo's Friday `11-27-2026` review batch (duplicate `15:05 PST` submission rejected as redundant).
+- Waiting until `11-23-2026 23:01 PST` for personal Claude Ultra Fable quota reset (`100% used` as of `12:20 PST`); corrected STAIR `bm` key (`34398f0964464299bad9`) request (`+ Claude 5.2-fable`, `$1000 -> $1000/mo`) logged at `17:01 PST` for Sanmi Koyejo's Friday `11-27-2026` review batch.
 
 ## Next steps
 - Automated LaunchAgent `com.brando.putnam-fable52-max` checks Gmail IMAP every 30 min and launches `tmux` session `cc-putnam-expt02-fable52-max` after `11-23-2026 23:01 PST`:
@@ -29,3 +29,6 @@ Measure single-call LLM accuracy and matched original-vs-variation drop of `clau
 - 11-23-2026 12:38 PST -- Observed Zeyu Tang `12:29 PST` IMAP reply recommending STAIR key-change form (`https://forms.gle/zhqcWUqdHyjJ4Knq5`) and lower monthly steady-key budget for `34398f0964464299bad9`.
 - 11-23-2026 15:06 PST -- Email update observed (Mon, 23 Nov 2026 22:56:28 +0000): from `Zeyu Tang <zeyu@cs.stanford.edu>`, subject `[STAIR API Key] Received: change to bm`. No auto-spend triggered; keeping `$0` Claude Ultra reset schedule primary unless explicit approved API cap is set.
 - 11-23-2026 15:06 PST -- Email update observed (Mon, 23 Nov 2026 23:05:08 +0000): from `Zeyu Tang <zeyu@cs.stanford.edu>`, subject `[STAIR API Key] Not Filed: bm already has a change pending`. No auto-spend triggered; keeping `$0` Claude Ultra reset schedule primary unless explicit approved API cap is set.
+- 11-23-2026 16:43 PST -- Email update observed (Mon, 23 Nov 2026 19:36:12 -0500): from `Brando Miranda <brandojazz@gmail.com>`, subject `Re: [STAIR API Key] Not Filed: bm already has a change pending`. No auto-spend triggered; keeping `$0` Claude Ultra reset schedule primary unless explicit approved API cap is set.
+- 11-23-2026 17:14 PST -- Email update observed (Mon, 23 Nov 2026 16:50:28 -0800): from `Zeyu Tang <zeyu@cs.stanford.edu>`, subject `Re: [STAIR API Key] Not Filed: bm already has a change pending`. No auto-spend triggered; keeping `$0` Claude Ultra reset schedule primary unless explicit approved API cap is set.
+- 11-23-2026 17:14 PST -- Email update observed (Tue, 24 Nov 2026 01:01:27 +0000): from `Zeyu Tang <zeyu@cs.stanford.edu>`, subject `[STAIR API Key] Received: change to bm`. No auto-spend triggered; keeping `$0` Claude Ultra reset schedule primary unless explicit approved API cap is set.
