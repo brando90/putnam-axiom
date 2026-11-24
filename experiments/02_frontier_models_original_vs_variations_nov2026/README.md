@@ -6,7 +6,7 @@
 
 ## Status
 
-`PARTIAL` (11-23-2026): all 8 initial rows done except Gemini 3.8 Flash (100 matched originals and variation snapshot 1 only). Claude Opus 5.5 is complete (522 originals, 500 variation problems) after the 8:30 limit reset, and the one Claude Sonnet 5.5 problem that hung is rerun (500 variation problems). Scheduled `claude-fable-5-2` (`effort=max`, single-call `--safe-mode -p --tools ""`) on matched 100 Originals + Snapshot-1 Variations (`200` tasks) via LaunchAgent after the `11-23-2026 23:00 PST` reset ([`PROTOCOL.md`](PROTOCOL.md), [`results.md`](results.md), [`CKPT_fable52_max_eval.md`](CKPT_fable52_max_eval.md)). Not run: Fable 5.1 (usage credits or an API gateway key needed), "Claude 6.2" (no such model).
+`PARTIAL` (11-23-2026): all 8 initial rows done except Gemini 3.8 Flash (100 matched originals and variation snapshot 1 only). Claude Opus 5.5 is complete (522 originals, 500 variation problems) after the 8:30 limit reset, and the one Claude Sonnet 5.5 problem that hung is rerun (500 variation problems). `claude-fable-5-2` (`effort=max`, single-call `--safe-mode -p --tools ""`) completed `200/200` (`100` matched Originals: `88.0%`; `100` Snapshot-1 Variations: `74.0%`; paired drop `14.0 [8.0, 21.0]`, exact McNemar `p-val=0.0001221`) ([`PROTOCOL.md`](PROTOCOL.md), [`results.md`](results.md), [`CKPT_fable52_max_eval.md`](CKPT_fable52_max_eval.md)). Not run: Fable 5.1 (usage credits or an API gateway key needed), "Claude 6.2" (no such model).
 
 ## Layout
 

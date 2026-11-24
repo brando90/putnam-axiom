@@ -89,6 +89,7 @@ Per-question paired drop on the 100 matched originals vs their variations (paper
 
 | Model | Original (100) | Variation | Paired drop, points [95% interval] |
 |---|---|---|---|
+| claude-fable-5-2 (effort max, snapshot 1) | 88.0 | 74.0 | 14.0 [8.0, 21.0] |
 | gpt-6.2-astra | 81.0 | 69.0 | 12.0 [6.4, 18.2] |
 | gpt-6-astra | 82.0 | 69.4 | 12.6 [7.0, 19.0] |
 | gpt-5.5 | 80.0 | 68.6 | 11.4 [5.6, 18.0] |

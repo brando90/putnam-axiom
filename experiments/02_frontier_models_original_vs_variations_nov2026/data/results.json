@@ -1,4 +1,92 @@
 {
+ "fable52max": {
+  "meta": {
+   "id": "fable52max",
+   "label": "claude-fable-5-2 (effort max)",
+   "harness": "none (Claude Code 2.1.330 print mode, safe-mode, tools off, one turn)",
+   "route": "Claude Ultra personal subscription (~/.claude) on Mac",
+   "price_in": 8,
+   "price_out": 40
+  },
+  "orig": {
+   "n": 100,
+   "k": 88,
+   "acc": 88.0,
+   "lo": 80.18773199709163,
+   "hi": 93.00066263473222,
+   "relaxed": 89.0
+  },
+  "m100": {
+   "n": 100,
+   "k": 88,
+   "acc": 88.0,
+   "lo": 80.18773199709163,
+   "hi": 93.00066263473222,
+   "relaxed": 89.0
+  },
+  "var": {
+   "n": 100,
+   "k": 74,
+   "acc": 74.0,
+   "lo": 64.62882736813837,
+   "hi": 81.59542187301354,
+   "relaxed": 76.0
+  },
+  "snaps": {
+   "1": {
+    "n": 100,
+    "k": 74,
+    "acc": 74.0,
+    "lo": 64.62882736813837,
+    "hi": 81.59542187301354,
+    "relaxed": 76.0
+   },
+   "2": {
+    "n": 0,
+    "k": 0,
+    "acc": null,
+    "lo": NaN,
+    "hi": NaN,
+    "relaxed": null
+   },
+   "3": {
+    "n": 0,
+    "k": 0,
+    "acc": null,
+    "lo": NaN,
+    "hi": NaN,
+    "relaxed": null
+   },
+   "4": {
+    "n": 0,
+    "k": 0,
+    "acc": null,
+    "lo": NaN,
+    "hi": NaN,
+    "relaxed": null
+   },
+   "5": {
+    "n": 0,
+    "k": 0,
+    "acc": null,
+    "lo": NaN,
+    "hi": NaN,
+    "relaxed": null
+   }
+  },
+  "var_acc": 74.0,
+  "var_judged": null,
+  "var_n": 100,
+  "gap": 14.0,
+  "gap_j": null,
+  "tok_in": 558909,
+  "tok_out": 751125,
+  "truncated": 0,
+  "boxed": 100.0,
+  "cost": 34.516272,
+  "n_rows": 200,
+  "n_judged_items": 0
+ },
  "astra62": {
   "meta": {
    "id": "astra62",

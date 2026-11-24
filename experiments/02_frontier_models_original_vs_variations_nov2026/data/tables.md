@@ -2,6 +2,7 @@
 
 | Model | Harness and route | n | Accuracy, paper grader (%) | 95% CI | Accuracy, answer-equivalence judge (%) |
 |---|---|---|---|---|---|
+| claude-fable-5-2 (effort max) | none (Claude Code 2.1.330 print mode, safe-mode, tools off, one turn); Claude Ultra personal subscription (~/.claude) on Mac | 100 | 88.0 | 80.2 to 93.0 | n/a |
 | claude-opus-5-5 (default effort) | none (Claude Code 2.1.329 print mode, tools off, one turn); Stanford enterprise login (claude-su profile) on skampere2 | 522 | 78.9 | 75.2 to 82.2 | 90.6 |
 | claude-sonnet-5-5 (default effort), substitute for Claude 6.2 | none (Claude Code 2.1.278 print mode, tools off, one turn); Stanford enterprise login (claude-su) on skampere2 | 522 | 77.4 | 73.6 to 80.8 | 89.5 |
 | gpt-6.2-astra (effort max) | none (plain call, no tools); OpenAI Responses API, Koyejo-lab key, run from skampere2 | 522 | 72.0 | 68.0 to 75.7 | 87.9 |
@@ -15,6 +16,7 @@
 
 | Model | Harness and route | n | Accuracy, paper grader (%) | 95% CI | Accuracy, answer-equivalence judge (%) | Matched 100 originals, paper grader (%) | Gap original minus variation, paper grader (points) | Gap, judge (points) |
 |---|---|---|---|---|---|---|---|---|
+| claude-fable-5-2 (effort max) | none (Claude Code 2.1.330 print mode, safe-mode, tools off, one turn); Claude Ultra personal subscription (~/.claude) on Mac | 100 | 74.0 | 64.6 to 81.6 | n/a | 88.0 (n=100) | 14.0 | n/a |
 | claude-opus-5-5 (default effort) | none (Claude Code 2.1.329 print mode, tools off, one turn); Stanford enterprise login (claude-su profile) on skampere2 | 500 | 73.6 | 69.6 to 77.3 | 85.8 | 83.0 (n=100) | 9.4 | 6.2 |
 | claude-sonnet-5-5 (default effort), substitute for Claude 6.2 | none (Claude Code 2.1.278 print mode, tools off, one turn); Stanford enterprise login (claude-su) on skampere2 | 500 | 71.2 | 67.1 to 75.0 | 82.4 | 83.0 (n=100) | 11.8 | 10.6 |
 | gpt-6.2-astra (effort max) | none (plain call, no tools); OpenAI Responses API, Koyejo-lab key, run from skampere2 | 500 | 69.0 | 64.8 to 72.9 | 79.4 | 81.0 (n=100) | 12.0 | 9.6 |
