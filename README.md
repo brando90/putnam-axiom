@@ -94,6 +94,7 @@ Per-question paired drop on the 100 matched originals vs their variations (paper
 | gemini-4-argon-high (snapshot 1) | high (`--effort high`) | single-call agy 1.5.15 (`permission_mode=request-review`, `num_turns=1`) | 24Nov2026 | 88.0 | 77.0 | 11.0 [5.0, 18.0] |
 | gemini-4-carbon-high (snapshot 1) | high (`--effort high`) | single-call agy 1.5.15 (`permission_mode=request-review`, `num_turns=1`) | 24Nov2026 | 86.0 | 77.0 | 9.0 [2.0, 16.0] |
 | GLM 5.3 (snapshot 1) | default (unset; reasoning active) | STAIR Gateway OpenAI chat API (`temp=0`, `max_tokens=8192`, 0 retries) | 24Nov2026 | 34.0 | 28.0 | 6.0 [-2.0, 14.0] |
+| Kimi K3 (snapshot 1) | default (unset; reasoning active) | STAIR Gateway OpenAI chat API (`temp=0`, `max_tokens=8192`, 0 retries) | 26Nov2026 | 67.0 | 57.0 | 10.0 [2.0, 18.0] |
 | gpt-6.2-astra | max (`reasoning.effort=max`) | OpenAI Responses API (no tools) | 20Nov2026 | 81.0 | 69.0 | 12.0 [6.4, 18.2] |
 | gpt-6-astra | max (`reasoning.effort=max`) | OpenAI Responses API (no tools) | 20Nov2026 | 82.0 | 69.4 | 12.6 [7.0, 19.0] |
 | gpt-5.5 | high (`reasoning.effort=high`) | OpenAI Responses API (no tools) | 20Nov2026 | 80.0 | 68.6 | 11.4 [5.6, 18.0] |
