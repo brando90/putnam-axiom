@@ -1,7 +1,7 @@
 # Checkpoint: Putnam-AXIOM Experiment 03 STAIR Open Models & Gemini 4 Single-Call Eval
 
 Created: 11-24-2026 01:16 PST
-Last updated: 11-26-2026 01:14 PST
+Last updated: 11-27-2026 00:21 PST
 
 ## Goal
 Evaluate `GLM 5.3` (`GLM 5.3 Flash` returned HTTP 400 on `/chat/completions`), `Kimi K3`, `DeepSeek V4.1 Flash 1017` (STAIR `bm` Gateway on `skampere1`, `240/day` cap, `$15` cost stop) and `gemini-4-neon-xhigh`, `gemini-4-argon-high`, `gemini-4-carbon-high` (local `agy` single-call mode, `>=20%` weekly reserve) on the `100` matched Originals vs Snapshot-1 Variations (`1,200` total calls).
@@ -38,3 +38,4 @@ Evaluate `GLM 5.3` (`GLM 5.3 Flash` returned HTTP 400 on `/chat/completions`), `
 - 11-24-2026 09:35 PST -- Completed all `600/600` local `agy` Gemini 4 calls (`argon-high` `88/77`, `neon-xhigh` `87/77`, `carbon-high` `86/77`; `0` tool violations), compressed raw outputs to `*.jsonl.gz`, and regenerated reports and `README.md`.
 - 11-24-2026 09:52 PST -- Completed Tier-2 Light QA (`VERDICT: FIXED` via `agy` `gemini-4-neon-xhigh` `--effort xhigh`), synced updated `run_stair_gateway_eval.py` to `skampere1`, added mandatory `Thinking effort` rule to `AGENTS.md`/`CLAUDE.md`/`.cursor/rules/project.mdc`, and regenerated `README.md`, `results.md`, and `RESULTS_*.md` with explicit `Thinking effort` columns.
 - 11-26-2026 01:14 PST -- Daily STAIR batch synced: counts={'glm53': 200, 'kimik3': 200, 'deepseekv41flash': 153}, est_cost=$9.128629, stop_reason=DAILY_CAP_REACHED (240)
+- 11-27-2026 00:21 PST -- Daily STAIR batch synced: counts={'glm53': 200, 'kimik3': 200, 'deepseekv41flash': 200}, est_cost=$9.988183, stop_reason=None
